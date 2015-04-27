@@ -1,18 +1,18 @@
 # Overview #
 show admob banner and full screen ad
 
-[android, ios, wp8] [phonegap cli] [crosswalk]
+[android, ios, wp8] [cordova cli] [crosswalk]
 
 requires admob account http://www.google.com/ads/admob/
 
 fix Admob SDK FPS issue: go to your AdMob account and disable text banners, leaving enabled only image banners. (provided by Cipriux)
 (not both, but one of them)
 
-This cordova is open source and has 2% ad traffic share code for supporting this plugin.
+This cordova plugin is open source and has 2% ad traffic share code for supporting this plugin.
 If you do not want to this share, fork this github and remove the code.
 
 # Change log #
-
+```c
 2014.9.17
 	supports SKYSCRAPER size (120x600, Tablets, ipad only)
 	Added additional example (example/banner_position_size/index.html)
@@ -43,8 +43,29 @@ To-Do:
 	supports other position: 'top-left', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-right' on ios.
 	supports banner reposition when orientation changes on ios.
 	supports SMART_BANNER resize when orientation changes on ios.	
-
+```
 # Install plugin #
+
+## Cordova cli ##
+```c
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob
+
+cf)apple app store meta data
+
+xport Compliance
+	Have you added or made changes to encryption features since your last submission of this app? (No)
+
+Advertising Identifier
+	Does this app use the Advertising Identifier (IDFA)? (Yes)
+	
+	This app uses the Advertising Identifier to (select all that apply):
+		Serve advertisements within the app (check)
+	
+	Limit Ad Tracking setting in iOS (check)	
+	
+Previous Purchase Restrictions
+	Are you updating this app because of a significant usability issue or for a legal issue, such as an infringement claim? (No)
+```
 
 ## Crosswalk ##
 ```c
@@ -70,29 +91,10 @@ Advertising Identifier
 Previous Purchase Restrictions
 	Are you updating this app because of a significant usability issue or for a legal issue, such as an infringement claim? (No)
 ```
-## Cordova cli ##
+
+## Phonegap build service (config.xml) ##
 ```c
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob
-
-cf)apple app store meta data
-
-xport Compliance
-	Have you added or made changes to encryption features since your last submission of this app? (No)
-
-Advertising Identifier
-	Does this app use the Advertising Identifier (IDFA)? (Yes)
-	
-	This app uses the Advertising Identifier to (select all that apply):
-		Serve advertisements within the app (check)
-	
-	Limit Ad Tracking setting in iOS (check)	
-	
-Previous Purchase Restrictions
-	Are you updating this app because of a significant usability issue or for a legal issue, such as an infringement claim? (No)
-```
-## Phonegap build service (construct2 automatically add this tag to config.xml) ##
-```c
-not yet supported
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob" />
 ```
 
 # Server setting #
@@ -174,8 +176,8 @@ window.admob.showFullScreenAd();
 window.admob.reloadFullScreenAd();
 ```
 # Examples #
-<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.cordova.ad.admob/blob/master/example/basic/index.html">example/basic/index.html</a><br>
-<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.cordova.ad.admob/blob/master/example/advanced/index.html">example/advanced/index.html</a>
+<a href="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/example/basic/index.html">example/basic/index.html</a><br>
+<a href="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/example/advanced/index.html">example/advanced/index.html</a>
 
 # Test #
 
