@@ -150,8 +150,8 @@
 	
 		bannerView = [[GADBannerView alloc] initWithAdSize:adSize];
 		//
-		NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.admob: %@", email]];
-		NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
+		NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
+		NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.admob: %@", email]];
 		if(licenseKey != Nil && ([licenseKey isEqualToString:str1] || [licenseKey isEqualToString:str2])){
 			NSLog(@"valid licenseKey");
 			bannerView.adUnitID = self.adUnit;
@@ -332,8 +332,8 @@
     if (interstitialView == nil || self.interstitialView.hasBeenUsed){//ios only //An interstitial object can only be used once for ios
         self.interstitialView = [[GADInterstitial alloc] init];
         //
-		NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.admob: %@", email]];
-		NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
+		NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
+		NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.admob: %@", email]];
 		if(licenseKey != Nil && ([licenseKey isEqualToString:str1] || [licenseKey isEqualToString:str2])){
             NSLog(@"valid licenseKey");
             self.interstitialView.adUnitID = adUnitFullScreen;
