@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.cranberrygame.cordova.plugin.ad.admob"
-    version="1.0.39">
+    version="1.0.40">
 	
     <name>Cordova Admob plugin</name>
     <description>Cordova Admob plugin</description>

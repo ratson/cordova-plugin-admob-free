@@ -8,8 +8,12 @@ requires admob account http://www.google.com/ads/admob/
 fix Admob SDK FPS issue: go to your AdMob account and disable text banners, leaving enabled only image banners. (provided by Cipriux)
 (not both, but one of them)
 
-This cordova plugin is open source and has 2% ad traffic share code for supporting this plugin.
-If you do not want to this share, fork this github and remove the code.
+this is open source cordova plugin.
+
+if you want to see real admob working example, see this: https://play.google.com/store/apps/details?id=com.cranberrygame.avoidbird
+
+this has 2% ad traffic share code for supporting plugin development.
+if you do not want to this, fork this github and remove this code.
 
 # Change log #
 ```c
@@ -94,7 +98,7 @@ Previous Purchase Restrictions
 
 ## Phonegap build service (config.xml) ##
 ```c
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob" source="plugins.cordova.io" />
 ```
 
 # Server setting #
@@ -173,7 +177,6 @@ window.admob.hideBannerAd();
 
 window.admob.preloadFullScreenAd();
 window.admob.showFullScreenAd();
-window.admob.reloadFullScreenAd();
 ```
 # Examples #
 <a href="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/example/basic/index.html">example/basic/index.html</a><br>
@@ -183,7 +186,13 @@ window.admob.reloadFullScreenAd();
 
 # Useful links #
 
-Cordova ad related plugins (+crosswalk) support<br>
-https://plus.google.com/communities/103549383058309199257
+Cordova Admob (Ad plugin)<br>
+http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.admob<br>
+https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob<br>
+<br>
+<br>
+Cordova RevMob (Ad plugin)<br>
+http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.revmob<br>
+https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob<br>
 
 # Credits #

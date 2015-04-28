@@ -242,7 +242,7 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 	//cranberrygame end: Plugin
 	
 	//cranberrygame start: AdmobPluginDelegate
-	
+
 	public void _setUp(String adUnit, String adUnitFullScreen, boolean isOverlap, boolean isTest) {
 		pluginDelegate._setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
 	}

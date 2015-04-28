@@ -121,7 +121,7 @@
 //cranberrygame end: Plugin
 
 //cranberrygame start: PluginDelegate
-	
+
 - (void) _setUp:(NSString *)adUnit anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
 	[pluginDelegate _setUp:adUnit anAdUnitFullScreen:adUnitFullScreen anIsOverlap:isOverlap anIsTest:isTest];
 }
