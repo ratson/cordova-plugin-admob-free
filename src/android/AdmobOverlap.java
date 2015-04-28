@@ -206,7 +206,7 @@ public class AdmobOverlap implements PluginDelegate {
 			bannerView = new AdView(plugin.getCordova().getActivity());//
 			//
 			String str1 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
-			String str2 = Util.md5(email);
+			String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.: " + email);
 			if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
 				Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
 				bannerView.setAdUnitId(this.adUnit);
@@ -389,7 +389,7 @@ public class AdmobOverlap implements PluginDelegate {
 			interstitialView = new InterstitialAd(plugin.getCordova().getActivity());
 			//
 			String str1 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
-			String str2 = Util.md5(email);
+			String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.: " + email);
 			if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
 				Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
 				interstitialView.setAdUnitId(this.adUnitFullScreen);
