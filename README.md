@@ -224,17 +224,10 @@ https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/
 
 # Useful links #
 
-Cordova Admob (Ad plugin)<br>
-http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.admob<br>
-https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob<br>
-https://www.youtube.com/watch?v=xXrVb8E8gMM<br>
-Cordova Chartboost (Ad plugin)<br>
-http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.chartboost<br>
-https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.chartboost<br>
-https://www.youtube.com/watch?v=EQJLRbSKmPU&feature=youtu.be<br>
-Cordova RevMob (Ad plugin)<br>
-http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.revmob<br>
-https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob<br>
-https://www.youtube.com/watch?v=fThTXn88dNw<br>
+Cordova monetisation related plugins G+ community<br>
+https://plus.google.com/communities/116032133386884708413<br>
+<br>
+Construct2 monetisation related plugins by cordova G+ community<br>
+https://plus.google.com/communities/117978754675005605917<br>
 
 # Credits #
