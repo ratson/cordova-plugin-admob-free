@@ -15,15 +15,13 @@
 
 @property id<Plugin> plugin;
 //
+@property NSString *email;
+@property NSString *licenseKey_;
+//
 @property NSString *adUnit;
 @property NSString *adUnitFullScreen;
 @property BOOL isOverlap;
 @property BOOL isTest;
-//
-@property NSString *email;
-@property NSString *licenseKey;
-@property NSString *TEST_AD_UNIT;
-@property NSString *TEST_AD_UNIT_FULL_SCREEN;
 //
 @property NSString *bannerPreviousPosition;
 @property NSString *bannerPreviousSize;

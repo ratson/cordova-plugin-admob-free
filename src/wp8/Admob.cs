@@ -17,6 +17,17 @@ using Microsoft.Phone.Controls;
 namespace Cordova.Extension.Commands {
     public class Admob : BaseCommand {
 		
+		public void setLicenseKey(string args) {
+            string email = JsonHelper.Deserialize<string[]>(args)[0];
+            string licenseKey = JsonHelper.Deserialize<string[]>(args)[1];
+            Debug.WriteLine("email: " + email);
+            Debug.WriteLine("licenseKey: " + licenseKey);
+
+            Deployment.Current.Dispatcher.BeginInvoke(() => {   
+                _setLicenseKey(email, licenseKey);
+            });					
+        }
+		
 		public void setUp(string args) {
             string adUnit = JsonHelper.Deserialize<string[]>(args)[0];
             string adUnitFullScreen = JsonHelper.Deserialize<string[]>(args)[1];
@@ -74,7 +85,11 @@ namespace Cordova.Extension.Commands {
         }
 	
 		//cranberrygame start: AdmobPluginDelegate
-	
+
+        private void _setLicenseKey(string email, string licenseKey) {
+			pluginDelegate._setLicenseKey(email, licenseKey);
+        }
+		
         private void _setUp(string adUnit, string adUnitFullScreen, bool isOverlap, bool isTest) {
 			pluginDelegate._setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
         }

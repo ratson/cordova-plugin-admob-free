@@ -1,6 +1,16 @@
 
 module.exports = {
 
+	setLicenseKey: function(email, licenseKey) {
+		var self = this;	
+        cordova.exec(
+            null,
+            null,
+            'Admob',
+            'setLicenseKey',			
+            [email, licenseKey]
+        ); 
+    },
 	setUp: function(adUnit, adUnitFullScreen, isOverlap, isTest) {
 		var self = this;	
         cordova.exec(
@@ -45,16 +55,6 @@ module.exports = {
             'Admob',
             'setUp',			
             [adUnit, adUnitFullScreen, isOverlap, isTest]
-        ); 
-    },
-	setLicenseKey: function(email, licenseKey) {
-		var self = this;	
-        cordova.exec(
-            null,
-            null,
-            'Admob',
-            'setLicenseKey',			
-            [email, licenseKey]
         ); 
     },
 	preloadBannerAd: function() {

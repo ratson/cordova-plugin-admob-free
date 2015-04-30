@@ -17,6 +17,20 @@
 @synthesize callbackIdKeepCallback;
 //
 @synthesize pluginDelegate;
+//
+@synthesize email;
+@synthesize licenseKey_;
+
+- (void) setLicenseKey: (CDVInvokedUrlCommand*)command {
+    NSString *email = [command.arguments objectAtIndex: 0];
+    NSString *licenseKey = [command.arguments objectAtIndex: 1];
+    NSLog(@"%@", email);
+    NSLog(@"%@", licenseKey);
+    
+    [self.commandDelegate runInBackground:^{
+        [self _setLicenseKey:email aLicenseKey:licenseKey];
+    }];
+}
 	
 - (void) setUp: (CDVInvokedUrlCommand*)command {
     //self.viewController
@@ -38,7 +52,7 @@
     NSLog(@"%d", isTest);
     
     self.callbackIdKeepCallback = command.callbackId;
- 
+
     if(isOverlap)
         pluginDelegate = [[AdmobOverlap alloc] initWithPlugin:self];
     else
@@ -46,17 +60,6 @@
     
     [self.commandDelegate runInBackground:^{
         [self _setUp:adUnit anAdUnitFullScreen:adUnitFullScreen anIsOverlap:isOverlap anIsTest:isTest];
-    }];
-}
-
-- (void) setLicenseKey: (CDVInvokedUrlCommand*)command {
-    NSString *email = [command.arguments objectAtIndex: 0];
-    NSString *licenseKey = [command.arguments objectAtIndex: 1];
-    NSLog(@"%@", email);
-    NSLog(@"%@", licenseKey);
-    
-    [self.commandDelegate runInBackground:^{
-        [self _setLicenseKey:email aLicenseKey:licenseKey];
     }];
 }
 
@@ -122,12 +125,14 @@
 
 //cranberrygame start: PluginDelegate
 
-- (void) _setUp:(NSString *)adUnit anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
-	[pluginDelegate _setUp:adUnit anAdUnitFullScreen:adUnitFullScreen anIsOverlap:isOverlap anIsTest:isTest];
+- (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey {
+	//[pluginDelegate _setLicenseKey:email aLicenseKey:licenseKey];	
+	self.email = email;
+	self.licenseKey_ = licenseKey;
 }
 
-- (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey {
-	[pluginDelegate _setLicenseKey:email aLicenseKey:licenseKey];
+- (void) _setUp:(NSString *)adUnit anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
+	[pluginDelegate _setUp:adUnit anAdUnitFullScreen:adUnitFullScreen anIsOverlap:isOverlap anIsTest:isTest];
 }
 		
 - (void) _preloadBannerAd {

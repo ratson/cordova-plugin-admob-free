@@ -27,11 +27,10 @@ import android.widget.RelativeLayout;
 import android.os.Build;
 import android.provider.Settings;
 
+import android.os.Handler;
+//md5
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import android.os.Handler;
-
 //Util
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -95,15 +94,15 @@ public class AdmobOverlap implements PluginDelegate {
 	protected static final String LOG_TAG = "AdmobOverlap";
 	protected Plugin plugin;	
 	//
-	protected String adUnit;
-	protected String adUnitFullScreen;
-	protected boolean isOverlap;
-	protected boolean isTest;
-	//
 	protected String email;
 	protected String licenseKey;
 	protected String TEST_AD_UNIT = "ca-app-pub-4906074177432504/6997786077";
 	protected String TEST_AD_UNIT_FULL_SCREEN = "ca-app-pub-4906074177432504/8474519270";
+	//
+	protected String adUnit;
+	protected String adUnitFullScreen;
+	protected boolean isOverlap;
+	protected boolean isTest;
 	//
 	protected String bannerPreviousPosition;	
 	protected String bannerPreviousSize;
@@ -120,19 +119,21 @@ public class AdmobOverlap implements PluginDelegate {
 		plugin = plugin_;
 	}
 
+	public void _setLicenseKey(String email, String licenseKey) {
+		this.email = email;
+		this.licenseKey = licenseKey;
+	}
+	
 	public void _setUp(String adUnit, String adUnitFullScreen, boolean isOverlap, boolean isTest) {
 		this.adUnit = adUnit;
 		this.adUnitFullScreen = adUnitFullScreen;
 		this.isOverlap = isOverlap;
 		this.isTest = isTest;
+
+		_setLicenseKey(((Admob)plugin).email, ((Admob)plugin).licenseKey);
 		
 		lastOrientation = -1;		
 		handleLayoutChangeOverlap();
-	}
-	
-	public void _setLicenseKey(String email, String licenseKey) {
-		this.email = email;
-		this.licenseKey = licenseKey;
 	}
 	
 	//@SuppressLint("NewApi")

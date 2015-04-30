@@ -17,8 +17,8 @@
 @end
 
 @protocol PluginDelegate <NSObject>
-- (void) _setUp:(NSString *)adUnit anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest;
 - (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey;
+- (void) _setUp:(NSString *)adUnit anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest;
 - (void) _preloadBannerAd;
 - (void) _showBannerAd:(NSString *)position aSize:(NSString *)size;
 - (void) _reloadBannerAd;
@@ -30,11 +30,14 @@
 @interface Admob : CDVPlugin <Plugin, PluginDelegate>
 
 @property NSString *callbackIdKeepCallback;
-
+//
 @property id<PluginDelegate> pluginDelegate;
+//
+@property NSString *email;
+@property NSString *licenseKey_;
 
-- (void) setUp: (CDVInvokedUrlCommand*)command;
 - (void) setLicenseKey: (CDVInvokedUrlCommand*)command;
+- (void) setUp: (CDVInvokedUrlCommand*)command;
 - (void) preloadBannerAd: (CDVInvokedUrlCommand*)command;
 - (void) showBannerAd: (CDVInvokedUrlCommand*)command;
 - (void) reloadBannerAd: (CDVInvokedUrlCommand*)command;

@@ -36,8 +36,8 @@ interface Plugin {
 }
 
 interface PluginDelegate {
-	public void _setUp(String adUnit, String adUnitFullScreen, boolean isOverlap, boolean isTest);
 	public void _setLicenseKey(String email, String licenseKey);
+	public void _setUp(String adUnit, String adUnitFullScreen, boolean isOverlap, boolean isTest);
 	public void _preloadBannerAd();
 	public void _showBannerAd(String position, String size);
 	public void _reloadBannerAd();
@@ -54,6 +54,9 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 	protected CallbackContext callbackContextKeepCallback;
 	//
 	protected PluginDelegate pluginDelegate;
+	//
+	public String email;
+	public String licenseKey;	
 	
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
@@ -62,13 +65,13 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-		if (action.equals("setUp")) {
-			setUp(action, args, callbackContext);
+		if (action.equals("setLicenseKey")) {
+			setLicenseKey(action, args, callbackContext);
 
 			return true;
 		}			
-		else if (action.equals("setLicenseKey")) {
-			setLicenseKey(action, args, callbackContext);
+		else if (action.equals("setUp")) {
+			setUp(action, args, callbackContext);
 
 			return true;
 		}			
@@ -104,6 +107,20 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 		}
 		
 		return false; // Returning false results in a "MethodNotFound" error.
+	}
+	
+	private void setLicenseKey(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+		final String email = args.getString(0);
+		final String licenseKey = args.getString(1);				
+		Log.d(LOG_TAG, String.format("%s", email));			
+		Log.d(LOG_TAG, String.format("%s", licenseKey));
+		
+		cordova.getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				_setLicenseKey(email, licenseKey);
+			}
+		});
 	}
 	
 	private void setUp(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -148,20 +165,6 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 			@Override
 			public void run() {
 				_setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
-			}
-		});
-	}
-	
-	private void setLicenseKey(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-		final String email = args.getString(0);
-		final String licenseKey = args.getString(1);				
-		Log.d(LOG_TAG, String.format("%s", email));			
-		Log.d(LOG_TAG, String.format("%s", licenseKey));
-		
-		cordova.getActivity().runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				_setLicenseKey(email, licenseKey);
 			}
 		});
 	}
@@ -243,12 +246,14 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 	
 	//cranberrygame start: AdmobPluginDelegate
 
+	public void _setLicenseKey(String email, String licenseKey) {
+		//pluginDelegate._setLicenseKey(email, licenseKey);
+		this.email = email;
+		this.licenseKey = licenseKey;
+	}
+	
 	public void _setUp(String adUnit, String adUnitFullScreen, boolean isOverlap, boolean isTest) {
 		pluginDelegate._setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
-	}
-
-	public void _setLicenseKey(String email, String licenseKey) {
-		pluginDelegate._setLicenseKey(email, licenseKey);
 	}
 	
 	public void _preloadBannerAd() {

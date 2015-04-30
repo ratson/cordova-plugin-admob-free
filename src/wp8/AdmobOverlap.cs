@@ -37,6 +37,11 @@ namespace Cordova.Extension.Commands {
 			plugin = plugin_;
 		}
 	
+        private void _setLicenseKey(string email, string licenseKey) {
+			this.email = email;
+			this.licenseKey = licenseKey;
+        }
+		
         private void _setUp(string adUnit, string adUnitFullScreen, bool isOverlap, bool isTest) {
 			this.adUnit = adUnit;
 			this.adUnitFullScreen = adUnitFullScreen;

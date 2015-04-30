@@ -5,6 +5,9 @@ show admob banner and full screen ad
 
 requires admob account http://www.google.com/ads/admob/
 
+com.google.playservices@21.0.0
+GoogleMobileAdsSdkiOS-7.1.0
+
 fix Admob SDK FPS issue: go to your AdMob account and disable text banners, leaving enabled only image banners. (provided by Cipriux)
 (not both, but one of them)
 
@@ -101,10 +104,39 @@ Previous Purchase Restrictions
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob" source="plugins.cordova.io" />
 ```
 
+## Construct2 ##
+
+Download construct2 admob plugin and example
+https://plus.google.com/communities/117978754675005605917 
+
 # Server setting #
 ```c
 ```
+<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit1.png"><br>
+<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit2.png"><br>
+<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit3.png"><br>
+<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit4.png"><br>
+<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit5.png"><br>
+<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit6.png"><br>
+<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit7.png"><br>
+<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit8.png"><br>
 
+cf)심사를 위해 제출:
+
+Export Compliance
+	Have you added or made changes to encryption features since your last submission of this app? (No)
+
+콘텐츠 권한
+	App에 타사 콘텐츠가 포함 또는 표시되거나, App에서 타사 콘텐츠에 액세스할 수 있습니까? (No)
+
+Advertising Identifier
+	Does this app use the Advertising Identifier (IDFA)? (Yes)
+	
+	This app uses the Advertising Identifier to (select all that apply):
+		Serve advertisements within the app (check)
+	
+	Limit Ad Tracking setting in iOS (check)
+	
 # API #
 ```javascript
 var adUnit = "REPLACE_THIS_WITH_YOUR_AD_UNIT";
@@ -184,15 +216,25 @@ window.admob.showFullScreenAd();
 
 # Test #
 
+Youtube
+[![](http://img.youtube.com/vi/xXrVb8E8gMM/0.jpg)](https://www.youtube.com/watch?v=xXrVb8E8gMM&feature=youtu.be "Youtube")
+
+CordovaApp-debug.apk
+https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/CordovaApp-debug.apk
+
 # Useful links #
 
 Cordova Admob (Ad plugin)<br>
 http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.admob<br>
 https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob<br>
-<br>
-<br>
+https://www.youtube.com/watch?v=xXrVb8E8gMM<br>
+Cordova Chartboost (Ad plugin)<br>
+http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.chartboost<br>
+https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.chartboost<br>
+https://www.youtube.com/watch?v=EQJLRbSKmPU&feature=youtu.be<br>
 Cordova RevMob (Ad plugin)<br>
 http://plugins.cordova.io/#/package/com.cranberrygame.cordova.plugin.ad.revmob<br>
 https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.revmob<br>
+https://www.youtube.com/watch?v=fThTXn88dNw<br>
 
 # Credits #
