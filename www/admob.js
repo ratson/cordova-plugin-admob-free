@@ -40,6 +40,8 @@ module.exports = {
 					else if (result == "onFullScreenAdHidden") {
 						 if (self.onFullScreenAdHidden)
 							self.onFullScreenAdHidden();
+						 if (self.onFullScreenAdClosed)
+							self.onFullScreenAdClosed(); //deprecated							
 					}
 				}
 				else {
@@ -118,11 +120,14 @@ module.exports = {
             []
         ); 
     },
+	reloadFullScreenAd: function() { //deprecated
+    },	
 	onBannerAdPreloaded: null,
 	onBannerAdLoaded: null,
 	//
 	onFullScreenAdPreloaded: null,
 	onFullScreenAdLoaded: null,
 	onFullScreenAdShown: null,
-	onFullScreenAdHidden: null
+	onFullScreenAdHidden: null,
+	onFullScreenAdClosed: null //deprecated	
 };
