@@ -224,10 +224,17 @@ https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/
 
 # Useful links #
 
+<<<<<<< HEAD
 Cordova monetisation-related plugins G+ community<br>
 https://plus.google.com/communities/116032133386884708413<br>
 <br>
 Construct2 monetisation-related plugins by cordova G+ community<br>
+=======
+Cordova monetisation related plugins G+ community<br>
+https://plus.google.com/communities/116032133386884708413<br>
+<br>
+Construct2 monetisation related plugins by cordova G+ community<br>
+>>>>>>> origin/master
 https://plus.google.com/communities/117978754675005605917<br>
 
 # Credits #
