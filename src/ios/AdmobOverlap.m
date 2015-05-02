@@ -17,8 +17,6 @@
 //
 @synthesize email;
 @synthesize licenseKey_;
-static NSString *TEST_AD_UNIT = @"ca-app-pub-4906074177432504/4286495279";
-static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/5763228472";
 //
 @synthesize adUnit;
 @synthesize adUnitFullScreen;
@@ -88,12 +86,33 @@ static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/576322
 }
 
 - (void) _setUp:(NSString *)adUnit anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
+
+    [self _setLicenseKey:((Admob*)plugin).email aLicenseKey:((Admob*)plugin).licenseKey_];
+	
+	//
+	NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
+	NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.admob: %@", email]];
+	if(licenseKey_ != Nil && ([licenseKey_ isEqualToString:str1] || [licenseKey_ isEqualToString:str2])){
+		NSLog(@"valid licenseKey");
+	}
+	else {
+		NSLog(@"invalid licenseKey");
+
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" 
+                                                message:@"Cordova Admob: invalid email / license key." 
+                                               delegate:nil 
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil];
+		[alert show];
+		
+		return;
+	}	
+
+	//
 	self.adUnit = adUnit;
 	self.adUnitFullScreen = adUnitFullScreen;
 	self.isOverlap = isOverlap;
 	self.isTest = isTest;	
-
-    [self _setLicenseKey:((Admob*)plugin).email aLicenseKey:((Admob*)plugin).licenseKey_];
 }
 
 - (void) _preloadBannerAd {
@@ -148,23 +167,8 @@ static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/576322
 		}		
 	
 		bannerView = [[GADBannerView alloc] initWithAdSize:adSize];
-		//
-		NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
-		NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.admob: %@", email]];
-		if(licenseKey_ != Nil && ([licenseKey_ isEqualToString:str1] || [licenseKey_ isEqualToString:str2])){
-			NSLog(@"valid licenseKey");
-			bannerView.adUnitID = self.adUnit;
-		}
-		else {
-			NSLog(@"invalid licenseKey");
-			if (arc4random() % 100 <= 1) {//0 ~ 99			
-				bannerView.adUnitID = TEST_AD_UNIT;
-			}
-			else {
-				bannerView.adUnitID = self.adUnit;
-			}
-		}
         //
+		bannerView.adUnitID = self.adUnit;
 		bannerView.delegate = self;
 		bannerView.rootViewController = [self.plugin getViewController];//
 	}
@@ -331,22 +335,7 @@ static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/576322
     if (interstitialView == nil || self.interstitialView.hasBeenUsed){//ios only //An interstitial object can only be used once for ios
         self.interstitialView = [[GADInterstitial alloc] init];
         //
-		NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
-		NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.admob: %@", email]];
-		if(licenseKey_ != Nil && ([licenseKey_ isEqualToString:str1] || [licenseKey_ isEqualToString:str2])){
-            NSLog(@"valid licenseKey");
-            self.interstitialView.adUnitID = adUnitFullScreen;
-        }
-        else {
-            NSLog(@"invalid licenseKey");
-            if (arc4random() % 100 <= 1) {//0 ~ 99
-                self.interstitialView.adUnitID = TEST_AD_UNIT_FULL_SCREEN;
-            }
-            else {
-                self.interstitialView.adUnitID = adUnitFullScreen;
-            }
-        }
-        //
+		self.interstitialView.adUnitID = adUnitFullScreen;
         self.interstitialView.delegate = self;
     }	
 	

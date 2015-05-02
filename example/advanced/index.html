@@ -34,6 +34,9 @@ else if( navigator.userAgent.match(/Windows Phone/i) ) {
 */
 
 document.addEventListener("deviceready", function(){
+	//get free license from https://play.google.com/store/apps/details?id=com.cranberrygame.cordovapluginfreelicense
+	window.admob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
+	
 	window.admob.setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
 		
 	//banner ad callback

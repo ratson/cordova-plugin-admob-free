@@ -96,8 +96,6 @@ public class AdmobOverlap implements PluginDelegate {
 	//
 	protected String email;
 	protected String licenseKey;
-	protected String TEST_AD_UNIT = "ca-app-pub-4906074177432504/6997786077";
-	protected String TEST_AD_UNIT_FULL_SCREEN = "ca-app-pub-4906074177432504/8474519270";
 	//
 	protected String adUnit;
 	protected String adUnitFullScreen;
@@ -125,12 +123,28 @@ public class AdmobOverlap implements PluginDelegate {
 	}
 	
 	public void _setUp(String adUnit, String adUnitFullScreen, boolean isOverlap, boolean isTest) {
+
+		//
+		_setLicenseKey(((Admob)plugin).email, ((Admob)plugin).licenseKey);
+		//
+		String str1 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
+		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
+		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
+			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
+		}
+		else {
+			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
+			
+			Util.alert(plugin.getCordova().getActivity(),"Cordova Admob: invalid email / license key.");
+			
+			return;
+		}
+
+		//
 		this.adUnit = adUnit;
 		this.adUnitFullScreen = adUnitFullScreen;
 		this.isOverlap = isOverlap;
-		this.isTest = isTest;
-
-		_setLicenseKey(((Admob)plugin).email, ((Admob)plugin).licenseKey);
+		this.isTest = isTest;			
 		
 		lastOrientation = -1;		
 		handleLayoutChangeOverlap();
@@ -206,22 +220,7 @@ public class AdmobOverlap implements PluginDelegate {
 			//
 			bannerView = new AdView(plugin.getCordova().getActivity());//
 			//
-			String str1 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
-			String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
-			if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
-				Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
-				bannerView.setAdUnitId(this.adUnit);
-			}
-			else {
-				Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
-				if (new Random().nextInt(100) <= 1) {//0~99					
-					bannerView.setAdUnitId(TEST_AD_UNIT);
-				}
-				else {
-					bannerView.setAdUnitId(this.adUnit);
-				}
-			}
-			//
+			bannerView.setAdUnitId(this.adUnit);
 			bannerView.setAdListener(new MyBannerViewListener());		
 			//https://developers.google.com/mobile-ads-sdk/docs/admob/android/banner
 			if(bannerPreviousSize == null) {
@@ -389,22 +388,7 @@ public class AdmobOverlap implements PluginDelegate {
 		if (interstitialView == null) {
 			interstitialView = new InterstitialAd(plugin.getCordova().getActivity());
 			//
-			String str1 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
-			String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
-			if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
-				Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
-				interstitialView.setAdUnitId(this.adUnitFullScreen);
-			}
-			else {
-				Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
-				if (new Random().nextInt(100) <= 1) {//0~99				
-					interstitialView.setAdUnitId(TEST_AD_UNIT_FULL_SCREEN);
-				}
-				else {
-					interstitialView.setAdUnitId(this.adUnitFullScreen);
-				}
-			}
-			//
+			interstitialView.setAdUnitId(this.adUnitFullScreen);
 			interstitialView.setAdListener(new MyInterstitialViewListener());					
 		}		
 		

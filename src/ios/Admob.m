@@ -58,9 +58,9 @@
     else
         pluginDelegate = [[AdmobSplit alloc] initWithPlugin:self];
     
-    [self.commandDelegate runInBackground:^{
+    //[self.commandDelegate runInBackground:^{
         [self _setUp:adUnit anAdUnitFullScreen:adUnitFullScreen anIsOverlap:isOverlap anIsTest:isTest];
-    }];
+    //}];
 }
 
 - (void) preloadBannerAd: (CDVInvokedUrlCommand*)command {
