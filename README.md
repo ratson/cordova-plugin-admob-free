@@ -13,11 +13,12 @@ fix Admob SDK FPS issue: go to your AdMob account and disable text banners, leav
 
 this is open source cordova plugin.
 
-you can get free license from following app.
-https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/cordovapluginfreelicense/CordovaApp-debug.apk
-put window.admob.setLicenseKey("youremail@yourdoamin.com", "yourlicensekey"); function call before setUp function call.
-if you do not call this function, this plugin will share 2% traffic with plugin developer for supporting plugin development.
-	
+you can download the following app and get free license.
+https://play.google.com/store/apps/details?id=com.cranberrygame.cordovapluginfreelicense
+put the following function call before setUp function call in the javascript source code 
+window.admob.setLicenseKey("youremailid@youremaildoamin.com", "yourFreeLicenseKey");
+if you do not call this function, then you share 2% traffic with this plugin developer for supporting plugin development.
+
 # Change log #
 ```c
 2014.9.17
@@ -103,11 +104,6 @@ Previous Purchase Restrictions
 ```c
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob" source="plugins.cordova.io" />
 ```
-
-## Construct2 ##
-
-Download construct2 admob plugin and example
-https://plus.google.com/communities/117978754675005605917 
 
 # Server setting #
 ```c
@@ -216,25 +212,17 @@ window.admob.showFullScreenAd();
 
 # Test #
 
-Youtube
 [![](http://img.youtube.com/vi/xXrVb8E8gMM/0.jpg)](https://www.youtube.com/watch?v=xXrVb8E8gMM&feature=youtu.be "Youtube")
 
-CordovaApp-debug.apk
+You can also run following test apk.
 https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/CordovaApp-debug.apk
 
 # Useful links #
 
-<<<<<<< HEAD
-Cordova monetisation-related plugins G+ community<br>
+Cordova promotion & monetisation plugins G+ community<br>
 https://plus.google.com/communities/116032133386884708413<br>
 <br>
-Construct2 monetisation-related plugins by cordova G+ community<br>
-=======
-Cordova monetisation related plugins G+ community<br>
-https://plus.google.com/communities/116032133386884708413<br>
-<br>
-Construct2 monetisation related plugins by cordova G+ community<br>
->>>>>>> origin/master
+C2 promotion & monetisation plugins by cordova G+ community<br>
 https://plus.google.com/communities/117978754675005605917<br>
 
 # Credits #
