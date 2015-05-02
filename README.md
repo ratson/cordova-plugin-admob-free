@@ -11,6 +11,8 @@ GoogleMobileAdsSdkiOS-7.1.0
 fix Admob SDK FPS issue: go to your AdMob account and disable text banners, leaving enabled only image banners. (provided by Cipriux)
 (not both, but one of them)
 
+need to set license, get free license from https://play.google.com/store/apps/details?id=com.cranberrygame.cordovapluginfreelicense
+
 this is open source cordova plugin.
 
 # Change log #
