@@ -1,19 +1,19 @@
+Cordova AdMob plugin (Free)
+====================
+
 # Overview #
 show admob banner and full screen ad
 
-[android, ios, wp8] [cordova cli] [crosswalk]
+[android, ios, wp8] [cordova cli] [xdk]
 
 requires admob account http://www.google.com/ads/admob/
-
-com.google.playservices@21.0.0
-GoogleMobileAdsSdkiOS-7.1.0
 
 fix Admob SDK FPS issue: go to your AdMob account and disable text banners, leaving enabled only image banners. (provided by Cipriux)
 (not both, but one of them)
 
-need to set license, get free license from http://cranberrygame.github.io
-
 this is open source cordova plugin.
+
+need to set license, get free license from http://cranberrygame.github.io?referrer=github
 
 # Change log #
 ```c
@@ -38,7 +38,8 @@ this is open source cordova plugin.
 1.0.39
 	Moved package name from com.cranberrygame.phonegap.plugin.ad.admob to com.cranberrygame.cordova.plugin.ad.admob
 	Updated Admob SDK
-		iOS 7.1.0
+		android com.google.playservices@21.0.0
+		iOS GoogleMobileAdsSdkiOS-7.1.0
 	
 To-Do:
 
@@ -71,7 +72,7 @@ Previous Purchase Restrictions
 	Are you updating this app because of a significant usability issue or for a legal issue, such as an infringement claim? (No)
 ```
 
-## Crosswalk ##
+## Xdk ##
 ```c
 XDK PORJECTS - your_xdk_project - CORDOVA 3.X HYBRID MOBILE APP SETTINGS - PLUGINS AND PERMISSIONS - Third Party Plugins - Add a Third Party Plugin - Get Plugin from the Web -
 
@@ -113,7 +114,7 @@ Previous Purchase Restrictions
 <img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit7.png"><br>
 <img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit8.png"><br>
 
-cf)심사를 위해 제출:
+cf)submit for review for ios
 
 Export Compliance
 	Have you added or made changes to encryption features since your last submission of this app? (No)
@@ -159,7 +160,7 @@ else if( navigator.userAgent.match(/Windows Phone/i) ) {
 */
 
 document.addEventListener("deviceready", function(){
-	//need to set license, get free license from http://cranberrygame.github.io
+	//need to set license, get free license from http://cranberrygame.github.io?referrer=github
 	window.admob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
 
 	window.admob.setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
@@ -214,11 +215,11 @@ window.admob.showFullScreenAd();
 [![](http://img.youtube.com/vi/xXrVb8E8gMM/0.jpg)](https://www.youtube.com/watch?v=xXrVb8E8gMM&feature=youtu.be "Youtube")
 
 You can also run following test apk.
-https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/CordovaApp-debug.apk
+https://dl.dropboxusercontent.com/u/186681453/free/admob/CordovaApp-debug.apk
 
 # Useful links #
 
 Cordova promotion & monetisation plugins<br>
-http://cranberrygame.github.io
+http://cranberrygame.github.io?referrer=github
 
 # Credits #
