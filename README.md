@@ -1,4 +1,4 @@
-Cordova AdMob plugin (Free)
+Cordova AdMob plugin
 ====================
 
 # Overview #
@@ -159,7 +159,7 @@ else if( navigator.userAgent.match(/Windows Phone/i) ) {
 
 document.addEventListener("deviceready", function(){
 	//if no license key, 2% ad traffic share for dev support.
-	//you can get free license key from http://cranberrygame.github.io?referrer=github
+	//you can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova
 	//window.admob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
 
 	window.admob.setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
