@@ -38,8 +38,6 @@ import android.view.Surface;
 
 //
 import android.annotation.TargetApi;
-//
-import java.util.*;
 
 class Util {
 
@@ -94,9 +92,6 @@ public class AdmobOverlap implements PluginDelegate {
 	protected static final String LOG_TAG = "AdmobOverlap";
 	protected Plugin plugin;	
 	//
-	protected String email;
-	protected String licenseKey;
-	//
 	protected String adUnit;
 	protected String adUnitFullScreen;
 	protected boolean isOverlap;
@@ -118,29 +113,9 @@ public class AdmobOverlap implements PluginDelegate {
 	}
 
 	public void _setLicenseKey(String email, String licenseKey) {
-		this.email = email;
-		this.licenseKey = licenseKey;
 	}
 	
 	public void _setUp(String adUnit, String adUnitFullScreen, boolean isOverlap, boolean isTest) {
-
-		//
-		_setLicenseKey(((Admob)plugin).email, ((Admob)plugin).licenseKey);
-		//
-		String str1 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
-		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
-		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
-			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
-		}
-		else {
-			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
-			
-			Util.alert(plugin.getCordova().getActivity(),"Cordova Admob: invalid email / license key. get free license from http://cranberrygame.github.io/");
-			
-			return;
-		}
-
-		//
 		this.adUnit = adUnit;
 		this.adUnitFullScreen = adUnitFullScreen;
 		this.isOverlap = isOverlap;

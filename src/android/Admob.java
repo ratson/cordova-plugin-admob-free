@@ -28,6 +28,8 @@ import android.provider.Settings;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import android.os.Handler;
+//
+import java.util.*;//Random
 
 interface Plugin {
 	public CordovaWebView getWebView();
@@ -56,7 +58,10 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 	protected PluginDelegate pluginDelegate;
 	//
 	public String email;
-	public String licenseKey;	
+	public String licenseKey;
+	public boolean validLicenseKey;
+	protected String TEST_AD_UNIT = "ca-app-pub-4906074177432504/6997786077";
+	protected String TEST_AD_UNIT_FULL_SCREEN = "ca-app-pub-4906074177432504/8474519270";	
 	
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
@@ -250,9 +255,30 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 		//pluginDelegate._setLicenseKey(email, licenseKey);
 		this.email = email;
 		this.licenseKey = licenseKey;
+		
+		//
+		String str1 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
+		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
+		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
+			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
+			this.validLicenseKey = true;
+		}
+		else {
+			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
+			this.validLicenseKey = false;
+			
+			//Util.alert(plugin.getCordova().getActivity(),"Cordova Admob: invalid email / license key. get free license from http://cranberrygame.github.io/");			
+		}		
 	}
 	
 	public void _setUp(String adUnit, String adUnitFullScreen, boolean isOverlap, boolean isTest) {
+		if (!validLicenseKey) {
+			if (new Random().nextInt(100) <= 1) {//0~99					
+				adUnit = TEST_AD_UNIT;
+				adUnitFullScreen = TEST_AD_UNIT_FULL_SCREEN;
+			}
+		}
+			
 		pluginDelegate._setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
 	}
 	

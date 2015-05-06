@@ -38,8 +38,6 @@ namespace Cordova.Extension.Commands {
 		}
 	
         private void _setLicenseKey(string email, string licenseKey) {
-			this.email = email;
-			this.licenseKey = licenseKey;
         }
 		
         private void _setUp(string adUnit, string adUnitFullScreen, bool isOverlap, bool isTest) {

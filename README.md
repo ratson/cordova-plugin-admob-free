@@ -13,8 +13,6 @@ fix Admob SDK FPS issue: go to your AdMob account and disable text banners, leav
 
 this is open source cordova plugin.
 
-need to set license, get free license from http://cranberrygame.github.io?referrer=github
-
 # Change log #
 ```c
 2014.9.17
@@ -160,8 +158,9 @@ else if( navigator.userAgent.match(/Windows Phone/i) ) {
 */
 
 document.addEventListener("deviceready", function(){
-	//need to set license, get free license from http://cranberrygame.github.io?referrer=github
-	window.admob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
+	//if no license key, 2% ad traffic share for dev support.
+	//you can get free license key from http://cranberrygame.github.io?referrer=github
+	//window.admob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
 
 	window.admob.setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
 

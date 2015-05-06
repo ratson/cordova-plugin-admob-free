@@ -2,7 +2,6 @@
 //Email: cranberrygame@yahoo.com
 //Homepage: http://www.github.com/cranberrygame
 //License: MIT (http://opensource.org/licenses/MIT)
-#include "AdmobSplit.h"
 #include "AdmobOverlap.h"
 
 @interface AdmobSplit : AdmobOverlap

@@ -4,13 +4,9 @@
 //License: MIT (http://opensource.org/licenses/MIT)
 #import "Admob.h"
 //
-#import <GoogleMobileAds/GADExtras.h>
-#import <GoogleMobileAds/GADAdSize.h>
-#import <GoogleMobileAds/GADBannerView.h>
-#import <GoogleMobileAds/GADInterstitial.h>
-#import "MainViewController.h"
 #import "AdmobOverlap.h"
 #import "AdmobSplit.h"
+#import <CommonCrypto/CommonDigest.h> //md5
 
 @implementation Admob
 
@@ -20,7 +16,10 @@
 //
 @synthesize email;
 @synthesize licenseKey_;
-
+@synthesize validLicenseKey;
+static NSString *TEST_AD_UNIT = @"ca-app-pub-4906074177432504/4286495279";
+static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/5763228472";
+	
 - (void) setLicenseKey: (CDVInvokedUrlCommand*)command {
     NSString *email = [command.arguments objectAtIndex: 0];
     NSString *licenseKey = [command.arguments objectAtIndex: 1];
@@ -129,9 +128,45 @@
 	//[pluginDelegate _setLicenseKey:email aLicenseKey:licenseKey];	
 	self.email = email;
 	self.licenseKey_ = licenseKey;
+
+	//
+	NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
+	NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.admob: %@", email]];
+	if(licenseKey_ != Nil && ([licenseKey_ isEqualToString:str1] || [licenseKey_ isEqualToString:str2])){
+		NSLog(@"valid licenseKey");
+		validLicenseKey = YES;
+	}
+	else {
+		NSLog(@"invalid licenseKey");
+		validLicenseKey = NO;
+
+		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Cordova Admob: invalid email / license key. get free license from http://cranberrygame.github.io" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		//[alert show];		
+		//return;
+	}	
+}
+
+- (NSString*) md5:(NSString*) input {
+	const char *cStr = [input UTF8String];
+	unsigned char digest[16];
+	CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+
+	NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+
+	for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+	[output appendFormat:@"%02x", digest[i]];
+
+	return  output;
 }
 
 - (void) _setUp:(NSString *)adUnit anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
+	if (!validLicenseKey) {
+		if (arc4random() % 100 <= 1) {//0 ~ 99			
+			adUnit = TEST_AD_UNIT;
+			adUnitFullScreen = TEST_AD_UNIT_FULL_SCREEN;
+		}
+	}
+	
 	[pluginDelegate _setUp:adUnit anAdUnitFullScreen:adUnitFullScreen anIsOverlap:isOverlap anIsTest:isTest];
 }
 		

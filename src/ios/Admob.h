@@ -4,10 +4,6 @@
 //License: MIT (http://opensource.org/licenses/MIT)
 #import <Foundation/Foundation.h>
 #import <Cordova/CDV.h>
-//
-#import <GoogleMobileAds/GADBannerViewDelegate.h>
-#import <GoogleMobileAds/GADInterstitialDelegate.h>
-#import <UIKit/UIKit.h>
 
 @protocol Plugin <NSObject>
 - (UIWebView*) getWebView;
@@ -35,7 +31,8 @@
 //
 @property NSString *email;
 @property NSString *licenseKey_;
-
+@property BOOL validLicenseKey;
+	
 - (void) setLicenseKey: (CDVInvokedUrlCommand*)command;
 - (void) setUp: (CDVInvokedUrlCommand*)command;
 - (void) preloadBannerAd: (CDVInvokedUrlCommand*)command;

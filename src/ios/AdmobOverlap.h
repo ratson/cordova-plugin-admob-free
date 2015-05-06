@@ -2,21 +2,14 @@
 //Email: cranberrygame@yahoo.com
 //Homepage: http://www.github.com/cranberrygame
 //License: MIT (http://opensource.org/licenses/MIT)
-#import <Foundation/Foundation.h>
-#import <Cordova/CDV.h>
-//
 #import <GoogleMobileAds/GADBannerView.h>
 #import <GoogleMobileAds/GADInterstitialDelegate.h>
-#import <UIKit/UIKit.h>
 //
 #import "Admob.h"
 
 @interface AdmobOverlap : NSObject <PluginDelegate, GADBannerViewDelegate, GADInterstitialDelegate>
 
 @property id<Plugin> plugin;
-//
-@property NSString *email;
-@property NSString *licenseKey_;
 //
 @property NSString *adUnit;
 @property NSString *adUnitFullScreen;

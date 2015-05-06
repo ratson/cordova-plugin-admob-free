@@ -16,7 +16,17 @@ using Microsoft.Phone.Controls;
 
 namespace Cordova.Extension.Commands {
     public class Admob : BaseCommand {
-		
+/*
+		//
+		protected PluginDelegate pluginDelegate;
+		//
+		public String email;
+		public String licenseKey;
+		public boolean validLicenseKey;
+		protected String TEST_AD_UNIT = "";
+		protected String TEST_AD_UNIT_FULL_SCREEN = "";
+*/
+	
 		public void setLicenseKey(string args) {
             string email = JsonHelper.Deserialize<string[]>(args)[0];
             string licenseKey = JsonHelper.Deserialize<string[]>(args)[1];
@@ -87,10 +97,37 @@ namespace Cordova.Extension.Commands {
 		//cranberrygame start: AdmobPluginDelegate
 
         private void _setLicenseKey(string email, string licenseKey) {
-			pluginDelegate._setLicenseKey(email, licenseKey);
+			//pluginDelegate._setLicenseKey(email, licenseKey);			
+			this.email = email;
+			this.licenseKey = licenseKey;
+
+/*
+		//
+		String str1 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
+		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
+		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
+			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
+			this.validLicenseKey = true;
+		}
+		else {
+			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
+			this.validLicenseKey = false;
+			
+			//Util.alert(plugin.getCordova().getActivity(),"Cordova Admob: invalid email / license key. get free license from http://cranberrygame.github.io/");			
+		}
+*/			
         }
 		
         private void _setUp(string adUnit, string adUnitFullScreen, bool isOverlap, bool isTest) {
+/*
+			if (!validLicenseKey) {
+				if (new Random().nextInt(100) <= 1) {//0~99					
+					adUnit = TEST_AD_UNIT;
+					adUnitFullScreen = TEST_AD_UNIT_FULL_SCREEN;
+				}
+			}
+*/
+		
 			pluginDelegate._setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
         }
 		

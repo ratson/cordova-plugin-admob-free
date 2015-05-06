@@ -4,19 +4,14 @@
 //License: MIT (http://opensource.org/licenses/MIT)
 #import "AdmobOverlap.h"
 //
-#import <GoogleMobileAds/GADExtras.h>
-#import <GoogleMobileAds/GADAdSize.h>
 #import <GoogleMobileAds/GADBannerView.h>
 #import <GoogleMobileAds/GADInterstitial.h>
-#import "MainViewController.h"
-#import <CommonCrypto/CommonDigest.h> //md5
+#import <GoogleMobileAds/GADAdSize.h>
+#import <GoogleMobileAds/GADExtras.h>
 
 @implementation AdmobOverlap
 
 @synthesize plugin;
-//
-@synthesize email;
-@synthesize licenseKey_;
 //
 @synthesize adUnit;
 @synthesize adUnitFullScreen;
@@ -81,34 +76,9 @@
 }	
 
 - (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey {
-	self.email = email;
-	self.licenseKey_ = licenseKey;
 }
 
 - (void) _setUp:(NSString *)adUnit anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
-
-    [self _setLicenseKey:((Admob*)plugin).email aLicenseKey:((Admob*)plugin).licenseKey_];
-	
-	//
-	NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
-	NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.admob: %@", email]];
-	if(licenseKey_ != Nil && ([licenseKey_ isEqualToString:str1] || [licenseKey_ isEqualToString:str2])){
-		NSLog(@"valid licenseKey");
-	}
-	else {
-		NSLog(@"invalid licenseKey");
-
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" 
-                                                message:@"Cordova Admob: invalid email / license key. get free license from http://cranberrygame.github.io" 
-                                               delegate:nil 
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil];
-		[alert show];
-		
-		return;
-	}	
-
-	//
 	self.adUnit = adUnit;
 	self.adUnitFullScreen = adUnitFullScreen;
 	self.isOverlap = isOverlap;
@@ -186,19 +156,6 @@
 //		request.testing = YES;//not exist in ios sdk 7.1.0
 	}
 	[self.bannerView loadRequest:request];	
-}
-
-- (NSString*) md5:(NSString*) input {
-	const char *cStr = [input UTF8String];
-	unsigned char digest[16];
-	CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
-
-	NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-
-	for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
-	[output appendFormat:@"%02x", digest[i]];
-
-	return  output;
 }
 
 - (void) _showBannerAd:(NSString *)position aSize:(NSString *)size {
