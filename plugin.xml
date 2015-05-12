@@ -2,15 +2,15 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.cranberrygame.cordova.plugin.ad.admob"
-    version="1.0.51">
+    version="1.0.52">
 	
     <name>Cordova Admob plugin</name>
     <description>show admob banner and full screen ad</description>
     <author>Sang Ki Kwon (Cranberrygame)</author>		
     <license>MIT</license>
     <keywords>cordova,plugin,ad,admob,overlap,split,monetisation</keywords>
-    <repo>https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob</repo>
-    <issue>https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/issues</issue> 	
+    <repo>https://github.com/cranberrygame/cordova-plugin-ad-admob</repo>
+    <issue>https://github.com/cranberrygame/cordova-plugin-ad-admob/issues</issue> 	
 	<engines>
 	    <engine name="cordova" version=">=3.0.0" />
 	</engines>

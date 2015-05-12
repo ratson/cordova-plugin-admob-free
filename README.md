@@ -103,14 +103,14 @@ Previous Purchase Restrictions
 # Server setting #
 ```c
 ```
-<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit1.png"><br>
-<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit2.png"><br>
-<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit3.png"><br>
-<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit4.png"><br>
-<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit5.png"><br>
-<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit6.png"><br>
-<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit7.png"><br>
-<img src="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/doc/ad_unit8.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit1.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit2.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit3.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit4.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit5.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit6.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit7.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit8.png"><br>
 
 cf)submit for review for ios
 
@@ -206,8 +206,8 @@ window.admob.preloadFullScreenAd();
 window.admob.showFullScreenAd();
 ```
 # Examples #
-<a href="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/example/basic/index.html">example/basic/index.html</a><br>
-<a href="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.ad.admob/blob/master/example/advanced/index.html">example/advanced/index.html</a>
+<a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/basic/index.html">example/basic/index.html</a><br>
+<a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/advanced/index.html">example/advanced/index.html</a>
 
 # Test #
 
@@ -218,7 +218,7 @@ https://dl.dropboxusercontent.com/u/186681453/free/admob/CordovaApp-debug.apk
 
 # Useful links #
 
-Cordova promotion & monetisation plugins<br>
+Plugin For Cordova<br>
 http://cranberrygame.github.io?referrer=github
 
 # Credits #

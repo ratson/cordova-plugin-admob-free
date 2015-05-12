@@ -39,6 +39,14 @@ namespace Cordova.Extension.Commands {
         }
 		
 		public void setUp(string args) {
+            //string adUnit = JsonHelper.Deserialize<string[]>(args)[0];
+            //string adUnitFullScreen = JsonHelper.Deserialize<string[]>(args)[1];
+            //bool isOverlap = Convert.ToBoolean(JsonHelper.Deserialize<string[]>(args)[2]);
+            //bool isTest = Convert.ToBoolean(JsonHelper.Deserialize<string[]>(args)[3]);
+            //Debug.WriteLine("adUnit: " + adUnit);
+            //Debug.WriteLine("adUnitFullScreen: " + adUnitFullScreen);
+            //Debug.WriteLine("isOverlap: " + isOverlap);
+            //Debug.WriteLine("isTest: " + isTest);			
             string adUnit = JsonHelper.Deserialize<string[]>(args)[0];
             string adUnitFullScreen = JsonHelper.Deserialize<string[]>(args)[1];
             bool isOverlap = Convert.ToBoolean(JsonHelper.Deserialize<string[]>(args)[2]);
