@@ -1,6 +1,8 @@
 
 module.exports = {
-
+	_isShowingBannerAd: false,
+	_isShowingFullScreenAd: false,
+	//
 	setLicenseKey: function(email, licenseKey) {
 		var self = this;	
         cordova.exec(
@@ -34,13 +36,17 @@ module.exports = {
 							self.onFullScreenAdLoaded();
 					}
 					else if (result == "onFullScreenAdShown") {
+						self._isShowingFullScreenAd = true;
+
 						if (self.onFullScreenAdShown)
 							self.onFullScreenAdShown();
 					}
 					else if (result == "onFullScreenAdHidden") {
-						 if (self.onFullScreenAdHidden)
+						self._isShowingFullScreenAd = false;
+						
+						if (self.onFullScreenAdHidden)
 							self.onFullScreenAdHidden();
-						 if (self.onFullScreenAdClosed)
+						if (self.onFullScreenAdClosed)
 							self.onFullScreenAdClosed(); //deprecated							
 					}
 				}
@@ -71,6 +77,9 @@ module.exports = {
     },
     showBannerAd: function(position, size) {
 		var self = this;	
+
+		self._isShowingBannerAd = true;
+	
         cordova.exec(
             null,
             null,
@@ -90,7 +99,10 @@ module.exports = {
         ); 
     },
     hideBannerAd: function() {
-		var self = this;	
+		var self = this;
+		
+		self._isShowingBannerAd = false;
+		
         cordova.exec(
             null,
             null,
@@ -121,7 +133,13 @@ module.exports = {
         ); 
     },
 	reloadFullScreenAd: function() { //deprecated
-    },	
+    },
+	isShowingBannerAd: function() {
+		return this._isShowingBannerAd;
+	},
+	isShowingFullScreenAd: function() {
+		return this._isShowingFullScreenAd;
+	},	
 	onBannerAdPreloaded: null,
 	onBannerAdLoaded: null,
 	//

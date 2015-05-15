@@ -38,6 +38,8 @@ this is open source cordova plugin.
 	Updated Admob SDK
 		android com.google.playservices@21.0.0
 		iOS GoogleMobileAdsSdkiOS-7.1.0
+1.0.53
+	Added isShowingBannerAd, isShowingFullScreenAd
 	
 To-Do:
 
@@ -99,6 +101,9 @@ Previous Purchase Restrictions
 ```c
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob" source="plugins.cordova.io" />
 ```
+
+## Construct2 ##
+Download construct2 plugin: https://dl.dropboxusercontent.com/u/186681453/pluginsforcordova/admob/construct2.html
 
 # Server setting #
 ```c
@@ -204,6 +209,10 @@ window.admob.hideBannerAd();
 
 window.admob.preloadFullScreenAd();
 window.admob.showFullScreenAd();
+
+alert(window.admob.isShowingBannerAd());//boolean: true or false
+
+alert(window.admob.isShowingFullScreenAd());//boolean: true or false
 ```
 # Examples #
 <a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/basic/index.html">example/basic/index.html</a><br>
@@ -218,7 +227,7 @@ https://dl.dropboxusercontent.com/u/186681453/free/admob/CordovaApp-debug.apk
 
 # Useful links #
 
-Plugin For Cordova<br>
+Plugins For Cordova<br>
 http://cranberrygame.github.io?referrer=github
 
 # Credits #

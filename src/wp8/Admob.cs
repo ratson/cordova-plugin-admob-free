@@ -1,6 +1,6 @@
 ﻿//Copyright (c) 2014 Sang Ki Kwon (Cranberrygame)
 //Email: cranberrygame@yahoo.com
-//Homepage: http://www.github.com/cranberrygame
+//Homepage: http://cranberrygame.github.io
 //License: MIT (http://opensource.org/licenses/MIT)
 using System;
 using System.Windows;
@@ -121,7 +121,7 @@ namespace Cordova.Extension.Commands {
 			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
 			this.validLicenseKey = false;
 			
-			//Util.alert(plugin.getCordova().getActivity(),"Cordova Admob: invalid email / license key. get free license from http://cranberrygame.github.io/");			
+			//Util.alert(plugin.getCordova().getActivity(),"Cordova Admob: invalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova");			
 		}
 */			
         }

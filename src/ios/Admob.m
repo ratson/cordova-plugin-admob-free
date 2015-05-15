@@ -1,6 +1,6 @@
 //Copyright (c) 2014 Sang Ki Kwon (Cranberrygame)
 //Email: cranberrygame@yahoo.com
-//Homepage: http://www.github.com/cranberrygame
+//Homepage: http://cranberrygame.github.io
 //License: MIT (http://opensource.org/licenses/MIT)
 #import "Admob.h"
 //
@@ -140,7 +140,7 @@ static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/576322
 		NSLog(@"invalid licenseKey");
 		validLicenseKey = NO;
 
-		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Cordova Admob: invalid email / license key. get free license from http://cranberrygame.github.io" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Cordova Admob: invalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		//[alert show];		
 		//return;
 	}	
