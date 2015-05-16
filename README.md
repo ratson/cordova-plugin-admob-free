@@ -2,16 +2,18 @@ Cordova AdMob plugin
 ====================
 
 # Overview #
-show admob banner and full screen ad
+Show admob banner and full screen ad
 
 [android, ios, wp8] [cordova cli] [xdk]
 
-requires admob account http://www.google.com/ads/admob/
+Requires admob account http://www.google.com/ads/admob/
 
-fix Admob SDK FPS issue: go to your AdMob account and disable text banners, leaving enabled only image banners. (provided by Cipriux)
+Fix Admob SDK FPS issue: go to your AdMob account and disable text banners, leaving enabled only image banners. (provided by Cipriux)
 (not both, but one of them)
 
-this is open source cordova plugin.
+This is open source cordova plugin.
+
+You can see Plugins For Cordova in one page: http://cranberrygame.github.io?referrer=github
 
 # Change log #
 ```c
@@ -223,7 +225,7 @@ alert(window.admob.isShowingFullScreenAd());//boolean: true or false
 [![](http://img.youtube.com/vi/xXrVb8E8gMM/0.jpg)](https://www.youtube.com/watch?v=xXrVb8E8gMM&feature=youtu.be "Youtube")
 
 You can also run following test apk.
-https://dl.dropboxusercontent.com/u/186681453/free/admob/CordovaApp-debug.apk
+https://dl.dropboxusercontent.com/u/186681453/pluginsforcordova/admob/apk.html
 
 # Useful links #
 

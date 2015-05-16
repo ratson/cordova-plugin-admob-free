@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.cranberrygame.cordova.plugin.ad.admob"
-    version="1.0.54">
+    version="1.0.55">
 	
     <name>Cordova Admob plugin</name>
     <description>show admob banner and full screen ad</description>
