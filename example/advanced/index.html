@@ -40,14 +40,14 @@ document.addEventListener("deviceready", function(){
 	
 	window.admob.setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
 		
-	//banner ad callback
+	//
 	window.admob.onBannerAdPreloaded = function() {
 		alert('onBannerAdPreloaded');
 	};
 	window.admob.onBannerAdLoaded = function() {
 		alert('onBannerAdLoaded');
 	};
-	//full screen ad callback
+	//
 	window.admob.onFullScreenAdPreloaded = function() {
 		alert('onFullScreenAdPreloaded');
 	};

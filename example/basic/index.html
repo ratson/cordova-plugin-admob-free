@@ -40,14 +40,14 @@ document.addEventListener("deviceready", function(){
 
 	window.admob.setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
 		
-	//banner ad callback
+	//
 	window.admob.onBannerAdPreloaded = function() {
 		alert('onBannerAdPreloaded');
 	};
 	window.admob.onBannerAdLoaded = function() {
 		alert('onBannerAdLoaded');
 	};
-	//full screen ad callback
+	//
 	window.admob.onFullScreenAdPreloaded = function() {
 		alert('onFullScreenAdPreloaded');
 	};
@@ -82,10 +82,8 @@ size: 	'BANNER' (320x50, Phones and Tablets)
 <br>
 <p><button onclick="window.admob.preloadFullScreenAd();">preloadFullScreenAd</button></p>
 <p><button onclick="window.admob.showFullScreenAd();">showFullScreenAd</button></p>
-<p><button onclick="window.admob.reloadFullScreenAd();">reloadFullScreenAd</button></p>
 <br>
 <p><button onclick="alert(window.admob.isShowingBannerAd());">isShowingBannerAd</button></p>
-<br>
 <p><button onclick="alert(window.admob.isShowingFullScreenAd());">isShowingFullScreenAd</button></p>
 
 </body>

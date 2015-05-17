@@ -106,7 +106,8 @@ Previous Purchase Restrictions
 
 ## Construct2 ##
 Download construct2 plugin: https://dl.dropboxusercontent.com/u/186681453/pluginsforcordova/admob/construct2.html
-
+<br>
+Now all the native plugins are installed automatically: https://plus.google.com/102658703990850475314/posts/XS5jjEApJYV
 # Server setting #
 ```c
 ```
@@ -171,14 +172,14 @@ document.addEventListener("deviceready", function(){
 
 	window.admob.setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
 
-	//banner ad callback
+	//
 	window.admob.onBannerAdPreloaded = function() {
 		alert('onBannerAdPreloaded');
 	};
 	window.admob.onBannerAdLoaded = function() {
 		alert('onBannerAdLoaded');
 	};
-	//full screen ad callback
+	//
 	window.admob.onFullScreenAdPreloaded = function() {
 		alert('onFullScreenAdPreloaded');
 	};
@@ -213,7 +214,6 @@ window.admob.preloadFullScreenAd();
 window.admob.showFullScreenAd();
 
 alert(window.admob.isShowingBannerAd());//boolean: true or false
-
 alert(window.admob.isShowingFullScreenAd());//boolean: true or false
 ```
 # Examples #

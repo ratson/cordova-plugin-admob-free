@@ -37,6 +37,7 @@ static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/576322
     //NSString *adUnitFullScreen = [command.arguments objectAtIndex: 1];
     //BOOL isOverlap = [[command.arguments objectAtIndex: 2] boolValue];
     //BOOL isTest = [[command.arguments objectAtIndex: 3] boolValue];
+	//NSArray *zoneIds = [command.arguments objectAtIndex:4];	
     //NSLog(@"%@", adUnit);
     //NSLog(@"%@", adUnitFullScreen);
     //NSLog(@"%d", isOverlap);
