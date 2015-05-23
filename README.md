@@ -55,6 +55,8 @@ To-Do:
 
 ## Cordova cli ##
 ```c
+https://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface - npm install -g cordova@4.1.2
+
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob
 
 cf)apple app store meta data
@@ -76,7 +78,7 @@ Previous Purchase Restrictions
 
 ## Xdk ##
 ```c
-XDK PORJECTS - your_xdk_project - CORDOVA 3.X HYBRID MOBILE APP SETTINGS - PLUGINS AND PERMISSIONS - Third Party Plugins - Add a Third Party Plugin - Get Plugin from the Web -
+https://software.intel.com/en-us/intel-xdk - Download XDK - XDK PORJECTS - [specific project] - CORDOVA 3.X HYBRID MOBILE APP SETTINGS - PLUGINS - Third Party Plugins - Add a Third Party Plugin - Get Plugin from the Web -
 
 Name: admob
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob
@@ -99,8 +101,13 @@ Previous Purchase Restrictions
 	Are you updating this app because of a significant usability issue or for a legal issue, such as an infringement claim? (No)
 ```
 
+## Cocoon ##
+https://cocoon.io - Create project - [specific project] - Setting - Plugins - Search - cranberrygame - admob
+
 ## Phonegap build service (config.xml) ##
 ```c
+https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
+
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob" source="plugins.cordova.io" />
 ```
 
@@ -142,7 +149,6 @@ var adUnit = "REPLACE_THIS_WITH_YOUR_AD_UNIT";
 var adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_AD_UNIT";
 var isOverlap = true; //true: overlap, false: split
 var isTest = true;
-
 /*
 var adUnit;
 var adUnitFullScreen;
