@@ -54,60 +54,25 @@ To-Do:
 # Install plugin #
 
 ## Cordova cli ##
-```c
 https://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface - npm install -g cordova@4.1.2
-
+```c
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob
-
-cf)apple app store meta data
-
-xport Compliance
-	Have you added or made changes to encryption features since your last submission of this app? (No)
-
-Advertising Identifier
-	Does this app use the Advertising Identifier (IDFA)? (Yes)
-	
-	This app uses the Advertising Identifier to (select all that apply):
-		Serve advertisements within the app (check)
-	
-	Limit Ad Tracking setting in iOS (check)	
-	
-Previous Purchase Restrictions
-	Are you updating this app because of a significant usability issue or for a legal issue, such as an infringement claim? (No)
 ```
 
 ## Xdk ##
-```c
 https://software.intel.com/en-us/intel-xdk - Download XDK - XDK PORJECTS - [specific project] - CORDOVA 3.X HYBRID MOBILE APP SETTINGS - PLUGINS - Third Party Plugins - Add a Third Party Plugin - Get Plugin from the Web -
-
+```c
 Name: admob
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob
 [v] Plugin is located in the Apache Cordova Plugins Registry
-
-cf)apple app store meta data
-
-xport Compliance
-	Have you added or made changes to encryption features since your last submission of this app? (No)
-
-Advertising Identifier
-	Does this app use the Advertising Identifier (IDFA)? (Yes)
-	
-	This app uses the Advertising Identifier to (select all that apply):
-		Serve advertisements within the app (check)
-	
-	Limit Ad Tracking setting in iOS (check)	
-	
-Previous Purchase Restrictions
-	Are you updating this app because of a significant usability issue or for a legal issue, such as an infringement claim? (No)
 ```
 
 ## Cocoon ##
 https://cocoon.io - Create project - [specific project] - Setting - Plugins - Search - cranberrygame - admob
 
 ## Phonegap build service (config.xml) ##
-```c
 https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
-
+```c
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob" source="plugins.cordova.io" />
 ```
 
@@ -126,48 +91,33 @@ Now all the native plugins are installed automatically: https://plus.google.com/
 <img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit6.png"><br>
 <img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit7.png"><br>
 <img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit8.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ios_submit_for_review_survey.png">
 
-cf)submit for review for ios
-
-Export Compliance
-	Have you added or made changes to encryption features since your last submission of this app? (No)
-
-콘텐츠 권한
-	App에 타사 콘텐츠가 포함 또는 표시되거나, App에서 타사 콘텐츠에 액세스할 수 있습니까? (No)
-
-Advertising Identifier
-	Does this app use the Advertising Identifier (IDFA)? (Yes)
-	
-	This app uses the Advertising Identifier to (select all that apply):
-		Serve advertisements within the app (check)
-	
-	Limit Ad Tracking setting in iOS (check)
-	
 # API #
 ```javascript
-var adUnit = "REPLACE_THIS_WITH_YOUR_AD_UNIT";
-var adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_AD_UNIT";
+var adUnitBanner = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
+var adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_FULL_SCREEN_AD_UNIT";
 var isOverlap = true; //true: overlap, false: split
 var isTest = true;
 /*
-var adUnit;
+var adUnitBanner;
 var adUnitFullScreen;
 var isOverlap = true; //true: overlap, false: split
 var isTest = true;
 //android
 if (navigator.userAgent.match(/Android/i)) {
-	adUnit = "REPLACE_THIS_WITH_YOUR_ANDROID_AD_UNIT";
-	adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_ANDROID_AD_UNIT";
+	adUnitBanner = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
+	adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_FULL_SCREEN_AD_UNIT";
 }
 //ios
 else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
-	adUnit = "REPLACE_THIS_WITH_YOUR_IOS_AD_UNIT";
-	adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_IOS_AD_UNIT";
+    adUnitBanner = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
+    adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_FULL_SCREEN_AD_UNIT";
 }
 //wp8
 else if( navigator.userAgent.match(/Windows Phone/i) ) {
-	adUnit = "REPLACE_THIS_WITH_YOUR_WP8_AD_UNIT";
-	adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_WP8_AD_UNIT";
+    adUnitBanner = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
+    adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_FULL_SCREEN_AD_UNIT";
 }
 */
 
@@ -176,7 +126,7 @@ document.addEventListener("deviceready", function(){
 	//you can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova
 	//window.admob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
 
-	window.admob.setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
+	window.admob.setUp(adUnitBanner, adUnitFullScreen, isOverlap, isTest);
 
 	//
 	window.admob.onBannerAdPreloaded = function() {
