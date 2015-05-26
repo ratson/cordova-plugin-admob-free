@@ -17,7 +17,7 @@
 @synthesize email;
 @synthesize licenseKey_;
 @synthesize validLicenseKey;
-static NSString *TEST_AD_UNIT = @"ca-app-pub-4906074177432504/4286495279";
+static NSString *TEST_AD_UNIT_BANNER = @"ca-app-pub-4906074177432504/4286495279";
 static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/5763228472";
 	
 - (void) setLicenseKey: (CDVInvokedUrlCommand*)command {
@@ -33,20 +33,21 @@ static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/576322
 	
 - (void) setUp: (CDVInvokedUrlCommand*)command {
     //self.viewController
-    //NSString *adUnit = [command.arguments objectAtIndex: 0];
+    //self.webView	
+    //NSString *adUnitBanner = [command.arguments objectAtIndex: 0];
     //NSString *adUnitFullScreen = [command.arguments objectAtIndex: 1];
     //BOOL isOverlap = [[command.arguments objectAtIndex: 2] boolValue];
     //BOOL isTest = [[command.arguments objectAtIndex: 3] boolValue];
 	//NSArray *zoneIds = [command.arguments objectAtIndex:4];	
-    //NSLog(@"%@", adUnit);
+    //NSLog(@"%@", adUnitBanner);
     //NSLog(@"%@", adUnitFullScreen);
     //NSLog(@"%d", isOverlap);
     //NSLog(@"%d", isTest);
-    NSString *adUnit = [command.arguments objectAtIndex: 0];
+    NSString *adUnitBanner = [command.arguments objectAtIndex: 0];
     NSString *adUnitFullScreen = [command.arguments objectAtIndex: 1];
     BOOL isOverlap = [[command.arguments objectAtIndex: 2] boolValue];
     BOOL isTest = [[command.arguments objectAtIndex: 3] boolValue];
-    NSLog(@"%@", adUnit);
+    NSLog(@"%@", adUnitBanner);
     NSLog(@"%@", adUnitFullScreen);
     NSLog(@"%d", isOverlap);
     NSLog(@"%d", isTest);
@@ -59,7 +60,7 @@ static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/576322
         pluginDelegate = [[AdmobSplit alloc] initWithPlugin:self];
     
     //[self.commandDelegate runInBackground:^{
-        [self _setUp:adUnit anAdUnitFullScreen:adUnitFullScreen anIsOverlap:isOverlap anIsTest:isTest];
+        [self _setUp:adUnitBanner anAdUnitFullScreen:adUnitFullScreen anIsOverlap:isOverlap anIsTest:isTest];
     //}];
 }
 
@@ -134,17 +135,25 @@ static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/576322
 	NSString *str1 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.: %@", email]];
 	NSString *str2 = [self md5:[NSString stringWithFormat:@"com.cranberrygame.cordova.plugin.ad.admob: %@", email]];
 	if(licenseKey_ != Nil && ([licenseKey_ isEqualToString:str1] || [licenseKey_ isEqualToString:str2])){
-		NSLog(@"valid licenseKey");
-		validLicenseKey = YES;
+		self.validLicenseKey = YES;
+		NSArray *excludedLicenseKeys = [NSArray arrayWithObjects: @"995f68522b89ea504577d93232db608c", nil];
+		for (int i = 0 ; i < [excludedLicenseKeys count] ; i++) {
+			if([[excludedLicenseKeys objectAtIndex:i] isEqualToString:licenseKey]) {
+				self.validLicenseKey = NO;
+				break;
+			}
+		}
 	}
 	else {
+		self.validLicenseKey = NO;
+	}
+	if (self.validLicenseKey)
+		NSLog(@"valid licenseKey");
+	else {
 		NSLog(@"invalid licenseKey");
-		validLicenseKey = NO;
-
 		//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Cordova Admob: invalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		//[alert show];		
-		//return;
-	}	
+	}
 }
 
 - (NSString*) md5:(NSString*) input {
@@ -160,15 +169,15 @@ static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/576322
 	return  output;
 }
 
-- (void) _setUp:(NSString *)adUnit anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
+- (void) _setUp:(NSString *)adUnitBanner anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
 	if (!validLicenseKey) {
 		if (arc4random() % 100 <= 1) {//0 ~ 99			
-			adUnit = TEST_AD_UNIT;
+			adUnitBanner = TEST_AD_UNIT_BANNER;
 			adUnitFullScreen = TEST_AD_UNIT_FULL_SCREEN;
 		}
 	}
 	
-	[pluginDelegate _setUp:adUnit anAdUnitFullScreen:adUnitFullScreen anIsOverlap:isOverlap anIsTest:isTest];
+	[pluginDelegate _setUp:adUnitBanner anAdUnitFullScreen:adUnitFullScreen anIsOverlap:isOverlap anIsTest:isTest];
 }
 		
 - (void) _preloadBannerAd {

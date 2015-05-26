@@ -18,7 +18,7 @@ namespace Cordova.Extension.Commands {
     public class AdmobOverlap : BaseCommand {
 		protected Plugin plugin;	
 		//
-		private string adUnit;
+		private string adUnitBanner;
 		private string adUnitFullScreen;
 		private bool isOverlap;
 		private bool isTest;
@@ -40,8 +40,8 @@ namespace Cordova.Extension.Commands {
         private void _setLicenseKey(string email, string licenseKey) {
         }
 		
-        private void _setUp(string adUnit, string adUnitFullScreen, bool isOverlap, bool isTest) {
-			this.adUnit = adUnit;
+        private void _setUp(string adUnitBanner, string adUnitFullScreen, bool isOverlap, bool isTest) {
+			this.adUnitBanner = adUnitBanner;
 			this.adUnitFullScreen = adUnitFullScreen;
 			this.isOverlap = isOverlap;
 			this.isTest = isTest;
@@ -78,7 +78,7 @@ namespace Cordova.Extension.Commands {
 					//Format = AdFormats.Banner,
 					//Format = AdFormats.SmartBanner,
 					Format = format,
-					AdUnitID = this.adUnit
+					AdUnitID = this.adUnitBanner
 				};
 				bannerView.ReceivedAd += OnBannerViewReceivedAd;
 				bannerView.FailedToReceiveAd += OnBannerViewFailedToReceiveAd;
@@ -286,12 +286,26 @@ namespace Cordova.Extension.Commands {
 		
 		//bannerView.ShowingOverlay
         private void OnBannerViewShowingOverlay(object sender, AdEventArgs e) {
-            Debug.WriteLine("OnBannerViewShowingOverlay");			
+            Debug.WriteLine("OnBannerViewShowingOverlay");	
+
+			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdShown");
+			pr.KeepCallback = true;
+			DispatchCommandResult(pr);
+			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+			//pr.KeepCallback = true;
+			//DispatchCommandResult(pr);
         }
 		
 		//bannerView.DismissingOverlay
         private void OnBannerViewDismissingOverlay(object sender, AdEventArgs e) {
             Debug.WriteLine("OnBannerViewDismissingOverlay");
+			
+			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdHidden");
+			pr.KeepCallback = true;
+			DispatchCommandResult(pr);
+			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+			//pr.KeepCallback = true;
+			//DispatchCommandResult(pr);			
         }		
 		
 		//interstitialView.ReceivedAd

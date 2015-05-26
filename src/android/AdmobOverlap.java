@@ -92,7 +92,7 @@ public class AdmobOverlap implements PluginDelegate {
 	protected static final String LOG_TAG = "AdmobOverlap";
 	protected Plugin plugin;	
 	//
-	protected String adUnit;
+	protected String adUnitBanner;
 	protected String adUnitFullScreen;
 	protected boolean isOverlap;
 	protected boolean isTest;
@@ -115,8 +115,8 @@ public class AdmobOverlap implements PluginDelegate {
 	public void _setLicenseKey(String email, String licenseKey) {
 	}
 	
-	public void _setUp(String adUnit, String adUnitFullScreen, boolean isOverlap, boolean isTest) {
-		this.adUnit = adUnit;
+	public void _setUp(String adUnitBanner, String adUnitFullScreen, boolean isOverlap, boolean isTest) {
+		this.adUnitBanner = adUnitBanner;
 		this.adUnitFullScreen = adUnitFullScreen;
 		this.isOverlap = isOverlap;
 		this.isTest = isTest;			
@@ -131,7 +131,10 @@ public class AdmobOverlap implements PluginDelegate {
 		//http://stackoverflow.com/questions/24539578/cordova-plugin-listening-to-device-orientation-change-is-it-possible
 		//http://developer.android.com/reference/android/view/View.OnLayoutChangeListener.html
 		//https://gitshell.com/lvxudong/A530_packages_app_Camera/blob/master/src/com/android/camera/ActivityBase.java
-    	plugin.getWebView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){
+    	plugin.getWebView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//cordova5 build error
+		//plugin.getWebView().getRootView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//cordova5 build error
+		//plugin.getWebView().getView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//fix cordova5 build error
+    			
 		    @Override
 	        public void onLayoutChange(View v, int left, int top, int right, int bottom,
 	                int oldLeft, int oldTop, int oldRight, int oldBottom) {
@@ -195,7 +198,7 @@ public class AdmobOverlap implements PluginDelegate {
 			//
 			bannerView = new AdView(plugin.getCordova().getActivity());//
 			//
-			bannerView.setAdUnitId(this.adUnit);
+			bannerView.setAdUnitId(this.adUnitBanner);
 			bannerView.setAdListener(new MyBannerViewListener());		
 			//https://developers.google.com/mobile-ads-sdk/docs/admob/android/banner
 			if(bannerPreviousSize == null) {
@@ -277,9 +280,11 @@ public class AdmobOverlap implements PluginDelegate {
 		if(bannerViewLayout == null) {
 			bannerViewLayout = new RelativeLayout(plugin.getCordova().getActivity());//	
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-			//webView.addView(bannerViewLayout, params);
 			bannerViewLayout.setLayoutParams(params);
-			plugin.getWebView().addView(bannerViewLayout);
+			//plugin.getWebView().addView(bannerViewLayout, params);
+			plugin.getWebView().addView(bannerViewLayout);//cordova5 build error
+			//((ViewGroup)plugin.getWebView().getRootView()).addView(bannerViewLayout);//cordova5 build error
+			//((ViewGroup)plugin.getWebView().getView()).addView(bannerViewLayout);//fix cordova5 build error
 		}
 		
 		//http://tigerwoods.tistory.com/11
@@ -417,9 +422,23 @@ public class AdmobOverlap implements PluginDelegate {
     	}
     	public void onAdOpened() {
     		Log.d(LOG_TAG, "onAdOpened");//overlay screen opened
+			
+			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdShown");
+			pr.setKeepCallback(true);
+			plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+			//pr.setKeepCallback(true);
+			//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
     	}
     	public void onAdClosed() {
     		Log.d(LOG_TAG, "onAdClosed");
+			
+			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdHidden");
+			pr.setKeepCallback(true);
+			plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+			//pr.setKeepCallback(true);
+			//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
     	}
     	public void onAdLeftApplication() {
     		Log.d(LOG_TAG, "onAdLeftApplication");

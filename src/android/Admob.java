@@ -39,7 +39,7 @@ interface Plugin {
 
 interface PluginDelegate {
 	public void _setLicenseKey(String email, String licenseKey);
-	public void _setUp(String adUnit, String adUnitFullScreen, boolean isOverlap, boolean isTest);
+	public void _setUp(String adUnitBanner, String adUnitFullScreen, boolean isOverlap, boolean isTest);
 	public void _preloadBannerAd();
 	public void _showBannerAd(String position, String size);
 	public void _reloadBannerAd();
@@ -60,7 +60,7 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 	public String email;
 	public String licenseKey;
 	public boolean validLicenseKey;
-	protected String TEST_AD_UNIT = "ca-app-pub-4906074177432504/6997786077";
+	protected String TEST_AD_UNIT_BANNER = "ca-app-pub-4906074177432504/6997786077";
 	protected String TEST_AD_UNIT_FULL_SCREEN = "ca-app-pub-4906074177432504/8474519270";	
 	
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -157,10 +157,10 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 		//args.getBoolean(0)
 		//args.getBoolean(1)
 		//JSONObject json = args.optJSONObject(0);
-		//json.optString("adUnit")
+		//json.optString("adUnitBanner")
 		//json.optString("adUnitFullScreen")
 		//JSONObject inJson = json.optJSONObject("inJson");
-		//final String adUnit = args.getString(0);
+		//final String adUnitBanner = args.getString(0);
 		//final String adUnitFullScreen = args.getString(1);				
 		//final boolean isOverlap = args.getBoolean(2);				
 		//final boolean isTest = args.getBoolean(3);
@@ -168,15 +168,15 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 		//for (int i = 0; i < args.getJSONArray(4).length(); i++) {
 		//	zoneIds[i] = args.getJSONArray(4).getString(i);
 		//}			
-		//Log.d(LOG_TAG, String.format("%s", adUnit));			
+		//Log.d(LOG_TAG, String.format("%s", adUnitBanner));			
 		//Log.d(LOG_TAG, String.format("%s", adUnitFullScreen));
 		//Log.d(LOG_TAG, String.format("%b", isOverlap));
 		//Log.d(LOG_TAG, String.format("%b", isTest));		
-		final String adUnit = args.getString(0);
+		final String adUnitBanner = args.getString(0);
 		final String adUnitFullScreen = args.getString(1);				
 		final boolean isOverlap = args.getBoolean(2);				
 		final boolean isTest = args.getBoolean(3);				
-		Log.d(LOG_TAG, String.format("%s", adUnit));			
+		Log.d(LOG_TAG, String.format("%s", adUnitBanner));			
 		Log.d(LOG_TAG, String.format("%s", adUnitFullScreen));
 		Log.d(LOG_TAG, String.format("%b", isOverlap));
 		Log.d(LOG_TAG, String.format("%b", isTest));
@@ -191,7 +191,7 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 		cordova.getActivity().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				_setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
+				_setUp(adUnitBanner, adUnitFullScreen, isOverlap, isTest);
 			}
 		});
 	}
@@ -282,26 +282,37 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 		String str1 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
 		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
 		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
-			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
 			this.validLicenseKey = true;
+			//
+			String[] excludedLicenseKeys = {"995f68522b89ea504577d93232db608c"};
+			for (int i = 0 ; i < excludedLicenseKeys.length ; i++) {
+				if (excludedLicenseKeys[i].equals(licenseKey)) {
+					this.validLicenseKey = false;
+					break;
+				}
+			}			
+			if (this.validLicenseKey)
+				Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
+			else
+				Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
 		}
 		else {
 			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
-			this.validLicenseKey = false;
-			
-			//Util.alert(plugin.getCordova().getActivity(),"Cordova Admob: invalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova");			
-		}		
+			this.validLicenseKey = false;			
+		}
+		//if (!this.validLicenseKey)
+		//	Util.alert(plugin.getCordova().getActivity(),"Cordova Admob: invalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova");			
 	}
 	
-	public void _setUp(String adUnit, String adUnitFullScreen, boolean isOverlap, boolean isTest) {
+	public void _setUp(String adUnitBanner, String adUnitFullScreen, boolean isOverlap, boolean isTest) {
 		if (!validLicenseKey) {
 			if (new Random().nextInt(100) <= 1) {//0~99					
-				adUnit = TEST_AD_UNIT;
+				adUnitBanner = TEST_AD_UNIT_BANNER;
 				adUnitFullScreen = TEST_AD_UNIT_FULL_SCREEN;
 			}
 		}
 			
-		pluginDelegate._setUp(adUnit, adUnitFullScreen, isOverlap, isTest);
+		pluginDelegate._setUp(adUnitBanner, adUnitFullScreen, isOverlap, isTest);
 	}
 	
 	public void _preloadBannerAd() {

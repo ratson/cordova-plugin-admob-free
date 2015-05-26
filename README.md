@@ -135,6 +135,12 @@ document.addEventListener("deviceready", function(){
 	window.admob.onBannerAdLoaded = function() {
 		alert('onBannerAdLoaded');
 	};
+	window.admob.onBannerAdShown = function() {
+		alert('onBannerAdShown');
+	};
+	window.admob.onBannerAdHidden = function() {
+		alert('onBannerAdHidden');
+	};	
 	//
 	window.admob.onFullScreenAdPreloaded = function() {
 		alert('onFullScreenAdPreloaded');
@@ -150,7 +156,7 @@ document.addEventListener("deviceready", function(){
 	};
 }, false);
 
-window.admob.preloadBannerAd();
+window.admob.preloadBannerAd();//option, download ad previously for fast show
 /*
 position: 'top-left', 'top-center', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-center', 'bottom-right'
 size: 	'BANNER' (320x50, Phones and Tablets)
@@ -166,7 +172,7 @@ window.admob.showBannerAd('bottom-center', 'SMART_BANNER');
 window.admob.reloadBannerAd();
 window.admob.hideBannerAd();
 
-window.admob.preloadFullScreenAd();
+window.admob.preloadFullScreenAd();//option, download ad previously for fast show
 window.admob.showFullScreenAd();
 
 alert(window.admob.isShowingBannerAd());//boolean: true or false

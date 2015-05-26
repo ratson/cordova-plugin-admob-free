@@ -26,8 +26,20 @@ module.exports = {
 						if (self.onBannerAdLoaded)
 							self.onBannerAdLoaded();
 					}
+					else if (result == "onBannerAdShown") {
+						self._isShowingBannerAd = true;
+					
+						if (self.onBannerAdShown)
+							self.onBannerAdShown();
+					}
+					else if (result == "onBannerAdHidden") {
+						self._isShowingBannerAd = false;
+					
+						 if (self.onBannerAdHidden)
+							self.onBannerAdHidden();
+					}
 					//
-					if (result == "onFullScreenAdPreloaded") {
+					else if (result == "onFullScreenAdPreloaded") {
 						if (self.onFullScreenAdPreloaded)
 							self.onFullScreenAdPreloaded();
 					}
@@ -77,9 +89,6 @@ module.exports = {
     },
     showBannerAd: function(position, size) {
 		var self = this;	
-
-		self._isShowingBannerAd = true;
-	
         cordova.exec(
             null,
             null,
@@ -100,9 +109,6 @@ module.exports = {
     },
     hideBannerAd: function() {
 		var self = this;
-		
-		self._isShowingBannerAd = false;
-		
         cordova.exec(
             null,
             null,

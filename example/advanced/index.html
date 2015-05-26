@@ -30,12 +30,9 @@ var isTest = true;
 	adUnitBanner = "ca-app-pub-4906074177432504/4462901274";
 	adUnitFullScreen = "ca-app-pub-4906074177432504/5939634477";
  }
- */
+*/
 
 document.addEventListener("deviceready", function(){
-	//if no license key, 2% ad traffic share for dev support.
-	//you can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova
-	//window.admob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
 	
 	window.admob.setUp(adUnitBanner, adUnitFullScreen, isOverlap, isTest);
 		
@@ -46,6 +43,12 @@ document.addEventListener("deviceready", function(){
 	window.admob.onBannerAdLoaded = function() {
 		alert('onBannerAdLoaded');
 	};
+	window.admob.onBannerAdShown = function() {
+		alert('onBannerAdShown');
+	};
+	window.admob.onBannerAdHidden = function() {
+		alert('onBannerAdHidden');
+	};	
 	//
 	window.admob.onFullScreenAdPreloaded = function() {
 		alert('onFullScreenAdPreloaded');

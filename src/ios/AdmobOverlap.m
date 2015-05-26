@@ -3,7 +3,7 @@
 //Homepage: http://cranberrygame.github.io
 //License: MIT (http://opensource.org/licenses/MIT)
 #import "AdmobOverlap.h"
-//
+//view
 #import <GoogleMobileAds/GADBannerView.h>
 #import <GoogleMobileAds/GADInterstitial.h>
 #import <GoogleMobileAds/GADAdSize.h>
@@ -13,7 +13,7 @@
 
 @synthesize plugin;
 //
-@synthesize adUnit;
+@synthesize adUnitBanner;
 @synthesize adUnitFullScreen;
 @synthesize isOverlap;
 @synthesize isTest;
@@ -78,8 +78,8 @@
 - (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey {
 }
 
-- (void) _setUp:(NSString *)adUnit anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
-	self.adUnit = adUnit;
+- (void) _setUp:(NSString *)adUnitBanner anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
+	self.adUnitBanner = adUnitBanner;
 	self.adUnitFullScreen = adUnitFullScreen;
 	self.isOverlap = isOverlap;
 	self.isTest = isTest;	
@@ -138,7 +138,7 @@
 	
 		bannerView = [[GADBannerView alloc] initWithAdSize:adSize];
         //
-		bannerView.adUnitID = self.adUnit;
+		bannerView.adUnitID = self.adUnitBanner;
 		bannerView.delegate = self;
 		bannerView.rootViewController = [self.plugin getViewController];//
 	}
@@ -357,6 +357,13 @@
 
 - (void) adViewWillPresentScreen:(GADBannerView *)adView {
 	NSLog(@"adViewWillPresentScreen");
+	
+	CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onBannerAdShown"];
+	[pr setKeepCallbackAsBool:YES];
+	[[self.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self.plugin getCallbackIdKeepCallback]];
+	//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+	//[pr setKeepCallbackAsBool:YES];
+	//[[self.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self.plugin getCallbackIdKeepCallback]];	
 }
 
 - (void) adViewWillDismissScreen:(GADBannerView *)adView {
@@ -365,6 +372,13 @@
 
 - (void)adViewDidDismissScreen:(GADBannerView *)adView {
 	NSLog(@"adViewDidDismissScreen");
+	
+	CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onBannerAdHidden"];
+	[pr setKeepCallbackAsBool:YES];
+	[[self.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self.plugin getCallbackIdKeepCallback]];
+	//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+	//[pr setKeepCallbackAsBool:YES];
+	//[[self.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self.plugin getCallbackIdKeepCallback]];	
 }
 
 //GADInterstitialDelegate
