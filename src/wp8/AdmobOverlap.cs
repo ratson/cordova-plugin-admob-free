@@ -167,6 +167,13 @@ namespace Cordova.Extension.Commands {
 			else {
 				
 			}
+			
+			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdShown");
+			pr.KeepCallback = true;
+			DispatchCommandResult(pr);
+			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+			//pr.KeepCallback = true;
+			//DispatchCommandResult(pr);			
         }
       	
 		protected boolean bannerIsShowingOverlap() {
@@ -196,6 +203,13 @@ namespace Cordova.Extension.Commands {
 		
         private void _hideBannerAd() {
             removeBannerViewOverlap();
+			
+			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdHidden");
+			pr.KeepCallback = true;
+			DispatchCommandResult(pr);
+			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+			//pr.KeepCallback = true;
+			//DispatchCommandResult(pr);			
         }
  	
         private void removeBannerViewOverlap() {
@@ -286,26 +300,12 @@ namespace Cordova.Extension.Commands {
 		
 		//bannerView.ShowingOverlay
         private void OnBannerViewShowingOverlay(object sender, AdEventArgs e) {
-            Debug.WriteLine("OnBannerViewShowingOverlay");	
-
-			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdShown");
-			pr.KeepCallback = true;
-			DispatchCommandResult(pr);
-			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-			//pr.KeepCallback = true;
-			//DispatchCommandResult(pr);
+            Debug.WriteLine("OnBannerViewShowingOverlay");//click and ad opened //onBannerAdShown x
         }
 		
 		//bannerView.DismissingOverlay
         private void OnBannerViewDismissingOverlay(object sender, AdEventArgs e) {
-            Debug.WriteLine("OnBannerViewDismissingOverlay");
-			
-			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdHidden");
-			pr.KeepCallback = true;
-			DispatchCommandResult(pr);
-			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-			//pr.KeepCallback = true;
-			//DispatchCommandResult(pr);			
+            Debug.WriteLine("OnBannerViewDismissingOverlay");//onBannerAdHidden x
         }		
 		
 		//interstitialView.ReceivedAd

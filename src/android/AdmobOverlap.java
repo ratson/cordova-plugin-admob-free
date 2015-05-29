@@ -261,6 +261,13 @@ public class AdmobOverlap implements PluginDelegate {
 		}
 
 		addBannerViewOverlap(position, size);
+		
+		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdShown");
+		pr.setKeepCallback(true);
+		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+		//pr.setKeepCallback(true);
+		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
 	}
 	
 	protected boolean bannerIsShowingOverlap() {
@@ -344,6 +351,13 @@ public class AdmobOverlap implements PluginDelegate {
 	
 	public void _hideBannerAd() {
 		removeBannerViewOverlap();
+		
+		PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdHidden");
+		pr.setKeepCallback(true);
+		plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
+		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+		//pr.setKeepCallback(true);
+		//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);		
 	}
 	
 	protected void removeBannerViewOverlap() {
@@ -421,24 +435,10 @@ public class AdmobOverlap implements PluginDelegate {
     		Log.d(LOG_TAG, "onAdFailedToLoad");
     	}
     	public void onAdOpened() {
-    		Log.d(LOG_TAG, "onAdOpened");//overlay screen opened
-			
-			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdShown");
-			pr.setKeepCallback(true);
-			plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-			//pr.setKeepCallback(true);
-			//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
+    		Log.d(LOG_TAG, "onAdOpened");//click and ad opened //onBannerAdShown x
     	}
     	public void onAdClosed() {
-    		Log.d(LOG_TAG, "onAdClosed");
-			
-			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdHidden");
-			pr.setKeepCallback(true);
-			plugin.getCallbackContextKeepCallback().sendPluginResult(pr);
-			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-			//pr.setKeepCallback(true);
-			//plugin.getCallbackContextKeepCallback().sendPluginResult(pr);			
+    		Log.d(LOG_TAG, "onAdClosed");//onBannerAdHidden x
     	}
     	public void onAdLeftApplication() {
     		Log.d(LOG_TAG, "onAdLeftApplication");

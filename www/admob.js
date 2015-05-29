@@ -1,5 +1,7 @@
 
 module.exports = {
+	_loadedBannerAd: false,
+	_loadedFullScreenAd: false,
 	_isShowingBannerAd: false,
 	_isShowingFullScreenAd: false,
 	//
@@ -18,15 +20,18 @@ module.exports = {
         cordova.exec(
             function (result) {
 				if (typeof result == "string") {
-					if (result == "onBannerAdPreloaded") {
+					if (result == "onBannerAdPreloaded") {					
 						if (self.onBannerAdPreloaded)
 							self.onBannerAdPreloaded();
 					}
 					else if (result == "onBannerAdLoaded") {
+						self._loadedBannerAd = true;
+						
 						if (self.onBannerAdLoaded)
 							self.onBannerAdLoaded();
 					}
 					else if (result == "onBannerAdShown") {
+						self._loadedBannerAd = false;
 						self._isShowingBannerAd = true;
 					
 						if (self.onBannerAdShown)
@@ -44,10 +49,13 @@ module.exports = {
 							self.onFullScreenAdPreloaded();
 					}
 					else if (result == "onFullScreenAdLoaded") {
+						self._loadedFullScreenAd = true;
+						
 						if (self.onFullScreenAdLoaded)
 							self.onFullScreenAdLoaded();
 					}
 					else if (result == "onFullScreenAdShown") {
+						self._loadedFullScreenAd = false;					
 						self._isShowingFullScreenAd = true;
 
 						if (self.onFullScreenAdShown)
@@ -140,6 +148,12 @@ module.exports = {
     },
 	reloadFullScreenAd: function() { //deprecated
     },
+	loadedBannerAd: function() {
+		return this._loadedBannerAd;
+	},
+	loadedFullScreenAd: function() {
+		return this._loadedFullScreenAd;
+	},	
 	isShowingBannerAd: function() {
 		return this._isShowingBannerAd;
 	},
@@ -148,6 +162,8 @@ module.exports = {
 	},	
 	onBannerAdPreloaded: null,
 	onBannerAdLoaded: null,
+	onBannerAdShown: null,
+	onBannerAdHidden: null,	
 	//
 	onFullScreenAdPreloaded: null,
 	onFullScreenAdLoaded: null,

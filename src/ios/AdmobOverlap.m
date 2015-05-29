@@ -176,7 +176,14 @@
 		[self loadBannerAd];
 	}
 			
-	[self addBannerViewOverlap:position aSize:size];	
+	[self addBannerViewOverlap:position aSize:size];
+
+	CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onBannerAdShown"];
+	[pr setKeepCallbackAsBool:YES];
+	[[self.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self.plugin getCallbackIdKeepCallback]];
+	//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+	//[pr setKeepCallbackAsBool:YES];
+	//[[self.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self.plugin getCallbackIdKeepCallback]];	
 }
 
 - (BOOL) bannerIsShowingOverlap {
@@ -267,6 +274,13 @@
 
 - (void) _hideBannerAd {
 	[self _removeBannerViewOverlap];
+	
+	CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onBannerAdHidden"];
+	[pr setKeepCallbackAsBool:YES];
+	[[self.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self.plugin getCallbackIdKeepCallback]];
+	//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+	//[pr setKeepCallbackAsBool:YES];
+	//[[self.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self.plugin getCallbackIdKeepCallback]];	
 }
 
 - (void)_removeBannerViewOverlap {
@@ -356,14 +370,7 @@
 }
 
 - (void) adViewWillPresentScreen:(GADBannerView *)adView {
-	NSLog(@"adViewWillPresentScreen");
-	
-	CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onBannerAdShown"];
-	[pr setKeepCallbackAsBool:YES];
-	[[self.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self.plugin getCallbackIdKeepCallback]];
-	//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-	//[pr setKeepCallbackAsBool:YES];
-	//[[self.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self.plugin getCallbackIdKeepCallback]];	
+	NSLog(@"adViewWillPresentScreen");//click and ad opened //onBannerAdShown x
 }
 
 - (void) adViewWillDismissScreen:(GADBannerView *)adView {
@@ -371,14 +378,7 @@
 }
 
 - (void)adViewDidDismissScreen:(GADBannerView *)adView {
-	NSLog(@"adViewDidDismissScreen");
-	
-	CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"onBannerAdHidden"];
-	[pr setKeepCallbackAsBool:YES];
-	[[self.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self.plugin getCallbackIdKeepCallback]];
-	//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-	//[pr setKeepCallbackAsBool:YES];
-	//[[self.plugin getCommandDelegate] sendPluginResult:pr callbackId:[self.plugin getCallbackIdKeepCallback]];	
+	NSLog(@"adViewDidDismissScreen");//onBannerAdHidden x
 }
 
 //GADInterstitialDelegate

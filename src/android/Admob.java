@@ -284,7 +284,7 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
 			this.validLicenseKey = true;
 			//
-			String[] excludedLicenseKeys = {"995f68522b89ea504577d93232db608c"};
+			String[] excludedLicenseKeys = {"xxx"};
 			for (int i = 0 ; i < excludedLicenseKeys.length ; i++) {
 				if (excludedLicenseKeys[i].equals(licenseKey)) {
 					this.validLicenseKey = false;
