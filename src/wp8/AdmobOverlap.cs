@@ -18,8 +18,8 @@ namespace Cordova.Extension.Commands {
     public class AdmobOverlap : BaseCommand {
 		protected Plugin plugin;	
 		//
-		private string adUnitBanner;
-		private string adUnitFullScreen;
+		private string bannerAdUnit;
+		private string fullScreenAdUnit;
 		private bool isOverlap;
 		private bool isTest;
 		//
@@ -40,9 +40,9 @@ namespace Cordova.Extension.Commands {
         private void _setLicenseKey(string email, string licenseKey) {
         }
 		
-        private void _setUp(string adUnitBanner, string adUnitFullScreen, bool isOverlap, bool isTest) {
-			this.adUnitBanner = adUnitBanner;
-			this.adUnitFullScreen = adUnitFullScreen;
+        private void _setUp(string bannerAdUnit, string fullScreenAdUnit, bool isOverlap, bool isTest) {
+			this.bannerAdUnit = bannerAdUnit;
+			this.fullScreenAdUnit = fullScreenAdUnit;
 			this.isOverlap = isOverlap;
 			this.isTest = isTest;
         }
@@ -78,7 +78,7 @@ namespace Cordova.Extension.Commands {
 					//Format = AdFormats.Banner,
 					//Format = AdFormats.SmartBanner,
 					Format = format,
-					AdUnitID = this.adUnitBanner
+					AdUnitID = this.bannerAdUnit
 				};
 				bannerView.ReceivedAd += OnBannerViewReceivedAd;
 				bannerView.FailedToReceiveAd += OnBannerViewFailedToReceiveAd;
@@ -240,7 +240,7 @@ namespace Cordova.Extension.Commands {
             if (interstitialView == null) {
                 //interstitialView = new InterstitialAd("ca-app-pub-4906074177432504/4879304879");//x cf) wp8
                 //interstitialView = new InterstitialAd("ca-app-pub-4906074177432504/5150650074");//o cf) android
-                interstitialView = new InterstitialAd(this.adUnitFullScreen);
+                interstitialView = new InterstitialAd(this.fullScreenAdUnit);
 				//http://forums.xamarin.com/discussion/849/binding-library-for-inneractive-sdk
                 interstitialView.ReceivedAd += OnInterstitialViewReceivedAd;
                 interstitialView.FailedToReceiveAd += OnInterstitialViewFailedToReceiveAd;

@@ -92,8 +92,8 @@ public class AdmobOverlap implements PluginDelegate {
 	protected static final String LOG_TAG = "AdmobOverlap";
 	protected Plugin plugin;	
 	//
-	protected String adUnitBanner;
-	protected String adUnitFullScreen;
+	protected String bannerAdUnit;
+	protected String fullScreenAdUnit;
 	protected boolean isOverlap;
 	protected boolean isTest;
 	//
@@ -115,9 +115,9 @@ public class AdmobOverlap implements PluginDelegate {
 	public void _setLicenseKey(String email, String licenseKey) {
 	}
 	
-	public void _setUp(String adUnitBanner, String adUnitFullScreen, boolean isOverlap, boolean isTest) {
-		this.adUnitBanner = adUnitBanner;
-		this.adUnitFullScreen = adUnitFullScreen;
+	public void _setUp(String bannerAdUnit, String fullScreenAdUnit, boolean isOverlap, boolean isTest) {
+		this.bannerAdUnit = bannerAdUnit;
+		this.fullScreenAdUnit = fullScreenAdUnit;
 		this.isOverlap = isOverlap;
 		this.isTest = isTest;			
 		
@@ -198,7 +198,7 @@ public class AdmobOverlap implements PluginDelegate {
 			//
 			bannerView = new AdView(plugin.getCordova().getActivity());//
 			//
-			bannerView.setAdUnitId(this.adUnitBanner);
+			bannerView.setAdUnitId(this.bannerAdUnit);
 			bannerView.setAdListener(new MyBannerViewListener());		
 			//https://developers.google.com/mobile-ads-sdk/docs/admob/android/banner
 			if(bannerPreviousSize == null) {
@@ -382,7 +382,7 @@ public class AdmobOverlap implements PluginDelegate {
 		if (interstitialView == null) {
 			interstitialView = new InterstitialAd(plugin.getCordova().getActivity());
 			//
-			interstitialView.setAdUnitId(this.adUnitFullScreen);
+			interstitialView.setAdUnitId(this.fullScreenAdUnit);
 			interstitialView.setAdListener(new MyInterstitialViewListener());					
 		}		
 		

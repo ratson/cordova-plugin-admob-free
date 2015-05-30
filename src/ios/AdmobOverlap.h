@@ -11,8 +11,8 @@
 
 @property id<Plugin> plugin;
 //
-@property NSString *adUnitBanner;
-@property NSString *adUnitFullScreen;
+@property NSString *bannerAdUnit;
+@property NSString *fullScreenAdUnit;
 @property BOOL isOverlap;
 @property BOOL isTest;
 //

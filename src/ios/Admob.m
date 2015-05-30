@@ -17,8 +17,8 @@
 @synthesize email;
 @synthesize licenseKey_;
 @synthesize validLicenseKey;
-static NSString *TEST_AD_UNIT_BANNER = @"ca-app-pub-4906074177432504/4286495279";
-static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/5763228472";
+static NSString *TEST_BANNER_AD_UNIT = @"ca-app-pub-4906074177432504/4286495279";
+static NSString *TEST_FULL_SCREEN_AD_UNIT = @"ca-app-pub-4906074177432504/5763228472";
 	
 - (void) setLicenseKey: (CDVInvokedUrlCommand*)command {
     NSString *email = [command.arguments objectAtIndex: 0];
@@ -34,21 +34,21 @@ static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/576322
 - (void) setUp: (CDVInvokedUrlCommand*)command {
     //self.viewController
     //self.webView	
-    //NSString *adUnitBanner = [command.arguments objectAtIndex: 0];
-    //NSString *adUnitFullScreen = [command.arguments objectAtIndex: 1];
+    //NSString *bannerAdUnit = [command.arguments objectAtIndex: 0];
+    //NSString *fullScreenAdUnit = [command.arguments objectAtIndex: 1];
     //BOOL isOverlap = [[command.arguments objectAtIndex: 2] boolValue];
     //BOOL isTest = [[command.arguments objectAtIndex: 3] boolValue];
 	//NSArray *zoneIds = [command.arguments objectAtIndex:4];	
-    //NSLog(@"%@", adUnitBanner);
-    //NSLog(@"%@", adUnitFullScreen);
+    //NSLog(@"%@", bannerAdUnit);
+    //NSLog(@"%@", fullScreenAdUnit);
     //NSLog(@"%d", isOverlap);
     //NSLog(@"%d", isTest);
-    NSString *adUnitBanner = [command.arguments objectAtIndex: 0];
-    NSString *adUnitFullScreen = [command.arguments objectAtIndex: 1];
+    NSString *bannerAdUnit = [command.arguments objectAtIndex: 0];
+    NSString *fullScreenAdUnit = [command.arguments objectAtIndex: 1];
     BOOL isOverlap = [[command.arguments objectAtIndex: 2] boolValue];
     BOOL isTest = [[command.arguments objectAtIndex: 3] boolValue];
-    NSLog(@"%@", adUnitBanner);
-    NSLog(@"%@", adUnitFullScreen);
+    NSLog(@"%@", bannerAdUnit);
+    NSLog(@"%@", fullScreenAdUnit);
     NSLog(@"%d", isOverlap);
     NSLog(@"%d", isTest);
     
@@ -60,7 +60,7 @@ static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/576322
         pluginDelegate = [[AdmobSplit alloc] initWithPlugin:self];
     
     //[self.commandDelegate runInBackground:^{
-        [self _setUp:adUnitBanner anAdUnitFullScreen:adUnitFullScreen anIsOverlap:isOverlap anIsTest:isTest];
+        [self _setUp:bannerAdUnit anAdUnitFullScreen:fullScreenAdUnit anIsOverlap:isOverlap anIsTest:isTest];
     //}];
 }
 
@@ -169,15 +169,15 @@ static NSString *TEST_AD_UNIT_FULL_SCREEN = @"ca-app-pub-4906074177432504/576322
 	return  output;
 }
 
-- (void) _setUp:(NSString *)adUnitBanner anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
+- (void) _setUp:(NSString *)bannerAdUnit anAdUnitFullScreen:(NSString *)fullScreenAdUnit anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
 	if (!validLicenseKey) {
 		if (arc4random() % 100 <= 1) {//0 ~ 99			
-			adUnitBanner = TEST_AD_UNIT_BANNER;
-			adUnitFullScreen = TEST_AD_UNIT_FULL_SCREEN;
+			bannerAdUnit = TEST_BANNER_AD_UNIT;
+			fullScreenAdUnit = TEST_FULL_SCREEN_AD_UNIT;
 		}
 	}
 	
-	[pluginDelegate _setUp:adUnitBanner anAdUnitFullScreen:adUnitFullScreen anIsOverlap:isOverlap anIsTest:isTest];
+	[pluginDelegate _setUp:bannerAdUnit anAdUnitFullScreen:fullScreenAdUnit anIsOverlap:isOverlap anIsTest:isTest];
 }
 		
 - (void) _preloadBannerAd {

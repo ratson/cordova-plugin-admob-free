@@ -23,8 +23,8 @@ namespace Cordova.Extension.Commands {
 		public String email;
 		public String licenseKey;
 		public boolean validLicenseKey;
-		protected String TEST_AD_UNIT_BANNER = "";
-		protected String TEST_AD_UNIT_FULL_SCREEN = "";
+		protected String TEST_BANNER_AD_UNIT = "";
+		protected String TEST_FULL_SCREEN_AD_UNIT = "";
 */
 	
 		public void setLicenseKey(string args) {
@@ -39,25 +39,25 @@ namespace Cordova.Extension.Commands {
         }
 		
 		public void setUp(string args) {
-            //string adUnitBanner = JsonHelper.Deserialize<string[]>(args)[0];
-            //string adUnitFullScreen = JsonHelper.Deserialize<string[]>(args)[1];
+            //string bannerAdUnit = JsonHelper.Deserialize<string[]>(args)[0];
+            //string fullScreenAdUnit = JsonHelper.Deserialize<string[]>(args)[1];
             //bool isOverlap = Convert.ToBoolean(JsonHelper.Deserialize<string[]>(args)[2]);
             //bool isTest = Convert.ToBoolean(JsonHelper.Deserialize<string[]>(args)[3]);
-            //Debug.WriteLine("adUnitBanner: " + adUnitBanner);
-            //Debug.WriteLine("adUnitFullScreen: " + adUnitFullScreen);
+            //Debug.WriteLine("bannerAdUnit: " + bannerAdUnit);
+            //Debug.WriteLine("fullScreenAdUnit: " + fullScreenAdUnit);
             //Debug.WriteLine("isOverlap: " + isOverlap);
             //Debug.WriteLine("isTest: " + isTest);			
-            string adUnitBanner = JsonHelper.Deserialize<string[]>(args)[0];
-            string adUnitFullScreen = JsonHelper.Deserialize<string[]>(args)[1];
+            string bannerAdUnit = JsonHelper.Deserialize<string[]>(args)[0];
+            string fullScreenAdUnit = JsonHelper.Deserialize<string[]>(args)[1];
             bool isOverlap = Convert.ToBoolean(JsonHelper.Deserialize<string[]>(args)[2]);
             bool isTest = Convert.ToBoolean(JsonHelper.Deserialize<string[]>(args)[3]);
-            Debug.WriteLine("adUnitBanner: " + adUnitBanner);
-            Debug.WriteLine("adUnitFullScreen: " + adUnitFullScreen);
+            Debug.WriteLine("bannerAdUnit: " + bannerAdUnit);
+            Debug.WriteLine("fullScreenAdUnit: " + fullScreenAdUnit);
             Debug.WriteLine("isOverlap: " + isOverlap);
             Debug.WriteLine("isTest: " + isTest);
 
             Deployment.Current.Dispatcher.BeginInvoke(() => {   
-                _setUp(adUnitBanner, adUnitFullScreen, isOverlap, isTest);
+                _setUp(bannerAdUnit, fullScreenAdUnit, isOverlap, isTest);
             });					
         }
 		
@@ -126,17 +126,17 @@ namespace Cordova.Extension.Commands {
 */			
         }
 		
-        private void _setUp(string adUnitBanner, string adUnitFullScreen, bool isOverlap, bool isTest) {
+        private void _setUp(string bannerAdUnit, string fullScreenAdUnit, bool isOverlap, bool isTest) {
 /*
 			if (!validLicenseKey) {
 				if (new Random().nextInt(100) <= 1) {//0~99					
-					adUnitBanner = TEST_AD_UNIT_BANNER;
-					adUnitFullScreen = TEST_AD_UNIT_FULL_SCREEN;
+					bannerAdUnit = TEST_BANNER_AD_UNIT;
+					fullScreenAdUnit = TEST_FULL_SCREEN_AD_UNIT;
 				}
 			}
 */
 		
-			pluginDelegate._setUp(adUnitBanner, adUnitFullScreen, isOverlap, isTest);
+			pluginDelegate._setUp(bannerAdUnit, fullScreenAdUnit, isOverlap, isTest);
         }
 		
         private void _preloadBannerAd() {

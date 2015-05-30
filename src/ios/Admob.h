@@ -14,7 +14,7 @@
 
 @protocol PluginDelegate <NSObject>
 - (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey;
-- (void) _setUp:(NSString *)adUnitBanner anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest;
+- (void) _setUp:(NSString *)bannerAdUnit anAdUnitFullScreen:(NSString *)fullScreenAdUnit anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest;
 - (void) _preloadBannerAd;
 - (void) _showBannerAd:(NSString *)position aSize:(NSString *)size;
 - (void) _reloadBannerAd;

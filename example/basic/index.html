@@ -6,35 +6,35 @@
 
 <script>
 
-var adUnitBanner = "ca-app-pub-4906074177432504/9172302471";
-var adUnitFullScreen = "ca-app-pub-4906074177432504/1649035673";
+var bannerAdUnit = "ca-app-pub-4906074177432504/9172302471";
+var fullScreenAdUnit = "ca-app-pub-4906074177432504/1649035673";
 var isOverlap = true; //true: overlap, false: split
 var isTest = true;
 /*
- var adUnitBanner;
- var adUnitFullScreen;
+ var bannerAdUnit;
+ var fullScreenAdUnit;
  var isOverlap = true; //true: overlap, false: split
  var isTest = true;
  //android
  if (navigator.userAgent.match(/Android/i)) {
-	adUnitBanner = "ca-app-pub-4906074177432504/9172302471";
-	adUnitFullScreen = "ca-app-pub-4906074177432504/1649035673";
+	bannerAdUnit = "ca-app-pub-4906074177432504/9172302471";
+	fullScreenAdUnit = "ca-app-pub-4906074177432504/1649035673";
  }
  //ios
  else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
-	adUnitBanner = "ca-app-pub-4906074177432504/4602502071";
-	adUnitFullScreen = "ca-app-pub-4906074177432504/7555968477";
+	bannerAdUnit = "ca-app-pub-4906074177432504/4602502071";
+	fullScreenAdUnit = "ca-app-pub-4906074177432504/7555968477";
  }
  //wp8
  else if( navigator.userAgent.match(/Windows Phone/i) ) {
-	adUnitBanner = "ca-app-pub-4906074177432504/4462901274";
-	adUnitFullScreen = "ca-app-pub-4906074177432504/5939634477";
+	bannerAdUnit = "ca-app-pub-4906074177432504/4462901274";
+	fullScreenAdUnit = "ca-app-pub-4906074177432504/5939634477";
  }
 */
 
 document.addEventListener("deviceready", function(){
 
-	window.admob.setUp(adUnitBanner, adUnitFullScreen, isOverlap, isTest);
+	window.admob.setUp(bannerAdUnit, fullScreenAdUnit, isOverlap, isTest);
 		
 	//
 	window.admob.onBannerAdPreloaded = function() {

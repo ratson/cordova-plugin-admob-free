@@ -15,7 +15,7 @@ module.exports = {
             [email, licenseKey]
         ); 
     },
-	setUp: function(adUnit, adUnitFullScreen, isOverlap, isTest) {
+	setUp: function(adUnit, fullScreenAdUnit, isOverlap, isTest) {
 		var self = this;	
         cordova.exec(
             function (result) {
@@ -82,7 +82,7 @@ module.exports = {
 			},
             'Admob',
             'setUp',			
-            [adUnit, adUnitFullScreen, isOverlap, isTest]
+            [adUnit, fullScreenAdUnit, isOverlap, isTest]
         ); 
     },
 	preloadBannerAd: function() {

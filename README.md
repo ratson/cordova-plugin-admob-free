@@ -95,29 +95,29 @@ Now all the native plugins are installed automatically: https://plus.google.com/
 
 # API #
 ```javascript
-var adUnitBanner = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
-var adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_FULL_SCREEN_AD_UNIT";
+var bannerAdUnit = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
+var fullScreenAdUnit = "REPLACE_THIS_WITH_YOUR_FULL_SCREEN_AD_UNIT";
 var isOverlap = true; //true: overlap, false: split
 var isTest = true;
 /*
-var adUnitBanner;
-var adUnitFullScreen;
+var bannerAdUnit;
+var fullScreenAdUnit;
 var isOverlap = true; //true: overlap, false: split
 var isTest = true;
 //android
 if (navigator.userAgent.match(/Android/i)) {
-	adUnitBanner = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
-	adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_FULL_SCREEN_AD_UNIT";
+	bannerAdUnit = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
+	fullScreenAdUnit = "REPLACE_THIS_WITH_YOUR_FULL_SCREEN_AD_UNIT";
 }
 //ios
 else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
-    adUnitBanner = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
-    adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_FULL_SCREEN_AD_UNIT";
+    bannerAdUnit = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
+    fullScreenAdUnit = "REPLACE_THIS_WITH_YOUR_FULL_SCREEN_AD_UNIT";
 }
 //wp8
 else if( navigator.userAgent.match(/Windows Phone/i) ) {
-    adUnitBanner = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
-    adUnitFullScreen = "REPLACE_THIS_WITH_YOUR_FULL_SCREEN_AD_UNIT";
+    bannerAdUnit = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
+    fullScreenAdUnit = "REPLACE_THIS_WITH_YOUR_FULL_SCREEN_AD_UNIT";
 }
 */
 
@@ -126,7 +126,7 @@ document.addEventListener("deviceready", function(){
 	//you can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova
 	//window.admob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
 
-	window.admob.setUp(adUnitBanner, adUnitFullScreen, isOverlap, isTest);
+	window.admob.setUp(bannerAdUnit, fullScreenAdUnit, isOverlap, isTest);
 
 	//
 	window.admob.onBannerAdPreloaded = function() {

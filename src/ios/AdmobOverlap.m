@@ -13,8 +13,8 @@
 
 @synthesize plugin;
 //
-@synthesize adUnitBanner;
-@synthesize adUnitFullScreen;
+@synthesize bannerAdUnit;
+@synthesize fullScreenAdUnit;
 @synthesize isOverlap;
 @synthesize isTest;
 //
@@ -78,9 +78,9 @@
 - (void) _setLicenseKey:(NSString *)email aLicenseKey:(NSString *)licenseKey {
 }
 
-- (void) _setUp:(NSString *)adUnitBanner anAdUnitFullScreen:(NSString *)adUnitFullScreen anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
-	self.adUnitBanner = adUnitBanner;
-	self.adUnitFullScreen = adUnitFullScreen;
+- (void) _setUp:(NSString *)bannerAdUnit anAdUnitFullScreen:(NSString *)fullScreenAdUnit anIsOverlap:(BOOL)isOverlap anIsTest:(BOOL)isTest {
+	self.bannerAdUnit = bannerAdUnit;
+	self.fullScreenAdUnit = fullScreenAdUnit;
 	self.isOverlap = isOverlap;
 	self.isTest = isTest;	
 }
@@ -138,7 +138,7 @@
 	
 		bannerView = [[GADBannerView alloc] initWithAdSize:adSize];
         //
-		bannerView.adUnitID = self.adUnitBanner;
+		bannerView.adUnitID = self.bannerAdUnit;
 		bannerView.delegate = self;
 		bannerView.rootViewController = [self.plugin getViewController];//
 	}
@@ -306,7 +306,7 @@
     if (interstitialView == nil || self.interstitialView.hasBeenUsed){//ios only //An interstitial object can only be used once for ios
         self.interstitialView = [[GADInterstitial alloc] init];
         //
-		self.interstitialView.adUnitID = adUnitFullScreen;
+		self.interstitialView.adUnitID = fullScreenAdUnit;
         self.interstitialView.delegate = self;
     }	
 	
