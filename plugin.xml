@@ -2,13 +2,13 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.cranberrygame.cordova.plugin.ad.admob"
-    version="1.0.63">
+    version="1.0.64">
 	
     <name>Cordova Admob plugin</name>
     <description>Show admob banner and full screen ad</description>
     <author>Sang Ki Kwon (Cranberrygame)</author>		
     <license>MIT</license>
-    <keywords>cordova,plugin,ad,admob,overlap,split,monetisation</keywords>
+    <keywords>cordova,plugin,ad,admob,monetisation</keywords>
     <repo>https://github.com/cranberrygame/cordova-plugin-ad-admob</repo>
     <issue>https://github.com/cranberrygame/cordova-plugin-ad-admob/issues</issue> 	
 	<engines>
@@ -21,11 +21,6 @@
 	
     <!-- android -->
     <platform name="android">
-<!--
-		<dependency id="com.google.playservices" url="https://github.com/MobileChromeApps/google-play-services" commit="1f56399572d255193f8f9564843df60e50938e69" />
--->		
-		<dependency id="com.google.playservices@21.0.0" />
-		
 	    <config-file target="res/xml/config.xml" parent="/*">
             <feature name="Admob" >
                 <param name="android-package" value="com.cranberrygame.cordova.plugin.ad.admob.Admob"/>
@@ -42,7 +37,7 @@
 			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
         </config-file>		
 		
-		<!-- cranberrygame start: google-play-services.jar -->
+		<!-- cranberrygame start: com.google.playservices -->
 <!--		
 		<config-file target="AndroidManifest.xml" parent="/manifest/application">
 			<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
@@ -52,13 +47,19 @@
 	
         <source-file src="src/android/Admob.java" target-dir="src/com/cranberrygame/cordova/plugin/ad/admob" />		
         <source-file src="src/android/AdmobOverlap.java" target-dir="src/com/cranberrygame/cordova/plugin/ad/admob" />		
-        <source-file src="src/android/AdmobSplit.java" target-dir="src/com/cranberrygame/cordova/plugin/ad/admob" />		
-		<!-- cranberrygame start: google-play-services.jar -->
+        <source-file src="src/android/AdmobSplit.java" target-dir="src/com/cranberrygame/cordova/plugin/ad/admob" />
+		
+		<!-- cranberrygame start: com.google.playservices -->
 <!--		
 		<source-file src="src/android/google-play-services.jar" target-dir="libs" />
 		<source-file src="src/android/version.xml" target-dir="res/values" />
 -->		
 		<!-- cranberrygame end -->
+		
+<!--
+		<dependency id="com.google.playservices" url="https://github.com/MobileChromeApps/google-play-services" commit="1f56399572d255193f8f9564843df60e50938e69" />
+-->		
+		<dependency id="com.google.playservices@21.0.0" />
     </platform>
 
 	<!-- ios -->
@@ -77,8 +78,7 @@
 		<header-file src="src/ios/AdmobSplit.h" />
 		<source-file src="src/ios/AdmobSplit.m" />
 
-		<framework src="src/ios/GoogleMobileAds.framework" custom="true" />
-		
+		<framework src="src/ios/GoogleMobileAds.framework" custom="true" />		
  	    <framework src="StoreKit.framework" />
  	    <framework src="AudioToolbox.framework" />
         <framework src="MessageUI.framework" />

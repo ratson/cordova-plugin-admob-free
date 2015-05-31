@@ -42,6 +42,8 @@ You can see Plugins For Cordova in one page: http://cranberrygame.github.io?refe
 		iOS GoogleMobileAdsSdkiOS-7.1.0
 1.0.53
 	Added isShowingBannerAd, isShowingFullScreenAd
+1.0.64
+	Added AdColony admob mediation plugin.
 	
 To-Do:
 
@@ -57,6 +59,10 @@ To-Do:
 https://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface - npm install -g cordova@4.1.2
 ```c
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob
+
+//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.adcolony
+
 ```
 
 ## Xdk ##
@@ -65,21 +71,35 @@ https://software.intel.com/en-us/intel-xdk - Download XDK - XDK PORJECTS - [spec
 Name: admob
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob
 [v] Plugin is located in the Apache Cordova Plugins Registry
+
+//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.
+Name: admob-adcolony
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.adcolony
+[v] Plugin is located in the Apache Cordova Plugins Registry
 ```
 
 ## Cocoon ##
-https://cocoon.io - Create project - [specific project] - Setting - Plugins - Search - cranberrygame - admob
+https://cocoon.io - Create project - [specific project] - Setting - Plugins - Search - cranberrygame - admob<br>
+<br>
+//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.<br>
+adcolony<br>
 
 ## Phonegap build service (config.xml) ##
 https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
 ```c
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob" source="plugins.cordova.io" />
+
+//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.adcolony" source="plugins.cordova.io" />
 ```
 
 ## Construct2 ##
 Download construct2 plugin: http://www.paywithapost.de/pay?id=4ef3f2be-26e8-4a04-b826-6680db13a8c8
 <br>
-Now all the native plugins are installed automatically: https://plus.google.com/102658703990850475314/posts/XS5jjEApJYV
+Now all the native plugins are installed automatically: https://plus.google.com/102658703990850475314/posts/XS5jjEApJYV<br>
+<br>
+//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.<br>
+Cordova AdColony construct2 plugin<br>
 # Server setting #
 ```c
 ```
@@ -91,6 +111,9 @@ Now all the native plugins are installed automatically: https://plus.google.com/
 <img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit6.png"><br>
 <img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit7.png"><br>
 <img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit8.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation1.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation2.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation3.png"><br>
 <img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ios_submit_for_review_survey.png">
 
 # API #
