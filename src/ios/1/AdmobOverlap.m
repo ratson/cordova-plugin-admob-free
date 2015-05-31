@@ -4,10 +4,10 @@
 //License: MIT (http://opensource.org/licenses/MIT)
 #import "AdmobOverlap.h"
 //view
-////#import <GoogleMobileAds/GADBannerView.h>
-////#import <GoogleMobileAds/GADInterstitial.h>
-////#import <GoogleMobileAds/GADAdSize.h>
-////#import <GoogleMobileAds/GADExtras.h>
+#import <GoogleMobileAds/GADBannerView.h>
+#import <GoogleMobileAds/GADInterstitial.h>
+#import <GoogleMobileAds/GADAdSize.h>
+#import <GoogleMobileAds/GADExtras.h>
 
 @implementation AdmobOverlap
 
