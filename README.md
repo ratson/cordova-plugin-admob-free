@@ -44,6 +44,8 @@ You can see Plugins For Cordova in one page: http://cranberrygame.github.io?refe
 	Added isShowingBannerAd, isShowingFullScreenAd
 1.0.64
 	Added AdColony admob mediation plugin.
+1.0.67
+	Added other mediation plugins.
 	
 To-Do:
 
@@ -62,7 +64,13 @@ cordova plugin add com.cranberrygame.cordova.plugin.ad.admob
 
 //If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.adcolony
-
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.facebookads
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.flurryads
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.iad
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.inmobi
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.leadbolt
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.millennialmedia
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.mobfox
 ```
 
 ## Xdk ##
@@ -76,6 +84,27 @@ Plugin ID: com.cranberrygame.cordova.plugin.ad.admob
 Name: admob-adcolony
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.adcolony
 [v] Plugin is located in the Apache Cordova Plugins Registry
+Name: admob-facebookads
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.facebookads
+[v] Plugin is located in the Apache Cordova Plugins Registry
+Name: admob-flurryads
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.flurryads
+[v] Plugin is located in the Apache Cordova Plugins Registry
+Name: admob-iad
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.iad
+[v] Plugin is located in the Apache Cordova Plugins Registry
+Name: admob-inmobi
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.inmobi
+[v] Plugin is located in the Apache Cordova Plugins Registry
+Name: admob-leadbolt
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.leadbolt
+[v] Plugin is located in the Apache Cordova Plugins Registry
+Name: admob-millennialmedia
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.millennialmedia
+[v] Plugin is located in the Apache Cordova Plugins Registry
+Name: admob-mobfox
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.mobfox
+[v] Plugin is located in the Apache Cordova Plugins Registry
 ```
 
 ## Cocoon ##
@@ -83,7 +112,14 @@ https://cocoon.io - Create project - [specific project] - Setting - Plugins - Se
 <br>
 //If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.<br>
 adcolony<br>
-
+facebookads<br>
+flurryads<br>
+iad<br>
+inmobi<br>
+leadbolt<br>
+millennialmedia<br>
+mobfox<br>
+...
 ## Phonegap build service (config.xml) ##
 https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
 ```c
@@ -91,6 +127,14 @@ https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file
 
 //If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.adcolony" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.facebookads" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.flurryads" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.iad" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.inmobi" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.leadbolt" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.millennialmedia" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.mobfox" source="plugins.cordova.io" />
+...
 ```
 
 ## Construct2 ##
@@ -99,7 +143,15 @@ Download construct2 plugin: http://www.paywithapost.de/pay?id=4ef3f2be-26e8-4a04
 Now all the native plugins are installed automatically: https://plus.google.com/102658703990850475314/posts/XS5jjEApJYV<br>
 <br>
 //If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.<br>
-Cordova AdColony construct2 plugin<br>
+Cordova AdmobAdColony construct2 plugin<br>
+Cordova AdmobFacebookAds construct2 plugin<br>
+Cordova AdmobFlurryAds construct2 plugin<br>
+Cordova AdmobiAd construct2 plugin<br>
+Cordova AdmobInMobi construct2 plugin<br>
+Cordova AdmobLeadbolt construct2 plugin<br>
+Cordova AdmobMillennialMedia construct2 plugin<br>
+Cordova AdmobMobFox construct2 plugin<br>
+
 # Server setting #
 ```c
 ```

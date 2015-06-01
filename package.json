@@ -1,0 +1,27 @@
+{
+    "version": "1.0.68",
+    "name": "com.cranberrygame.cordova.plugin.ad.admob",
+    "cordova_name": "Cordova Admob plugin",
+    "description": "Show admob banner and full screen ad",
+    "license": "MIT",
+    "repo": "https://github.com/cranberrygame/cordova-plugin-ad-admob",
+    "issue": "https://github.com/cranberrygame/cordova-plugin-ad-admob/issues",
+    "keywords": [
+        "cordova",
+        "plugin",
+        "ad",
+        "admob",
+        "monetisation"
+    ],
+    "platforms": [
+        "android",
+        "ios",
+        "wp8"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.0.0"
+        }
+    ]
+}
