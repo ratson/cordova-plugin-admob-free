@@ -90,6 +90,7 @@
 		<framework src="EventKitUI.framework" />		
 		<framework src="QuartzCore.framework" />
 -->		
+<dependency id="com.ios.libgoogleadmobads" url="https://github.com/appfeel/google-iosadmobads" />
 	</platform>
 	
     <!-- wp8 -->
@@ -116,5 +117,5 @@
     </platform>
     
     
-    <dependency id="com.ios.libgoogleadmobads" url="https://github.com/appfeel/google-iosadmobads" />
+    
 </plugin>
