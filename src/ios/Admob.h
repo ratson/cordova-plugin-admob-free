@@ -4,6 +4,13 @@
 //License: MIT (http://opensource.org/licenses/MIT)
 #import <Foundation/Foundation.h>
 #import <Cordova/CDV.h>
+//
+#import <GoogleMobileAds/GADAdSize.h>
+#import <GoogleMobileAds/GADBannerView.h>
+#import <GoogleMobileAds/GADInterstitial.h>
+#import <GoogleMobileAds/GADBannerViewDelegate.h>
+#import <GoogleMobileAds/GADInterstitialDelegate.h>
+#import <GoogleMobileAds/GADExtras.h>
 
 @protocol Plugin <NSObject>
 - (UIWebView*) getWebView;
