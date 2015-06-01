@@ -2,6 +2,13 @@
 //Email: cranberrygame@yahoo.com
 //Homepage: http://cranberrygame.github.io
 //License: MIT (http://opensource.org/licenses/MIT)
+<<<<<<< HEAD
+=======
+////#import <GoogleMobileAds/GoogleMobileAds.h> //http://stackoverflow.com/questions/28572343/admob-sdk-ios-file-not-found
+////#import <GoogleMobileAds/GADBannerView.h>
+////#import <GoogleMobileAds/GADInterstitialDelegate.h>
+//
+>>>>>>> origin/master
 #import "Admob.h"
 
 @interface AdmobOverlap : NSObject <PluginDelegate, GADBannerViewDelegate, GADInterstitialDelegate>

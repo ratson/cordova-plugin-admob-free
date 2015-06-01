@@ -50,6 +50,7 @@
 		<source-file src="src/ios/AdmobOverlap.m" />
 		<header-file src="src/ios/AdmobSplit.h" />
 		<source-file src="src/ios/AdmobSplit.m" />
+<<<<<<< HEAD
 
 		<!-- dependency -->
 		<dependency id="com.cranberrygame.cordova.plugin.ad.admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />
@@ -57,6 +58,22 @@
 <dependency id="com.ios.libgoogleadmobads" url="https://github.com/appfeel/google-iosadmobads" />
 -->		
 		
+=======
+<!--
+		<framework src="src/ios/GoogleMobileAds.framework" custom="true" />		
+ 	    <framework src="StoreKit.framework" />
+ 	    <framework src="AudioToolbox.framework" />
+        <framework src="MessageUI.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="AdSupport.framework" />
+        <framework src="CoreTelephony.framework" />
+		<framework src="EventKit.framework" />
+		<framework src="EventKitUI.framework" />		
+		<framework src="QuartzCore.framework" />
+-->		
+<dependency id="com.ios.libgoogleadmobads" url="https://github.com/appfeel/google-iosadmobads" />
+>>>>>>> origin/master
 	</platform>
 	
     <!-- wp8 -->
@@ -75,4 +92,7 @@
 		<!-- dependency -->
 		<dependency id="com.cranberrygame.cordova.plugin.ad.admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />
     </platform>
+    
+    
+    
 </plugin>
