@@ -71,6 +71,7 @@ cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.inmobi
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.leadbolt
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.millennialmedia
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.mobfox
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.mopub
 ```
 
 ## Xdk ##
@@ -105,10 +106,13 @@ Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.millennialmedia
 Name: admob-mobfox
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.mobfox
 [v] Plugin is located in the Apache Cordova Plugins Registry
+Name: admob-mopub
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.mopub
+[v] Plugin is located in the Apache Cordova Plugins Registry
 ```
 
 ## Cocoon ##
-https://cocoon.io - Create project - [specific project] - Setting - Plugins - Search - cranberrygame - admob<br>
+https://cocoon.io - Create project - [specific project] - Setting - Plugins - Search - cranberrygame - admob - Save<br>
 <br>
 //If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.<br>
 adcolony<br>
@@ -119,6 +123,7 @@ inmobi<br>
 leadbolt<br>
 millennialmedia<br>
 mobfox<br>
+mopub<br>
 ...
 ## Phonegap build service (config.xml) ##
 https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
@@ -134,6 +139,7 @@ https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.leadbolt" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.millennialmedia" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.mobfox" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.mobpub" source="plugins.cordova.io" />
 ...
 ```
 
@@ -151,6 +157,7 @@ Cordova AdmobInMobi construct2 plugin<br>
 Cordova AdmobLeadbolt construct2 plugin<br>
 Cordova AdmobMillennialMedia construct2 plugin<br>
 Cordova AdmobMobFox construct2 plugin<br>
+Cordova AdmobMoPub construct2 plugin<br>
 
 # Server setting #
 ```c
