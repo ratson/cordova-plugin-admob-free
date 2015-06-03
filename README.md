@@ -66,12 +66,16 @@ cordova plugin add com.cranberrygame.cordova.plugin.ad.admob
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.adcolony
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.facebookads
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.flurryads
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.huntads
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.iad
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.inmobi
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.leadbolt
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.lifestreetmedia
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.millennialmedia
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.mobfox
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.mojiva
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.mopub
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.phunware
 ```
 
 ## Xdk ##
@@ -91,6 +95,9 @@ Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.facebookads
 Name: admob-flurryads
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.flurryads
 [v] Plugin is located in the Apache Cordova Plugins Registry
+Name: admob-huntads
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.huntads
+[v] Plugin is located in the Apache Cordova Plugins Registry
 Name: admob-iad
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.iad
 [v] Plugin is located in the Apache Cordova Plugins Registry
@@ -100,14 +107,23 @@ Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.inmobi
 Name: admob-leadbolt
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.leadbolt
 [v] Plugin is located in the Apache Cordova Plugins Registry
+Name: admob-lifestreetmedia
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.lifestreetmedia
+[v] Plugin is located in the Apache Cordova Plugins Registry
 Name: admob-millennialmedia
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.millennialmedia
 [v] Plugin is located in the Apache Cordova Plugins Registry
 Name: admob-mobfox
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.mobfox
 [v] Plugin is located in the Apache Cordova Plugins Registry
+Name: admob-mojiva
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.mojiva
+[v] Plugin is located in the Apache Cordova Plugins Registry
 Name: admob-mopub
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.mopub
+[v] Plugin is located in the Apache Cordova Plugins Registry
+Name: admob-phunware
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.phunware
 [v] Plugin is located in the Apache Cordova Plugins Registry
 ```
 
@@ -118,12 +134,16 @@ https://cocoon.io - Create project - [specific project] - Setting - Plugins - Se
 adcolony<br>
 facebookads<br>
 flurryads<br>
+huntads<br>
 iad<br>
 inmobi<br>
 leadbolt<br>
+lifestreetmedia<br>
 millennialmedia<br>
 mobfox<br>
+mojiva<br>
 mopub<br>
+phunware<br>
 ...
 ## Phonegap build service (config.xml) ##
 https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
@@ -134,12 +154,16 @@ https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.adcolony" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.facebookads" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.flurryads" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.huntads" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.iad" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.inmobi" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.leadbolt" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.lifestreetmedia" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.millennialmedia" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.mobfox" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.mojiva" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.mopub" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.phunware" source="plugins.cordova.io" />
 ...
 ```
 
@@ -152,13 +176,16 @@ Now all the native plugins are installed automatically: https://plus.google.com/
 Cordova AdmobAdColony construct2 plugin<br>
 Cordova AdmobFacebookAds construct2 plugin<br>
 Cordova AdmobFlurryAds construct2 plugin<br>
+Cordova AdmobHuntAds construct2 plugin<br>
 Cordova AdmobiAd construct2 plugin<br>
 Cordova AdmobInMobi construct2 plugin<br>
 Cordova AdmobLeadbolt construct2 plugin<br>
+Cordova AdmobLifeStreetMedia construct2 plugin<br>
 Cordova AdmobMillennialMedia construct2 plugin<br>
 Cordova AdmobMobFox construct2 plugin<br>
+Cordova AdmobMojiva construct2 plugin<br>
 Cordova AdmobMoPub construct2 plugin<br>
-
+Cordova AdmobPhunware construct2 plugin<br>
 # Server setting #
 ```c
 ```
