@@ -24,6 +24,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 //
 import android.annotation.TargetApi;
+//
+import java.lang.reflect.Method;
 
 public class AdmobSplit extends AdmobOverlap {
 	protected static final String LOG_TAG = "AdmobSplit";
@@ -38,13 +40,14 @@ public class AdmobSplit extends AdmobOverlap {
 		//http://stackoverflow.com/questions/24539578/cordova-plugin-listening-to-device-orientation-change-is-it-possible
 		//http://developer.android.com/reference/android/view/View.OnLayoutChangeListener.html
 		//https://gitshell.com/lvxudong/A530_packages_app_Camera/blob/master/src/com/android/camera/ActivityBase.java
-       	plugin.getWebView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//cordova5 build error
-        //plugin.getWebView().getRootView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//cordova5 build error
-       	//plugin.getWebView().getView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//fix cordova5 build error
-    		
-		    @Override
-	        public void onLayoutChange(View v, int left, int top, int right, int bottom,
-	                int oldLeft, int oldTop, int oldRight, int oldBottom) {
+		//plugin.getWebView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//only for ~cordova4
+		//plugin.getWebView().getRootView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//only for ~cordova4
+		//plugin.getWebView().getView().addOnLayoutChangeListener(new View.OnLayoutChangeListener(){//only for cordova5~
+		getView(plugin.getWebView()).addOnLayoutChangeListener(new View.OnLayoutChangeListener(){
+		
+			@Override
+			public void onLayoutChange(View v, int left, int top, int right, int bottom,
+					int oldLeft, int oldTop, int oldRight, int oldBottom) {
 				if (left == oldLeft && top == oldTop && right == oldRight
 						&& bottom == oldBottom) {
 					return;
@@ -84,12 +87,30 @@ public class AdmobSplit extends AdmobOverlap {
 						}						
 					}
 				}
-            
+			
 				lastOrientation = orientation;		
-	        }		    
+			}		    
 		});
     }	
 
+	public static View getView(CordovaWebView webView) {	
+		if(View.class.isAssignableFrom(CordovaWebView.class)) {
+			return (View) webView;
+		}
+		
+		try {
+			Method getViewMethod = CordovaWebView.class.getMethod("getView", (Class<?>[]) null);
+			if(getViewMethod != null) {
+				Object[] args = {};
+				return (View) getViewMethod.invoke(webView, args);
+			}
+		} 
+		catch (Exception e) {
+		}
+		
+		return null;
+	}
+	
 	protected boolean bannerIsShowingOverlap() {
 		boolean bannerIsShowing = false;
 		if (bannerView != null) {							
@@ -104,10 +125,11 @@ public class AdmobSplit extends AdmobOverlap {
 	}
 	
 	protected void addBannerViewOverlap(String position, String size) {
-		if (plugin.getWebView() != null) {							
-			ViewGroup parentView = (ViewGroup)plugin.getWebView().getParent();//cordova5 build error
-			//ViewGroup parentView = (ViewGroup)plugin.getWebView().getRootView();//cordova5 build error
-			//ViewGroup parentView = (ViewGroup)plugin.getWebView().getView();//fix cordova5 build error
+		if (plugin.getWebView() != null) {
+			//ViewGroup parentView = (ViewGroup)plugin.getWebView().getParent();//only for ~cordova4
+			//ViewGroup parentView = (ViewGroup)plugin.getWebView().getRootView();//only for ~cordova4
+			//ViewGroup parentView = (ViewGroup)plugin.getWebView().getView();//only for cordova5
+			ViewGroup parentView = (ViewGroup)getView(plugin.getWebView());
 			if (parentView != null) {
 				if (position.equals("top-left") || position.equals("top-center")|| position.equals("top-right") || position.equals("left") || position.equals("center") || position.equals("right")) {	
 					parentView.addView(bannerView, 0);

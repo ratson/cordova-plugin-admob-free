@@ -46,6 +46,8 @@ You can see Plugins For Cordova in one page: http://cranberrygame.github.io?refe
 	Added AdColony admob mediation plugin.
 1.0.67
 	Added other mediation plugins.
+1.0.72
+	Fixed Android cordova5 build error.
 	
 To-Do:
 
@@ -144,7 +146,6 @@ mobfox<br>
 mojiva<br>
 mopub<br>
 phunware<br>
-...
 ## Phonegap build service (config.xml) ##
 https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
 ```c
@@ -164,7 +165,6 @@ https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.mojiva" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.mopub" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.phunware" source="plugins.cordova.io" />
-...
 ```
 
 ## Construct2 ##
