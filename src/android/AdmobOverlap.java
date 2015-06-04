@@ -127,8 +127,7 @@ public class AdmobOverlap implements PluginDelegate {
 		handleLayoutChangeOverlap();
 	}
 	
-	//@SuppressLint("NewApi")
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	protected void handleLayoutChangeOverlap() {
 		//http://stackoverflow.com/questions/24539578/cordova-plugin-listening-to-device-orientation-change-is-it-possible
 		//http://developer.android.com/reference/android/view/View.OnLayoutChangeListener.html

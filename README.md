@@ -8,9 +8,6 @@ Show admob banner and full screen ad
 
 Requires admob account http://www.google.com/ads/admob/
 
-Fix Admob SDK FPS issue: go to your AdMob account and disable text banners, leaving enabled only image banners. (provided by Cipriux)
-(not both, but one of them)
-
 This is open source cordova plugin.
 
 You can see Plugins For Cordova in one page: http://cranberrygame.github.io?referrer=github
@@ -68,7 +65,7 @@ cordova plugin add com.cranberrygame.cordova.plugin.ad.admob
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.adcolony
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.facebookads
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.flurryads
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.huntads
+cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.huntmads
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.iad
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.inmobi
 cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.leadbolt
@@ -97,8 +94,8 @@ Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.facebookads
 Name: admob-flurryads
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.flurryads
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-huntads
-Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.huntads
+Name: admob-huntmads
+Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.huntmads
 [v] Plugin is located in the Apache Cordova Plugins Registry
 Name: admob-iad
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.iad
@@ -136,7 +133,7 @@ https://cocoon.io - Create project - [specific project] - Setting - Plugins - Cu
 https://github.com/cranberrygame/cordova-plugin-ad-admob-adcolony.git<br>
 https://github.com/cranberrygame/cordova-plugin-ad-admob-facebookads.git<br>
 https://github.com/cranberrygame/cordova-plugin-ad-admob-flurryads.git<br>
-https://github.com/cranberrygame/cordova-plugin-ad-admob-huntads.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-huntmads.git<br>
 https://github.com/cranberrygame/cordova-plugin-ad-admob-iad.git<br>
 https://github.com/cranberrygame/cordova-plugin-ad-admob-inmobi.git<br>
 https://github.com/cranberrygame/cordova-plugin-ad-admob-leadbolt.git<br>
@@ -146,6 +143,7 @@ https://github.com/cranberrygame/cordova-plugin-ad-admob-mobfox.git<br>
 https://github.com/cranberrygame/cordova-plugin-ad-admob-mojiva.git<br>
 https://github.com/cranberrygame/cordova-plugin-ad-admob-mopub.git<br>
 https://github.com/cranberrygame/cordova-plugin-ad-admob-phunware.git
+
 ## Phonegap build service (config.xml) ##
 https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
 ```c
@@ -155,7 +153,7 @@ https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.adcolony" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.facebookads" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.flurryads" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.huntads" source="plugins.cordova.io" />
+<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.huntmads" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.iad" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.inmobi" source="plugins.cordova.io" />
 <gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.leadbolt" source="plugins.cordova.io" />
@@ -176,7 +174,7 @@ Now all the native plugins are installed automatically: https://plus.google.com/
 Cordova AdmobAdColony construct2 plugin<br>
 Cordova AdmobFacebookAds construct2 plugin<br>
 Cordova AdmobFlurryAds construct2 plugin<br>
-Cordova AdmobHuntAds construct2 plugin<br>
+Cordova AdmobHuntMAds construct2 plugin<br>
 Cordova AdmobiAd construct2 plugin<br>
 Cordova AdmobInMobi construct2 plugin<br>
 Cordova AdmobLeadbolt construct2 plugin<br>
