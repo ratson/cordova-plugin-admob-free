@@ -130,22 +130,22 @@ Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.phunware
 ```
 
 ## Cocoon ##
-https://cocoon.io - Create project - [specific project] - Setting - Plugins - Search - cranberrygame - admob - Save<br>
+https://cocoon.io - Create project - [specific project] - Setting - Plugins - Custom - Git Url: https://github.com/cranberrygame/cordova-plugin-ad-admob.git - INSTALL - Save<br>
 <br>
 //If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.<br>
-adcolony<br>
-facebookads<br>
-flurryads<br>
-huntads<br>
-iad<br>
-inmobi<br>
-leadbolt<br>
-lifestreetmedia<br>
-millennialmedia<br>
-mobfox<br>
-mojiva<br>
-mopub<br>
-phunware<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-adcolony.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-facebookads.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-flurryads.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-huntads.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-iad.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-inmobi.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-leadbolt.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-lifestreetmedia.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-millennialmedia.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-mobfox.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-mojiva.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-mopub.git<br>
+https://github.com/cranberrygame/cordova-plugin-ad-admob-phunware.git
 ## Phonegap build service (config.xml) ##
 https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
 ```c
