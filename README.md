@@ -8,6 +8,34 @@ Show admob banner and full screen ad
 
 Requires admob account http://www.google.com/ads/admob/
 
+[Admob mediation networks]
+adcolony
+http://www.adcolony.com/
+facebookads
+https://developers.facebook.com/docs/audience-network
+flurryads
+http://www.flurry.com/
+huntmads
+http://huntmads.com/google
+iad
+http://advertising.apple.com/
+inmobi
+http://www.inmobi.com/
+leadbolt
+http://leadbolt.net/
+lifestreet
+http://www.lifestreet.com/
+millennialmedia
+http://www.millennialmedia.com/
+mobfox
+http://www.mobfox.com/google/
+mojiva
+http://welcome.mojiva.com/
+mopub
+http://www.mopub.com/
+phunware (tapit)
+http://www.phunware.com/advertising
+
 This is open source cordova plugin.
 
 You can see Plugins For Cordova in one page: http://cranberrygame.github.io?referrer=github
@@ -198,6 +226,10 @@ Cordova AdmobPhunware construct2 plugin<br>
 <img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation1.png"><br>
 <img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation2.png"><br>
 <img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation3.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation4.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation5.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation6.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation7.png"><br>
 <img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ios_submit_for_review_survey.png">
 
 # API #
