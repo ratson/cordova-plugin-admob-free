@@ -8,32 +8,32 @@ Show admob banner and full screen ad
 
 Requires admob account http://www.google.com/ads/admob/
 
-[Admob mediation networks]
-adcolony
-http://www.adcolony.com/
-facebookads
-https://developers.facebook.com/docs/audience-network
-flurryads
-http://www.flurry.com/
-huntmads
-http://huntmads.com/google
-iad
-http://advertising.apple.com/
-inmobi
-http://www.inmobi.com/
-leadbolt
-http://leadbolt.net/
-lifestreet
-http://www.lifestreet.com/
-millennialmedia
-http://www.millennialmedia.com/
-mobfox
-http://www.mobfox.com/google/
-mojiva
-http://welcome.mojiva.com/
-mopub
-http://www.mopub.com/
-phunware (tapit)
+[Admob mediation networks]<br>
+adcolony<br>
+http://www.adcolony.com/<br>
+facebookads<br>
+https://developers.facebook.com/docs/audience-network<br>
+flurryads<br>
+http://www.flurry.com/<br>
+huntmads<br>
+http://huntmads.com/google<br>
+iad<br>
+http://advertising.apple.com/<br>
+inmobi<br>
+http://www.inmobi.com/<br>
+leadbolt<br>
+http://leadbolt.net/<br>
+lifestreet<br>
+http://www.lifestreet.com/<br>
+millennialmedia<br>
+http://www.millennialmedia.com/<br>
+mobfox<br>
+http://www.mobfox.com/google/<br>
+mojiva<br>
+http://welcome.mojiva.com/<br>
+mopub<br>
+http://www.mopub.com/<br>
+phunware (tapit)<br>
 http://www.phunware.com/advertising
 
 This is open source cordova plugin.
@@ -85,24 +85,24 @@ To-Do:
 # Install plugin #
 
 ## Cordova cli ##
-https://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface - npm install -g cordova@4.1.2
+https://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface - npm install -g cordova@5.0.0
 ```c
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob
+cordova plugin add cordova-plugin-ad-admob
 
 //If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.adcolony
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.facebookads
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.flurryads
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.huntmads
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.iad
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.inmobi
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.leadbolt
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.lifestreetmedia
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.millennialmedia
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.mobfox
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.mojiva
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.mopub
-cordova plugin add com.cranberrygame.cordova.plugin.ad.admob.phunware
+cordova plugin add cordova-plugin-ad-admob-adcolony
+cordova plugin add cordova-plugin-ad-admob-facebookads
+cordova plugin add cordova-plugin-ad-admob-flurryads
+cordova plugin add cordova-plugin-ad-admob-huntmads
+cordova plugin add cordova-plugin-ad-admob-iad
+cordova plugin add cordova-plugin-ad-admob-inmobi
+cordova plugin add cordova-plugin-ad-admob-leadbolt
+cordova plugin add cordova-plugin-ad-admob-lifestreetmedia
+cordova plugin add cordova-plugin-ad-admob-millennialmedia
+cordova plugin add cordova-plugin-ad-admob-mobfox
+cordova plugin add cordova-plugin-ad-admob-mojiva
+cordova plugin add cordova-plugin-ad-admob-mopub
+cordova plugin add cordova-plugin-ad-admob-phunware
 ```
 
 ## Xdk ##
@@ -175,22 +175,22 @@ https://github.com/cranberrygame/cordova-plugin-ad-admob-phunware.git
 ## Phonegap build service (config.xml) ##
 https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
 ```c
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob" source="plugins.cordova.io" />
+<gap:plugin name="cordova-plugin-ad-admob" source="npm" />
 
 //If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.adcolony" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.facebookads" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.flurryads" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.huntmads" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.iad" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.inmobi" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.leadbolt" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.lifestreetmedia" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.millennialmedia" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.mobfox" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.mojiva" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.mopub" source="plugins.cordova.io" />
-<gap:plugin name="com.cranberrygame.cordova.plugin.ad.admob.phunware" source="plugins.cordova.io" />
+<gap:plugin name="cordova-plugin-ad-admob-adcolony" source="npm" />
+<gap:plugin name="cordova-plugin-ad-admob-facebookads" source="npm" />
+<gap:plugin name="cordova-plugin-ad-admob-flurryads" source="npm" />
+<gap:plugin name="cordova-plugin-ad-admob-huntmads" source="npm" />
+<gap:plugin name="cordova-plugin-ad-admob-iad" source="npm" />
+<gap:plugin name="cordova-plugin-ad-admob-inmobi" source="npm" />
+<gap:plugin name="cordova-plugin-ad-admob-leadbolt" source="npm" />
+<gap:plugin name="cordova-plugin-ad-admob-lifestreetmedia" source="npm" />
+<gap:plugin name="cordova-plugin-ad-admob-millennialmedia" source="npm" />
+<gap:plugin name="cordova-plugin-ad-admob-mobfox" source="npm" />
+<gap:plugin name="cordova-plugin-ad-admob-mojiva" source="npm" />
+<gap:plugin name="cordova-plugin-ad-admob-mopub" source="npm" />
+<gap:plugin name="cordova-plugin-ad-admob-phunware" source="npm" />
 ```
 
 ## Construct2 ##
@@ -215,22 +215,22 @@ Cordova AdmobPhunware construct2 plugin<br>
 # Server setting #
 ```c
 ```
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit1.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit2.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit3.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit4.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit5.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit6.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit7.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ad_unit8.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation1.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation2.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation3.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation4.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation5.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation6.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/admob_mediation7.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/doc/ios_submit_for_review_survey.png">
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit1.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit2.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit3.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit4.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit5.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit6.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit7.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit8.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation1.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation2.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation3.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation4.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation5.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation6.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation7.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ios_submit_for_review_survey.png">
 
 # API #
 ```javascript

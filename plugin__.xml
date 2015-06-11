@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="cordova-plugin-ad-admob"
-    version="1.0.86">
+    id="com.cranberrygame.cordova.plugin.ad.admob"
+    version="1.0.75">
 	
     <name>Cordova Admob plugin</name>
     <description>Show admob banner and full screen ad</description>
@@ -32,7 +32,7 @@
         <source-file src="src/android/AdmobSplit.java" target-dir="src/com/cranberrygame/cordova/plugin/ad/admob" />
 		
 		<!-- dependency -->
-		<dependency id="cordova-plugin-ad-admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />
+		<dependency id="com.cranberrygame.cordova.plugin.ad.admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />
     </platform>
 
 	<!-- ios -->
@@ -52,7 +52,7 @@
 		<source-file src="src/ios/AdmobSplit.m" />
 
 		<!-- dependency -->
-		<dependency id="cordova-plugin-ad-admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />
+		<dependency id="com.cranberrygame.cordova.plugin.ad.admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />
 	</platform>
 	
     <!-- wp8 -->
@@ -69,6 +69,6 @@
         <source-file src="src/wp8/AdmobSplit.cs" />
 
 		<!-- dependency -->
-		<dependency id="cordova-plugin-ad-admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />
+		<dependency id="com.cranberrygame.cordova.plugin.ad.admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />
     </platform>
 </plugin>
