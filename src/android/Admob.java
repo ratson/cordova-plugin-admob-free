@@ -63,9 +63,7 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 	protected String TEST_BANNER_AD_UNIT = "ca-app-pub-4906074177432504/6997786077";
 	protected String TEST_FULL_SCREEN_AD_UNIT = "ca-app-pub-4906074177432504/8474519270";	
 	
-    //public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-	//	super.initialize(cordova, webView);
-    //}
+    @Override
 	public void pluginInitialize() {
 		super.pluginInitialize();
 		//
