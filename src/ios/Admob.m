@@ -20,6 +20,11 @@
 static NSString *TEST_BANNER_AD_UNIT = @"ca-app-pub-4906074177432504/4286495279";
 static NSString *TEST_FULL_SCREEN_AD_UNIT = @"ca-app-pub-4906074177432504/5763228472";
 	
+- (void) pluginInitialize {
+    [super pluginInitialize];    
+    //
+}
+	
 - (void) setLicenseKey: (CDVInvokedUrlCommand*)command {
     NSString *email = [command.arguments objectAtIndex: 0];
     NSString *licenseKey = [command.arguments objectAtIndex: 1];

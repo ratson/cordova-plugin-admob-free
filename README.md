@@ -108,48 +108,48 @@ cordova plugin add cordova-plugin-ad-admob-phunware
 ## Xdk ##
 https://software.intel.com/en-us/intel-xdk - Download XDK - XDK PORJECTS - [specific project] - CORDOVA 3.X HYBRID MOBILE APP SETTINGS - PLUGINS - Third Party Plugins - Add a Third Party Plugin - Get Plugin from the Web -
 ```c
-Name: admob
+Name: cordova-plugin-ad-admob
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob
 [v] Plugin is located in the Apache Cordova Plugins Registry
 
 //If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.
-Name: admob-adcolony
+Name: cordova-plugin-ad-admob-adcolony
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.adcolony
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-facebookads
+Name: cordova-plugin-ad-admob-facebookads
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.facebookads
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-flurryads
+Name: cordova-plugin-ad-admob-flurryads
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.flurryads
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-huntmads
+Name: cordova-plugin-ad-admob-huntmads
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.huntmads
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-iad
+Name: cordova-plugin-ad-admob-iad
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.iad
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-inmobi
+Name: cordova-plugin-ad-admob-inmobi
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.inmobi
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-leadbolt
+Name: cordova-plugin-ad-admob-leadbolt
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.leadbolt
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-lifestreetmedia
+Name: cordova-plugin-ad-admob-lifestreetmedia
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.lifestreetmedia
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-millennialmedia
+Name: cordova-plugin-ad-admob-millennialmedia
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.millennialmedia
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-mobfox
+Name: cordova-plugin-ad-admob-mobfox
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.mobfox
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-mojiva
+Name: cordova-plugin-ad-admob-mojiva
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.mojiva
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-mopub
+Name: cordova-plugin-ad-admob-mopub
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.mopub
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: admob-phunware
+Name: cordova-plugin-ad-admob-phunware
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.phunware
 [v] Plugin is located in the Apache Cordova Plugins Registry
 ```
