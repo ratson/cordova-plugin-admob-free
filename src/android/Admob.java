@@ -297,9 +297,11 @@ public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
 		this.licenseKey = licenseKey;
 		
 		//
-		String str1 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
-		String str2 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
-		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2))) {
+		String str1 = Util.md5("cordova-plugin-: " + email);
+		String str2 = Util.md5("cordova-plugin-ad-admob: " + email);
+		String str3 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
+		String str4 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
+		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2) || licenseKey.equalsIgnoreCase(str3) || licenseKey.equalsIgnoreCase(str4))) {
 			this.validLicenseKey = true;
 			//
 			String[] excludedLicenseKeys = {"xxx"};

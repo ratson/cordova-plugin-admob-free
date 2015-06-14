@@ -4,7 +4,7 @@ Cordova AdMob plugin
 # Overview #
 Show admob banner and full screen ad
 
-[android, ios, wp8] [cordova cli] [xdk]
+[android, ios, wp8] [cordova cli] [xdk] [cocoon]
 
 Requires admob account http://www.google.com/ads/admob/
 
@@ -215,6 +215,7 @@ Cordova AdmobPhunware construct2 plugin<br>
 # Server setting #
 ```c
 ```
+## bannerAdUnit, fullScreenAdUnit ##
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit1.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit2.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit3.png"><br>
@@ -223,15 +224,22 @@ Cordova AdmobPhunware construct2 plugin<br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit6.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit7.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ad_unit8.png"><br>
+
+## admob mediation ##
+The step to use admob mediation networks is following:<br>
+1)Just install additional ad network plugin.<br>
+2)Join mediation networks. (See Overview section)<br>
+3)Set the mediation setting in admob console.<br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation1.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation2.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation3.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation4.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation5.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation6.png"><br>
-<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation7.png"><br>
-<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ios_submit_for_review_survey.png">
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/admob_mediation7.png">
 
+## ios submit for review survey ##
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-ad-admob/master/doc/ios_submit_for_review_survey.png">
 # API #
 ```javascript
 var bannerAdUnit = "REPLACE_THIS_WITH_YOUR_BANNER_AD_UNIT";
