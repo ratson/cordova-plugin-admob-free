@@ -347,9 +347,9 @@ alert(window.admob.isShowingFullScreenAd());//boolean: true or false
 ```
 # Examples #
 <a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/basic/index.html">example/basic/index.html</a><br>
-<a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/advanced/index.html">example/advanced/index.html</a>
-<a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/basic_wp8/index.html">example/basic/index.html</a><br>
-<a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/advanced_wp8/index.html">example/advanced/index.html</a>
+<a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/advanced/index.html">example/advanced/index.html</a><br>
+<a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/basic_wp8/index.html">example/basic_wp8/index.html</a><br>
+<a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/advanced_wp8/index.html">example/advanced_wp8/index.html</a>
 
 # Test #
 
