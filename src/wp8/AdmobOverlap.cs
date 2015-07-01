@@ -5,49 +5,55 @@
 using System;
 using System.Windows;
 using System.Runtime.Serialization;
+using WPCordovaClassLib;
 using WPCordovaClassLib.Cordova;
 using WPCordovaClassLib.Cordova.Commands;
 using WPCordovaClassLib.Cordova.JSON;
+using System.Windows.Controls;
+using Microsoft.Phone.Controls;
 using System.Diagnostics; //Debug.WriteLine
 //
 using GoogleAds;
-using System.Windows.Controls;
-using Microsoft.Phone.Controls;
 
-namespace Cordova.Extension.Commands {
-    public class AdmobOverlap : BaseCommand {
-		protected Plugin plugin;	
+namespace Test {
+
+    public class AdmobOverlap : PluginDelegate
+    {
+		Plugin plugin;	
 		//
-		private string bannerAdUnit;
-		private string fullScreenAdUnit;
-		private bool isOverlap;
-		private bool isTest;
+        protected string bannerAdUnit;
+        protected string fullScreenAdUnit;
+        protected bool isOverlap;
+        protected bool isTest;
 		//
-		private string previousBannerPosition;
-		private string previousBannerSize;
-		private int lastOrientation;
+        protected String bannerPreviousPosition;
+        protected String bannerPreviousSize;
+        protected int lastOrientation;
 		//
-		public bool bannerAdPreload;	
-		public bool fullScreenAdPreload;
+        protected bool bannerAdPreload;
+        protected bool fullScreenAdPreload;
 		//admob
-        private AdView bannerView;
-        private InterstitialAd interstitialView;
-			
-		public AdmobOverlap(Plugin plugin_) {
+        protected AdView bannerView;
+        protected InterstitialAd interstitialView;
+
+        public AdmobOverlap(Plugin plugin_)
+        {
 			plugin = plugin_;
 		}
 	
-        private void _setLicenseKey(string email, string licenseKey) {
+        public void _setLicenseKey(string email, string licenseKey) {
         }
-		
-        private void _setUp(string bannerAdUnit, string fullScreenAdUnit, bool isOverlap, bool isTest) {
+
+        public void _setUp(string bannerAdUnit, string fullScreenAdUnit, bool isOverlap, bool isTest)
+        {
 			this.bannerAdUnit = bannerAdUnit;
 			this.fullScreenAdUnit = fullScreenAdUnit;
 			this.isOverlap = isOverlap;
 			this.isTest = isTest;
         }
-		
-        private void _preloadBannerAd() {
+
+        public void _preloadBannerAd()
+        {
 			bannerAdPreload = true;	
 			
 			_hideBannerAd();
@@ -57,21 +63,26 @@ namespace Cordova.Extension.Commands {
 		
         private void loadBannerAd() {
 		    if (bannerView == null) {
-				if(size == null) {
-					size = "SMART_BANNER";
-				}			
+                if (bannerPreviousSize == null)
+                {
+                    //bannerPreviousSize = "SMART_BANNER";
+                    bannerPreviousSize = "BANNER";
+                }			
 				//
 				AdFormats format = AdFormats.Banner;
 				//https://developers.google.com/mobile-ads-sdk/docs/admob/wp/banner		
-				if (size.Equals("BANNER")) {
+                if (bannerPreviousSize.Equals("BANNER"))
+                {
 					format = AdFormats.Banner;//Banner (320x50, Phones and Tablets)
 				}
-				else if (size.Equals("SMART_BANNER")) {
+                else if (bannerPreviousSize.Equals("SMART_BANNER"))
+                {
 					format = AdFormats.SmartBanner;//Smart banner (Auto size, Phones and Tablets) //https://developers.google.com/mobile-ads-sdk/docs/admob/android/banner#smart
 				} 				
 				else {
 					format = AdFormats.SmartBanner;
 				}
+
 				//
 				bannerView = new AdView
 				{
@@ -80,10 +91,11 @@ namespace Cordova.Extension.Commands {
 					Format = format,
 					AdUnitID = this.bannerAdUnit
 				};
-				bannerView.ReceivedAd += OnBannerViewReceivedAd;
-				bannerView.FailedToReceiveAd += OnBannerViewFailedToReceiveAd;
-				bannerView.ShowingOverlay += OnBannerViewShowingOverlay;
-				bannerView.DismissingOverlay += OnBannerViewDismissingOverlay;				
+				bannerView.ReceivedAd += bannerView_ReceivedAd;
+				bannerView.FailedToReceiveAd += bannerView_FailedToReceiveAd;
+				bannerView.ShowingOverlay += bannerView_ShowingOverlay;
+				bannerView.LeavingApplication += bannerView_LeavingApplicationAd;
+				bannerView.DismissingOverlay += bannerView_DismissingOverlay;				
 			}
 	 
 			AdRequest adRequest = new AdRequest();
@@ -91,16 +103,17 @@ namespace Cordova.Extension.Commands {
 				adRequest.ForceTesting = true;
 			}					
 			bannerView.LoadAd(adRequest);
-        }		
-		
-        private void _showBannerAd(string position, string size) {
-			
-			if (bannerIsShowing() && position.Equals(this.previousBannerPosition) && size.Equals(this.previousBannerSize)) {				
+        }
+
+        public void _showBannerAd(string position, string size)
+        {
+            if (bannerIsShowingOverlap() && position.Equals(this.bannerPreviousPosition) && size.Equals(this.bannerPreviousSize))
+            {				
 				return;
 			}
-				
-			this.previousBannerPosition = position;
-			this.previousBannerSize = size;
+
+            this.bannerPreviousPosition = position;
+            this.bannerPreviousSize = size;
 			
 			if(bannerAdPreload) {
 				bannerAdPreload = false;
@@ -110,127 +123,196 @@ namespace Cordova.Extension.Commands {
 				
 				loadBannerAd();
 			}			
-			
-			if (isOverlap) {
-				PhoneApplicationFrame frame = Application.Current.RootVisual as PhoneApplicationFrame;
-				if (frame != null) {
-					PhoneApplicationPage page = frame.Content as PhoneApplicationPage;
-					if (page != null) {
-						Grid grid = page.FindName("LayoutRoot") as Grid;
-						if (grid != null) {
-							if (position.Equals("top-left")) {
-								bannerView.VerticalAlignment = VerticalAlignment.Top;
-								bannerView.HorizontalAlignment = HorizontalAlignment.Left;
-							}
-							else if (position.Equals("top-center"))	{
-								bannerView.VerticalAlignment = VerticalAlignment.Top;
-								bannerView.HorizontalAlignment = HorizontalAlignment.Center;
-							}
-							else if (position.Equals("top-right")) {
-								bannerView.VerticalAlignment = VerticalAlignment.Top;
-								bannerView.HorizontalAlignment = HorizontalAlignment.Right;
-							}
-							else if (position.Equals("left")) {
-								bannerView.VerticalAlignment = VerticalAlignment.Center;
-								bannerView.HorizontalAlignment = HorizontalAlignment.Left;
-							}
-							else if (position.Equals("center")) { 
-								bannerView.VerticalAlignment = VerticalAlignment.Center;
-								bannerView.HorizontalAlignment = HorizontalAlignment.Center;
-							}
-							else if (position.Equals("right")) {
-								bannerView.VerticalAlignment = VerticalAlignment.Center;
-								bannerView.HorizontalAlignment = HorizontalAlignment.Right;
-							}
-							else if (position.Equals("bottom-left")) {
-								bannerView.VerticalAlignment = VerticalAlignment.Bottom;
-								bannerView.HorizontalAlignment = HorizontalAlignment.Left;
-							}
-							else if (position.Equals("bottom-center")) {
-								bannerView.VerticalAlignment = VerticalAlignment.Bottom;
-								bannerView.HorizontalAlignment = HorizontalAlignment.Center;
-							}
-							else if (position.Equals("bottom-right")) {
-								bannerView.VerticalAlignment = VerticalAlignment.Bottom;
-								bannerView.HorizontalAlignment = HorizontalAlignment.Right;
-							}
-							else {
-								bannerView.VerticalAlignment = VerticalAlignment.Top;
-								bannerView.HorizontalAlignment = HorizontalAlignment.Center;
-							}
 
-							grid.Children.Add(bannerView);
-						}
-					}
-				}				
-			}
-			else {
-				
-			}
+            addBannerViewOverlap(position, size);
 			
 			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdShown");
 			pr.KeepCallback = true;
-			DispatchCommandResult(pr);
-			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+			plugin.DispatchCommandResult(pr);
+            //PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 			//pr.KeepCallback = true;
-			//DispatchCommandResult(pr);			
+            //plugin.DispatchCommandResult(pr);
         }
-      	
-		protected boolean bannerIsShowingOverlap() {
+
+        protected virtual bool bannerIsShowingOverlap()
+        {
 			bool bannerIsShowing = false;
-			//if banner is showing
-			if (bannerView != null)	{
-				PhoneApplicationFrame frame = Application.Current.RootVisual as PhoneApplicationFrame;
-				if (frame != null) {
-					PhoneApplicationPage page = frame.Content as PhoneApplicationPage;
-					if (page != null) {
-						Grid grid = page.FindName("LayoutRoot") as Grid;							
-						if (grid != null) {
-							if (grid.Children.Contains(bannerView))	{
-								bannerIsShowing = true;
-							}									
-						}
-					}
-				}
-			}
+
+            if (bannerView != null)	
+            {
+                PhoneApplicationFrame rootFrame = Application.Current.RootVisual as PhoneApplicationFrame;
+                PhoneApplicationPage rootPage = rootFrame.Content as PhoneApplicationPage;
+                Grid rootGrid = rootPage.FindName("LayoutRoot") as Grid;
+                //rootGrid.ShowGridLines = true;
+                CordovaView rootView = rootPage.FindName("CordovaView") as CordovaView;
+
+                if (rootGrid.Children.Contains(bannerView))
+                    bannerIsShowing = true;
+            }
 			
 			return bannerIsShowing;
 		}
-		
-        private void _reloadBannerAd() {
+
+        protected virtual void addBannerViewOverlap(String position, String size)
+        {
+/*
+//D:\share\cordova_test\testapp\platforms\wp8\MainPage.xaml
+<?xml version='1.0' encoding='utf-8'?>
+<phone:PhoneApplicationPage Background="Black" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeNormal}" Foreground="{StaticResource PhoneForegroundBrush}" Orientation="portrait" SupportedOrientations="portrait" d:DesignHeight="768" d:DesignWidth="480" mc:Ignorable="d" shell:SystemTray.IsVisible="True" x:Class="com.cranberrygame.adrotatortest.MainPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:my="clr-namespace:WPCordovaClassLib" xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Background="Transparent" HorizontalAlignment="Stretch" x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <my:CordovaView HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" x:Name="CordovaView" />
+    </Grid>
+</phone:PhoneApplicationPage>
+
+//D:\share\cordova_test\testapp\platforms\wp8\MainPage.xaml.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
+using Microsoft.Phone.Controls;
+using System.IO;
+using System.Windows.Media.Imaging;
+using System.Windows.Resources;
+
+namespace com.cranberrygame.adrotatortest
+{
+    public partial class MainPage : PhoneApplicationPage
+    {
+        // Constructor
+        public MainPage()
+        {
+            InitializeComponent();
+            this.CordovaView.Loaded += CordovaView_Loaded;
+        }
+
+        private void CordovaView_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.CordovaView.Loaded -= CordovaView_Loaded;
+        }
+    }
+}
+
+//D:\share\cordova_test\testapp\platforms\wp8\MainPage.xaml
+<?xml version='1.0' encoding='utf-8'?>
+<phone:PhoneApplicationPage Background="Black" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeNormal}" Foreground="{StaticResource PhoneForegroundBrush}" Orientation="portrait" SupportedOrientations="portrait" d:DesignHeight="768" d:DesignWidth="480" mc:Ignorable="d" shell:SystemTray.IsVisible="True" x:Class="com.cranberrygame.adrotatortest.MainPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:my="clr-namespace:WPCordovaClassLib" xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Background="Transparent" HorizontalAlignment="Stretch" x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <my:CordovaView HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" x:Name="CordovaView" />
+        <!-- cranberrygame start -->
+        <GoogleAds:AdView AdUnitID="YOUR_AD_UNIT_ID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="480" Height="80" Margin="-10,527,-14,0" />
+        <!-- cranberrygame end -->
+    </Grid>
+</phone:PhoneApplicationPage>
+*/
+
+            if (position.Equals("top-left"))
+            {
+                bannerView.VerticalAlignment = VerticalAlignment.Top;
+                bannerView.HorizontalAlignment = HorizontalAlignment.Left;
+            }
+            else if (position.Equals("top-center"))
+            {
+                bannerView.VerticalAlignment = VerticalAlignment.Top;
+                bannerView.HorizontalAlignment = HorizontalAlignment.Center;
+            }
+            else if (position.Equals("top-right"))
+            {
+                bannerView.VerticalAlignment = VerticalAlignment.Top;
+                bannerView.HorizontalAlignment = HorizontalAlignment.Right;
+            }
+            else if (position.Equals("left"))
+            {
+                bannerView.VerticalAlignment = VerticalAlignment.Center;
+                bannerView.HorizontalAlignment = HorizontalAlignment.Left;
+            }
+            else if (position.Equals("center"))
+            {
+                bannerView.VerticalAlignment = VerticalAlignment.Center;
+                bannerView.HorizontalAlignment = HorizontalAlignment.Center;
+            }
+            else if (position.Equals("right"))
+            {
+                bannerView.VerticalAlignment = VerticalAlignment.Center;
+                bannerView.HorizontalAlignment = HorizontalAlignment.Right;
+            }
+            else if (position.Equals("bottom-left"))
+            {
+                bannerView.VerticalAlignment = VerticalAlignment.Bottom;
+                bannerView.HorizontalAlignment = HorizontalAlignment.Left;
+            }
+            else if (position.Equals("bottom-center"))
+            {
+                bannerView.VerticalAlignment = VerticalAlignment.Bottom;
+                bannerView.HorizontalAlignment = HorizontalAlignment.Center;
+            }
+            else if (position.Equals("bottom-right"))
+            {
+                bannerView.VerticalAlignment = VerticalAlignment.Bottom;
+                bannerView.HorizontalAlignment = HorizontalAlignment.Right;
+            }
+            else
+            {
+                bannerView.VerticalAlignment = VerticalAlignment.Top;
+                bannerView.HorizontalAlignment = HorizontalAlignment.Center;
+            }
+
+            PhoneApplicationFrame rootFrame = Application.Current.RootVisual as PhoneApplicationFrame;
+            PhoneApplicationPage rootPage = rootFrame.Content as PhoneApplicationPage;
+            Grid rootGrid = rootPage.FindName("LayoutRoot") as Grid;
+			//rootGrid.ShowGridLines = true;
+            CordovaView rootView = rootPage.FindName("CordovaView") as CordovaView;
+			
+            rootGrid.Children.Add(bannerView);
+        }
+
+        public void _reloadBannerAd()
+        {
 			loadBannerAd();
         }
-		
-        private void _hideBannerAd() {
+
+        public void _hideBannerAd()        
+        {
             removeBannerViewOverlap();
 			
 			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdHidden");
 			pr.KeepCallback = true;
-			DispatchCommandResult(pr);
+            plugin.DispatchCommandResult(pr);
 			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 			//pr.KeepCallback = true;
-			//DispatchCommandResult(pr);			
+            //plugin.DispatchCommandResult(pr);			
         }
- 	
-        private void removeBannerViewOverlap() {
+
+        protected virtual void removeBannerViewOverlap()
+        {
             if (bannerView == null)
-				return
-			
-			PhoneApplicationFrame frame = Application.Current.RootVisual as PhoneApplicationFrame;
-			if (frame != null) {
-				PhoneApplicationPage page = frame.Content as PhoneApplicationPage;
-				if (page != null) {
-					Grid grid = page.FindName("LayoutRoot") as Grid;
-					if (grid != null) {
-						if (grid.Children.Contains(bannerView))	{
-							grid.Children.Remove(bannerView);
-						}
-					}
-				}
-			}				
+                return;
+
+            PhoneApplicationFrame rootFrame = Application.Current.RootVisual as PhoneApplicationFrame;
+            PhoneApplicationPage rootPage = rootFrame.Content as PhoneApplicationPage;
+            Grid rootGrid = rootPage.FindName("LayoutRoot") as Grid;
+            //rootGrid.ShowGridLines = true;
+            CordovaView rootView = rootPage.FindName("CordovaView") as CordovaView;
+
+            if (rootGrid.Children.Contains(bannerView))
+            {
+                rootGrid.Children.Remove(bannerView);
+            }
         }
-		
-        private void _preloadFullScreenAd() {
+
+        public void _preloadFullScreenAd()
+        {
 			fullScreenAdPreload = true;			
 						
 			loadFullScreenAd();
@@ -242,10 +324,10 @@ namespace Cordova.Extension.Commands {
                 //interstitialView = new InterstitialAd("ca-app-pub-4906074177432504/5150650074");//o cf) android
                 interstitialView = new InterstitialAd(this.fullScreenAdUnit);
 				//http://forums.xamarin.com/discussion/849/binding-library-for-inneractive-sdk
-                interstitialView.ReceivedAd += OnInterstitialViewReceivedAd;
-                interstitialView.FailedToReceiveAd += OnInterstitialViewFailedToReceiveAd;
-                interstitialView.ShowingOverlay += OnInterstitialViewShowingOverlay;
-				interstitialView.DismissingOverlay += OnInterstitialViewDismissingOverlay;
+                interstitialView.ReceivedAd += interstitialView_ReceivedAd;
+                interstitialView.FailedToReceiveAd += interstitialView_FailedToReceiveAd;
+                interstitialView.ShowingOverlay += interstitialView_ShowingOverlay;
+				interstitialView.DismissingOverlay += interstitialView_DismissingOverlay;
             }
 						
 			AdRequest adRequest = new AdRequest();
@@ -254,8 +336,9 @@ namespace Cordova.Extension.Commands {
 			}				
 			interstitialView.LoadAd(adRequest);
 		}
-		
-        private void _showFullScreenAd() {
+
+        public void _showFullScreenAd()
+        {
 			if (fullScreenAdPreload) {
 				fullScreenAdPreload = false;
 
@@ -271,96 +354,93 @@ namespace Cordova.Extension.Commands {
 			}
         }
 		
-		//bannerView.ReceivedAd		
-        private void OnBannerViewReceivedAd(object sender, AdEventArgs e) {
-            Debug.WriteLine("OnBannerViewReceivedAd");
+        private void bannerView_ReceivedAd(object sender, AdEventArgs e) {
+            Debug.WriteLine("BannerView_ReceivedAd");
 
             PluginResult pr;
 			if (bannerAdPreload) {
 				pr = new PluginResult(PluginResult.Status.OK, "onBannerAdPreloaded");
 				pr.KeepCallback = true;
-				DispatchCommandResult(pr);
+                plugin.DispatchCommandResult(pr);
 				//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 				//pr.KeepCallback = true;
-				//DispatchCommandResult(pr);
+                //plugin.DispatchCommandResult(pr);
 			}
 			
 			pr = new PluginResult(PluginResult.Status.OK, "onBannerAdLoaded");
 			pr.KeepCallback = true;
-			DispatchCommandResult(pr);
+            plugin.DispatchCommandResult(pr);
 			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 			//pr.KeepCallback = true;
-			//DispatchCommandResult(pr);
+            //plugin.DispatchCommandResult(pr);
         }
 		
-		//bannerView.FailedToReceiveAd
-        private void OnBannerViewFailedToReceiveAd(object sender, AdErrorEventArgs errorCode) {
-            Debug.WriteLine("OnBannerViewFailedToReceiveAd " + errorCode.ErrorCode);
+        private void bannerView_FailedToReceiveAd(object sender, AdErrorEventArgs errorCode) {
+            Debug.WriteLine("BannerView_FailedToReceiveAd " + errorCode.ErrorCode);
         }
 		
-		//bannerView.ShowingOverlay
-        private void OnBannerViewShowingOverlay(object sender, AdEventArgs e) {
-            Debug.WriteLine("OnBannerViewShowingOverlay");//click and ad opened //onBannerAdShown x
+        private void bannerView_ShowingOverlay(object sender, AdEventArgs e) {
+            Debug.WriteLine("BannerView_ShowingOverlay");//click and ad opened //onBannerAdShown x
         }
 		
-		//bannerView.DismissingOverlay
-        private void OnBannerViewDismissingOverlay(object sender, AdEventArgs e) {
-            Debug.WriteLine("OnBannerViewDismissingOverlay");//onBannerAdHidden x
+		private void bannerView_LeavingApplicationAd(object sender, AdEventArgs args)
+		{
+			Debug.WriteLine("bannerView_LeavingApplicationAd");
+		}
+		
+        private void bannerView_DismissingOverlay(object sender, AdEventArgs e) {
+            Debug.WriteLine("BannerView_DismissingOverlay");//onBannerAdHidden x
         }		
 		
-		//interstitialView.ReceivedAd
-        private void OnInterstitialViewReceivedAd(object sender, AdEventArgs e) {
-            Debug.WriteLine("OnInterstitialViewReceivedAd");
+        private void interstitialView_ReceivedAd(object sender, AdEventArgs e) {
+            Debug.WriteLine("interstitialView_ReceivedAd");
 
             PluginResult pr;
 			if(fullScreenAdPreload) {
 				pr = new PluginResult(PluginResult.Status.OK, "onFullScreenAdPreloaded");
 				pr.KeepCallback = true;
-				DispatchCommandResult(pr);
+                plugin.DispatchCommandResult(pr);
 				//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 				//pr.KeepCallback = true;
-				//DispatchCommandResult(pr);
+				//plugin.DispatchCommandResult(pr);
 			}
 			
 			pr = new PluginResult(PluginResult.Status.OK, "onFullScreenAdLoaded");
 			pr.KeepCallback = true;
-			DispatchCommandResult(pr);
+			plugin.DispatchCommandResult(pr);
 			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 			//pr.KeepCallback = true;
-			//DispatchCommandResult(pr);
+			//plugin.DispatchCommandResult(pr);
 				
 			if(!fullScreenAdPreload) {
 				interstitialView.ShowAd();
 			}
         }
 		
-		//interstitialView.FailedToReceiveAd
-        private void OnInterstitialViewFailedToReceiveAd(object sender, AdErrorEventArgs errorCode) {
-            Debug.WriteLine("OnInterstitialViewFailedToReceiveAd " + errorCode.ErrorCode);
+        private void interstitialView_FailedToReceiveAd(object sender, AdErrorEventArgs errorCode) {
+            Debug.WriteLine("interstitialView_FailedToReceiveAd " + errorCode.ErrorCode);
         }
 		
-        //interstitialView.ShowingOverlay
-        private void OnInterstitialViewShowingOverlay(object sender, AdEventArgs e) {
+        private void interstitialView_ShowingOverlay(object sender, AdEventArgs e) {
             Debug.WriteLine("OnInterstitialViewPresentScreen");
 			
 			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onFullScreenAdShown");
 			pr.KeepCallback = true;
-			DispatchCommandResult(pr);
+            plugin.DispatchCommandResult(pr);
 			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 			//pr.KeepCallback = true;
-			//DispatchCommandResult(pr);			
+            //plugin.DispatchCommandResult(pr);			
         }
 		
-        //interstitialView.DismissingOverlay
-        private void OnInterstitialViewDismissingOverlay(object sender, AdEventArgs e) {
-            Debug.WriteLine("OnInterstitialViewDismissScreen");	
+        private void interstitialView_DismissingOverlay(object sender, AdEventArgs e) {
+            Debug.WriteLine("interstitialView_DismissingOverlay");	
 			
 			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onFullScreenAdHidden");
 			pr.KeepCallback = true;
-			DispatchCommandResult(pr);
+            plugin.DispatchCommandResult(pr);
 			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 			//pr.KeepCallback = true;
-			//DispatchCommandResult(pr);			
+            //plugin.DispatchCommandResult(pr);			
         }
 	}
 }

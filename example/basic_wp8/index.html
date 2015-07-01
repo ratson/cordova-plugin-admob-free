@@ -25,9 +25,25 @@ else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad
 	bannerAdUnit = "ca-app-pub-4906074177432504/4602502071";
 	fullScreenAdUnit = "ca-app-pub-4906074177432504/7555968477";
 }
+//wp8
+else if( navigator.userAgent.match(/Windows Phone/i) ) {
+	bannerAdUnit = "ca-app-pub-4906074177432504/4462901274";
+	fullScreenAdUnit = "ca-app-pub-4906074177432504/5939634477";
+}
 */
 
 document.addEventListener("deviceready", function(){
+
+		if (typeof window["admob"] != 'undefined') {
+			setUpPlugin();
+		}
+		//wp8
+		else {
+			setTimeout(setUpPlugin,600);				
+		}
+}, false);
+
+function setUpPlugin() {
 
 	window.admob.setUp(bannerAdUnit, fullScreenAdUnit, isOverlap, isTest);
 
@@ -57,7 +73,7 @@ document.addEventListener("deviceready", function(){
 	window.admob.onFullScreenAdHidden = function() {
 		alert('onFullScreenAdHidden');
 	};
-}, false);
+}
 	
 /*
 position: 'top-left', 'top-center', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-center', 'bottom-right'
@@ -71,29 +87,20 @@ size: 	'BANNER' (320x50, Phones and Tablets)
 */
 </script>
 
-position: <select id="position">
-			<option value='top-left'>top-left</option>
-			<option value='top-center' selected>top-center</option>
-			<option value='top-right'>top-right</option>
-			<option value='left'>left</option>
-			<option value='center'>center</option>
-			<option value='right'>right</option>
-			<option value='bottom-left'>bottom-left</option>
-			<option value='bottom-center'>bottom-center</option>
-			<option value='bottom-right'>bottom-right</option>
-		</select><br>		
-size: <select id="size">
-			<option value='BANNER'>BANNER (320x50, Phones and Tablets)</option>
-			<option value='LARGE_BANNER'>LARGE_BANNER (320x100, Phones and Tablets)</option>
-			<option value='MEDIUM_RECTANGLE'>MEDIUM_RECTANGLE (300x250, Phones and Tablets)</option>
-			<option value='FULL_BANNER'>FULL_BANNER (468x60, Tablets)</option>
-			<option value='LEADERBOARD'>LEADERBOARD (728x90, Tablets)</option>
-			<option value='SKYSCRAPER'>SKYSCRAPER (120x600, Tablets, ipad only)</option>
-			<option value='SMART_BANNER' selected>SMART_BANNER (Auto size, Phones and Tablets, if other size not supported)</option>
-		</select><br>
-<button onclick="window.admob.preloadBannerAd();">preloadBannerAd</button><br>		
-<button onclick="window.admob.showBannerAd(document.getElementById('position').value, document.getElementById('size').value);">showBannerAd</button><br>
-<button onclick="window.admob.reloadBannerAd();">reloadBannerAd</button><br>
-<button onclick="window.admob.hideBannerAd();">hideBannerAd</button>
+<p><button onclick="window.admob.preloadBannerAd();">preloadBannerAd</button></p>
+<p><button onclick="window.admob.showBannerAd('top-center', 'BANNER');">showBannerAd top-center</button></p>
+<p><button onclick="window.admob.showBannerAd('bottom-center', 'BANNER');">showBannerAd bottom-center</button></p>
+<p><button onclick="window.admob.reloadBannerAd();">reloadBannerAd</button></p>
+<p><button onclick="window.admob.hideBannerAd();">hideBannerAd</button></p>
+<br>
+<p><button onclick="window.admob.preloadFullScreenAd();">preloadFullScreenAd</button></p>
+<p><button onclick="window.admob.showFullScreenAd();">showFullScreenAd</button></p>
+<br>
+<p><button onclick="alert(window.admob.loadedBannerAd());">loadedBannerAd</button></p>
+<p><button onclick="alert(window.admob.loadedFullScreenAd());">loadedFullScreenAd</button></p>
+<br>
+<p><button onclick="alert(window.admob.isShowingBannerAd());">isShowingBannerAd</button></p>
+<p><button onclick="alert(window.admob.isShowingFullScreenAd());">isShowingFullScreenAd</button></p>
+
 </body>
 </html>

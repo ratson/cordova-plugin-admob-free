@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-ad-admob"
-    version="1.0.90">
+    version="1.0.91">
 	
     <name>Cordova Admob plugin</name>
     <description>Show admob banner and full screen ad</description>
@@ -67,7 +67,8 @@
         <source-file src="src/wp8/Admob.cs" />
         <source-file src="src/wp8/AdmobOverlap.cs" />
         <source-file src="src/wp8/AdmobSplit.cs" />
-
+		<framework src="src/wp8/Silverlight.Md5.dll" custom="true" />		
+		
 		<!-- dependency -->
 		<dependency id="cordova-plugin-ad-admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />
     </platform>

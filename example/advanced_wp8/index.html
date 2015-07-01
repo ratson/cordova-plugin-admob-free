@@ -25,9 +25,25 @@ else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad
 	bannerAdUnit = "ca-app-pub-4906074177432504/4602502071";
 	fullScreenAdUnit = "ca-app-pub-4906074177432504/7555968477";
 }
+//wp8
+else if( navigator.userAgent.match(/Windows Phone/i) ) {
+	bannerAdUnit = "ca-app-pub-4906074177432504/4462901274";
+	fullScreenAdUnit = "ca-app-pub-4906074177432504/5939634477";
+}
 */
 
 document.addEventListener("deviceready", function(){
+
+		if (typeof window["admob"] != 'undefined') {
+			setUpPlugin();
+		}
+		//wp8
+		else {
+			setTimeout(setUpPlugin,600);				
+		}
+}, false);
+
+function setUpPlugin() {
 
 	window.admob.setUp(bannerAdUnit, fullScreenAdUnit, isOverlap, isTest);
 
@@ -57,7 +73,7 @@ document.addEventListener("deviceready", function(){
 	window.admob.onFullScreenAdHidden = function() {
 		alert('onFullScreenAdHidden');
 	};
-}, false);
+}
 	
 /*
 position: 'top-left', 'top-center', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-center', 'bottom-right'
@@ -83,13 +99,13 @@ position: <select id="position">
 			<option value='bottom-right'>bottom-right</option>
 		</select><br>		
 size: <select id="size">
-			<option value='BANNER'>BANNER (320x50, Phones and Tablets)</option>
+			<option value='BANNER' selected>BANNER (320x50, Phones and Tablets)</option>
 			<option value='LARGE_BANNER'>LARGE_BANNER (320x100, Phones and Tablets)</option>
 			<option value='MEDIUM_RECTANGLE'>MEDIUM_RECTANGLE (300x250, Phones and Tablets)</option>
 			<option value='FULL_BANNER'>FULL_BANNER (468x60, Tablets)</option>
 			<option value='LEADERBOARD'>LEADERBOARD (728x90, Tablets)</option>
 			<option value='SKYSCRAPER'>SKYSCRAPER (120x600, Tablets, ipad only)</option>
-			<option value='SMART_BANNER' selected>SMART_BANNER (Auto size, Phones and Tablets, if other size not supported)</option>
+			<option value='SMART_BANNER'>SMART_BANNER (Auto size, Phones and Tablets, if other size not supported)</option>
 		</select><br>
 <button onclick="window.admob.preloadBannerAd();">preloadBannerAd</button><br>		
 <button onclick="window.admob.showBannerAd(document.getElementById('position').value, document.getElementById('size').value);">showBannerAd</button><br>

@@ -11,31 +11,26 @@ var fullScreenAdUnit = "ca-app-pub-4906074177432504/1649035673";
 var isOverlap = true; //true: overlap, false: split
 var isTest = true;
 /*
- var bannerAdUnit;
- var fullScreenAdUnit;
- var isOverlap = true; //true: overlap, false: split
- var isTest = true;
- //android
- if (navigator.userAgent.match(/Android/i)) {
+var bannerAdUnit;
+var fullScreenAdUnit;
+var isOverlap = true; //true: overlap, false: split
+var isTest = true;
+//android
+if (navigator.userAgent.match(/Android/i)) {
 	bannerAdUnit = "ca-app-pub-4906074177432504/9172302471";
 	fullScreenAdUnit = "ca-app-pub-4906074177432504/1649035673";
- }
- //ios
- else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+}
+//ios
+else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
 	bannerAdUnit = "ca-app-pub-4906074177432504/4602502071";
 	fullScreenAdUnit = "ca-app-pub-4906074177432504/7555968477";
- }
- //wp8
- else if( navigator.userAgent.match(/Windows Phone/i) ) {
-	bannerAdUnit = "ca-app-pub-4906074177432504/4462901274";
-	fullScreenAdUnit = "ca-app-pub-4906074177432504/5939634477";
- }
+}
 */
 
 document.addEventListener("deviceready", function(){
 
 	window.admob.setUp(bannerAdUnit, fullScreenAdUnit, isOverlap, isTest);
-		
+
 	//
 	window.admob.onBannerAdPreloaded = function() {
 		alert('onBannerAdPreloaded');

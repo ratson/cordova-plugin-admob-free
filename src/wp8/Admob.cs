@@ -10,22 +10,65 @@ using WPCordovaClassLib.Cordova.Commands;
 using WPCordovaClassLib.Cordova.JSON;
 using System.Diagnostics; //Debug.WriteLine
 //
+using JeffWilcox.Utilities.Silverlight;
+using System.Text;
 using GoogleAds;
 using System.Windows.Controls;
 using Microsoft.Phone.Controls;
 
+using Test;
+
+public interface Plugin
+{
+    /*
+     CordovaWebView getWebView();
+     CordovaInterface getCordova();
+     CallbackContext getCallbackContextKeepCallback();
+     */
+	void DispatchCommandResult(PluginResult pr);
+}
+
+public interface PluginDelegate
+{
+    void _setLicenseKey(String email, String licenseKey);
+    void _setUp(String bannerAdUnit, String fullScreenAdUnit, bool isOverlap, bool isTest);
+    void _preloadBannerAd();
+    void _showBannerAd(String position, String size);
+    void _reloadBannerAd();
+    void _hideBannerAd();
+    void _preloadFullScreenAd();
+    void _showFullScreenAd();
+}
+
 namespace Cordova.Extension.Commands {
-    public class Admob : BaseCommand {
-/*
+
+    public class Util
+    {
+		public static string md5(string input)
+		{
+            //MD5.CS is missing from Source Control for IronCow.WindowsPhone solution
+            //https://ironcow.codeplex.com/workitem/6841
+            //http://www.jeff.wilcox.name/2008/03/silverlight-2-md5/
+            return MD5CryptoServiceProvider.GetMd5String(input);
+		}
+        
+		public static void alert(string message) {
+            MessageBox.Show(message, "Alert", MessageBoxButton.OK);
+		}	
+	}
+
+    public class Admob : BaseCommand, Plugin
+    {
+        //
+        protected string CurrentCommandCallbackIdKeepCallback;
+        //
+        protected PluginDelegate pluginDelegate;
 		//
-		protected PluginDelegate pluginDelegate;
-		//
-		public String email;
-		public String licenseKey;
-		public boolean validLicenseKey;
-		protected String TEST_BANNER_AD_UNIT = "";
-		protected String TEST_FULL_SCREEN_AD_UNIT = "";
-*/
+        protected string email;
+        protected string licenseKey;
+        protected bool validLicenseKey;
+        protected string TEST_BANNER_AD_UNIT = "ca-app-pub-4906074177432504/5891944075";
+        protected string TEST_FULL_SCREEN_AD_UNIT = "ca-app-pub-4906074177432504/1322143678";
 	
 		public void setLicenseKey(string args) {
             string email = JsonHelper.Deserialize<string[]>(args)[0];
@@ -56,6 +99,17 @@ namespace Cordova.Extension.Commands {
             Debug.WriteLine("isOverlap: " + isOverlap);
             Debug.WriteLine("isTest: " + isTest);
 
+            CurrentCommandCallbackIdKeepCallback = CurrentCommandCallbackId;
+
+            if (isOverlap)
+            {
+                pluginDelegate = new AdmobOverlap(this);
+            }
+            else
+            {
+                pluginDelegate = new AdmobSplit(this);
+            }
+
             Deployment.Current.Dispatcher.BeginInvoke(() => {   
                 _setUp(bannerAdUnit, fullScreenAdUnit, isOverlap, isTest);
             });					
@@ -72,7 +126,7 @@ namespace Cordova.Extension.Commands {
 			string size=JsonHelper.Deserialize<string[]>(args)[1];
 			Debug.WriteLine(position);
 			Debug.WriteLine(size);
-			
+
             Deployment.Current.Dispatcher.BeginInvoke(() => {
                 _showBannerAd(position, size);
             });
@@ -97,47 +151,55 @@ namespace Cordova.Extension.Commands {
         }
 		
         public void showFullScreenAd(string args) {
-            Deployment.Current.Dispatcher.BeginInvoke(() => {
+           Deployment.Current.Dispatcher.BeginInvoke(() => {
                 _showFullScreenAd();
-            });		
+           });		
         }
 	
 		//cranberrygame start: AdmobPluginDelegate
 
-        private void _setLicenseKey(string email, string licenseKey) {
-			//pluginDelegate._setLicenseKey(email, licenseKey);			
+		public void _setLicenseKey(String email, String licenseKey) {
+			//pluginDelegate._setLicenseKey(email, licenseKey);
 			this.email = email;
 			this.licenseKey = licenseKey;
-
-/*
-		//
-		String str1 = Util.md5("cordova-plugin-: " + email);
-		String str2 = Util.md5("cordova-plugin-ad-admob: " + email);
-		String str3 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
-		String str4 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
-		if(licenseKey != null && (licenseKey.equalsIgnoreCase(str1) || licenseKey.equalsIgnoreCase(str2) || licenseKey.equalsIgnoreCase(str3) || licenseKey.equalsIgnoreCase(str4))) {
-			Log.d(LOG_TAG, String.format("%s", "valid licenseKey"));
-			this.validLicenseKey = true;
-		}
-		else {
-			Log.d(LOG_TAG, String.format("%s", "invalid licenseKey"));
-			this.validLicenseKey = false;
 			
-			//Util.alert(plugin.getCordova().getActivity(),"Cordova Admob: invalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova");			
+			//
+			String str1 = Util.md5("cordova-plugin-: " + email);
+			String str2 = Util.md5("cordova-plugin-ad-admob: " + email);
+			String str3 = Util.md5("com.cranberrygame.cordova.plugin.: " + email);
+			String str4 = Util.md5("com.cranberrygame.cordova.plugin.ad.admob: " + email);
+			if(licenseKey != null && (licenseKey.Equals(str1, StringComparison.CurrentCultureIgnoreCase) || licenseKey.Equals(str2, StringComparison.CurrentCultureIgnoreCase) || licenseKey.Equals(str3, StringComparison.CurrentCultureIgnoreCase) || licenseKey.Equals(str4, StringComparison.CurrentCultureIgnoreCase))) {
+				this.validLicenseKey = true;
+				//
+				String[] excludedLicenseKeys = {"xxx"};
+				for (int i = 0 ; i < excludedLicenseKeys.Length ; i++) {
+					if (excludedLicenseKeys[i].Equals(licenseKey)) {
+						this.validLicenseKey = false;
+						break;
+					}
+				}			
+				if (this.validLicenseKey)
+					Debug.WriteLine("valid licenseKey");
+				else
+					Debug.WriteLine("invalid licenseKey");
+			}
+			else {
+				Debug.WriteLine("invalid licenseKey");
+				this.validLicenseKey = false;			
+			}
+			//if (!this.validLicenseKey)
+			//	Util.alert("Cordova Admob: invalid email / license key. You can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova");			
 		}
-*/			
-        }
-		
+
         private void _setUp(string bannerAdUnit, string fullScreenAdUnit, bool isOverlap, bool isTest) {
-/*
+
 			if (!validLicenseKey) {
-				if (new Random().nextInt(100) <= 1) {//0~99					
+				if (new Random().Next(100) <= 1) {//0~99					
 					bannerAdUnit = TEST_BANNER_AD_UNIT;
 					fullScreenAdUnit = TEST_FULL_SCREEN_AD_UNIT;
 				}
 			}
-*/
-		
+
 			pluginDelegate._setUp(bannerAdUnit, fullScreenAdUnit, isOverlap, isTest);
         }
 		
@@ -168,7 +230,7 @@ namespace Cordova.Extension.Commands {
 		//cranberrygame end: AdmobPluginDelegate
     
 		//cranberrygame start: Plugin
-		
+/*		
 		public CallbackContext getCallbackContextKeepCallback() {
 			return callbackContextKeepCallback;
 		}
@@ -180,6 +242,11 @@ namespace Cordova.Extension.Commands {
 		public CordovaWebView getWebView() {
 			return webView;
 		}	
+*/
+        public void DispatchCommandResult(PluginResult pr)
+        {
+            base.DispatchCommandResult(pr, CurrentCommandCallbackIdKeepCallback);
+        }
 
 		//cranberrygame end: Plugin		
 	}

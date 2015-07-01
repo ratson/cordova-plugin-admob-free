@@ -73,11 +73,14 @@ You can see Plugins For Cordova in one page: http://cranberrygame.github.io?refe
 	Added other mediation plugins.
 1.0.72
 	Fixed Android cordova5 build error.
+1.0.91
+	Updated Admob SDK
+		Windows Phone 8 - 6.5.13	
+		Supports wp8 split mode
 	
 To-Do:
 
 	supports ios split mode
-	supports wp8 split mode
 	supports other position: 'top-left', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-right' on ios.
 	supports banner reposition when orientation changes on ios.
 	supports SMART_BANNER resize when orientation changes on ios.	
@@ -88,8 +91,9 @@ To-Do:
 https://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface - npm install -g cordova@5.0.0
 ```c
 cordova plugin add cordova-plugin-ad-admob
+(when build error, use github url: cordova plugin add cordova plugin add https://github.com/cranberrygame/cordova-plugin-ad-admob)
 
-//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.
+//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with. (but too many mediations will increase app size)
 cordova plugin add cordova-plugin-ad-admob-adcolony
 cordova plugin add cordova-plugin-ad-admob-facebookads
 cordova plugin add cordova-plugin-ad-admob-flurryads
@@ -108,48 +112,48 @@ cordova plugin add cordova-plugin-ad-admob-phunware
 ## Xdk ##
 https://software.intel.com/en-us/intel-xdk - Download XDK - XDK PORJECTS - [specific project] - CORDOVA 3.X HYBRID MOBILE APP SETTINGS - PLUGINS - Third Party Plugins - Add a Third Party Plugin - Get Plugin from the Web -
 ```c
-Name: cordova-plugin-ad-admob
+Name: admob
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob
 [v] Plugin is located in the Apache Cordova Plugins Registry
 
-//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.
-Name: cordova-plugin-ad-admob-adcolony
+//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with. (but too many mediations will increase app size)
+Name: admob-adcolony
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.adcolony
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: cordova-plugin-ad-admob-facebookads
+Name: admob-facebookads
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.facebookads
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: cordova-plugin-ad-admob-flurryads
+Name: admob-flurryads
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.flurryads
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: cordova-plugin-ad-admob-huntmads
+Name: admob-huntmads
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.huntmads
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: cordova-plugin-ad-admob-iad
+Name: admob-iad
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.iad
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: cordova-plugin-ad-admob-inmobi
+Name: admob-inmobi
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.inmobi
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: cordova-plugin-ad-admob-leadbolt
+Name: admob-leadbolt
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.leadbolt
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: cordova-plugin-ad-admob-lifestreetmedia
+Name: admob-lifestreetmedia
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.lifestreetmedia
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: cordova-plugin-ad-admob-millennialmedia
+Name: admob-millennialmedia
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.millennialmedia
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: cordova-plugin-ad-admob-mobfox
+Name: admob-mobfox
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.mobfox
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: cordova-plugin-ad-admob-mojiva
+Name: admob-mojiva
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.mojiva
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: cordova-plugin-ad-admob-mopub
+Name: admob-mopub
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.mopub
 [v] Plugin is located in the Apache Cordova Plugins Registry
-Name: cordova-plugin-ad-admob-phunware
+Name: admob-phunware
 Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.phunware
 [v] Plugin is located in the Apache Cordova Plugins Registry
 ```
@@ -157,7 +161,7 @@ Plugin ID: com.cranberrygame.cordova.plugin.ad.admob.phunware
 ## Cocoon ##
 https://cocoon.io - Create project - [specific project] - Setting - Plugins - Custom - Git Url: https://github.com/cranberrygame/cordova-plugin-ad-admob.git - INSTALL - Save<br>
 <br>
-//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.<br>
+//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with. (but too many mediations will increase app size)<br>
 https://github.com/cranberrygame/cordova-plugin-ad-admob-adcolony.git<br>
 https://github.com/cranberrygame/cordova-plugin-ad-admob-facebookads.git<br>
 https://github.com/cranberrygame/cordova-plugin-ad-admob-flurryads.git<br>
@@ -177,7 +181,7 @@ https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file
 ```c
 <gap:plugin name="cordova-plugin-ad-admob" source="npm" />
 
-//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.
+//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with. (but too many mediations will increase app size)
 <gap:plugin name="cordova-plugin-ad-admob-adcolony" source="npm" />
 <gap:plugin name="cordova-plugin-ad-admob-facebookads" source="npm" />
 <gap:plugin name="cordova-plugin-ad-admob-flurryads" source="npm" />
@@ -194,11 +198,12 @@ https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file
 ```
 
 ## Construct2 ##
-Download construct2 plugin: http://www.paywithapost.de/pay?id=4ef3f2be-26e8-4a04-b826-6680db13a8c8
+Download construct2 plugin<br>
+https://dl.dropboxusercontent.com/u/186681453/pluginsforcordova/index.html<br>
+How to install c2 native plugins in xdk, cocoon and cordova cli<br>
+https://plus.google.com/102658703990850475314/posts/XS5jjEApJYV
 <br>
-Now all the native plugins are installed automatically: https://plus.google.com/102658703990850475314/posts/XS5jjEApJYV<br>
-<br>
-//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with.<br>
+//If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with. (but too many mediations will increase app size)<br>
 Cordova AdmobAdColony construct2 plugin<br>
 Cordova AdmobFacebookAds construct2 plugin<br>
 Cordova AdmobFlurryAds construct2 plugin<br>
@@ -212,6 +217,7 @@ Cordova AdmobMobFox construct2 plugin<br>
 Cordova AdmobMojiva construct2 plugin<br>
 Cordova AdmobMoPub construct2 plugin<br>
 Cordova AdmobPhunware construct2 plugin<br>
+
 # Server setting #
 ```c
 ```
@@ -269,6 +275,17 @@ else if( navigator.userAgent.match(/Windows Phone/i) ) {
 */
 
 document.addEventListener("deviceready", function(){
+
+		if (typeof window["admob"] != 'undefined') {
+			setUpPlugin();
+		}
+		//wp8
+		else {
+			setTimeout(setUpPlugin,600);				
+		}
+}, false);
+
+function setUpPlugin() {
 	//if no license key, 2% ad traffic share for dev support.
 	//you can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova
 	//window.admob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
@@ -301,8 +318,8 @@ document.addEventListener("deviceready", function(){
 	window.admob.onFullScreenAdHidden = function() {
 		alert('onFullScreenAdHidden');
 	};
-}, false);
-
+}
+	
 window.admob.preloadBannerAd();//option, download ad previously for fast show
 /*
 position: 'top-left', 'top-center', 'top-right', 'left', 'center', 'right', 'bottom-left', 'bottom-center', 'bottom-right'
@@ -331,6 +348,8 @@ alert(window.admob.isShowingFullScreenAd());//boolean: true or false
 # Examples #
 <a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/basic/index.html">example/basic/index.html</a><br>
 <a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/advanced/index.html">example/advanced/index.html</a>
+<a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/basic_wp8/index.html">example/basic/index.html</a><br>
+<a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/master/example/advanced_wp8/index.html">example/advanced/index.html</a>
 
 # Test #
 

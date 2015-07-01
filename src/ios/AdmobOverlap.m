@@ -249,7 +249,7 @@
 	bannerView.setLayoutParams(params);
 	bannerViewLayout.addView(bannerView);
 */
-
+///*
 	CGRect bannerFrame = bannerView.frame;
 	if ([position isEqualToString:@"top-center"]) {		    
 		bannerFrame.origin.y = 0;
@@ -261,6 +261,19 @@
 	bannerView.frame = bannerFrame;
 	//https://developer.apple.com/library/ios/documentation/uikit/reference/UIView_Class/UIView/UIView.html#//apple_ref/occ/cl/UIView
 	[[self.plugin getWebView] addSubview:bannerView];
+//*/
+/*
+     CGFloat width = [self.plugin getWebView].bounds.size.width;
+     CGFloat height = [self.plugin getWebView].bounds.size.height;
+     if ([position isEqualToString:@"top-center"]) {
+        bannerView.frame = CGRectMake(0, 0, width, 50);
+     }
+     else {
+        bannerView.frame = CGRectMake(0, height - 50, width, 50);
+     }
+     //bannerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+     [[self.plugin getWebView] addSubview:bannerView];
+*/
 }
 
 - (void) _reloadBannerAd {
@@ -282,6 +295,7 @@
     if (bannerView == nil)
 		return;
 		
+	//[self.bannerView removeFromSuperview];		
 	//if banner is showing
 	UIView* webView = [bannerView superview];
 	if (webView != nil) {

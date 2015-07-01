@@ -52,7 +52,7 @@ interface PluginDelegate {
 }
 
 public class Admob extends CordovaPlugin implements PluginDelegate, Plugin {
-	private static final String LOG_TAG = "Admob";	
+	protected static final String LOG_TAG = "Admob";	
 	protected CallbackContext callbackContextKeepCallback;
 	//
 	protected PluginDelegate pluginDelegate;
