@@ -73,7 +73,7 @@ You can see Plugins For Cordova in one page: http://cranberrygame.github.io?refe
 	Added other mediation plugins.
 1.0.72
 	Fixed Android cordova5 build error.
-1.0.93
+1.0.94
 	Updated Admob SDK
 		Windows Phone 8 - 6.5.13	
 		Supports wp8 split mode
