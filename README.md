@@ -73,7 +73,7 @@ You can see Plugins For Cordova in one page: http://cranberrygame.github.io?refe
 	Added other mediation plugins.
 1.0.72
 	Fixed Android cordova5 build error.
-1.0.91
+1.0.92
 	Updated Admob SDK
 		Windows Phone 8 - 6.5.13	
 		Supports wp8 split mode
@@ -91,7 +91,7 @@ To-Do:
 https://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface - npm install -g cordova@5.0.0
 ```c
 cordova plugin add cordova-plugin-ad-admob
-(when build error, use github url: cordova plugin add cordova plugin add https://github.com/cranberrygame/cordova-plugin-ad-admob)
+(when build error, use github url: cordova plugin add https://github.com/cranberrygame/cordova-plugin-ad-admob)
 
 //If you want to mediate admob with other ad networks, then install the following additional ad networks you want to mediate with. (but too many mediations will increase app size)
 cordova plugin add cordova-plugin-ad-admob-adcolony
