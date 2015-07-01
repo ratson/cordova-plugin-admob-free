@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-ad-admob",
-  "version": "1.0.92",
+  "version": "1.0.93",
   "description": "Show admob banner and full screen ad",
   "cordova": {
     "id": "cordova-plugin-ad-admob",

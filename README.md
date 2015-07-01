@@ -73,7 +73,7 @@ You can see Plugins For Cordova in one page: http://cranberrygame.github.io?refe
 	Added other mediation plugins.
 1.0.72
 	Fixed Android cordova5 build error.
-1.0.92
+1.0.93
 	Updated Admob SDK
 		Windows Phone 8 - 6.5.13	
 		Supports wp8 split mode
@@ -275,50 +275,39 @@ else if( navigator.userAgent.match(/Windows Phone/i) ) {
 */
 
 document.addEventListener("deviceready", function(){
+    //if no license key, 2% ad traffic share for dev support.
+    //you can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova
+    //window.admob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
 
-		if (typeof window["admob"] != 'undefined') {
-			setUpPlugin();
-		}
-		//wp8
-		else {
-			setTimeout(setUpPlugin,600);				
-		}
+    window.admob.setUp(bannerAdUnit, fullScreenAdUnit, isOverlap, isTest);
+
+    //
+    window.admob.onBannerAdPreloaded = function() {
+        alert('onBannerAdPreloaded');
+    };
+    window.admob.onBannerAdLoaded = function() {
+        alert('onBannerAdLoaded');
+    };
+    window.admob.onBannerAdShown = function() {
+        alert('onBannerAdShown');
+    };
+    window.admob.onBannerAdHidden = function() {
+        alert('onBannerAdHidden');
+    };	
+    //
+    window.admob.onFullScreenAdPreloaded = function() {
+        alert('onFullScreenAdPreloaded');
+    };
+    window.admob.onFullScreenAdLoaded = function() {
+        alert('onFullScreenAdLoaded');
+    };
+    window.admob.onFullScreenAdShown = function() {
+        alert('onFullScreenAdShown');
+    };
+    window.admob.onFullScreenAdHidden = function() {
+        alert('onFullScreenAdHidden');
+    };
 }, false);
-
-function setUpPlugin() {
-	//if no license key, 2% ad traffic share for dev support.
-	//you can get free license key from https://play.google.com/store/apps/details?id=com.cranberrygame.pluginsforcordova
-	//window.admob.setLicenseKey("yourEmailId@yourEmaildDamin.com", "yourFreeLicenseKey");
-
-	window.admob.setUp(bannerAdUnit, fullScreenAdUnit, isOverlap, isTest);
-
-	//
-	window.admob.onBannerAdPreloaded = function() {
-		alert('onBannerAdPreloaded');
-	};
-	window.admob.onBannerAdLoaded = function() {
-		alert('onBannerAdLoaded');
-	};
-	window.admob.onBannerAdShown = function() {
-		alert('onBannerAdShown');
-	};
-	window.admob.onBannerAdHidden = function() {
-		alert('onBannerAdHidden');
-	};	
-	//
-	window.admob.onFullScreenAdPreloaded = function() {
-		alert('onFullScreenAdPreloaded');
-	};
-	window.admob.onFullScreenAdLoaded = function() {
-		alert('onFullScreenAdLoaded');
-	};
-	window.admob.onFullScreenAdShown = function() {
-		alert('onFullScreenAdShown');
-	};
-	window.admob.onFullScreenAdHidden = function() {
-		alert('onFullScreenAdHidden');
-	};
-}
 	
 window.admob.preloadBannerAd();//option, download ad previously for fast show
 /*
