@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-ad-admob"
-    version="1.0.94">
+    version="1.0.95">
 	
     <name>Cordova Admob plugin</name>
     <description>Show admob banner and full screen ad</description>
@@ -56,8 +56,7 @@
 	</platform>
 	
     <!-- wp8 -->
-    <platform name="wp8">
-		
+    <platform name="wp8">		
         <config-file target="config.xml" parent="/*">
             <feature name="Admob">
                 <param name="wp-package" value="Admob"/>
@@ -72,4 +71,24 @@
 		<!-- dependency -->
 		<dependency id="cordova-plugin-ad-admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />
     </platform>
+	
+	<!-- windows (wp8.1) --> <!-- not yet supported-->
+<!--	
+    <platform name="windows">
+        <js-module src="src/windows/admobproxy.js">
+			<runs />
+        </js-module>
+-->		
+<!--		
+        <framework src="src/windows/Com.Cranberrygame.Cordova.Plugin.Ad.AdMob/Com.Cranberrygame.Cordova.Plugin.Ad.AdMob.csproj" custom="true" type="projectReference" target="win" />
+-->
+<!--
+		<framework src="src/windows/Com.Cranberrygame.Cordova.Plugin.Ad.AdMob/bin/Debug/Com.Cranberrygame.Cordova.Plugin.Ad.AdMob.winmd" custom="true" target="win" />
+		<framework src="src/wp8/Silverlight.Md5.dll" custom="true" />	
+-->		
+		<!-- dependency -->
+<!--		
+		<dependency id="cordova-plugin-ad-admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />
+    </platform>	
+-->	
 </plugin>

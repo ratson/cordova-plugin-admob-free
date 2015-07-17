@@ -77,6 +77,8 @@ You can see Plugins For Cordova in one page: http://cranberrygame.github.io?refe
 	Updated Admob SDK
 		Windows Phone 8 - 6.5.13	
 		Supports wp8 split mode
+1.0.95
+	Fixed wp8 build error
 	
 To-Do:
 

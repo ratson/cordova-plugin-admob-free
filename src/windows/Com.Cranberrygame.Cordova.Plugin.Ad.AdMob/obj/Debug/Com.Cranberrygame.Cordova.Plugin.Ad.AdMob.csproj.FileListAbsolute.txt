@@ -1,0 +1,1 @@
+D:\share\cordova_plugin_add_local\cordova-plugin-ad-admob_updated\src\windows\Com.Cranberrygame.Cordova.Plugin.Ad.AdMob\obj\Debug\Com.Cranberrygame.Cordova.Plugin.Ad.AdMob.csprojResolveAssemblyReference.cache

@@ -5,22 +5,32 @@
 using System;
 using System.Windows;
 using System.Runtime.Serialization;
-using WPCordovaClassLib;
-using WPCordovaClassLib.Cordova;
-using WPCordovaClassLib.Cordova.Commands;
-using WPCordovaClassLib.Cordova.JSON;
-using System.Windows.Controls;
-using Microsoft.Phone.Controls;
+////using WPCordovaClassLib;
+////using WPCordovaClassLib.Cordova;
+////using WPCordovaClassLib.Cordova.Commands;
+////using WPCordovaClassLib.Cordova.JSON;
+////using System.Windows.Controls;
+////using Microsoft.Phone.Controls;
 using System.Diagnostics; //Debug.WriteLine
+//
+using Windows.UI.Popups;//
 //
 using GoogleAds;
 
 namespace Test {
 
-    public class AdmobOverlap : PluginDelegate
+    public class Util
     {
-		protected Plugin plugin;	
-		//
+        public static async void alert(string message)
+        {
+            var msgDlg = new Windows.UI.Popups.MessageDialog(message);
+            msgDlg.DefaultCommandIndex = 1;
+            await msgDlg.ShowAsync();
+        }
+    }
+	
+    public class AdMobOverlap
+    {
         protected string bannerAdUnit;
         protected string fullScreenAdUnit;
         protected bool isOverlap;
@@ -35,11 +45,6 @@ namespace Test {
 		//admob
         protected AdView bannerView;
         protected InterstitialAd interstitialView;
-
-        public AdmobOverlap(Plugin plugin_)
-        {
-			plugin = plugin_;
-		}
 	
         public void _setLicenseKey(string email, string licenseKey) {
         }
@@ -84,7 +89,7 @@ namespace Test {
 				else {
 					format = AdFormats.SmartBanner;
 				}
-
+/*
 				//
 				bannerView = new AdView
 				{
@@ -97,7 +102,8 @@ namespace Test {
 				bannerView.FailedToReceiveAd += bannerView_FailedToReceiveAd;
 				bannerView.ShowingOverlay += bannerView_ShowingOverlay;
 				bannerView.LeavingApplication += bannerView_LeavingApplicationAd;
-				bannerView.DismissingOverlay += bannerView_DismissingOverlay;				
+				bannerView.DismissingOverlay += bannerView_DismissingOverlay;		
+ */ 
 			}
 	 
 			AdRequest adRequest = new AdRequest();
@@ -130,13 +136,15 @@ namespace Test {
 			}			
 
             addBannerViewOverlap(position, size);
-			
+		
+/*	
 			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdShown");
 			pr.KeepCallback = true;
 			plugin.DispatchCommandResult(pr);
             //PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 			//pr.KeepCallback = true;
             //plugin.DispatchCommandResult(pr);
+ */ 
         }
 
         protected virtual bool bannerIsShowingOverlap()
@@ -291,12 +299,14 @@ namespace com.cranberrygame.adrotatortest
         {
             removeBannerViewOverlap();
 			
+/*
 			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onBannerAdHidden");
 			pr.KeepCallback = true;
             plugin.DispatchCommandResult(pr);
 			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 			//pr.KeepCallback = true;
             //plugin.DispatchCommandResult(pr);			
+ */ 
         }
 
         protected virtual void removeBannerViewOverlap()
@@ -325,8 +335,8 @@ namespace com.cranberrygame.adrotatortest
 		
 		protected void loadFullScreenAd() 
 		{
-            //if (interstitialView == null) //need to comment on wp8
-			//{
+            if (interstitialView == null) 
+			{
                 //interstitialView = new InterstitialAd("ca-app-pub-4906074177432504/4879304879");//x cf) wp8
                 //interstitialView = new InterstitialAd("ca-app-pub-4906074177432504/5150650074");//o cf) android
                 interstitialView = new InterstitialAd(this.fullScreenAdUnit);
@@ -335,7 +345,7 @@ namespace com.cranberrygame.adrotatortest
                 interstitialView.FailedToReceiveAd += interstitialView_FailedToReceiveAd;
                 interstitialView.ShowingOverlay += interstitialView_ShowingOverlay;
 				interstitialView.DismissingOverlay += interstitialView_DismissingOverlay;
-            //}
+            }
 						
 			AdRequest adRequest = new AdRequest();
 			if(isTest) 
@@ -358,7 +368,6 @@ namespace com.cranberrygame.adrotatortest
                 }
                 catch (Exception ex) 
 				{
-					Debug.WriteLine(ex.Message);
                 }
 			}
 			else 
@@ -371,6 +380,7 @@ namespace com.cranberrygame.adrotatortest
 		{
             Debug.WriteLine("BannerView_ReceivedAd");
 
+/*
             PluginResult pr;
 			if (bannerAdPreload) 
 			{
@@ -388,6 +398,7 @@ namespace com.cranberrygame.adrotatortest
 			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 			//pr.KeepCallback = true;
             //plugin.DispatchCommandResult(pr);
+ */ 
         }
 		
         protected void bannerView_FailedToReceiveAd(object sender, AdErrorEventArgs errorCode) 
@@ -414,6 +425,7 @@ namespace com.cranberrygame.adrotatortest
 		{
             Debug.WriteLine("interstitialView_ReceivedAd");
 
+/*
             PluginResult pr;
 			if (fullScreenAdPreload) 
 			{
@@ -431,6 +443,7 @@ namespace com.cranberrygame.adrotatortest
 			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 			//pr.KeepCallback = true;
 			//plugin.DispatchCommandResult(pr);
+*/
 				
 			if (!fullScreenAdPreload) 
 			{
@@ -447,24 +460,28 @@ namespace com.cranberrygame.adrotatortest
 		{
             Debug.WriteLine("OnInterstitialViewPresentScreen");
 			
+/*
 			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onFullScreenAdShown");
 			pr.KeepCallback = true;
             plugin.DispatchCommandResult(pr);
 			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 			//pr.KeepCallback = true;
-            //plugin.DispatchCommandResult(pr);			
+            //plugin.DispatchCommandResult(pr);
+ */ 
         }
 		
         protected void interstitialView_DismissingOverlay(object sender, AdEventArgs e) 
 		{
             Debug.WriteLine("interstitialView_DismissingOverlay");	
 			
+/*
 			PluginResult pr = new PluginResult(PluginResult.Status.OK, "onFullScreenAdHidden");
 			pr.KeepCallback = true;
             plugin.DispatchCommandResult(pr);
 			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 			//pr.KeepCallback = true;
-            //plugin.DispatchCommandResult(pr);			
+            //plugin.DispatchCommandResult(pr);
+ */ 
         }
 	}
 }

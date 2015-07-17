@@ -15,7 +15,8 @@ using System.Diagnostics; //Debug.WriteLine
 
 namespace Test {
 
-    public class AdmobSplit : AdmobOverlap {
+    public class AdmobSplit : AdmobOverlap 
+	{
         private double rootViewHeight = 0.0;
         private double rootViewWidth = 0.0;
         private const int BANNER_HEIGHT_PORTRAIT = 50;
@@ -127,7 +128,7 @@ namespace Test {
             rootFrame.OrientationChanged -= rootFrame_OrientationChanged;
         }
 
-        private void rootFrame_OrientationChanged(object sender, OrientationChangedEventArgs e)
+        protected void rootFrame_OrientationChanged(object sender, OrientationChangedEventArgs e)
         {
             if (!bannerIsShowingOverlap())
                 return;
