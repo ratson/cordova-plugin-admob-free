@@ -15,9 +15,13 @@ cordova plugin add cordova-plugin-admob-simple
 ECLIPSE STUFF
 
 -Import the project into eclipse, make sure you import the folder 'platforms/android', not the base folder of the project.
+
 -Copy the google-play-services.jar into the libs folder.
+
 -Add the following line to the manifest file, just before the </application> tag
+
 <meta-data android:name="com.google.android.gms.version" android:value="8487000" />
+ 
  -If your play services is a different version, then use the right value above. The console will warn you when you try run it if it's wrong. 
    
 ANDROID STUDIO STUFF
@@ -37,6 +41,7 @@ dependencies {
 If you use a different version of play services, put the correct version.
 
 And finally syncronise your project (the button to the left of the AVD manager).
+
 
 CODING DETAILS
 
@@ -110,3 +115,9 @@ function showInterstitialFunc(){
 
     window.plugins.AdMob.destroyBannerView();
 
+
+
+
+
+
+Disclaimer: This code is free to use how you want as it's opensource. Two percent of the ad requests go to the developers.
