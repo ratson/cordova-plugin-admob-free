@@ -18,7 +18,7 @@ ECLIPSE STUFF
 
 -Copy the google-play-services.jar into the libs folder.
 
--Add the following line to the manifest file, just before the </application> tag
+-Add the following line to the manifest file, just before the /application tag
 
 	<meta-data android:name="com.google.android.gms.version" android:value="8487000" />
  
