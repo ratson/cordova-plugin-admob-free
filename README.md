@@ -1,11 +1,15 @@
 INSTRUCTIONS
 
 -Create your app
+
 cordova create hallo com.example.hallo HalloWorld
+
 cd hallo
+
 cordova platform add android
 
 -Add the plugin
+
 cordova plugin add cordova-plugin-admob-simple
 
 ECLIPSE STUFF
@@ -38,7 +42,9 @@ CODING DETAILS
 
 -Add the following javascript functions and call them from onDeviceReady()
 -------------------------------------------------------------------------------
+
 function initAd(){
+
     if ( window.plugins && window.plugins.AdMob ) {
         var ad_units = {
             ios : {
@@ -66,6 +72,7 @@ function initAd(){
 }
 
 function registerAdEvents() {
+
     document.addEventListener('onReceiveAd', function(){});
     document.addEventListener('onFailedToReceiveAd', function(data){});
     document.addEventListener('onPresentAd', function(){});
@@ -75,15 +82,19 @@ function registerAdEvents() {
     document.addEventListener('onPresentInterstitialAd', function(){ });
     document.addEventListener('onDismissInterstitialAd', function(){ });
 }
+
 -----------------------------------------------------------------------------
 - Add the following 2 functions and call them when you want ads
 -----------------------------------------------------------------------------
 
 function showAdsFunc(){
+
 	//alert("show ads");
 	window.plugins.AdMob.createBannerView();
 }
+
 function showInterstitialFunc(){
+
     //alert("interstitial");
     window.plugins.AdMob.createInterstitialView();      
     window.plugins.AdMob.requestInterstitialAd();	//don't need this line if autoshow is true
@@ -97,5 +108,5 @@ function showInterstitialFunc(){
 
 -To close the banner
 
-window.plugins.AdMob.destroyBannerView();
+    window.plugins.AdMob.destroyBannerView();
 
