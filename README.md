@@ -20,7 +20,7 @@ ECLIPSE STUFF
 
 -Add the following line to the manifest file, just before the </application> tag
 
-<meta-data android:name="com.google.android.gms.version" android:value="8487000" />
+	<meta-data android:name="com.google.android.gms.version" android:value="8487000" />
  
  -If your play services is a different version, then use the right value above. The console will warn you when you try run it if it's wrong. 
    
@@ -48,62 +48,62 @@ CODING DETAILS
 -Add the following javascript functions and call them from onDeviceReady()
 -------------------------------------------------------------------------------
 
-function initAd(){
+	function initAd(){
 
-    if ( window.plugins && window.plugins.AdMob ) {
-        var ad_units = {
-            ios : {
-                banner: 'ca-app-pub-4789158063632032/7680949608',
-                interstitial: 'ca-app-pub-4789158063632032/4587882405'
-            },
-            android : {
-                banner: 'ca-app-pub-4789158063632032/7680949608',
-                interstitial: 'ca-app-pub-4789158063632032/4587882405'
-            }
-        };
-        var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
-        window.plugins.AdMob.setOptions( {
-            publisherId: admobid.banner,
-            interstitialAdId: admobid.interstitial,
-            bannerAtTop: false, // set to true, to put banner at top
-            overlap: false, // set to true, to allow banner overlap webview
-            offsetTopBar: false, // set to true to avoid ios7 status bar overlap
-            isTesting: false, // receiving test ad
-            autoShow: false // auto show interstitial ad when loaded
-        });
-    } else {
-        //alert( 'admob plugin not ready' );
-    }
-}
+	    if ( window.plugins && window.plugins.AdMob ) {
+	        var ad_units = {
+	            ios : {
+	                banner: 'ca-app-pub-4789158063632032/7680949608',
+	                interstitial: 'ca-app-pub-4789158063632032/4587882405'
+	            },
+	            android : {
+	                banner: 'ca-app-pub-4789158063632032/7680949608',
+	                interstitial: 'ca-app-pub-4789158063632032/4587882405'
+	            }
+	        };
+	        var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
+	        window.plugins.AdMob.setOptions( {
+	            publisherId: admobid.banner,
+	            interstitialAdId: admobid.interstitial,
+	            bannerAtTop: false, // set to true, to put banner at top
+	            overlap: false, // set to true, to allow banner overlap webview
+	            offsetTopBar: false, // set to true to avoid ios7 status bar overlap
+	            isTesting: false, // receiving test ad
+	            autoShow: false // auto show interstitial ad when loaded
+	        });
+	    } else {
+	        //alert( 'admob plugin not ready' );
+	    }
+	}
 
-function registerAdEvents() {
-
-    document.addEventListener('onReceiveAd', function(){});
-    document.addEventListener('onFailedToReceiveAd', function(data){});
-    document.addEventListener('onPresentAd', function(){});
-    document.addEventListener('onDismissAd', function(){ });
-    document.addEventListener('onLeaveToAd', function(){ });
-    document.addEventListener('onReceiveInterstitialAd', function(){ });
-    document.addEventListener('onPresentInterstitialAd', function(){ });
-    document.addEventListener('onDismissInterstitialAd', function(){ });
-}
+	function registerAdEvents() {
+	
+	    document.addEventListener('onReceiveAd', function(){});
+	    document.addEventListener('onFailedToReceiveAd', function(data){});
+	    document.addEventListener('onPresentAd', function(){});
+	    document.addEventListener('onDismissAd', function(){ });
+	    document.addEventListener('onLeaveToAd', function(){ });
+	    document.addEventListener('onReceiveInterstitialAd', function(){ });
+	    document.addEventListener('onPresentInterstitialAd', function(){ });
+	    document.addEventListener('onDismissInterstitialAd', function(){ });
+	}
 
 -----------------------------------------------------------------------------
 - Add the following 2 functions and call them when you want ads
 -----------------------------------------------------------------------------
 
-function showAdsFunc(){
+	function showAdsFunc(){
+	
+		//alert("show ads");
+		window.plugins.AdMob.createBannerView();
+	}
 
-	//alert("show ads");
-	window.plugins.AdMob.createBannerView();
-}
-
-function showInterstitialFunc(){
-
-    //alert("interstitial");
-    window.plugins.AdMob.createInterstitialView();      
-    window.plugins.AdMob.requestInterstitialAd();	//don't need this line if autoshow is true
-}
+	function showInterstitialFunc(){
+	
+	    //alert("interstitial");
+	    window.plugins.AdMob.createInterstitialView();      
+	    window.plugins.AdMob.requestInterstitialAd();	//don't need this line if autoshow is true
+	}
 
 -----------------------------------------------------------------------
 
