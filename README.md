@@ -107,7 +107,7 @@ function showInterstitialFunc(){
 
 -----------------------------------------------------------------------
 
--If using autoshow, then need the following, or something like it when you want to display the interstitial
+-If not using autoshow, then need the following, or something like it when you want to display the interstitial
 
     document.addEventListener('onReceiveInterstitialAd', function(){window.plugins.AdMob.showInterstitialAd() });
 
