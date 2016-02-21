@@ -1,0 +1,32 @@
+{
+  "name": "cordova-plugin-admob-simple",
+  "version": "1.0.0",
+  "description": "Cordova plugin for AdMob Ads",
+  "cordova": {
+    "id": "cordova-plugin-admob-simple",
+    "platforms": [
+      "android",
+      "ios",
+      "wp8",
+      "windows"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/floatinghotpot/cordova-plugin-admob.git"
+  },
+  "bugs": {
+    "url": "https://github.com/floatinghotpot/cordova-plugin-admob/issues"
+  },
+  "keywords": [
+    "cordova",
+    "ecosystem:cordova",
+    "ad",
+    "admob",
+    "google",
+  ],
+  "author": {
+    "name": "Cupertino"
+  },
+  "license": "MIT"
+}

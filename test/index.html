@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+        <title>Hello World</title>
+        <script type="text/javascript" src="cordova.js"></script>
+        <style type="text/css">
+            html, body { width:100%; height:100%; margin:0; padding:0; overflow:hidden; background-color:white; }
+            div#fullpage { width:100%; height:100%; margin:0; padding:0; border:0px solid red; text-align:center; vertical-align:middle; }
+            button { font-size: 22px; }
+        </style>
+    </head>
+    <body onload="onDocLoad()" onresize="onResize()">
+    <script>
+    function onDocLoad() {
+        if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
+            document.addEventListener('deviceready', initApp, false);
+        } else {
+            initApp();
+        }
+    }
+    
+    function initApp() {
+        initAd();
+
+        // display the banner at startup
+        window.plugins.AdMob.createBannerView();
+    }
+    function initAd(){
+        if ( window.plugins && window.plugins.AdMob ) {
+    	    var ad_units = {
+				ios : {
+					banner: 'ca-app-pub-6869992474017983/4806197152',
+					interstitial: 'ca-app-pub-6869992474017983/7563979554'
+				},
+				android : {
+					banner: 'ca-app-pub-6869992474017983/9375997553',
+					interstitial: 'ca-app-pub-6869992474017983/1657046752'
+				},
+				wp8 : {
+					banner: 'ca-app-pub-6869992474017983/8878394753',
+					interstitial: 'ca-app-pub-6869992474017983/1355127956'
+				}
+    	    };
+    	    var admobid = "";
+    	    if( /(android)/i.test(navigator.userAgent) ) {
+    	    	admobid = ad_units.android;
+    	    } else if(/(iphone|ipad)/i.test(navigator.userAgent)) {
+    	    	admobid = ad_units.ios;
+    	    } else {
+    	    	admobid = ad_units.wp8;
+    	    }
+
+            window.plugins.AdMob.setOptions( {
+                publisherId: admobid.banner,
+                interstitialAdId: admobid.interstitial,
+                bannerAtTop: false, // set to true, to put banner at top
+                overlap: false, // set to true, to allow banner overlap webview
+                offsetTopBar: false, // set to true to avoid ios7 status bar overlap
+                isTesting: false, // receiving test ad
+                autoShow: true // auto show interstitial ad when loaded
+            });
+
+            registerAdEvents();
+            
+        } else {
+            alert( 'admob plugin not ready' );
+        }
+    }
+	// optional, in case respond to events
+    function registerAdEvents() {
+    	document.addEventListener('onReceiveAd', function(){});
+        document.addEventListener('onFailedToReceiveAd', function(data){});
+        document.addEventListener('onPresentAd', function(){});
+        document.addEventListener('onDismissAd', function(){ });
+        document.addEventListener('onLeaveToAd', function(){ });
+        document.addEventListener('onReceiveInterstitialAd', function(){ });
+        document.addEventListener('onPresentInterstitialAd', function(){ });
+        document.addEventListener('onDismissInterstitialAd', function(){ });
+    }
+    function onResize() {
+        var msg = 'web view: ' + window.innerWidth + ' x ' + window.innerHeight;
+        document.getElementById('sizeinfo').innerHTML = msg;
+    }
+    </script>
+    <div id="fullpage">
+    <p>Demo for AdMob Plugin</p>
+    <p><button onclick="window.plugins.AdMob.createBannerView();">create Ad</button> <button onclick="window.plugins.AdMob.destroyBannerView();">remove Ad</button></p>
+    <p><button onclick="window.plugins.AdMob.showAd(true,function(){},function(e){alert(JSON.stringify(e));});">show Ad</button> <button onclick="window.plugins.AdMob.showAd(false);">hide Ad</button></p>
+    <p><button onclick="window.plugins.AdMob.createInterstitialView();">create Interstitial Ad</button></p>
+    <p><button onclick="window.plugins.AdMob.showInterstitialAd(true,function(){},function(e){alert(JSON.stringify(e));});">show Interstitial Ad</button></p>
+    <div id="sizeinfo">width * height</div>
+    <div>Try rotate screen to test the orientation change</div>
+
+    </div>
+    
+    </body>
+</html>
