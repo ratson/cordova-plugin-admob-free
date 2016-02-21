@@ -1,7 +1,7 @@
 {
   "name": "cordova-plugin-admob-simple",
   "version": "1.0.0",
-  "description": "Cordova plugin for AdMob Ads",
+  "description": "Robust, reliable and easy to use Cordova Admob plugin for Android. Allows preloading and automatic loading of interstitials.",
   "cordova": {
     "id": "cordova-plugin-admob-simple",
     "platforms": [
