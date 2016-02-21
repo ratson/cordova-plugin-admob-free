@@ -13,17 +13,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/floatinghotpot/cordova-plugin-admob.git"
+    "url": "https://github.com/sunnycupertino/cordova-plugin-admob-simple.git"
   },
   "bugs": {
-    "url": "https://github.com/floatinghotpot/cordova-plugin-admob/issues"
+    "url": "https://github.com/sunnycupertino/cordova-plugin-admob-simple/issues"
   },
   "keywords": [
     "cordova",
-    "ecosystem:cordova",
-    "ad",
     "admob",
-    "google",
+    "ad",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-wp8",
+    "google"
   ],
   "author": {
     "name": "Cupertino"
