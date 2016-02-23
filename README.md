@@ -111,9 +111,9 @@ cordova plugin add cordova-plugin-admob-simple
 ```
 
 - If not using autoshow, then need the following, or something like it when you want to display the interstitial
-
+```javascript
     document.addEventListener('onReceiveInterstitialAd', function(){window.plugins.AdMob.showInterstitialAd() });
-
+```
 - To close the banner
 ```javascript
     window.plugins.AdMob.destroyBannerView();
