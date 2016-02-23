@@ -1,7 +1,7 @@
 {
   "name": "cordova-plugin-admob-simple",
-  "version": "1.0.0",
-  "description": "Cordova plugin for AdMob Ads",
+  "version": "1.0.4",
+  "description": "Robust, reliable and easy to use Cordova Admob plugin for Android. Allows preloading and automatic loading of interstitials.",
   "cordova": {
     "id": "cordova-plugin-admob-simple",
     "platforms": [
@@ -13,17 +13,33 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/floatinghotpot/cordova-plugin-admob.git"
+    "url": "https://github.com/sunnycupertino/cordova-plugin-admob-simple.git"
   },
   "bugs": {
-    "url": "https://github.com/floatinghotpot/cordova-plugin-admob/issues"
+    "url": "https://github.com/sunnycupertino/cordova-plugin-admob-simple/issues"
   },
   "keywords": [
     "cordova",
-    "ecosystem:cordova",
-    "ad",
     "admob",
+    "ad",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-wp8",
     "google",
+    "eclipse",
+    "android-studio",
+    "simple",
+    "android",
+    "phonegap",
+    "monetization",
+    "monetisation",
+    "money",
+    "banner",
+    "interstitial",
+    "advertisement",
+    "advertising",
+    "earn"
   ],
   "author": {
     "name": "Cupertino"

@@ -3,15 +3,15 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	id="cordova-plugin-admob-simple"
-	version="1.0.0">
+	version="1.0.4">
       
     <name>AdMob</name>
-	<description>Cordova plugin for AdMob Ads</description>
+	<description>Robust, reliable and easy to use Cordova Admob plugin for Android. Allows preloading and automatic loading of interstitials.</description>
 	<author>Cupertino</author>
 	<license>MIT</license>
-	<keywords>ad,admob,google,cordova</keywords>
-    <repo>https://github.com/floatinghotpot/cordova-plugin-admob.git</repo>
-    <issue>https://github.com/floatinghotpot/cordova-plugin-admob/issues</issue>
+	<keywords>admob, google, cordova-ios, cordova-android, ecosystem:cordova, money, monetization, iad, services, play, win, earn, publicity, advertisment, advertising, ads, ad, eclipse, android studio</keywords>
+    <repo>https://github.com/sunnycupertino/cordova-plugin-admob-simple.git</repo>
+    <issue>https://github.com/sunnycupertino/cordova-plugin-admob-simple/issues</issue>
 
 	<engines>
 	    <engine name="cordova" version=">=3.0" />
@@ -44,7 +44,7 @@
         </config-file>
         <source-file src="src/android/AdMob.java" target-dir="src/com/cupertino/cordova/plugin" />
 
-        <!-- cordova CLI using gradle and it working well -->
+        <!-- cordova CLI using gradle and it's working well -->
         <framework src="com.google.android.gms:play-services-ads:+" />
         <!-- but unfortunately, build.phonegap.com, Intel XDK, and some other tools still use ant -->
         <!-- dependency id="cordova-plugin-googleplayservices"/ -->
