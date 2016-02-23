@@ -99,9 +99,9 @@ cordova plugin add https://github.com/sunnycupertino/cordova-plugin-admob-simple
 - Copy the google-play-services.jar into the libs folder.
 
 - Add the following line to the manifest file, just before the ending application tag
-
+```javascript
 	<meta-data android:name="com.google.android.gms.version" android:value="8487000" />
- 
+```
 - If your play services is a different version, then use the right value above. The console will warn you when you try run it if it's wrong. 
    
 ## ANDROID STUDIO STUFF
