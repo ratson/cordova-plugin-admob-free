@@ -23,9 +23,7 @@ cordova plugin add https://github.com/sunnycupertino/cordova-plugin-admob-simple
 
 - Add the following javascript functions and call them from onDeviceReady()
 ```javascript
-
 	function initAd(){
-
 	    if ( window.plugins && window.plugins.AdMob ) {
 	        var ad_units = {
 	            ios : {
@@ -53,7 +51,6 @@ cordova plugin add https://github.com/sunnycupertino/cordova-plugin-admob-simple
 	}
 
 	function registerAdEvents() {
-	
 	    document.addEventListener('onReceiveAd', function(){});
 	    document.addEventListener('onFailedToReceiveAd', function(data){});
 	    document.addEventListener('onPresentAd', function(){});
@@ -67,15 +64,12 @@ cordova plugin add https://github.com/sunnycupertino/cordova-plugin-admob-simple
 ```
 - Add the following 2 functions and call them when you want ads
 ```javascript
-
 	function showAdsFunc(){
-	
 		//alert("show ads");
 		window.plugins.AdMob.createBannerView();
 	}
 
 	function showInterstitialFunc(){
-	
 	    //alert("interstitial");
 	    window.plugins.AdMob.createInterstitialView();      
 	    window.plugins.AdMob.requestInterstitialAd();	//don't need this line if autoshow is true
@@ -100,7 +94,7 @@ cordova plugin add https://github.com/sunnycupertino/cordova-plugin-admob-simple
 
 - Add the following line to the manifest file, just before the ending application tag
 ```javascript
-	<meta-data android:name="com.google.android.gms.version" android:value="8487000" />
+<meta-data android:name="com.google.android.gms.version" android:value="8487000" />
 ```
 - If your play services is a different version, then use the right value above. The console will warn you when you try run it if it's wrong. 
    
@@ -114,16 +108,33 @@ cordova plugin add https://github.com/sunnycupertino/cordova-plugin-admob-simple
 	Android support repository, Google play services, Google repository.
 
 - Restart android studio and open the build gradle file. You must modify your build.gradle file to look like this under dependencies:
-
+```javascript
 	dependencies {
 	    compile 'com.google.android.gms:play-services:8.4.0'
 	 }
- 
+```
 - If you use a different version of play services, put the correct version.
 
 - And finally syncronise your project (the button to the left of the AVD manager).
 
+## The MIT License (MIT)
 
+Copyright (c) 2016 Sunny Cupertino
 
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
 
-Disclaimer: This code is free to use how you want as it's opensource. Two percent of the ad requests go to the developers.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Disclaimer. Two percent of the ad requests go to the developers.
