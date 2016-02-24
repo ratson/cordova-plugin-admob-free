@@ -1,7 +1,7 @@
 {
   "name": "cordova-plugin-admob-simple",
-  "version": "1.0.8",
-  "description": "Robust, reliable and easy to use Cordova Admob plugin for Android. Allows preloading and automatic loading of interstitials.",
+  "version": "1.0.9",
+  "description": "Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows phone. Allows preloading and automatic loading of interstitials.",
   "cordova": {
     "id": "cordova-plugin-admob-simple",
     "platforms": [
@@ -31,6 +31,8 @@
     "android-studio",
     "simple",
     "android",
+    "ios",
+    "windows",
     "phonegap",
     "monetization",
     "monetisation",
