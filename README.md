@@ -21,19 +21,21 @@ cordova plugin add https://github.com/sunnycupertino/cordova-plugin-admob-simple
 
 ## CODING DETAILS
 
-- Add the following javascript functions and call initAd() from onDeviceReady()
+- Add the following javascript functions, put in your own ad code, play with the variables if you want.
+
+- Call initAd() from onDeviceReady()
 ```javascript
 //initialize the goodies
 function initAd(){
         if ( window.plugins && window.plugins.AdMob ) {
             var ad_units = {
                 ios : {
-                    banner: 'ca-app-pub-4789158063632032/4700158004',
-                    interstitial: 'ca-app-pub-4789158063632032/7772558803'
+                    banner: 'ca-app-pub-4789158063632032/7680949608',
+                    interstitial: 'ca-app-pub-4789158063632032/4587882405'
                 },
                 android : {
-                    banner: 'ca-app-pub-4789158063632032/4700158004',
-                    interstitial: 'ca-app-pub-4789158063632032/7772558803'
+                    banner: 'ca-app-pub-4789158063632032/7680949608',
+                    interstitial: 'ca-app-pub-4789158063632032/4587882405'
                 }
             };
             var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
