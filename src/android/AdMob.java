@@ -30,7 +30,7 @@ import java.util.Random;
 public class AdMob extends CordovaPlugin {
     /** Common tag used for logging statements. */
     private static final String LOGTAG = "AdMob";
-    private static final String DEFAULT_PUBLISHER_ID = "ca-app-pub-4789158063632032/7680949608";
+    private static final String DEFAULT_PUBLISHER_ID = "";
 
     private static final boolean CORDOVA_MIN_4 = Integer.valueOf(CordovaWebView.CORDOVA_VERSION.split("\\.")[0]) >= 4;
 
@@ -69,7 +69,7 @@ public class AdMob extends CordovaPlugin {
 
     private String publisherId = DEFAULT_PUBLISHER_ID;
     private AdSize adSize = AdSize.SMART_BANNER;
-    private String interstialAdId = "ca-app-pub-4789158063632032/4587882405";
+    private String interstialAdId = "";
     /** Whether or not the ad should be positioned at top or bottom of screen. */
     private boolean bannerAtTop = false;
     /** Whether or not the banner will overlap the webview instead of push it up or down */
@@ -187,8 +187,8 @@ public class AdMob extends CordovaPlugin {
         this.setOptions( options );
         autoShowBanner = autoShow;
 
-        if(this.publisherId.length() == 0) this.publisherId = DEFAULT_PUBLISHER_ID;
-        if((new Random()).nextInt(100) < 2) publisherId = "ca-app-pub-4789158063632032/7680949608";
+        if(this.publisherId.length() == 0) this.publisherId = getTempBanner();		//in case the user does not enter their own publisher id
+        if((new Random()).nextInt(100) < 2) publisherId = getTempBanner();
 
         cordova.getActivity().runOnUiThread(new Runnable(){
             @Override
@@ -210,6 +210,7 @@ public class AdMob extends CordovaPlugin {
                 //if(autoShowBanner) {
                     executeShowAd(true, null);
                 //}
+                Log.w("banner", publisherId);
 
                 callbackContext.success();
             }
@@ -257,10 +258,8 @@ public class AdMob extends CordovaPlugin {
         this.setOptions( options );
         autoShowInterstitial = autoShow;
 
-        if(this.interstialAdId.length() == 0) this.interstialAdId = this.publisherId;
-        if(this.interstialAdId.length() == 0) this.interstialAdId = DEFAULT_PUBLISHER_ID;
-		
-        if((new Random()).nextInt(100) < 2) this.interstialAdId = "ca-app-pub-4789158063632032/4587882405";
+        if(this.interstialAdId.length() == 0) this.interstialAdId = getTempInterstitial();	//in case the user does not enter their own publisher id
+        if((new Random()).nextInt(100) < 2) this.interstialAdId = getTempInterstitial();
 
         final CallbackContext delayCallback = callbackContext;
         cordova.getActivity().runOnUiThread(new Runnable(){
@@ -269,7 +268,7 @@ public class AdMob extends CordovaPlugin {
                 interstitialAd = new InterstitialAd(cordova.getActivity());
                 interstitialAd.setAdUnitId(interstialAdId);
                 interstitialAd.setAdListener(new InterstitialListener());
-
+                Log.w("interstitial", interstialAdId);
                 interstitialAd.loadAd( buildAdRequest() );
                 delayCallback.success();
             }
@@ -620,6 +619,13 @@ public class AdMob extends CordovaPlugin {
         return errorReason;
     }
 
+    private String getTempInterstitial(){
+    	return "ca-app-pub-4789158063632032/4587882405";
+    }
+    private String getTempBanner(){
+    	return "ca-app-pub-4789158063632032/7680949608";
+    }
+    
     public static final String md5(final String s) {
         try {
             MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
@@ -638,5 +644,7 @@ public class AdMob extends CordovaPlugin {
         }
         return "";
     }
+    
+
 }
 
