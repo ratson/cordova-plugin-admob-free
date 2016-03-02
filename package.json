@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-admob-simple",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows phone. Allows preloading and automatic loading of interstitials and banners.",
   "cordova": {
     "id": "cordova-plugin-admob-simple",
@@ -43,6 +43,7 @@
     "advertising",
     "earn"
   ],
+  "tonicExampleFilename": "test.js",
   "author": {
     "name": "Cupertino"
   },
