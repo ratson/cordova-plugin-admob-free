@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	id="cordova-plugin-admob-simple"
-	version="1.2.1">
+	version="1.2.2">
       
     <name>AdMob</name>
 	<description>Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows phone. Allows preloading and automatic loading of interstitials and banners plus more.</description>
@@ -21,7 +21,7 @@
         <clobbers target="window.plugins.AdMob" />
     </js-module>
 
-	<dependency id="cordova-admob-sdk"/>
+	<dependency id="cordova-admob-sdklibs"/>
 
     <!-- android -->
     <!-- android, now build with gradle instead of ant -->
