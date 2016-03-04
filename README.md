@@ -111,19 +111,6 @@ function showInterstitialFunc(){
 - Now you have to launch the sdk manager and download and install the following files located under "extras" (if you don't have them already): 
 	Android support repository, Google play services, Google repository.
 
-- Restart android studio and open the build gradle file. You must modify your build.gradle file to have the following under dependencies:
-```javascript
-	dependencies {
-	...
-	    compile 'com.google.android.gms:play-services:8.4.0'
-	 }
-```
-- If you get the error 'The meta-data tag in your app's AndroidManifest.xml does not have the right value. Expected 8487000 but found 5089000'
-	- Then go to res->values->version.xml and fix the version number there. This is a bug with Google's libraries.
-	
-- If you use a different version of play services, put the correct version.
-
-- And finally syncronise your project (the button to the left of the AVD manager).
 
 ## The MIT License (MIT)
 
