@@ -30,12 +30,12 @@ function initAd(){
         if ( window.plugins && window.plugins.AdMob ) {
             var ad_units = {
                 ios : {
-                    banner: 'ca-app-pub-4789158063632032/7680949608',
-                    interstitial: 'ca-app-pub-4789158063632032/4587882405'
+                    banner: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx',
+                    interstitial: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx'
                 },
                 android : {
-                    banner: 'ca-app-pub-4789158063632032/7680949608',
-                    interstitial: 'ca-app-pub-4789158063632032/4587882405'
+                    banner: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx',
+                    interstitial: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx'
                 }
             };
             var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
