@@ -741,7 +741,7 @@ self.bannerIsInitialized = YES;
 
     GADRequest *request = [GADRequest request];
 
-    /*
+    
 
     if (self.isTesting) {
 
@@ -753,7 +753,7 @@ request.testDevices =
 
 [NSArray arrayWithObjects:
 
-         GAD_SIMULATOR_ID,
+         kGADSimulatorID,
 
          @"1d56890d176931716929d5a347d8a206",
 
@@ -763,7 +763,7 @@ request.testDevices =
 
          nil];
 
-}*/
+}
 
 if (self.adExtras) {
 
