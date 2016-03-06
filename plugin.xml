@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	id="cordova-plugin-admob-simple"
-	version="1.2.3">
+	version="1.2.4">
       
     <name>AdMob</name>
 	<description>Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows phone. Allows preloading and automatic loading of interstitials and banners plus more.</description>
@@ -53,7 +53,7 @@
      
      <!-- ios -->
      <platform name="ios"> 
-     <dependency id="cordova-plugin-ad-admobsdk"/>   
+     <dependency id="cordova-plugin-ad-admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />  
          <config-file target="config.xml" parent="/*">
              <feature name="AdMob">
                  <param name="ios-package" value="CDVAdMob" />
@@ -65,7 +65,7 @@
 
   <!-- Windows Phone 8 -->
   <platform name="wp8">
-  <dependency id="cordova-plugin-ad-admobsdk"/> 
+  <dependency id="cordova-plugin-ad-admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" />
     <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities">
         <Capability Name="ID_CAP_LOCATION" />
     </config-file>
@@ -79,7 +79,7 @@
 
   <!-- Windows Phone 8.1+ -->
 <platform name="windows">
-<dependency id="cordova-plugin-ad-admobsdk"/> 
+<dependency id="cordova-plugin-ad-admobsdk" url="https://github.com/cranberrygame/cordova-plugin-ad-admobsdk" /> 
     <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities">
         <Capability Name="ID_CAP_LOCATION" />
     </config-file>
