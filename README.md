@@ -148,7 +148,7 @@ function showBannerFunc(){
 //display the interstitial
 function showInterstitialFunc(){
 	window.plugins.AdMob.createInterstitialView();	//get the interstitials ready to be shown and show when it's loaded.
-    window.plugins.AdMob.requestInterstitialAd();
+	window.plugins.AdMob.requestInterstitialAd();
 }
 ```
 - To close the banner
