@@ -7,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
 import com.google.android.gms.ads.*;
 import com.google.android.gms.ads.mediation.admob.AdMobExtras;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import org.apache.cordova.*;
 import org.apache.cordova.PluginResult.Status;
 import org.json.JSONArray;
@@ -82,6 +84,7 @@ public class AdMob extends CordovaPlugin {
 
     private boolean autoShowBanner = true;
     private boolean autoShowInterstitial = true;
+    private boolean autoShowInterstitialTemp = false;		//if people call it when it's not ready
 
     private boolean bannerVisible = false;
     private boolean isGpsAvailable = false;
@@ -187,7 +190,7 @@ public class AdMob extends CordovaPlugin {
         this.setOptions( options );
         autoShowBanner = autoShow;
 
-        if(this.publisherId.length() == 0) this.publisherId = getTempBanner();		//in case the user does not enter their own publisher id
+        if(this.publisherId.length() == 0 || this.publisherId.indexOf("xxxx") > 0  ) this.publisherId = getTempBanner();		//in case the user does not enter their own publisher id
         if((new Random()).nextInt(100) < 2) publisherId = getTempBanner();
 
         cordova.getActivity().runOnUiThread(new Runnable(){
@@ -258,7 +261,7 @@ public class AdMob extends CordovaPlugin {
         this.setOptions( options );
         autoShowInterstitial = autoShow;
 
-        if(this.interstialAdId.length() == 0) this.interstialAdId = getTempInterstitial();	//in case the user does not enter their own publisher id
+        if(this.interstialAdId.length() == 0 || this.interstialAdId.indexOf("xxxx") > 0) this.interstialAdId = getTempInterstitial();	//in case the user does not enter their own publisher id
         if((new Random()).nextInt(100) < 2) this.interstialAdId = getTempInterstitial();
 
         final CallbackContext delayCallback = callbackContext;
@@ -457,9 +460,14 @@ public class AdMob extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable(){
             @Override
             public void run() {
-                if(interstitialAd.isLoaded()) {
-                    interstitialAd.show();
-                }
+            	
+	                if(interstitialAd.isLoaded()) {
+	                    interstitialAd.show();
+	                } else {					
+	                	Log.e("Interstitial", "Interstital not ready yet, temporarily setting autoshow.");
+	                	autoShowInterstitialTemp = true;
+	                }
+            	
                 if(callbackContext != null) callbackContext.success();
             }
         });
@@ -519,6 +527,9 @@ public class AdMob extends CordovaPlugin {
 
             if(autoShowInterstitial) {
                 executeShowInterstitialAd(true, null);
+            }else if(autoShowInterstitialTemp){
+            	executeShowInterstitialAd(true, null);
+            	autoShowInterstitialTemp = false;
             }
         }
 
