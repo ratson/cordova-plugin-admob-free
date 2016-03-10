@@ -20,8 +20,8 @@ namespace Cordova.Extension.Commands
 	/// 
 	public class AdMob : BaseCommand
 	{
-        private const string DEFAULT_PUBLISHER_ID = "ca-app-pub-4789158063632032/7680949608";
-        private const string DEFAULT_INTERSTITIAL_AD_ID = "ca-app-pub-4789158063632032/4587882405";
+        private const string DEFAULT_PUBLISHER_ID = "ca-app-pub-9606049518741138/6704199607";
+        private const string DEFAULT_INTERSTITIAL_AD_ID = "ca-app-pub-9606049518741138/8180932804";
 		
 		private const string BANNER = "BANNER";
 		private const string SMART_BANNER = "SMART_BANNER";

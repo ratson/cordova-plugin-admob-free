@@ -19,6 +19,9 @@ OR
 cordova plugin add https://github.com/sunnycupertino/cordova-plugin-admob-simple
 ```
 
+## ***WARNING***
+-Do not click your own ads or google could cancel all your accounts. They have automatic systems checking for this. For testing use the  'isTesting: true' javascript variable in the code below.
+
 ## CODING DETAILS (Load interstitial first, show it later)
 
 - Add the following javascript functions, put in your own ad code, play with the variables if you want.

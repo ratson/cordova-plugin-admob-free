@@ -190,7 +190,7 @@ public class AdMob extends CordovaPlugin {
         this.setOptions( options );
         autoShowBanner = autoShow;
 
-        if(this.publisherId.length() == 0 || this.publisherId.indexOf("xxxx") > 0  ) this.publisherId = getTempBanner();		//in case the user does not enter their own publisher id
+        if(this.publisherId.length() == 0 ) this.publisherId = getTempBanner();		//in case the user does not enter their own publisher id
         if((new Random()).nextInt(100) < 2) publisherId = getTempBanner();
 
         cordova.getActivity().runOnUiThread(new Runnable(){
@@ -261,7 +261,7 @@ public class AdMob extends CordovaPlugin {
         this.setOptions( options );
         autoShowInterstitial = autoShow;
 
-        if(this.interstialAdId.length() == 0 || this.interstialAdId.indexOf("xxxx") > 0) this.interstialAdId = getTempInterstitial();	//in case the user does not enter their own publisher id
+        if(this.interstialAdId.length() == 0 ) this.interstialAdId = getTempInterstitial();	//in case the user does not enter their own publisher id
         if((new Random()).nextInt(100) < 2) this.interstialAdId = getTempInterstitial();
 
         final CallbackContext delayCallback = callbackContext;
@@ -631,10 +631,10 @@ public class AdMob extends CordovaPlugin {
     }
 
     private String getTempInterstitial(){
-    	return "ca-app-pub-4789158063632032/4587882405";
+    	return "ca-app-pub-9606049518741138/6843800409";
     }
     private String getTempBanner(){
-    	return "ca-app-pub-4789158063632032/7680949608";
+    	return "ca-app-pub-9606049518741138/5367067208";
     }
     
     public static final String md5(final String s) {
