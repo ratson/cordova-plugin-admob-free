@@ -20,7 +20,9 @@ cordova plugin add https://github.com/sunnycupertino/cordova-plugin-admob-simple
 ```
 
 ## ***WARNING***
--Do not click your own ads or google could cancel all your accounts. They have automatic systems checking for this. For testing use the  'isTesting: true' javascript variable in the code below.
+-**Do not click your own ads or google could cancel all your accounts. They have automatic systems checking for this. For testing use the  'isTesting: true' javascript variable in the code below.**
+-**Do not make apps that allow people to download youtube movies, this is against their terms of service also. They will find out.**
+-**Do not make apps that embed youtube movies in a way that is not allowed.**
 
 ## CODING DETAILS (Load interstitial first, show it later)
 
