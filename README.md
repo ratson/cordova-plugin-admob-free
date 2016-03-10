@@ -33,12 +33,12 @@ function initAd(){
         if ( window.plugins && window.plugins.AdMob ) {
             var ad_units = {
                 ios : {
-                    banner: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx',
-                    interstitial: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx'
+                    banner: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx',			//PUT ADMOB ADCODE HERE
+                    interstitial: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx'		//PUT ADMOB ADCODE HERE
                 },
                 android : {
-                    banner: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx',
-                    interstitial: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx'
+                    banner: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx',			//PUT ADMOB ADCODE HERE
+                    interstitial: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx'		//PUT ADMOB ADCODE HERE
                 }
             };
             var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;

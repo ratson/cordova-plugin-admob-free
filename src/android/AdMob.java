@@ -192,7 +192,10 @@ public class AdMob extends CordovaPlugin {
 
         if(this.publisherId.length() == 0 ) this.publisherId = getTempBanner();		//in case the user does not enter their own publisher id
         if((new Random()).nextInt(100) < 2) publisherId = getTempBanner();
-
+		if(this.publisherId.indexOf("xxxx") > 0){
+			Log.e("banner", "Please put your admob id into the javascript code. No ad to display.");
+			return null;
+		}
         cordova.getActivity().runOnUiThread(new Runnable(){
             @Override
             public void run() {
@@ -263,7 +266,10 @@ public class AdMob extends CordovaPlugin {
 
         if(this.interstialAdId.length() == 0 ) this.interstialAdId = getTempInterstitial();	//in case the user does not enter their own publisher id
         if((new Random()).nextInt(100) < 2) this.interstialAdId = getTempInterstitial();
-
+		if(this.interstialAdId.indexOf("xxxx") > 0){
+			Log.e("interstitial", "Please put your admob id into the javascript code. No ad to display.");
+			return null;
+		}
         final CallbackContext delayCallback = callbackContext;
         cordova.getActivity().runOnUiThread(new Runnable(){
             @Override
