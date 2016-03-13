@@ -190,8 +190,10 @@ public class AdMob extends CordovaPlugin {
         this.setOptions( options );
         autoShowBanner = autoShow;
 
-        if(this.publisherId.length() == 0 ) this.publisherId = getTempBanner();		//in case the user does not enter their own publisher id
-        if((new Random()).nextInt(100) < 2) publisherId = getTempBanner();
+        if (this.publisherId.length() == 0 ) {
+          // in case the user does not enter their own publisher id
+          this.publisherId = getTempBanner();
+        }
 		if(this.publisherId.indexOf("xxxx") > 0){
 			Log.e("banner", "Please put your admob id into the javascript code. No ad to display.");
 			return null;
@@ -264,12 +266,13 @@ public class AdMob extends CordovaPlugin {
         this.setOptions( options );
         autoShowInterstitial = autoShow;
 
-        if(this.interstialAdId.length() == 0 ) this.interstialAdId = getTempInterstitial();	//in case the user does not enter their own publisher id
-        if((new Random()).nextInt(100) < 2) this.interstialAdId = getTempInterstitial();
-		if(this.interstialAdId.indexOf("xxxx") > 0){
-			Log.e("interstitial", "Please put your admob id into the javascript code. No ad to display.");
-			return null;
-		}
+        if (this.interstialAdId.length() == 0 || this.interstialAdId.indexOf("xxxx") > 0) {
+          //in case the user does not enter their own publisher id
+          this.interstialAdId = getTempInterstitial();
+
+          Log.e("interstitial", "Please put your admob id into the javascript code. Test ad is used.");
+        }
+
         final CallbackContext delayCallback = callbackContext;
         cordova.getActivity().runOnUiThread(new Runnable(){
             @Override
@@ -466,14 +469,14 @@ public class AdMob extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable(){
             @Override
             public void run() {
-            	
+
 	                if(interstitialAd.isLoaded()) {
 	                    interstitialAd.show();
-	                } else {					
+	                } else {
 	                	Log.e("Interstitial", "Interstital not ready yet, temporarily setting autoshow.");
 	                	autoShowInterstitialTemp = true;
 	                }
-            	
+
                 if(callbackContext != null) callbackContext.success();
             }
         });
@@ -637,12 +640,12 @@ public class AdMob extends CordovaPlugin {
     }
 
     private String getTempInterstitial(){
-    	return "ca-app-pub-9606049518741138/6843800409";
+    	return "ca-app-pub-3940256099942544/1033173712";
     }
     private String getTempBanner(){
-    	return "ca-app-pub-9606049518741138/5367067208";
+    	return "ca-app-pub-3940256099942544/6300978111";
     }
-    
+
     public static final String md5(final String s) {
         try {
             MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
@@ -661,7 +664,6 @@ public class AdMob extends CordovaPlugin {
         }
         return "";
     }
-    
+
 
 }
-

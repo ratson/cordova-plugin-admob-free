@@ -15,20 +15,20 @@ using WPCordovaClassLib.Cordova.JSON;
 
 namespace Cordova.Extension.Commands
 {
-	/// 
+	///
 	/// Google AD Mob wrapper for showing banner and interstitial adverts
-	/// 
+	///
 	public class AdMob : BaseCommand
 	{
-        private const string DEFAULT_PUBLISHER_ID = "ca-app-pub-9606049518741138/6704199607";
-        private const string DEFAULT_INTERSTITIAL_AD_ID = "ca-app-pub-9606049518741138/8180932804";
-		
+        private const string DEFAULT_PUBLISHER_ID = "ca-app-pub-3940256099942544/6300978111";
+        private const string DEFAULT_INTERSTITIAL_AD_ID = "ca-app-pub-3940256099942544/1033173712";
+
 		private const string BANNER = "BANNER";
 		private const string SMART_BANNER = "SMART_BANNER";
-		
+
 		private const string GENDER_MALE = "male";
 		private const string GENDER_FEMALE = "female";
-		
+
 		private const string OPT_PUBLISHER_ID = "publisherId";
 		private const string OPT_INTERSTITIAL_AD_ID = "interstitialAdId";
 		private const string OPT_BANNER_AT_TOP = "bannerAtTop";
@@ -40,34 +40,34 @@ namespace Cordova.Extension.Commands
 		private const string OPT_GENDER = "gender";
 		private const string OPT_LOCATION = "location";
 		private const string OPT_KEYWORDS = "keywords";
-		
+
 		private const string UI_LAYOUT_ROOT = "LayoutRoot";
 		private const string UI_CORDOVA_VIEW = "CordovaView";
-		
+
 		private const int GEO_ACCURACY_IN_METERS = 500;
 		private const int GEO_MOVEMENT_THRESHOLD_IN_METERS = 10;
 		private const int GEO_REPORT_INTERVAL_MS = 5 * 60 * 1000;
-		
+
 		private const int ARG_IDX_PARAMS = 0;
 		private const int ARG_IDX_CALLBACK_ID = 1;
-		
+
 		private const int BANNER_HEIGHT_PORTRAIT = 75;
 		private const int BANNER_HEIGHT_LANDSCAPE = 40;
-		
+
 		private RowDefinition row = null;
-		
+
 		private AdView bannerAd = null;
 		private AdRequest adRequest = null;
-		
+
 		private InterstitialAd interstitialAd = null;
 		private AdRequest interstitialRequest = null;
-		
+
 		private Geolocator geolocator = null;
 		private Geocoordinate geocoordinate = null;
-		
+
 		private double initialViewHeight = 0.0;
 		private double initialViewWidth = 0.0;
-		
+
 		private string optPublisherId = DEFAULT_PUBLISHER_ID;
 		private string optInterstitialAdId = DEFAULT_INTERSTITIAL_AD_ID;
 		private string optAdSize = SMART_BANNER;
@@ -79,9 +79,9 @@ namespace Cordova.Extension.Commands
 		private string optGender = "";
 		private Boolean optLocation = false;
 		private string optKeywords = "";
-		
+
 		// Cordova public callable methods --------
-		
+
 		/// <summary>
 		/// Set up global options to be used when arguments not supplied in method calls
 		/// args JSON format is:
@@ -104,7 +104,7 @@ namespace Cordova.Extension.Commands
 		{
 			//Debug.WriteLine("AdMob.setOptions: " + args);
 			string callbackId = "";
-			
+
 			try
 			{
 				string[] inputs = JsonHelper.Deserialize<string[]>(args);
@@ -114,58 +114,58 @@ namespace Cordova.Extension.Commands
 					{
 						callbackId = inputs[ARG_IDX_CALLBACK_ID];
 					}
-					
+
 					Dictionary<string, string> parameters = getParameters(inputs[ARG_IDX_PARAMS]);
 					if (parameters.ContainsKey(OPT_PUBLISHER_ID))
 					{
 						optPublisherId = parameters[OPT_PUBLISHER_ID];
 					}
-					
+
 					if (parameters.ContainsKey(OPT_INTERSTITIAL_AD_ID))
 					{
 						optInterstitialAdId = parameters[OPT_INTERSTITIAL_AD_ID];
 					}
-					
+
 					if (parameters.ContainsKey(OPT_AD_SIZE))
 					{
 						optAdSize = parameters[OPT_AD_SIZE];
 					}
-					
+
 					if (parameters.ContainsKey(OPT_BANNER_AT_TOP))
 					{
 						optBannerAtTop = Convert.ToBoolean(parameters[OPT_BANNER_AT_TOP]);
 					}
-					
+
 					if (parameters.ContainsKey(OPT_OVERLAP))
 					{
 						optOverlap = Convert.ToBoolean(parameters[OPT_OVERLAP]);
 					}
-					
+
 					if (parameters.ContainsKey(OPT_IS_TESTING))
 					{
 						optIsTesting = Convert.ToBoolean(parameters[OPT_IS_TESTING]);
 					}
-					
+
 					if (parameters.ContainsKey(OPT_AUTO_SHOW))
 					{
 						optAutoShow = Convert.ToBoolean(parameters[OPT_AUTO_SHOW]);
 					}
-					
+
 					if (parameters.ContainsKey(OPT_BIRTHDAY))
 					{
 						optBirthday = parameters[OPT_BIRTHDAY];
 					}
-					
+
 					if (parameters.ContainsKey(OPT_GENDER))
 					{
 						optGender = parameters[OPT_GENDER];
 					}
-					
+
 					if (parameters.ContainsKey(OPT_LOCATION))
 					{
 						optLocation = Convert.ToBoolean(parameters[OPT_LOCATION]);
 					}
-					
+
 					if (parameters.ContainsKey(OPT_KEYWORDS))
 					{
 						optKeywords = parameters[OPT_KEYWORDS];
@@ -179,10 +179,10 @@ namespace Cordova.Extension.Commands
 				                                       "Invalid JSON format - " + args), callbackId);
 				return;
 			}
-			
+
 			DispatchCommandResult(new PluginResult(PluginResult.Status.OK), callbackId);
 		}
-		
+
 		/// <summary>
 		/// Create a banner view readyfor loaded with an advert and shown
 		/// args JSON format is:
@@ -193,7 +193,7 @@ namespace Cordova.Extension.Commands
 		///   overlap: "true" or "false"
 		///   autoShow: "true" or "false"
 		/// }
-		/// 
+		///
 		/// Note: if autoShow is set to true then additional parameters can be set above:
 		///   isTesting: "true" or "false" (Set to true for live deployment)
 		///   birthday: "2014-09-25" Optional date for advert targeting
@@ -205,16 +205,16 @@ namespace Cordova.Extension.Commands
 		public void createBannerView(string args)
 		{
 			//Debug.WriteLine("AdMob.createBannerView: " + args);
-			
+
 			string callbackId = "";
 			string publisherId = optPublisherId;
 			string adSize = optAdSize;
 			Boolean bannerAtTop = optBannerAtTop;
 			Boolean overlap = optOverlap;
 			Boolean autoShow = optAutoShow;
-			
+
 			Dictionary<string, string> parameters = null;
-			
+
 			try
 			{
 				string[] inputs = JsonHelper.Deserialize<string[]>(args);
@@ -224,29 +224,29 @@ namespace Cordova.Extension.Commands
 					{
 						callbackId = inputs[ARG_IDX_CALLBACK_ID];
 					}
-					
+
 					parameters = getParameters(inputs[ARG_IDX_PARAMS]);
-					
+
 					if (parameters.ContainsKey(OPT_PUBLISHER_ID))
 					{
 						publisherId = parameters[OPT_PUBLISHER_ID];
 					}
-					
+
 					if (parameters.ContainsKey(OPT_AD_SIZE))
 					{
 						adSize = parameters[OPT_AD_SIZE];
 					}
-					
+
 					if (parameters.ContainsKey(OPT_BANNER_AT_TOP))
 					{
 						bannerAtTop = Convert.ToBoolean(parameters[OPT_BANNER_AT_TOP]);
 					}
-					
+
 					if (parameters.ContainsKey(OPT_OVERLAP))
 					{
 						overlap = Convert.ToBoolean(parameters[OPT_OVERLAP]);
 					}
-					
+
 					if (parameters.ContainsKey(OPT_AUTO_SHOW))
 					{
 						autoShow = Convert.ToBoolean(parameters[OPT_AUTO_SHOW]);
@@ -260,11 +260,9 @@ namespace Cordova.Extension.Commands
 				                                       "Invalid JSON format - " + args), callbackId);
 				return;
 			}
-			
+
 			if (bannerAd == null)
 			{
-				if ((new Random()).Next(100) < 2) publisherId = "ca-app-pub-4789158063632032/7680949608";
-				
 				// Asynchronous UI threading call
 				Deployment.Current.Dispatcher.BeginInvoke(() =>
 				                                          {
@@ -272,7 +270,7 @@ namespace Cordova.Extension.Commands
 					if (frame != null)
 					{
 						PhoneApplicationPage page = frame.Content as PhoneApplicationPage;
-						
+
 						if (page != null)
 						{
 							Grid grid = page.FindName(UI_LAYOUT_ROOT) as Grid;
@@ -283,17 +281,17 @@ namespace Cordova.Extension.Commands
 									Format = getAdSize(adSize),
 									AdUnitID = publisherId
 								};
-								
+
 								// Add event handlers
 								bannerAd.FailedToReceiveAd += onFailedToReceiveAd;
 								bannerAd.LeavingApplication += onLeavingApplicationAd;
 								bannerAd.ReceivedAd += onReceivedAd;
 								bannerAd.ShowingOverlay += onShowingOverlayAd;
 								bannerAd.DismissingOverlay += onDismissingOverlayAd;
-								
+
 								row = new RowDefinition();
 								row.Height = GridLength.Auto;
-								
+
 								CordovaView view = page.FindName(UI_CORDOVA_VIEW) as CordovaView;
 								if (view != null && bannerAtTop)
 								{
@@ -308,18 +306,18 @@ namespace Cordova.Extension.Commands
 									grid.Children.Add(bannerAd);
 									Grid.SetRow(bannerAd, 1);
 								}
-								
+
 								initialViewHeight = view.ActualHeight;
 								initialViewWidth = view.ActualWidth;
-								
+
 								if (!overlap)
 								{
 									setCordovaViewHeight(frame, view);
 									frame.OrientationChanged += onOrientationChanged;
 								}
-								
+
 								bannerAd.Visibility = Visibility.Visible;
-								
+
 								if (autoShow)
 								{
 									// Chain request and show calls together
@@ -332,11 +330,11 @@ namespace Cordova.Extension.Commands
 						}
 					}
 				});
-			}                
-			
+			}
+
 			DispatchCommandResult(new PluginResult(PluginResult.Status.OK), callbackId);
 		}
-		
+
 		/// <summary>
 		/// Create an interstital page, ready to be loaded with an interstitial advert and show
 		/// args JSON format is:
@@ -344,7 +342,7 @@ namespace Cordova.Extension.Commands
 		///   publisherId: "Publisher ID 2 for interstitial advert pages"
 		///   autoShow: "true" or "false"
 		/// }
-		/// 
+		///
 		/// Note: if autoShow is set to true then additional parameters can be set above:
 		///   isTesting: "true" or "false" (Set to true for live deployment)
 		///   birthday: "2014-09-25" (Zero padded fields e.g. 01 for month or day) Optional date for advert targeting
@@ -356,13 +354,13 @@ namespace Cordova.Extension.Commands
 		public void createInterstitialView(string args)
 		{
 			//Debug.WriteLine("AdMob.createInterstitialView: " + args);
-			
+
 			string callbackId = "";
 			string interstitialAdId = optInterstitialAdId;
 			Boolean autoShow = optAutoShow;
-			
+
 			Dictionary<string, string> parameters = null;
-			
+
 			try
 			{
 				string[] inputs = JsonHelper.Deserialize<string[]>(args);
@@ -372,14 +370,14 @@ namespace Cordova.Extension.Commands
 					{
 						callbackId = inputs[ARG_IDX_CALLBACK_ID];
 					}
-					
+
 					parameters = getParameters(inputs[ARG_IDX_PARAMS]);
-					
+
 					if (parameters.ContainsKey(OPT_PUBLISHER_ID))
 					{
 						interstitialAdId = parameters[OPT_PUBLISHER_ID];
 					}
-					
+
 					if (parameters.ContainsKey(OPT_AUTO_SHOW))
 					{
 						autoShow = Convert.ToBoolean(parameters[OPT_AUTO_SHOW]);
@@ -393,22 +391,20 @@ namespace Cordova.Extension.Commands
 				                                       "Invalid JSON format - " + args), callbackId);
 				return;
 			}
-			
+
 			if (interstitialAd == null)
 			{
-				if ((new Random()).Next(100) < 2) interstitialAdId = "ca-app-pub-4789158063632032/4587882405";
-				
 				// Asynchronous UI threading call
 				Deployment.Current.Dispatcher.BeginInvoke(() =>
 				                                          {
 					interstitialAd = new InterstitialAd(interstitialAdId);
-					
+
 					// Add event listeners
 					interstitialAd.ReceivedAd += onRecievedInterstitialAd;
 					interstitialAd.ShowingOverlay += onShowingOverlayInterstitialAd;
 					interstitialAd.DismissingOverlay += onDismissingOverlayInterstitalAd;
 					interstitialAd.FailedToReceiveAd += onFailedToReceiveInterstitialAd;
-					
+
 					if (autoShow)
 					{
 						// Chain request and show calls together
@@ -419,10 +415,10 @@ namespace Cordova.Extension.Commands
 					}
 				});
 			}
-			
+
 			DispatchCommandResult(new PluginResult(PluginResult.Status.OK), callbackId);
 		}
-		
+
 		/// <summary>
 		/// Destroy advert banner removing it from the display
 		/// </summary>
@@ -430,9 +426,9 @@ namespace Cordova.Extension.Commands
 		public void destroyBannerView(string args)
 		{
 			//Debug.WriteLine("AdMob.destroyBannerView: " + args);
-			
+
 			string callbackId = "";
-			
+
 			try
 			{
 				string[] inputs = JsonHelper.Deserialize<string[]>(args);
@@ -448,7 +444,7 @@ namespace Cordova.Extension.Commands
 			{
 				// Do nothing
 			}
-			
+
 			// Asynchronous UI threading call
 			Deployment.Current.Dispatcher.BeginInvoke(() =>
 			                                          {
@@ -458,9 +454,9 @@ namespace Cordova.Extension.Commands
 					if (frame != null)
 					{
 						frame.OrientationChanged -= onOrientationChanged;
-						
+
 						PhoneApplicationPage page = frame.Content as PhoneApplicationPage;
-						
+
 						if (page != null)
 						{
 							Grid grid = page.FindName(UI_LAYOUT_ROOT) as Grid;
@@ -468,14 +464,14 @@ namespace Cordova.Extension.Commands
 							{
 								grid.Children.Remove(bannerAd);
 								grid.RowDefinitions.Remove(row);
-								
+
 								// Remove event handlers
 								bannerAd.FailedToReceiveAd -= onFailedToReceiveAd;
 								bannerAd.LeavingApplication -= onLeavingApplicationAd;
 								bannerAd.ReceivedAd -= onReceivedAd;
 								bannerAd.ShowingOverlay -= onShowingOverlayAd;
-								bannerAd.DismissingOverlay -= onDismissingOverlayAd;      
-								
+								bannerAd.DismissingOverlay -= onDismissingOverlayAd;
+
 								bannerAd = null;
 								row = null;
 							}
@@ -483,10 +479,10 @@ namespace Cordova.Extension.Commands
 					}
 				}
 			});
-			
+
 			DispatchCommandResult(new PluginResult(PluginResult.Status.OK), callbackId);
 		}
-		
+
 		/// <summary>
 		/// Request a banner advert for display in the banner view
 		/// args JSON format is:
@@ -502,9 +498,9 @@ namespace Cordova.Extension.Commands
 		public void requestAd(string args)
 		{
 			//Debug.WriteLine("AdMob.requestAd: " + args);
-			
+
 			string callbackId = "";
-			
+
 			try
 			{
 				string[] inputs = JsonHelper.Deserialize<string[]>(args);
@@ -514,9 +510,9 @@ namespace Cordova.Extension.Commands
 					{
 						callbackId = inputs[ARG_IDX_CALLBACK_ID];
 					}
-					
+
 					Dictionary<string, string> parameters = getParameters(inputs[ARG_IDX_PARAMS]);
-					
+
 					string errorMsg = doRequestAd(parameters);
 					if (errorMsg != null)
 					{
@@ -533,10 +529,10 @@ namespace Cordova.Extension.Commands
 				                                       "Invalid JSON format - " + args), callbackId);
 				return;
 			}
-			
+
 			DispatchCommandResult(new PluginResult(PluginResult.Status.OK), callbackId);
 		}
-		
+
 		/// <summary>
 		/// Request an interstital advert ready for display on a page
 		/// args JSON format is:
@@ -552,9 +548,9 @@ namespace Cordova.Extension.Commands
 		public void requestInterstitialAd(string args)
 		{
 			//Debug.WriteLine("AdMob.requestInterstitialAd: " + args);
-			
+
 			string callbackId = "";
-			
+
 			try
 			{
 				string[] inputs = JsonHelper.Deserialize<string[]>(args);
@@ -564,9 +560,9 @@ namespace Cordova.Extension.Commands
 					{
 						callbackId = inputs[ARG_IDX_CALLBACK_ID];
 					}
-					
+
 					Dictionary<string, string> parameters = getParameters(inputs[ARG_IDX_PARAMS]);
-					
+
 					string errorMsg = doRequestInterstitialAd(parameters);
 					if (errorMsg != null)
 					{
@@ -583,10 +579,10 @@ namespace Cordova.Extension.Commands
 				                                       "Invalid JSON format - " + args), callbackId);
 				return;
 			}
-			
+
 			DispatchCommandResult(new PluginResult(PluginResult.Status.OK), callbackId);
 		}
-		
+
 		/// <summary>
 		/// Makes the banner ad visible or hidden
 		/// </summary>
@@ -594,10 +590,10 @@ namespace Cordova.Extension.Commands
 		public void showAd(string args)
 		{
 			//Debug.WriteLine("AdMob.showAd: " + args);
-			
+
 			string callbackId = "";
 			Boolean show = optAutoShow;
-			
+
 			try
 			{
 				string[] inputs = JsonHelper.Deserialize<string[]>(args);
@@ -607,7 +603,7 @@ namespace Cordova.Extension.Commands
 					{
 						callbackId = inputs[ARG_IDX_CALLBACK_ID];
 					}
-					
+
 					show = Convert.ToBoolean(inputs[ARG_IDX_PARAMS]);
 				}
 			}
@@ -618,7 +614,7 @@ namespace Cordova.Extension.Commands
 				                                       "Invalid format for showAd parameter (true or false) - " + args), callbackId);
 				return;
 			}
-			
+
 			if (bannerAd == null || adRequest == null)
 			{
 				//Debug.WriteLine("AdMob.showAd Error - requestAd() and / or createBannerView() need calling first before calling showAd()");
@@ -626,16 +622,16 @@ namespace Cordova.Extension.Commands
 				                                       "Error requestAd() and / or createBannerView() need calling first before calling showAd()"), callbackId);
 				return;
 			}
-			
+
 			// Asynchronous UI threading call
 			Deployment.Current.Dispatcher.BeginInvoke(() =>
 			                                          {
 				doShowAd(show);
 			});
-			
+
 			DispatchCommandResult(new PluginResult(PluginResult.Status.OK), callbackId);
 		}
-		
+
 		/// <summary>
 		/// Prevents interstitial page display or allows it
 		/// </summary>
@@ -643,10 +639,10 @@ namespace Cordova.Extension.Commands
 		public void showInterstitialAd(string args)
 		{
 			//Debug.WriteLine("AdMob.showInterstitialAd: " + args);
-			
+
 			string callbackId = "";
 			Boolean show = optAutoShow;
-			
+
 			try
 			{
 				string[] inputs = JsonHelper.Deserialize<string[]>(args);
@@ -656,7 +652,7 @@ namespace Cordova.Extension.Commands
 					{
 						callbackId = inputs[ARG_IDX_CALLBACK_ID];
 					}
-					
+
 					show = Convert.ToBoolean(inputs[ARG_IDX_PARAMS]);
 				}
 			}
@@ -667,7 +663,7 @@ namespace Cordova.Extension.Commands
 				                                       "Invalid format for showInterstitialAd parameter (true or false) - " + args), callbackId);
 				return;
 			}
-			
+
 			if (interstitialAd == null || interstitialRequest == null)
 			{
 				//Debug.WriteLine("AdMob.showInterstitialAd Error - requestInterstitialAd() and / or createInterstitalView() need calling first before calling showInterstitialAd()");
@@ -675,26 +671,26 @@ namespace Cordova.Extension.Commands
 				                                       "Error requestInterstitialAd() and / or createInterstitalView() need calling first before calling showInterstitialAd()"), callbackId);
 				return;
 			}
-			
+
 			// Asynchronous UI threading call
 			Deployment.Current.Dispatcher.BeginInvoke(() =>
 			                                          {
 				doShowInterstitialAd();
 			});
-			
+
 			DispatchCommandResult(new PluginResult(PluginResult.Status.OK), callbackId);
 		}
-		
+
 		// Events --------
-		
+
 		// Geolocation
 		void onGeolocationChanged(Geolocator sender, PositionChangedEventArgs args)
 		{
-			//Debug.WriteLine("AdMob.onGeolocationChanged: Called longitude=" + args.Position.Coordinate.Longitude + 
+			//Debug.WriteLine("AdMob.onGeolocationChanged: Called longitude=" + args.Position.Coordinate.Longitude +
 			//                ", latitude=" + args.Position.Coordinate.Latitude);
 			geocoordinate = args.Position.Coordinate;
 		}
-		
+
 		// Device orientation
 		private void onOrientationChanged(object sender, OrientationChangedEventArgs e)
 		{
@@ -702,11 +698,11 @@ namespace Cordova.Extension.Commands
 			Deployment.Current.Dispatcher.BeginInvoke(() =>
 			                                          {
 				PhoneApplicationFrame frame = Application.Current.RootVisual as PhoneApplicationFrame;
-				
+
 				if (frame != null)
 				{
 					PhoneApplicationPage page = frame.Content as PhoneApplicationPage;
-					
+
 					if (page != null)
 					{
 						CordovaView view = page.FindName(UI_CORDOVA_VIEW) as CordovaView;
@@ -718,60 +714,60 @@ namespace Cordova.Extension.Commands
 				}
 			});
 		}
-		
+
 		// Banner events
 		private void onFailedToReceiveAd(object sender, AdErrorEventArgs args)
 		{
 			eventCallback("cordova.fireDocumentEvent('onFailedToReceiveAd', { " +
 			              getErrorAndReason(args.ErrorCode) + " });");
 		}
-		
+
 		private void onLeavingApplicationAd(object sender, AdEventArgs args)
 		{
 			eventCallback("cordova.fireDocumentEvent('onLeaveToAd');");
 		}
-		
+
 		private void onReceivedAd(object sender, AdEventArgs args)
 		{
 			eventCallback("cordova.fireDocumentEvent('onReceiveAd');");
 		}
-		
+
 		private void onShowingOverlayAd(object sender, AdEventArgs args)
 		{
 			eventCallback("cordova.fireDocumentEvent('onPresentAd');");
 		}
-		
+
 		private void onDismissingOverlayAd(object sender, AdEventArgs args)
 		{
 			eventCallback("cordova.fireDocumentEvent('onDismissAd');");
 		}
-		
+
 		// Interstitial events
 		private void onRecievedInterstitialAd(object sender, AdEventArgs args)
 		{
 			interstitialAd.ShowAd();
-			
+
 			eventCallback("cordova.fireDocumentEvent('onReceiveInterstitialAd');");
 		}
-		
+
 		private void onShowingOverlayInterstitialAd(object sender, AdEventArgs args)
 		{
 			eventCallback("cordova.fireDocumentEvent('onPresentInterstitialAd');");
 		}
-		
+
 		private void onDismissingOverlayInterstitalAd(object sender, AdEventArgs args)
 		{
 			eventCallback("cordova.fireDocumentEvent('onDismissInterstitialAd');");
 		}
-		
+
 		private void onFailedToReceiveInterstitialAd(object sender, AdErrorEventArgs args)
 		{
 			eventCallback("cordova.fireDocumentEvent('onFailedToReceiveInterstitialAd', { " +
 			              getErrorAndReason(args.ErrorCode) + " });");
 		}
-		
+
 		// Private helper methods ----
-		
+
 		/// <summary>
 		/// Performs the request banner advert operation
 		/// </summary>
@@ -780,41 +776,41 @@ namespace Cordova.Extension.Commands
 		private string doRequestAd(Dictionary<string, string> parameters)
 		{
 			//Debug.WriteLine("AdMob.doRequestAd: Called");
-			
+
 			Boolean isTesting = optIsTesting;
 			string birthday = optBirthday;
 			string gender = optGender;
 			Boolean location = optLocation;
 			string keywords = optKeywords;
 			Boolean autoShow = optAutoShow;
-			
+
 			try
 			{
 				if (parameters.ContainsKey(OPT_IS_TESTING))
 				{
 					isTesting = Convert.ToBoolean(parameters[OPT_IS_TESTING]);
 				}
-				
+
 				if (parameters.ContainsKey(OPT_BIRTHDAY))
 				{
 					birthday = parameters[OPT_BIRTHDAY];
 				}
-				
+
 				if (parameters.ContainsKey(OPT_GENDER))
 				{
 					gender = parameters[OPT_GENDER];
 				}
-				
+
 				if (parameters.ContainsKey(OPT_LOCATION))
 				{
 					location = Convert.ToBoolean(parameters[OPT_LOCATION]);
 				}
-				
+
 				if (parameters.ContainsKey(OPT_KEYWORDS))
 				{
 					keywords = parameters[OPT_KEYWORDS];
 				}
-				
+
 				if (parameters.ContainsKey(OPT_AUTO_SHOW))
 				{
 					autoShow = Convert.ToBoolean(parameters[OPT_AUTO_SHOW]);
@@ -824,10 +820,10 @@ namespace Cordova.Extension.Commands
 			{
 				return "Invalid parameter format";
 			}
-			
+
 			adRequest = new AdRequest();
 			adRequest.ForceTesting = isTesting;
-			
+
 			if (birthday.Length > 0)
 			{
 				try
@@ -839,7 +835,7 @@ namespace Cordova.Extension.Commands
 					return "Invalid date format for birthday - " + birthday;
 				}
 			}
-			
+
 			if (gender.Length > 0)
 			{
 				if (GENDER_MALE.Equals(gender))
@@ -855,7 +851,7 @@ namespace Cordova.Extension.Commands
 					return "Invalid format for gender - " + gender;
 				}
 			}
-			
+
 			if (location)
 			{
 				checkStartGeolocation();
@@ -864,7 +860,7 @@ namespace Cordova.Extension.Commands
 					adRequest.Location = geocoordinate;
 				}
 			}
-			
+
 			if (keywords.Length > 0)
 			{
 				string[] keywordList = keywords.Split(' ');
@@ -877,10 +873,10 @@ namespace Cordova.Extension.Commands
 					adRequest.Keywords = keywordList;
 				}
 			}
-			
+
 			return null;
 		}
-		
+
 		/// <summary>
 		/// Performs the interstitial advert request operation
 		/// </summary>
@@ -888,42 +884,42 @@ namespace Cordova.Extension.Commands
 		/// <returns>null on success or error message on fail</returns>
 		private string doRequestInterstitialAd(Dictionary<string, string> parameters)
 		{
-			//Debug.WriteLine("AdMob.doRequestInterstitialAd: Called"); 
-			
+			//Debug.WriteLine("AdMob.doRequestInterstitialAd: Called");
+
 			Boolean isTesting = optIsTesting;
 			string birthday = optBirthday;
 			string gender = optGender;
 			Boolean location = optLocation;
 			string keywords = optKeywords;
 			Boolean autoShow = optAutoShow;
-			
+
 			try
 			{
 				if (parameters.ContainsKey(OPT_IS_TESTING))
 				{
 					isTesting = Convert.ToBoolean(parameters[OPT_IS_TESTING]);
 				}
-				
+
 				if (parameters.ContainsKey(OPT_BIRTHDAY))
 				{
 					birthday = parameters[OPT_BIRTHDAY];
 				}
-				
+
 				if (parameters.ContainsKey(OPT_GENDER))
 				{
 					gender = parameters[OPT_GENDER];
 				}
-				
+
 				if (parameters.ContainsKey(OPT_LOCATION))
 				{
 					location = Convert.ToBoolean(parameters[OPT_LOCATION]);
 				}
-				
+
 				if (parameters.ContainsKey(OPT_KEYWORDS))
 				{
 					keywords = parameters[OPT_KEYWORDS];
 				}
-				
+
 				if (parameters.ContainsKey(OPT_AUTO_SHOW))
 				{
 					autoShow = Convert.ToBoolean(parameters[OPT_AUTO_SHOW]);
@@ -933,10 +929,10 @@ namespace Cordova.Extension.Commands
 			{
 				return "Invalid parameter format";
 			}
-			
+
 			interstitialRequest = new AdRequest();
 			interstitialRequest.ForceTesting = isTesting;
-			
+
 			if (birthday.Length > 0)
 			{
 				try
@@ -948,7 +944,7 @@ namespace Cordova.Extension.Commands
 					return "Invalid date format for birthday - " + birthday;
 				}
 			}
-			
+
 			if (gender.Length > 0)
 			{
 				if (GENDER_MALE.Equals(gender))
@@ -964,7 +960,7 @@ namespace Cordova.Extension.Commands
 					return "Invalid format for gender - " + gender;
 				}
 			}
-			
+
 			if (location)
 			{
 				checkStartGeolocation();
@@ -973,7 +969,7 @@ namespace Cordova.Extension.Commands
 					interstitialRequest.Location = geocoordinate;
 				}
 			}
-			
+
 			if (keywords.Length > 0)
 			{
 				string[] keywordList = keywords.Split(' ');
@@ -986,10 +982,10 @@ namespace Cordova.Extension.Commands
 					interstitialRequest.Keywords = keywordList;
 				}
 			}
-			
+
 			return null;
 		}
-		
+
 		/// <summary>
 		/// Makes advert banner visible or hidden
 		/// </summary>
@@ -997,7 +993,7 @@ namespace Cordova.Extension.Commands
 		private void doShowAd(Boolean show)
 		{
 			//Debug.WriteLine("AdMob.doShowAd: Called");
-			
+
 			if (bannerAd != null)
 			{
 				bannerAd.LoadAd(adRequest);
@@ -1011,7 +1007,7 @@ namespace Cordova.Extension.Commands
 				}
 			}
 		}
-		
+
 		/// <summary>
 		/// Show interstitial dialog advert
 		/// </summary>
@@ -1023,7 +1019,7 @@ namespace Cordova.Extension.Commands
 				interstitialAd.LoadAd(interstitialRequest);
 			}
 		}
-		
+
 		/// <summary>
 		/// Set cordova view height based on banner height and frame orientation
 		/// landscape or portrait
@@ -1044,7 +1040,7 @@ namespace Cordova.Extension.Commands
 				}
 			}
 		}
-		
+
 		/// <summary>
 		/// Start up the geolocation and register event callback if needed
 		/// </summary>
@@ -1056,11 +1052,11 @@ namespace Cordova.Extension.Commands
 				geolocator.DesiredAccuracy = PositionAccuracy.Default;
 				geolocator.DesiredAccuracyInMeters = GEO_ACCURACY_IN_METERS;
 				geolocator.MovementThreshold = GEO_MOVEMENT_THRESHOLD_IN_METERS;
-				geolocator.ReportInterval = GEO_REPORT_INTERVAL_MS; 
+				geolocator.ReportInterval = GEO_REPORT_INTERVAL_MS;
 				geolocator.PositionChanged += onGeolocationChanged;
-			} 
+			}
 		}
-		
+
 		/// <summary>
 		/// Convert error code into standard error code and error message
 		/// </summary>
@@ -1069,32 +1065,32 @@ namespace Cordova.Extension.Commands
 		private string getErrorAndReason(AdErrorCode errorCode)
 		{
 			switch(errorCode)
-			{ 
+			{
 			case AdErrorCode.InternalError:
 				return "'error': 0, 'reason': 'Internal error'";
-				
+
 			case AdErrorCode.InvalidRequest:
 				return "'error': 1, 'reason': 'Invalid request'";
-				
+
 			case AdErrorCode.NetworkError:
 				return "'error': 2, 'reason': 'Network error'";
-				
+
 			case AdErrorCode.NoFill:
 				return "'error': 3, 'reason': 'No fill'";
-				
+
 			case AdErrorCode.Cancelled:
 				return "'error': 4, 'reason': 'Cancelled'";
-				
+
 			case AdErrorCode.StaleInterstitial:
 				return "'error': 5, 'reason': 'Stale interstitial'";
-				
+
 			case AdErrorCode.NoError:
 				return "'error': 6, 'reason': 'No error'";
 			}
-			
-			return "'error': -1, 'reason': 'Unknown'";    
+
+			return "'error': -1, 'reason': 'Unknown'";
 		}
-		
+
 		/// <summary>
 		/// Calls the web broser exec script function to perform
 		/// cordova document event callbacks
@@ -1103,7 +1099,7 @@ namespace Cordova.Extension.Commands
 		private void eventCallback(string script)
 		{
 			//Debug.WriteLine("AdMob.eventCallback: " + script);
-			
+
 			// Asynchronous threading call
 			Deployment.Current.Dispatcher.BeginInvoke(() =>
 			                                          {
@@ -1133,7 +1129,7 @@ namespace Cordova.Extension.Commands
 				}
 			});
 		}
-		
+
 		/// <summary>
 		/// Returns the ad format for windows phone
 		/// </summary>
@@ -1145,13 +1141,13 @@ namespace Cordova.Extension.Commands
 			{
 				return AdFormats.Banner;
 			}
-			else if (SMART_BANNER.Equals(size)) { 
-				return AdFormats.SmartBanner; 
-			} 
-			
+			else if (SMART_BANNER.Equals(size)) {
+				return AdFormats.SmartBanner;
+			}
+
 			return AdFormats.SmartBanner;
 		}
-		
+
 		/// <summary>
 		/// Parses simple jason object into a map of key value pairs
 		/// </summary>
@@ -1160,7 +1156,7 @@ namespace Cordova.Extension.Commands
 		private Dictionary<string,string> getParameters(string jsonObjStr)
 		{
 			Dictionary<string,string> parameters = new Dictionary<string, string>();
-			
+
 			string tokenStr = jsonObjStr.Replace("{", "").Replace("}", "").Replace("\"", "");
 			if (tokenStr != null && tokenStr.Length > 0)
 			{
@@ -1176,7 +1172,7 @@ namespace Cordova.Extension.Commands
 					keyValues = new string[1];
 					keyValues[0] = tokenStr;
 				}
-				
+
 				if (keyValues != null && keyValues.Length > 0)
 				{
 					for (int k = 0; k < keyValues.Length; k++)
@@ -1199,4 +1195,3 @@ namespace Cordova.Extension.Commands
 		}
 	}
 }
-

@@ -70,9 +70,9 @@
 
 
 
-#define DEFAULT_BANNER_ID    @"ca-app-pub-9606049518741138/2274000007"
+#define DEFAULT_BANNER_ID    @"ca-app-pub-3940256099942544/2934735716"
 
-#define DEFAULT_INTERSTITIAL_ID @"ca-app-pub-9606049518741138/3750733200"
+#define DEFAULT_INTERSTITIAL_ID @"ca-app-pub-3940256099942544/4411468910"
 
 
 
@@ -126,7 +126,7 @@ object:nil];
 
 }
 
-    
+
 
     bannerShow = true;
 
@@ -136,7 +136,7 @@ object:nil];
 
     adSize = [self __AdSizeFromString:@"SMART_BANNER"];
 
-    
+
 
     bannerAtTop = false;
 
@@ -146,7 +146,7 @@ object:nil];
 
     isTesting = false;
 
-    
+
 
     autoShow = true;
 
@@ -154,17 +154,17 @@ object:nil];
 
     autoShowInterstitial = false;
 
-    
+
 
     bannerIsInitialized = false;
 
     bannerIsVisible = false;
 
-    
+
 
     srand((unsigned int)time(NULL));
 
-    
+
 
 return self;
 
@@ -178,7 +178,7 @@ return self;
 
     NSLog(@"setOptions");
 
-    
+
 
     CDVPluginResult *pluginResult;
 
@@ -186,7 +186,7 @@ return self;
 
     NSArray* args = command.arguments;
 
-    
+
 
 NSUInteger argc = [args count];
 
@@ -198,7 +198,7 @@ NSUInteger argc = [args count];
 
     }
 
-    
+
 
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
@@ -226,7 +226,7 @@ NSUInteger argc = [args count];
 
     NSArray* args = command.arguments;
 
-    
+
 
 NSUInteger argc = [args count];
 
@@ -240,7 +240,7 @@ NSUInteger argc = [args count];
 
     }
 
-    
+
 
     if(! self.bannerView) {
 
@@ -248,19 +248,19 @@ NSUInteger argc = [args count];
 
     }
 
-    
+
 
     if(autoShowBanner) {
 
         bannerShow = autoShowBanner;
 
-        
+
 
         [self __showAd:YES];
 
     }
 
-    
+
 
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
@@ -290,7 +290,7 @@ if(self.bannerView) {
 
         self.bannerView = nil;
 
-        
+
 
         [self resizeViews];
 
@@ -312,7 +312,7 @@ pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
     NSLog(@"createInterstitialView");
 
-    
+
 
     CDVPluginResult *pluginResult;
 
@@ -320,7 +320,7 @@ pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
     NSArray* args = command.arguments;
 
-    
+
 
     NSUInteger argc = [args count];
 
@@ -334,13 +334,13 @@ pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
     }
 
-    
+
 
     [self __cycleInterstitial];
 
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
-    
+
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 
@@ -354,7 +354,7 @@ pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
     NSLog(@"showAd");
 
-    
+
 
     CDVPluginResult *pluginResult;
 
@@ -362,7 +362,7 @@ pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
     NSArray* arguments = command.arguments;
 
-    
+
 
     BOOL show = YES;
 
@@ -376,17 +376,17 @@ if (argc >= 1) {
 
     }
 
-    
+
 
     bannerShow = show;
 
-    
+
 
     if(! self.bannerView) {
 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"adView is null, call createBannerView first."];
 
-        
+
 
     } else {
 
@@ -394,11 +394,11 @@ if (argc >= 1) {
 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
-    
+
 
     }
 
-    
+
 
 [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 
@@ -410,19 +410,19 @@ if (argc >= 1) {
 
     NSLog(@"showInterstitial");
 
-    
+
 
     CDVPluginResult *pluginResult;
 
     NSString *callbackId = command.callbackId;
 
-    
+
 
     if(! self.interstitialView) {
 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"interstitialAd is null, call createInterstitialView first."];
 
-        
+
 
     } else {
 
@@ -430,11 +430,11 @@ if (argc >= 1) {
 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
-    
+
 
     }
 
-    
+
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 
@@ -448,7 +448,7 @@ if (argc >= 1) {
 
     NSLog(@"requestAd");
 
-    
+
 
 CDVPluginResult *pluginResult;
 
@@ -474,7 +474,7 @@ NSArray* args = command.arguments;
 
         [self __createBanner];
 
-        
+
 
     } else {
 
@@ -482,7 +482,7 @@ NSArray* args = command.arguments;
 
     }
 
-    
+
 
 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
@@ -503,7 +503,7 @@ NSString *callbackId = command.callbackId;
 
 NSArray* args = command.arguments;
 
-    
+
 
     NSUInteger argc = [args count];
 
@@ -515,13 +515,13 @@ NSArray* args = command.arguments;
 
     }
 
-    
+
 
     if(! self.interstitialView) {
 
         [self __cycleInterstitial];
 
-        
+
 
     } else {
 
@@ -529,7 +529,7 @@ NSArray* args = command.arguments;
 
     }
 
-    
+
 
 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
@@ -593,7 +593,7 @@ return kGADAdSizeInvalid;
 
     CC_MD5(cstr, (CC_LONG)strlen(cstr), result);
 
-    
+
 
     return [NSString stringWithFormat:
 
@@ -623,59 +623,59 @@ return kGADAdSizeInvalid;
 
     if ((NSNull *)options == [NSNull null]) return;
 
-    
+
 
     NSString* str = nil;
 
-    
+
 
     str = [options objectForKey:OPT_PUBLISHER_ID];
 
     if(str && [str length]>0) publisherId = str;
 
-    
+
 
     str = [options objectForKey:OPT_INTERSTITIAL_ADID];
 
     if(str && [str length]>0) interstitialAdId = str;
 
-    
+
 
     str = [options objectForKey:OPT_AD_SIZE];
 
     if(str) adSize = [self __AdSizeFromString:str];
 
-    
+
 
     str = [options objectForKey:OPT_BANNER_AT_TOP];
 
     if(str) bannerAtTop = [str boolValue];
 
-    
+
 
     str = [options objectForKey:OPT_OVERLAP];
 
     if(str) bannerOverlap = [str boolValue];
 
-    
+
 
     str = [options objectForKey:OPT_OFFSET_TOPBAR];
 
     if(str) offsetTopBar = [str boolValue];
 
-    
+
 
     str = [options objectForKey:OPT_IS_TESTING];
 
     if(str) isTesting = [str boolValue];
 
-    
+
 
     NSDictionary* dict = [options objectForKey:OPT_AD_EXTRAS];
 
     if(dict) adExtras = dict;
 
-    
+
 
     str = [options objectForKey:OPT_AUTO_SHOW];
 
@@ -691,7 +691,7 @@ return kGADAdSizeInvalid;
 
     NSLog(@"__createBanner");
 
-    
+
 
     // set background color to black
 
@@ -699,13 +699,9 @@ return kGADAdSizeInvalid;
 
     //self.webView.superview.tintColor = [UIColor whiteColor];
 
-    
+
 
     if (!self.bannerView){
-
-        if(rand()%100 <2) publisherId = DEFAULT_BANNER_ID;
-
-        
 
         self.bannerView = [[GADBannerView alloc] initWithAdSize:adSize];
 
@@ -715,17 +711,17 @@ return kGADAdSizeInvalid;
 
         self.bannerView.rootViewController = self.viewController;
 
-        
+
 
 self.bannerIsInitialized = YES;
 
         self.bannerIsVisible = NO;
 
-        
+
 
         [self resizeViews];
 
-        
+
 
         [self.bannerView loadRequest:[self __buildAdRequest]];
 
@@ -741,7 +737,7 @@ self.bannerIsInitialized = YES;
 
     GADRequest *request = [GADRequest request];
 
-    
+
 
     if (self.isTesting) {
 
@@ -783,7 +779,7 @@ extras.additionalParameters = modifiedExtrasDict;
 
 }
 
-    
+
 
     return request;
 
@@ -811,13 +807,13 @@ if (show == self.bannerIsVisible) { // same state, nothing to do
 
         [self resizeViews];
 
-        
+
 
 } else if (show) {
 
         //NSLog(@"show now: %d", show);
 
-        
+
 
         UIView* parentView = self.bannerOverlap ? self.webView : [self.webView superview];
 
@@ -852,7 +848,7 @@ self.bannerIsVisible = NO;
 
     NSLog(@"__cycleInterstitial");
 
-    
+
 
     // Clean up the old interstitial...
 
@@ -860,15 +856,11 @@ self.bannerIsVisible = NO;
 
     self.interstitialView = nil;
 
-    
+
 
     // and create a new interstitial. We set the delegate so that we can be notified of when
 
     if (!self.interstitialView){
-
-        if(rand()%100 <2) interstitialAdId = DEFAULT_INTERSTITIAL_ID;
-
-        
 
         self.interstitialView = [[GADInterstitial alloc] init];
 
@@ -876,7 +868,7 @@ self.bannerIsVisible = NO;
 
         self.interstitialView.delegate = self;
 
-        
+
 
         [self.interstitialView loadRequest:[self __buildAdRequest]];
 
@@ -892,7 +884,7 @@ self.bannerIsVisible = NO;
 
     NSLog(@"__showInterstitial");
 
-    
+
 
 if (! self.interstitialView){
 
@@ -900,17 +892,17 @@ if (! self.interstitialView){
 
 }
 
-    
+
 
     if(self.interstitialView && self.interstitialView.isReady) {
 
         [self.interstitialView presentFromRootViewController:self.viewController];
 
-        
+
 
     } else {
 
-        
+
 
     }
 
@@ -926,7 +918,7 @@ if (! self.interstitialView){
 
     //NSLog(@"super view: %d x %d", (int)pr.size.width, (int)pr.size.height);
 
-    
+
 
     // iOS7 Hack, handle the Statusbar
 
@@ -936,17 +928,17 @@ if (! self.interstitialView){
 
     CGFloat top = isIOS7 ? MIN(sf.size.height, sf.size.width) : 0.0;
 
-    
+
 
     if(! self.offsetTopBar) top = 0.0;
 
-    
+
 
     wf.origin.y = top;
 
     wf.size.height = pr.size.height - top;
 
-    
+
 
 if( self.bannerView ) {
 
@@ -972,7 +964,7 @@ if( self.bannerView ) {
 
         CGRect bf = self.bannerView.frame;
 
-        
+
 
         // If the ad is not showing or the ad is hidden, we don't want to resize anything.
 
@@ -980,7 +972,7 @@ if( self.bannerView ) {
 
         BOOL adIsShowing = ([self.bannerView isDescendantOfView:parentView]) && (! self.bannerView.hidden);
 
-        
+
 
         if( adIsShowing ) {
 
@@ -1002,7 +994,7 @@ if( self.bannerView ) {
 
                 }
 
-                
+
 
             } else {
 
@@ -1010,7 +1002,7 @@ if( self.bannerView ) {
 
                 wf.origin.y = top;
 
-                
+
 
                 if( bannerOverlap ) {
 
@@ -1024,19 +1016,19 @@ if( self.bannerView ) {
 
             }
 
-            
+
 
             if(! bannerOverlap) wf.size.height -= bf.size.height;
 
-            
+
 
             bf.origin.x = (pr.size.width - bf.size.width) * 0.5f;
 
-            
+
 
             self.bannerView.frame = bf;
 
-            
+
 
             //NSLog(@"x,y,w,h = %d,%d,%d,%d", (int) bf.origin.x, (int) bf.origin.y, (int) bf.size.width, (int) bf.size.height );
 
@@ -1044,11 +1036,11 @@ if( self.bannerView ) {
 
     }
 
-    
+
 
     self.webView.frame = wf;
 
-    
+
 
     //NSLog(@"superview: %d x %d, webview: %d x %d", (int) pr.size.width, (int) pr.size.height, (int) wf.size.width, (int) wf.size.height );
 
