@@ -2,16 +2,16 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	id="cordova-plugin-admob-simple"
-	version="2.1.5">
-      
+	id="cordova-plugin-admob-free"
+	version="0.0.1">
+
     <name>AdMob</name>
 	<description>Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows phone. Allows preloading and automatic loading of interstitials and banners plus more.</description>
-	<author>Cupertino</author>
+	<author>Ratson</author>
 	<license>MIT</license>
 	<keywords>admob, google, cordova-ios, cordova-android, ecosystem:cordova, android, ios, windows, money, monetization, iad, services, play, win, earn, publicity, advertisment, advertising, ads, ad, eclipse, android studio</keywords>
-    <repo>https://github.com/sunnycupertino/cordova-plugin-admob-simple.git</repo>
-    <issue>https://github.com/sunnycupertino/cordova-plugin-admob-simple/issues</issue>
+    <repo>https://github.com/ratson/cordova-plugin-admob-free.git</repo>
+    <issue>https://github.com/ratson/cordova-plugin-admob-free/issues</issue>
 
 	<engines>
 	    <engine name="cordova" version=">=3.0" />
@@ -21,13 +21,13 @@
         <clobbers target="window.plugins.AdMob" />
     </js-module>
 
-	
+
 <dependency id="cordova-admob-sdklibs"/>
     <!-- android -->
     <!-- android, now build with gradle instead of ant -->
     <platform name="android">
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" 
+            <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
                       android:name="com.google.android.gms.ads.AdActivity"
                       android:theme="@android:style/Theme.Translucent" />
           </config-file>
@@ -35,7 +35,7 @@
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
           </config-file>
-          
+
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="AdMob">
                 <param name="android-package" value="com.cupertino.cordova.plugin.AdMob"/>
@@ -44,14 +44,14 @@
         </config-file>
         <source-file src="src/android/AdMob.java" target-dir="src/com/cupertino/cordova/plugin" />
 
-        <!-- cordova CLI using gradle and it's working well 
+        <!-- cordova CLI using gradle and it's working well
         <framework src="com.google.android.gms:play-services-ads:+" /> -->
         <!-- but unfortunately, build.phonegap.com, Intel XDK, and some other tools still use ant -->
         <!-- dependency id="cordova-plugin-googleplayservices"/ -->
      </platform>
-     
+
      <!-- ios -->
-     <platform name="ios">   
+     <platform name="ios">
          <config-file target="config.xml" parent="/*">
              <feature name="AdMob">
                  <param name="ios-package" value="CDVAdMob" />

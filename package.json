@@ -1,9 +1,9 @@
 {
-  "name": "cordova-plugin-admob-simple",
-  "version": "2.1.5",
-  "description": "Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows phone. Allows preloading and automatic loading of interstitials and banners plus more.",
+  "name": "cordova-plugin-admob-free",
+  "version": "0.0.1",
+  "description": "Cordova AdMob Plugin for Google AdMob",
   "cordova": {
-    "id": "cordova-plugin-admob-simple",
+    "id": "cordova-plugin-admob-free",
     "platforms": [
       "android",
       "ios",
@@ -11,41 +11,20 @@
       "windows"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sunnycupertino/cordova-plugin-admob-simple.git"
-  },
-  "bugs": {
-    "url": "https://github.com/sunnycupertino/cordova-plugin-admob-simple/issues"
-  },
+  "repository": "ratson/cordova-plugin-admob-free",
   "keywords": [
     "cordova",
     "admob",
-    "ad",
     "ecosystem:cordova",
-    "cordova-android",
-    "cordova-ios",
-    "cordova-wp8",
+    "cordova-plugin-admob",
+    "cordova-admob",
+    "plugin",
     "google",
-    "eclipse",
-    "android-studio",
-    "simple",
-    "android",
-    "ios",
-    "windows",
-    "phonegap",
-    "monetization",
-    "monetisation",
-    "money",
-    "banner",
-    "interstitial",
-    "advertisement",
-    "advertising",
-    "earn"
+    "admobpro"
   ],
   "tonicExampleFilename": "test.js",
   "author": {
-    "name": "Cupertino"
+    "name": "Ratson"
   },
   "license": "MIT"
 }
