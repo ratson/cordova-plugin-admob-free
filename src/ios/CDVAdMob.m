@@ -100,9 +100,9 @@
 
 
 
-- (CDVPlugin *)initWithWebView:(UIWebView *)theWebView {
-
-self = (CDVAdMob *)[super initWithWebView:theWebView];
+- (void)pluginInitialize
+{
+    [super pluginInitialize];
 
 if (self) {
 
@@ -166,7 +166,6 @@ object:nil];
 
 
 
-return self;
 
 }
 
@@ -192,7 +191,8 @@ NSUInteger argc = [args count];
 
     if( argc >= 1 ) {
 
-        NSDictionary* options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+    	NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
+
 
         [self __setOptions:options];
 
@@ -232,7 +232,7 @@ NSUInteger argc = [args count];
 
     if( argc >= 1 ) {
 
-        NSDictionary* options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
 
         [self __setOptions:options];
 
@@ -326,7 +326,7 @@ pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
     if (argc >= 1) {
 
-        NSDictionary* options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
 
         [self __setOptions:options];
 
@@ -462,7 +462,7 @@ NSArray* args = command.arguments;
 
     if (argc >= 1) {
 
-        NSDictionary* options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
 
         [self __setOptions:options];
 
@@ -509,7 +509,7 @@ NSArray* args = command.arguments;
 
     if (argc >= 1) {
 
-        NSDictionary* options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
 
         [self __setOptions:options];
 
