@@ -9,12 +9,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.google.ads.mediation.admob.AdMobAdapter;
-import com.google.android.gms.ads.*;
-import com.google.android.gms.ads.mediation.admob.AdMobExtras;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
-import org.apache.cordova.*;
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaWebView;
+import org.apache.cordova.PluginResult;
 import org.apache.cordova.PluginResult.Status;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,8 +27,9 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
+import java.util.List;
 
 /**
  * This class represents the native implementation for the AdMob Cordova plugin.
@@ -63,6 +69,9 @@ public class AdMob extends CordovaPlugin {
     private static final String OPT_IS_TESTING = "isTesting";
     private static final String OPT_AD_EXTRAS = "adExtras";
     private static final String OPT_AUTO_SHOW = "autoShow";
+
+    public static final String OPT_TEST_DEVICES = "testDevices";
+    private List<String> testDeviceList = null;
 
     private ViewGroup parentView;
 
@@ -209,6 +218,16 @@ public class AdMob extends CordovaPlugin {
         if (options.has(OPT_AUTO_SHOW)) {
             this.autoShow = options.optBoolean(OPT_AUTO_SHOW);
         }
+
+        if (options.has(OPT_TEST_DEVICES)) {
+            JSONArray testDevices = options.optJSONArray(OPT_TEST_DEVICES);
+            if (testDevices != null) {
+                testDeviceList = new ArrayList<String>();
+                for (int i = 0; i < testDevices.length(); i++) {
+                    testDeviceList.add(testDevices.optString(i));
+                }
+            }
+        }
     }
 
     /**
@@ -332,6 +351,13 @@ public class AdMob extends CordovaPlugin {
             String ANDROID_ID = Settings.Secure.getString(cordova.getActivity().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
             String deviceId = md5(ANDROID_ID).toUpperCase();
             builder = builder.addTestDevice(deviceId).addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+        }
+
+        if (testDeviceList != null) {
+            Iterator<String> iterator = testDeviceList.iterator();
+            while (iterator.hasNext()) {
+                builder = builder.addTestDevice(iterator.next());
+            }
         }
 
         Bundle bundle = new Bundle();
