@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.*;
 import com.google.android.gms.ads.mediation.admob.AdMobExtras;
 import com.google.android.gms.common.ConnectionResult;
@@ -325,12 +326,12 @@ public class AdMob extends CordovaPlugin {
     }
 
     private AdRequest buildAdRequest() {
-        AdRequest.Builder request_builder = new AdRequest.Builder();
+        AdRequest.Builder builder = new AdRequest.Builder();
         if (isTesting) {
             // This will request test ads on the emulator and deviceby passing this hashed device ID.
             String ANDROID_ID = Settings.Secure.getString(cordova.getActivity().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
             String deviceId = md5(ANDROID_ID).toUpperCase();
-            request_builder = request_builder.addTestDevice(deviceId).addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+            builder = builder.addTestDevice(deviceId).addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
         }
 
         Bundle bundle = new Bundle();
@@ -346,11 +347,8 @@ public class AdMob extends CordovaPlugin {
                 }
             }
         }
-        AdMobExtras adextras = new AdMobExtras(bundle);
-        request_builder = request_builder.addNetworkExtras(adextras);
-        AdRequest request = request_builder.build();
-
-        return request;
+        builder = builder.addNetworkExtrasBundle(AdMobAdapter.class, bundle);
+        return builder.build();
     }
 
     /**
