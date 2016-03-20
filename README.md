@@ -1,4 +1,4 @@
-## INSTRUCTIONS
+## Cordova AdMob Plugin
 
 - Create your app
 

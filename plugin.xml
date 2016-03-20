@@ -3,9 +3,9 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	id="cordova-plugin-admob-simple"
-	version="2.2.1">
+	version="2.2.2">
       
-    <name>AdMob</name>
+    <name>Cordova AdMob Plugin</name>
 	<description>Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows phone. Allows preloading and automatic loading of interstitials and banners plus more.</description>
 	<author>Cupertino</author>
 	<license>MIT</license>
