@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	id="cordova-plugin-admob-x"
+	version="2.0.0">
+      
+    <name>Cordova AdMob Plugin for Android and iOS</name>
+	<description>Powerful, stable and easy to use. Open source Cordova Admob plugin for Android, iOS and Windows phone. Uses the latest SDKs. Display interstitials and banners on your apps.</description>
+	<author>Cordova Plugins</author>
+	<license>MIT</license>
+	<keywords>admob, google, cordova-ios, cordova-android, ecosystem:cordova, android, ios, windows, money, monetization, iad, services, play, win, earn, publicity, advertisment, advertising, ads, ad, eclipse, android studio</keywords>
+    <repo>https://github.com/cordovaplugz/cordova-plugin-admob-x.git</repo>
+    <issue>https://github.com/cordovaplugz/cordova-plugin-admob-x/issues</issue>
+
+	<engines>
+	    <engine name="cordova" version=">=3.0" />
+	</engines>
+
+    <js-module src="www/AdMob.js" name="AdMob">
+        <clobbers target="window.plugins.AdMob" />
+    </js-module>
+
+	
+<dependency id="cordova-admob-sdklibs"/>
+    <!-- android -->
+    <!-- android, now build with gradle instead of ant -->
+    <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" 
+                      android:name="com.google.android.gms.ads.AdActivity"
+                      android:theme="@android:style/Theme.Translucent" />
+          </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+          </config-file>
+          
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="AdMob">
+                <param name="android-package" value="com.cordova.plugin.AdMob"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <source-file src="src/android/AdMob.java" target-dir="src/com/cordova/plugin" />
+
+        <!-- cordova CLI using gradle and it's working well 
+        <framework src="com.google.android.gms:play-services-ads:+" /> -->
+        <!-- but unfortunately, build.phonegap.com, Intel XDK, and some other tools still use ant -->
+        <!-- dependency id="cordova-plugin-googleplayservices"/ -->
+     </platform>
+     
+     <!-- ios -->
+     <platform name="ios">   
+         <config-file target="config.xml" parent="/*">
+             <feature name="AdMob">
+                 <param name="ios-package" value="CDVAdMob" />
+             </feature>
+         </config-file>
+         <header-file src="src/ios/CDVAdMob.h" />
+         <source-file src="src/ios/CDVAdMob.m" />
+	</platform>
+
+  <!-- Windows Phone 8 -->
+  <platform name="wp8">
+    <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities">
+        <Capability Name="ID_CAP_LOCATION" />
+    </config-file>
+    <config-file target="config.xml" parent="/*">
+        <feature name="AdMob">
+            <param name="wp-package" value="AdMob"/>
+        </feature>
+    </config-file>
+    <source-file src="src/wp8/AdMob.cs" />
+</platform>
+
+  <!-- Windows Phone 8.1+ -->
+<platform name="windows">
+    <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities">
+        <Capability Name="ID_CAP_LOCATION" />
+    </config-file>
+    <config-file target="config.xml" parent="/*">
+        <feature name="AdMob">
+            <param name="wp-package" value="AdMob"/>
+        </feature>
+    </config-file>
+    <source-file src="src/wp8/AdMob.cs" />
+</platform>
+
+</plugin>
