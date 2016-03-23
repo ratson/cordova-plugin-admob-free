@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	id="cordova-plugin-admob-x"
-	version="2.0.0">
+	version="2.0.1">
       
     <name>Cordova AdMob Plugin for Android and iOS</name>
 	<description>Powerful, stable and easy to use. Open source Cordova Admob plugin for Android, iOS and Windows phone. Uses the latest SDKs. Display interstitials and banners on your apps.</description>
