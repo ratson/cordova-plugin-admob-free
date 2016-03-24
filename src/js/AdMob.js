@@ -42,3 +42,14 @@ export const showAd = (show = true, successCallback, failureCallback) => {
 export const showInterstitialAd = (show = true, successCallback, failureCallback) => {
   cordova.exec( successCallback, failureCallback, 'AdMob', 'showInterstitialAd', [ show ] )
 }
+
+// emulate cordova-admob-pro interface
+
+export const prepareInterstitial = (args, successCallback, failureCallback) => {
+  createInterstitialView(undefined, successCallback, failureCallback)
+  requestInterstitialAd(undefined, successCallback, failureCallback)
+}
+
+export const showInterstitial = (successCallback, failureCallback) => {
+  showInterstitialAd(true, successCallback, failureCallback)
+}

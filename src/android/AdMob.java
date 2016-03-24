@@ -308,7 +308,6 @@ public class AdMob extends CordovaPlugin {
         return null;
     }
 
-
     /**
      * Parses the create interstitial view input parameters and runs the create interstitial
      * view action on the UI thread.  If this request is successful, the developer
@@ -335,6 +334,7 @@ public class AdMob extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                clearInterstitial();
                 interstitialAd = new InterstitialAd(cordova.getActivity());
                 interstitialAd.setAdUnitId(interstialAdId);
                 interstitialAd.setAdListener(new InterstitialListener());
@@ -344,6 +344,14 @@ public class AdMob extends CordovaPlugin {
             }
         });
         return null;
+    }
+
+    private void clearInterstitial() {
+        if (interstitialAd == null) {
+            return;
+        }
+        interstitialAd.setAdListener(null);
+        interstitialAd = null;
     }
 
     private AdRequest buildAdRequest() {
@@ -616,7 +624,7 @@ public class AdMob extends CordovaPlugin {
         @Override
         public void onAdClosed() {
             webView.loadUrl("javascript:cordova.fireDocumentEvent('onDismissInterstitialAd');");
-            interstitialAd = null;
+            clearInterstitial();
         }
 
     }
