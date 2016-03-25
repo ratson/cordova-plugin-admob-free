@@ -1,5 +1,6 @@
 package com.cupertino.cordova.plugin;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -72,6 +73,15 @@ public class AdMob extends CordovaPlugin {
     private static final String OPT_AD_EXTRAS = "adExtras";
     private static final String OPT_AUTO_SHOW = "autoShow";
 
+    private static final String OPT_LOCATION = "location";
+    private Location mLocation = null;
+
+    private static final String OPT_GENDER = "gender";
+    private static final String OPT_FORCHILD = "forChild";
+    private static final String OPT_FORFAMILY = "forFamily";
+    private static final String OPT_CONTENTURL = "contentUrl";
+    private static final String OPT_EXCLUDE = "exclude";
+
     public static final String OPT_TEST_DEVICES = "testDevices";
     private List<String> testDeviceList = null;
 
@@ -107,6 +117,12 @@ public class AdMob extends CordovaPlugin {
     private boolean bannerShow = true;
     private JSONObject adExtras = null;
     private boolean autoShow = true;
+
+    private String mGender = null;
+    private String mForChild = null;
+    private String mForFamily = null;
+    private String mContentURL = null;
+    private JSONArray mExclude = null;
 
     private boolean autoShowBanner = true;
     private boolean autoShowInterstitial = true;
@@ -219,6 +235,31 @@ public class AdMob extends CordovaPlugin {
         }
         if (options.has(OPT_AUTO_SHOW)) {
             this.autoShow = options.optBoolean(OPT_AUTO_SHOW);
+        }
+
+        if (options.has(OPT_LOCATION)) {
+            JSONArray location = options.optJSONArray(OPT_LOCATION);
+            if (location != null) {
+                mLocation = new Location("dummyprovider");
+                mLocation.setLatitude(location.optDouble(0, 0.0));
+                mLocation.setLongitude(location.optDouble(1, 0));
+            }
+        }
+
+        if (options.has(OPT_GENDER)) {
+            mGender = options.optString(OPT_GENDER);
+        }
+        if (options.has(OPT_FORCHILD)) {
+            mForChild = options.optString(OPT_FORCHILD);
+        }
+        if (options.has(OPT_FORFAMILY)) {
+            mForFamily = options.optString(OPT_FORFAMILY);
+        }
+        if (options.has(OPT_CONTENTURL)) {
+            mContentURL = options.optString(OPT_CONTENTURL);
+        }
+        if (options.has(OPT_EXCLUDE)) {
+            mExclude = options.optJSONArray(OPT_EXCLUDE);
         }
 
         if (options.has(OPT_TEST_DEVICES)) {
@@ -384,6 +425,29 @@ public class AdMob extends CordovaPlugin {
             }
         }
         builder = builder.addNetworkExtrasBundle(AdMobAdapter.class, bundle);
+
+        if (mGender != null) {
+            if ("male".compareToIgnoreCase(mGender) != 0) {
+                builder.setGender(AdRequest.GENDER_MALE);
+            } else if ("female".compareToIgnoreCase(mGender) != 0) {
+                builder.setGender(AdRequest.GENDER_FEMALE);
+            } else {
+                builder.setGender(AdRequest.GENDER_UNKNOWN);
+            }
+        }
+        if (mLocation != null) {
+            builder.setLocation(mLocation);
+        }
+        if (mForFamily != null) {
+            builder.setIsDesignedForFamilies(true);
+        }
+        if (mForChild != null) {
+            builder.tagForChildDirectedTreatment(true);
+        }
+        if (mContentURL != null) {
+            builder.setContentUrl(mContentURL);
+        }
+
         return builder.build();
     }
 
