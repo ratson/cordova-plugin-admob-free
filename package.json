@@ -1,7 +1,7 @@
 {
   "name": "cordova-plugin-admob-simple",
-  "version": "2.2.8",
-  "description": "Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows phone. Allows preloading and automatic loading of interstitials and banners plus more.",
+  "version": "2.2.9",
+  "description": "Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows phone. Allows preloading and automatic loading of interstitials and banners plus more. Works with Cordova, Phonegap, Intel XDK/Crosswalk, Ionic, Meteor and more.",
   "cordova": {
     "id": "cordova-plugin-admob-simple",
     "platforms": [
@@ -22,6 +22,13 @@
     "cordova",
     "admob",
     "plugin",
+    "phonegap",
+    "intel-xdk",
+    "intel",
+    "xdk",
+    "crosswalk",
+    "ionic",
+    "meteor",
     "ad",
     "ecosystem:cordova",
     "cordova-android",
