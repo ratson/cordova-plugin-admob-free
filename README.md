@@ -97,6 +97,38 @@ iPhone Banner                  |  iPhone Interstitial
 -------------------------------|--------------------------------------------
 ![ScreenShot](docs/iphone.jpg) | ![ScreenShot](docs/iphone_interstitial.jpg)
 
+## API
+
+Methods:
+```javascript
+// set default value for other methods
+AdMob.setOptions(options, success, fail);
+
+// use banner
+AdMob.createBannerView();
+AdMob.destroyBannerView();
+
+// use interstitial
+AdMob.prepareInterstitial(adId/options, success, fail);
+AdMob.showInterstitial();
+// low-level methods
+AdMob.createInterstitialView();
+AdMob.requestInterstitialAd();
+AdMob.showInterstitialAd();
+```
+
+Events:
+```javascript
+document.addEventListener('onReceiveAd', function() {});
+document.addEventListener('onFailedToReceiveAd', function(data) {});
+document.addEventListener('onPresentAd', function() {});
+document.addEventListener('onDismissAd', function() {});
+document.addEventListener('onLeaveToAd', function() { );
+document.addEventListener('onReceiveInterstitialAd', function() {});
+document.addEventListener('onPresentInterstitialAd', function() {});
+document.addEventListener('onDismissInterstitialAd', function() {});
+```
+
 ## Status
 
 This plugin is forked from [cordova-plugin-admob-simple](https://github.com/sunnycupertino/cordova-plugin-admob-simple) and removed the ad-sharing related code. All APIs are remaining the same as the original fork.
