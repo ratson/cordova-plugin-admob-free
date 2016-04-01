@@ -1,151 +1,118 @@
+# Cordova AdMob Plugin
+
+A free, no ad-sharing version of Google AdMob plugin for Cordova.
+
+## Features
+
+- **No Ad-Sharing**
+
+  Unlike [some](https://github.com/appfeel/admob-google-cordova/blob/master/src/android/AdMobAds.java#L270) [other](https://github.com/sunnycupertino/cordova-plugin-admob-simple/blob/master/src/android/AdMob.java#L194) [plugins](https://github.com/floatinghotpot/cordova-admob-pro/wiki/License-Agreement#2-win-win-partnership), this plugin does not share your advertising revenue by randomly display developer's owned ads.
+
+- **Fully Open Sourced**
+
+  Except the provided [AdMob SDKs](https://github.com/sunnycupertino/cordova-admob-sdklibs), every line of code are on Github. You don't execute [compiled](https://github.com/floatinghotpot/cordova-extension/blob/master/src/android/cordova-generic-ad.jar) [binary](https://github.com/floatinghotpot/cordova-extension/blob/master/src/ios/libCordovaGenericAd.a) without seeing the source code.
+
+- **No Remote Control**
+
+  Do not [send your application information to a remote server](https://github.com/floatinghotpot/cordova-admob-pro/issues/326) to control whether ad could be displayed.
+
 ## Installation
 
 ```bash
 cordova plugin add cordova-plugin-admob-free
 ```
 
-## ***WARNING***
-- **Do not click your own ads or google could cancel all your accounts. They have automatic systems checking for this. For testing use the  'isTesting: true' javascript variable in the code below.**
-- **Do not make apps that allow people to download youtube movies, this is against their terms of service also. They will find out.**
-- **Do not make apps that embed youtube movies in a way that is not allowed.**
+## Usage
 
-## CODING DETAILS (Load interstitial first, show it later)
+### 1. Go to [AdMob portal](https://www.google.com/admob/), create Ad Unit ID for your banner and interstitial.
 
-- Add the following javascript functions, put in your own ad code, play with the variables if you want.
+### 2. Define configiration for differrent platforms.
 
-- Call initAd() from onDeviceReady()
 ```javascript
-//initialize the goodies
-function initAd(){
-        if ( window.plugins && window.plugins.AdMob ) {
-            var ad_units = {
-                ios : {
-                    banner: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx',		//PUT ADMOB ADCODE HERE
-                    interstitial: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx'	//PUT ADMOB ADCODE HERE
-                },
-                android : {
-                    banner: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx',		//PUT ADMOB ADCODE HERE
-                    interstitial: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx'	//PUT ADMOB ADCODE HERE
-                }
-            };
-            var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
-
-            window.plugins.AdMob.setOptions( {
-                publisherId: admobid.banner,
-                interstitialAdId: admobid.interstitial,
-                bannerAtTop: false, // set to true, to put banner at top
-                overlap: true, // set to true, to allow banner overlap webview
-                offsetTopBar: false, // set to true to avoid ios7 status bar overlap
-                isTesting: false, // receiving test ad
-                autoShow: false // auto show interstitial ad when loaded
-            });
-
-            registerAdEvents();
-            window.plugins.AdMob.createInterstitialView();	//get the interstitials ready to be shown
-            window.plugins.AdMob.requestInterstitialAd();
-
-        } else {
-            //alert( 'admob plugin not ready' );
-        }
-}
-//functions to allow you to know when ads are shown, etc.
-function registerAdEvents() {
-        document.addEventListener('onReceiveAd', function(){});
-        document.addEventListener('onFailedToReceiveAd', function(data){});
-        document.addEventListener('onPresentAd', function(){});
-        document.addEventListener('onDismissAd', function(){ });
-        document.addEventListener('onLeaveToAd', function(){ });
-        document.addEventListener('onReceiveInterstitialAd', function(){ });
-        document.addEventListener('onPresentInterstitialAd', function(){ });
-        document.addEventListener('onDismissInterstitialAd', function(){
-        	window.plugins.AdMob.createInterstitialView();			//REMOVE THESE 2 LINES IF USING AUTOSHOW
-            window.plugins.AdMob.requestInterstitialAd();			//get the next one ready only after the current one is closed
-        });
-    }
-
-```
-- Add the following 2 functions and call them when you want ads to show
-```javascript
-//display the banner
-function showBannerFunc(){
-	window.plugins.AdMob.createBannerView();
-}
-//display the interstitial
-function showInterstitialFunc(){
-	window.plugins.AdMob.showInterstitialAd();
+var admobid = {};
+if ( /(android)/i.test(navigator.userAgent) ) {  // for android & amazon-fireos
+  admobid = {
+    banner: 'ca-app-pub-xxx/xxx',
+    interstitial: 'ca-app-pub-xxx/xxx',
+  };
+} else if ( /(ipod|iphone|ipad)/i.test(navigator.userAgent) ) {  // for ios
+  admobid = {
+    banner: 'ca-app-pub-xxx/xxx',
+    interstitial: 'ca-app-pub-xxx/xxx',
+  };
+} else {  // for windows phone
+  admobid = {
+    banner: 'ca-app-pub-xxx/xxx',
+    interstitial: 'ca-app-pub-xxx/xxx',
+  };
 }
 ```
-- To close the banner
+
+### 3. Set options
+
 ```javascript
-    window.plugins.AdMob.destroyBannerView();
+AdMob.setOptions({
+  publisherId: admobid.banner,
+  interstitialAdId: admobid.interstitial,
+  bannerAtTop: false,  // set to true, to put banner at top
+  overlap: true,  // set to true, to allow banner overlap webview
+  offsetTopBar: false,  // set to true to avoid ios7 status bar overlap
+  isTesting: false,  // receiving test ad
+  autoShow: false,  // auto show interstitial ad when loaded
+});
 ```
 
-## CODING DETAILS (Show interstitial as soon as it's loaded)
+### 4. Display advertisements
 
-- Add the following javascript functions, put in your own ad code, play with the variables if you want.
+#### Banner Ad
 
-- Call initAd() from onDeviceReady()
 ```javascript
-//initialize the goodies
-function initAd(){
-        if ( window.plugins && window.plugins.AdMob ) {
-            var ad_units = {
-                ios : {
-                    banner: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx',		//PUT ADMOB ADCODE HERE
-                    interstitial: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx'	//PUT ADMOB ADCODE HERE
-                },
-                android : {
-                    banner: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx',		//PUT ADMOB ADCODE HERE
-                    interstitial: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx'	//PUT ADMOB ADCODE HERE
-                }
-            };
-            var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
+// Create banner
+AdMob.createBannerView();
 
-            window.plugins.AdMob.setOptions( {
-                publisherId: admobid.banner,
-                interstitialAdId: admobid.interstitial,
-                bannerAtTop: false, // set to true, to put banner at top
-                overlap: true, // set to true, to allow banner overlap webview
-                offsetTopBar: false, // set to true to avoid ios7 status bar overlap
-                isTesting: false, // receiving test ad
-                autoShow: true // auto show interstitial ad when loaded
-            });
-
-            registerAdEvents();
-        } else {
-            //alert( 'admob plugin not ready' );
-        }
-}
-//functions to allow you to know when ads are shown, etc.
-function registerAdEvents() {
-        document.addEventListener('onReceiveAd', function(){});
-        document.addEventListener('onFailedToReceiveAd', function(data){});
-        document.addEventListener('onPresentAd', function(){});
-        document.addEventListener('onDismissAd', function(){ });
-        document.addEventListener('onLeaveToAd', function(){ });
-        document.addEventListener('onReceiveInterstitialAd', function(){ });
-        document.addEventListener('onPresentInterstitialAd', function(){ });
-        document.addEventListener('onDismissInterstitialAd', function(){ });
-    }
-
+// Close the banner
+AdMob.destroyBannerView();
 ```
-- Add the following 2 functions and call them when you want ads to show
+
+#### Interstitial Ad
+
 ```javascript
-//display the banner
-function showBannerFunc(){
-	window.plugins.AdMob.createBannerView();
-}
-//display the interstitial
-function showInterstitialFunc(){
-	window.plugins.AdMob.createInterstitialView();	//get the interstitials ready to be shown and show when it's loaded.
-	window.plugins.AdMob.requestInterstitialAd();
-}
+// preppare and load ad resource in background, e.g. at begining of game level
+AdMob.prepareInterstitial({
+  adId: admobid.interstitial,
+  autoShow: false,
+});
+
+// show the interstitial later, e.g. at end of game level
+AdMob.showInterstitial();
 ```
-- To close the banner
-```javascript
-    window.plugins.AdMob.destroyBannerView();
-```
+
+## Status
+
+This plugin is forked from [cordova-plugin-admob-simple](https://github.com/sunnycupertino/cordova-plugin-admob-simple) and removed the ad-sharing related code. All APIs are remaining the same as the original fork.
+
+For Android, there are also some enhanced options. If anyone wants them on iOS, please open an issue and let me know.
+
+If you find this plugin useful, please [star it on Github](https://github.com/ratson/cordova-plugin-admob-free).
+
+## Contributing
+
+You can use this Cordova plugin for free. You can contribute to this project in many ways:
+
+* [Reporting issues](https://github.com/ratson/cordova-plugin-admob-free/issues).
+* Patching and bug fixing, especially when submitted with test code. [Open a pull request](https://github.com/ratson/cordova-plugin-admob-free/pulls).
+* Other enhancements.
+
+Help with documentation is always appreciated and can be done via pull requests.
+
+## Credits
+
+Thanks for the [cordova-plugin-admob-simple](https://github.com/sunnycupertino/cordova-plugin-admob-simple) author for forking the original project [cordova-plugin-admob](https://github.com/floatinghotpot/cordova-plugin-admob) to [make it functional](https://github.com/sunnycupertino/cordova-plugin-admob-simple/issues/1) and open source it.
+
+## Disclaimer
+
+This is NOT an official Google product. It is just a community-driven project, which use the Google AdMob SDKs.
 
 ## License
 
-  [MIT](LICENSE)
+[MIT](LICENSE)
