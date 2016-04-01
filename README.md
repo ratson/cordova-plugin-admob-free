@@ -87,6 +87,16 @@ AdMob.prepareInterstitial({
 AdMob.showInterstitial();
 ```
 
+## Screenshots
+
+Android Banner                 |  Android Interstitial
+-------------------------------|--------------------------------------------
+![ScreenShot](docs/android.jpg) | ![ScreenShot](docs/android_interstitial.jpg)
+
+iPhone Banner                  |  iPhone Interstitial
+-------------------------------|--------------------------------------------
+![ScreenShot](docs/iphone.jpg) | ![ScreenShot](docs/iphone_interstitial.jpg)
+
 ## Status
 
 This plugin is forked from [cordova-plugin-admob-simple](https://github.com/sunnycupertino/cordova-plugin-admob-simple) and removed the ad-sharing related code. All APIs are remaining the same as the original fork.
@@ -108,6 +118,8 @@ Help with documentation is always appreciated and can be done via pull requests.
 ## Credits
 
 Thanks for the [cordova-plugin-admob-simple](https://github.com/sunnycupertino/cordova-plugin-admob-simple) author for forking the original project [cordova-plugin-admob](https://github.com/floatinghotpot/cordova-plugin-admob) to [make it functional](https://github.com/sunnycupertino/cordova-plugin-admob-simple/issues/1) and open source it.
+
+Screenshots are copied from [cordova-admob-pro](https://github.com/floatinghotpot/cordova-admob-pro)
 
 ## Disclaimer
 
