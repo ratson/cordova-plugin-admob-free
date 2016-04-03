@@ -19,12 +19,14 @@ A free, no ad-sharing version of Google AdMob plugin for Cordova.
 ## Installation
 
 ```bash
-cordova plugin add cordova-plugin-admob-free
+cordova plugin add cordova-plugin-admob-free --save
 ```
 
 ## Usage
 
-### 1. Go to [AdMob portal](https://www.google.com/admob/), create Ad Unit ID for your banner and interstitial.
+### 1. Ceate Ad Unit ID for your banner and interstitial.
+
+Go to [AdMob portal](https://www.google.com/admob/), click "Monetize a new app" button to create new ad unit.
 
 ### 2. Define configiration for differrent platforms.
 
@@ -87,6 +89,8 @@ AdMob.prepareInterstitial({
 AdMob.showInterstitial();
 ```
 
+### 5. Profit
+
 ## Screenshots
 
 Android Banner                 |  Android Interstitial
@@ -123,7 +127,7 @@ document.addEventListener('onReceiveAd', function() {});
 document.addEventListener('onFailedToReceiveAd', function(data) {});
 document.addEventListener('onPresentAd', function() {});
 document.addEventListener('onDismissAd', function() {});
-document.addEventListener('onLeaveToAd', function() { );
+document.addEventListener('onLeaveToAd', function() {});
 document.addEventListener('onReceiveInterstitialAd', function() {});
 document.addEventListener('onPresentInterstitialAd', function() {});
 document.addEventListener('onDismissInterstitialAd', function() {});
@@ -151,7 +155,7 @@ Help with documentation is always appreciated and can be done via pull requests.
 
 Thanks for the [cordova-plugin-admob-simple](https://github.com/sunnycupertino/cordova-plugin-admob-simple) author for forking the original project [cordova-plugin-admob](https://github.com/floatinghotpot/cordova-plugin-admob) to [make it functional](https://github.com/sunnycupertino/cordova-plugin-admob-simple/issues/1) and open source it.
 
-Screenshots are copied from [cordova-admob-pro](https://github.com/floatinghotpot/cordova-admob-pro)
+Screenshots are copied from [cordova-admob-pro](https://github.com/floatinghotpot/cordova-admob-pro).
 
 ## Disclaimer
 
