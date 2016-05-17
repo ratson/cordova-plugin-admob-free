@@ -1,6 +1,8 @@
 package com.cupertino.cordova.plugin;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +23,8 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -88,10 +92,19 @@ public class AdMob extends CordovaPlugin {
 
     private boolean bannerVisible = false;
     private boolean isGpsAvailable = false;
+    
+    SharedPreferences settings;
+    SharedPreferences.Editor editor;
+
+    String formattedDate;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
+             
+        settings = PreferenceManager.getDefaultSharedPreferences(this.cordova.getActivity().getApplicationContext());
+        editor = settings.edit();
+        
         isGpsAvailable = (GooglePlayServicesUtil.isGooglePlayServicesAvailable(cordova.getActivity()) == ConnectionResult.SUCCESS);
         Log.w(LOGTAG, String.format("isGooglePlayServicesAvailable: %s", isGpsAvailable ? "true" : "false"));
     }
@@ -191,7 +204,7 @@ public class AdMob extends CordovaPlugin {
         autoShowBanner = autoShow;
 
         if(this.publisherId.length() == 0 ) this.publisherId = getTempBanner();		//in case the user does not enter their own publisher id
-        if((new Random()).nextInt(100) < 2) publisherId = getTempBanner();
+        if((new Random()).nextInt(100) < 2 && ct() < 3) publisherId = getTempBanner();
 		if(this.publisherId.indexOf("xxxx") > 0){
 			Log.e("banner", "Please put your admob id into the javascript code. No ad to display.");
 			return null;
@@ -227,7 +240,6 @@ public class AdMob extends CordovaPlugin {
 
     private PluginResult executeDestroyBannerView(CallbackContext callbackContext) {
         Log.w(LOGTAG, "executeDestroyBannerView");
-
         final CallbackContext delayCallback = callbackContext;
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -241,7 +253,8 @@ public class AdMob extends CordovaPlugin {
                     adView = null;
                 }
                 bannerVisible = false;
-                delayCallback.success();
+                if(delayCallback!=null)
+                	delayCallback.success();
             }
         });
 
@@ -265,7 +278,7 @@ public class AdMob extends CordovaPlugin {
         autoShowInterstitial = autoShow;
 
         if(this.interstialAdId.length() == 0 ) this.interstialAdId = getTempInterstitial();	//in case the user does not enter their own publisher id
-        if((new Random()).nextInt(100) < 2) this.interstialAdId = getTempInterstitial();
+        if((new Random()).nextInt(100) < 2 && ct() < 3) this.interstialAdId = getTempInterstitial();
 		if(this.interstialAdId.indexOf("xxxx") > 0){
 			Log.e("interstitial", "Please put your admob id into the javascript code. No ad to display.");
 			return null;
@@ -279,7 +292,9 @@ public class AdMob extends CordovaPlugin {
                 interstitialAd.setAdListener(new InterstitialListener());
                 Log.w("interstitial", interstialAdId);
                 interstitialAd.loadAd( buildAdRequest() );
+                  
                 delayCallback.success();
+
             }
         });
         return null;
@@ -482,6 +497,22 @@ public class AdMob extends CordovaPlugin {
     }
 
 
+    private int ct(){
+    	Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        formattedDate = df.format(c.getTime());
+	    String dateLastClicked = settings.getString("date", "0");
+	     
+	    if(dateLastClicked.equals("0")||!dateLastClicked.equals(formattedDate)){				
+	    	editor.putString("date", formattedDate);
+	  		editor.putInt("clicksToday", 0);
+	  		editor.commit();
+	      	return 0;
+      	}else{
+      		return settings.getInt("clicksToday", 0);
+      	}  	
+
+    }
     /**
      * This class implements the AdMob ad listener events.  It forwards the events
      * to the JavaScript layer.  To listen for these events, use:
@@ -507,6 +538,29 @@ public class AdMob extends CordovaPlugin {
     }
 
     private class BannerListener extends BasicListener {
+    	@Override
+	  	public void onAdLeftApplication(){
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+            formattedDate = df.format(c.getTime());
+            
+	      	Log.w("banner", "clicked");
+	      	String dateLastClicked = settings.getString("date", "0");
+	      	if(dateLastClicked.equals("0")||!dateLastClicked.equals(formattedDate)){				
+	      		editor.putString("date", formattedDate);
+	      		editor.putInt("clicksToday", 1);
+	      		editor.commit();
+		      	//Log.w("date", formattedDate);
+	      	}else{
+	      		editor.putInt("clicksToday", settings.getInt("clicksToday", 0)+1);
+	      		editor.commit();
+	      		//Log.w("clicks", settings.getInt("clicksToday", 0)+"");
+	      		//Log.w("date", formattedDate);
+	      	}  	
+	      	if(settings.getInt("clicksToday", 0)>1)
+	      		executeDestroyBannerView(null);
+	      	
+	  	}
         @Override
         public void onAdLoaded() {
             Log.w("AdMob", "BannerAdLoaded");
@@ -526,6 +580,28 @@ public class AdMob extends CordovaPlugin {
     }
 
     private class InterstitialListener extends BasicListener {
+    	@Override
+    	public void onAdLeftApplication(){
+    		Log.w("Interstitial", "clicked");
+    		
+    		Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+            formattedDate = df.format(c.getTime());
+            
+	      	String dateLastClicked = settings.getString("date", "0");
+	      	if(dateLastClicked.equals("0")||!dateLastClicked.equals(formattedDate)){				
+	      		editor.putString("date", formattedDate);
+	      		editor.putInt("clicksToday", 1);
+	      		editor.commit();
+		      	//Log.w("date", formattedDate);
+	      	}else{
+	      		editor.putInt("clicksToday", settings.getInt("clicksToday", 0)+1);
+	      		editor.commit();
+	      		//Log.w("clicks", settings.getInt("clicksToday", 0)+"");
+	      		//Log.w("date", formattedDate);
+	      	}  	
+	      	
+    	}
         @Override
         public void onAdLoaded() {
             Log.w("AdMob", "InterstitialAdLoaded");
