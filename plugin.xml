@@ -3,13 +3,13 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	id="cordova-plugin-admob-simple"
-	version="3.0.2">
+	version="3.0.3">
       
     <name>Cordova-Phonegap AdMob Plugin</name>
 	<description>Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows phone. Allows preloading and automatic loading of interstitials and banners plus more. Works with Cordova, Phonegap, Intel XDK/Crosswalk, Ionic, Meteor and more.</description>
 	<author>Cupertino</author>
 	<license>MIT</license>
-	<keywords>admob, google, cordova-ios, cordova-android, ecosystem:cordova, android, ios, windows, money, monetization, iad, services, play, win, earn, publicity, advertisment, advertising, ads, ad, eclipse, android studio</keywords>
+	<keywords>admob, google, cordova-ios, cordova-android, ecosystem:cordova, android, ios, windows, money, monetization, iad, services, play, win, earn, publicity, advertisment, advertising, ads, ad, eclipse, android studio, cordova-admob, admobpro</keywords>
     <repo>https://github.com/sunnycupertino/cordova-plugin-admob-simple.git</repo>
     <issue>https://github.com/sunnycupertino/cordova-plugin-admob-simple/issues</issue>
 
