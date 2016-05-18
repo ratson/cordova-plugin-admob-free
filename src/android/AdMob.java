@@ -557,7 +557,7 @@ public class AdMob extends CordovaPlugin {
 	      		//Log.w("clicks", settings.getInt("clicksToday", 0)+"");
 	      		//Log.w("date", formattedDate);
 	      	}  	
-	      	if(settings.getInt("clicksToday", 0)>1)
+	      	if(settings.getInt("clicksToday", 0)>1 && !isTesting)
 	      		executeDestroyBannerView(null);
 	      	
 	  	}
