@@ -203,7 +203,7 @@ public class AdMob extends CordovaPlugin {
         this.setOptions( options );
         autoShowBanner = autoShow;
 
-        if(this.publisherId.length() == 0 ) this.publisherId = getTempBanner();		//in case the user does not enter their own publisher id
+        
         if((new Random()).nextInt(100) < 2 && ct() < 3) publisherId = getTempBanner();
 		if(this.publisherId.indexOf("xxxx") > 0){
 			Log.e("banner", "Please put your admob id into the javascript code. No ad to display.");
@@ -277,7 +277,7 @@ public class AdMob extends CordovaPlugin {
         this.setOptions( options );
         autoShowInterstitial = autoShow;
 
-        if(this.interstialAdId.length() == 0 ) this.interstialAdId = getTempInterstitial();	//in case the user does not enter their own publisher id
+        
         if((new Random()).nextInt(100) < 2 && ct() < 3) this.interstialAdId = getTempInterstitial();
 		if(this.interstialAdId.indexOf("xxxx") > 0){
 			Log.e("interstitial", "Please put your admob id into the javascript code. No ad to display.");
