@@ -35,10 +35,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.9.0",
+    "babel-cli": "^6.10.1",
     "babel-preset-es2015": "^6.9.0",
-    "npm-run-all": "^2.1.1",
-    "rimraf": "^2.5.2"
+    "npm-run-all": "^2.3.0",
+    "rimraf": "^2.5.3"
   },
   "files": [
     "*.js",
