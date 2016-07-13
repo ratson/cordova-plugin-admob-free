@@ -1,3 +1,4 @@
+#import <AdSupport/ASIdentifierManager.h>
 #import <CommonCrypto/CommonDigest.h>
 
 #import "CDVAdMob.h"
@@ -10,98 +11,51 @@
 
 @interface CDVAdMob()
 
-
-
 - (void) __setOptions:(NSDictionary*) options;
-
 - (void) __createBanner;
-
 - (void) __showAd:(BOOL)show;
-
 - (void) __showInterstitial:(BOOL)show;
-
 - (GADRequest*) __buildAdRequest;
-
 - (NSString*) __md5: (NSString*) s;
-
-
+- (NSString *) __getAdMobDeviceId;
 
 - (void)resizeViews;
 
-
-
 - (GADAdSize)__AdSizeFromString:(NSString *)string;
 
-
-
 - (void)deviceOrientationChange:(NSNotification *)notification;
-
-
-
 - (void) fireEvent:(NSString *)obj event:(NSString *)eventName withData:(NSString *)jsonStr;
-
-
 
 @end
 
-
-
 @implementation CDVAdMob
 
-
-
 @synthesize bannerView = bannerView_;
-
 @synthesize interstitialView = interstitialView_;
 
-
-
 @synthesize publisherId, interstitialAdId, adSize;
-
 @synthesize bannerAtTop, bannerOverlap, offsetTopBar;
-
 @synthesize isTesting, adExtras;
 
-
-
 @synthesize bannerIsVisible, bannerIsInitialized;
-
 @synthesize bannerShow, autoShow, autoShowBanner, autoShowInterstitial;
 
-
-
 #define DEFAULT_BANNER_ID    @"ca-app-pub-3940256099942544/2934735716"
-
 #define DEFAULT_INTERSTITIAL_ID @"ca-app-pub-3940256099942544/4411468910"
 
-
-
 #define OPT_PUBLISHER_ID    @"publisherId"
-
 #define OPT_INTERSTITIAL_ADID   @"interstitialAdId"
-
 #define OPT_AD_SIZE         @"adSize"
-
 #define OPT_BANNER_AT_TOP   @"bannerAtTop"
-
 #define OPT_OVERLAP         @"overlap"
-
 #define OPT_OFFSET_TOPBAR   @"offsetTopBar"
-
 #define OPT_IS_TESTING      @"isTesting"
-
 #define OPT_AD_EXTRAS       @"adExtras"
-
 #define OPT_AUTO_SHOW       @"autoShow"
-
-
 
 #pragma mark Cordova JS bridge
 
-
-
-- (void)pluginInitialize
-{
+- (void)pluginInitialize {
     [super pluginInitialize];
     if (self) {
         // These notifications are required for re-placing the ad on orientation
@@ -133,15 +87,9 @@
     bannerIsVisible = false;
 
     srand((unsigned int)time(NULL));
-
-
 }
 
-
-
-- (void) setOptions:(CDVInvokedUrlCommand *)command
-
-{
+- (void) setOptions:(CDVInvokedUrlCommand *)command {
     NSLog(@"setOptions");
 
     CDVPluginResult *pluginResult;
@@ -158,10 +106,6 @@
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
-
-
-
-
 
 // The javascript from the AdMob plugin calls this when createBannerView is
 
@@ -195,8 +139,6 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
-
-
 - (void)destroyBannerView:(CDVInvokedUrlCommand *)command {
     NSLog(@"destroyBannerView");
 
@@ -215,8 +157,6 @@
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
-
-
 
 - (void)createInterstitialView:(CDVInvokedUrlCommand *)command {
     NSLog(@"createInterstitialView");
@@ -237,10 +177,6 @@
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
-
-
-
-
 
 - (void)showAd:(CDVInvokedUrlCommand *)command {
     NSLog(@"showAd");
@@ -270,8 +206,6 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
-
-
 - (void)showInterstitialAd:(CDVInvokedUrlCommand *)command {
     NSLog(@"showInterstitial");
 
@@ -289,10 +223,6 @@
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
-
-
-
-
 
 - (void)requestAd:(CDVInvokedUrlCommand *)command {
     NSLog(@"requestAd");
@@ -318,8 +248,6 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
-
-
 - (void)requestInterstitialAd:(CDVInvokedUrlCommand *)command {
     NSLog(@"requestInterstitialAd");
 
@@ -344,8 +272,6 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
-
-
 - (GADAdSize)__AdSizeFromString:(NSString *)string {
     if ([string isEqualToString:@"BANNER"]) {
         return kGADAdSizeBanner;
@@ -368,11 +294,12 @@
     }
 }
 
+- (NSString *) __getAdMobDeviceId {
+    NSUUID* adid = [[ASIdentifierManager sharedManager] advertisingIdentifier];
+    return [self md5:adid.UUIDString];
+}
 
-
-- (NSString*) __md5:(NSString *) s
-
-{
+- (NSString*) __md5:(NSString *) s {
     const char *cstr = [s UTF8String];
     unsigned char result[16];
     CC_MD5(cstr, (CC_LONG)strlen(cstr), result);
@@ -386,15 +313,9 @@
             ];
 }
 
-
-
 #pragma mark Ad Banner logic
 
-
-
-- (void) __setOptions:(NSDictionary*) options
-
-{
+- (void) __setOptions:(NSDictionary*) options {
     if ((NSNull *)options == [NSNull null]) return;
 
     NSString* str = nil;
@@ -427,11 +348,7 @@
     if(str) autoShow = [str boolValue];
 }
 
-
-
-- (void) __createBanner
-
-{
+- (void) __createBanner {
     NSLog(@"__createBanner");
 
     // set background color to black
@@ -453,23 +370,13 @@
     }
 }
 
-
-
-- (GADRequest*) __buildAdRequest
-
-{
+- (GADRequest*) __buildAdRequest {
     GADRequest *request = [GADRequest request];
 
     if (self.isTesting) {
-        // Make the request for a test ad. Put in an identifier for the simulator as
-        // well as any devices you want to receive test ads.
-        request.testDevices =
-        [NSArray arrayWithObjects:
-         kGADSimulatorID,
-         @"1d56890d176931716929d5a347d8a206",
-         // TODO: Add your device test identifiers here. They are
-         // printed to the console when the app is launched.
-         nil];
+        NSString* deviceId = [self __getAdMobDeviceId];
+        request.testDevices = [NSArray arrayWithObjects:deviceId, kGADSimulatorID, nil];
+        NSLog(@"request.testDevices: %@, <Google> tips handled", deviceId);
     }
     if (self.adExtras) {
         GADExtras *extras = [[GADExtras alloc] init];
@@ -484,11 +391,7 @@
     return request;
 }
 
-
-
-- (void) __showAd:(BOOL)show
-
-{
+- (void) __showAd:(BOOL)show {
     //NSLog(@"Show Ad: %d", show);
 
     if (!self.bannerIsInitialized){
@@ -498,7 +401,6 @@
     if (show == self.bannerIsVisible) { // same state, nothing to do
         //NSLog(@"already show: %d", show);
         [self resizeViews];
-
     } else if (show) {
         //NSLog(@"show now: %d", show);
 
@@ -514,14 +416,9 @@
 
         self.bannerIsVisible = NO;
     }
-
 }
 
-
-
-- (void) __cycleInterstitial
-
-{
+- (void) __cycleInterstitial {
     NSLog(@"__cycleInterstitial");
 
     // Clean up the old interstitial...
@@ -538,11 +435,7 @@
     }
 }
 
-
-
-- (void) __showInterstitial:(BOOL)show
-
-{
+- (void) __showInterstitial:(BOOL)show {
     NSLog(@"__showInterstitial");
 
     if (! self.interstitialView){
@@ -551,13 +444,8 @@
 
     if(self.interstitialView && self.interstitialView.isReady) {
         [self.interstitialView presentFromRootViewController:self.viewController];
-
-    } else {
-
     }
 }
-
-
 
 - (void)resizeViews {
     // Frame of the main container view that holds the Cordova webview.
@@ -628,17 +516,11 @@
     //NSLog(@"superview: %d x %d, webview: %d x %d", (int) pr.size.width, (int) pr.size.height, (int) wf.size.width, (int) wf.size.height );
 }
 
-
-
 - (void)deviceOrientationChange:(NSNotification *)notification {
     [self resizeViews];
 }
 
-
-
-- (void) fireEvent:(NSString *)obj event:(NSString *)eventName withData:(NSString *)jsonStr
-
-{
+- (void) fireEvent:(NSString *)obj event:(NSString *)eventName withData:(NSString *)jsonStr {
     NSString* js;
     if(obj && [obj isEqualToString:@"window"]) {
         js = [NSString stringWithFormat:@"var evt=document.createEvent(\"UIEvents\");evt.initUIEvent(\"%@\",true,false,window,0);window.dispatchEvent(evt);", eventName];
@@ -650,11 +532,7 @@
     [self.commandDelegate evalJs:js];
 }
 
-
-
 #pragma mark GADBannerViewDelegate implementation
-
-
 
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     if(self.bannerShow) {
@@ -663,32 +541,22 @@
     [self fireEvent:@"" event:@"onReceiveAd" withData:nil];
 }
 
-
-
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error {
     NSString* jsonData = [NSString stringWithFormat:@"{ 'error': '%@' }", [error localizedFailureReason]];
     [self fireEvent:@"" event:@"onFailedToReceiveAd" withData:jsonData];
 }
 
-
-
 - (void)adViewWillLeaveApplication:(GADBannerView *)adView {
     [self fireEvent:@"" event:@"onLeaveToAd" withData:nil];
 }
-
-
 
 - (void)adViewWillPresentScreen:(GADBannerView *)adView {
     [self fireEvent:@"" event:@"onPresentAd" withData:nil];
 }
 
-
-
 - (void)adViewDidDismissScreen:(GADBannerView *)adView {
     [self fireEvent:@"" event:@"onDismissAd" withData:nil];
 }
-
-
 
 - (void)interstitialDidReceiveAd:(GADInterstitial *)interstitial {
     [self fireEvent:@"" event:@"onReceiveInterstitialAd" withData:nil];
@@ -699,12 +567,9 @@
     }
 }
 
-
-
 - (void)interstitialWillPresentScreen:(GADInterstitial *)interstitial {
     [self fireEvent:@"" event:@"onPresentInterstitialAd" withData:nil];
 }
-
 
 
 - (void)interstitialDidDismissScreen:(GADInterstitial *)interstitial {
@@ -712,11 +577,7 @@
     self.interstitialView = nil;
 }
 
-
-
 #pragma mark Cleanup
-
-
 
 - (void)dealloc {
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
@@ -733,7 +594,5 @@
     self.bannerView = nil;
     self.interstitialView = nil;
 }
-
-
 
 @end
