@@ -24,6 +24,7 @@
     "cordova-admob",
     "cordova-android",
     "cordova-ios",
+    "cordova-windows",
     "cordova-wp8",
     "plugin",
     "google",
