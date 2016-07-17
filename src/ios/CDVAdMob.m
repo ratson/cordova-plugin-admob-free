@@ -40,6 +40,8 @@
 @synthesize bannerIsVisible, bannerIsInitialized;
 @synthesize bannerShow, autoShow, autoShowBanner, autoShowInterstitial;
 
+@synthesize gender, forChild;
+
 #define DEFAULT_BANNER_ID    @"ca-app-pub-3940256099942544/2934735716"
 #define DEFAULT_INTERSTITIAL_ID @"ca-app-pub-3940256099942544/4411468910"
 
@@ -52,6 +54,9 @@
 #define OPT_IS_TESTING      @"isTesting"
 #define OPT_AD_EXTRAS       @"adExtras"
 #define OPT_AUTO_SHOW       @"autoShow"
+
+#define OPT_GENDER          @"gender"
+#define OPT_FORCHILD        @"forChild"
 
 #pragma mark Cordova JS bridge
 
@@ -85,6 +90,9 @@
 
     bannerIsInitialized = false;
     bannerIsVisible = false;
+
+    gender = nil;
+    forChild = nil;
 
     srand((unsigned int)time(NULL));
 }
@@ -321,31 +329,58 @@
     NSString* str = nil;
 
     str = [options objectForKey:OPT_PUBLISHER_ID];
-    if(str && [str length]>0) publisherId = str;
+    if (str && [str length] > 0) {
+        publisherId = str;
+    }
 
     str = [options objectForKey:OPT_INTERSTITIAL_ADID];
-    if(str && [str length]>0) interstitialAdId = str;
+    if (str && [str length] > 0) {
+        interstitialAdId = str;
+    }
 
     str = [options objectForKey:OPT_AD_SIZE];
-    if(str) adSize = [self __AdSizeFromString:str];
+    if (str) {
+        adSize = [self __AdSizeFromString:str];
+    }
 
     str = [options objectForKey:OPT_BANNER_AT_TOP];
-    if(str) bannerAtTop = [str boolValue];
+    if (str) {
+        bannerAtTop = [str boolValue];
+    }
 
     str = [options objectForKey:OPT_OVERLAP];
-    if(str) bannerOverlap = [str boolValue];
+    if (str) {
+        bannerOverlap = [str boolValue];
+    }
 
     str = [options objectForKey:OPT_OFFSET_TOPBAR];
-    if(str) offsetTopBar = [str boolValue];
+    if (str) {
+        offsetTopBar = [str boolValue];
+    }
 
     str = [options objectForKey:OPT_IS_TESTING];
-    if(str) isTesting = [str boolValue];
+    if (str) {
+        isTesting = [str boolValue];
+    }
 
     NSDictionary* dict = [options objectForKey:OPT_AD_EXTRAS];
-    if(dict) adExtras = dict;
+    if (dict) {
+        adExtras = dict;
+    }
 
     str = [options objectForKey:OPT_AUTO_SHOW];
-    if(str) autoShow = [str boolValue];
+    if (str) {
+        autoShow = [str boolValue];
+    }
+
+    str = [options objectForKey:OPT_GENDER];
+    if (str && [str length] > 0) {
+        gender = str;
+    }
+    str = [options objectForKey:OPT_FORCHILD];
+    if (str && [str length] > 0) {
+        forChild = str;
+    }
 }
 
 - (void) __createBanner {
@@ -386,6 +421,19 @@
         [modifiedExtrasDict setValue:@"1" forKey:@"cordova"];
         extras.additionalParameters = modifiedExtrasDict;
         [request registerAdNetworkExtras:extras];
+    }
+
+    if (self.gender != nil) {
+        if ([self.gender caseInsensitiveCompare:@"male"] == NSOrderedSame) {
+            request.gender = kGADGenderMale;
+        } else if ([self.gender caseInsensitiveCompare:@"female"] == NSOrderedSame) {
+            request.gender = kGADGenderFemale;
+        } else {
+            request.gender = kGADGenderUnknown;
+        }
+    }
+    if (self.forChild != nil) {
+        [request tagForChildDirectedTreatment:YES];
     }
 
     return request;

@@ -44,6 +44,9 @@
 @property (assign) BOOL autoShowBanner;
 @property (assign) BOOL autoShowInterstitial;
 
+@property (nonatomic, retain) NSString* gender;
+@property (assign) BOOL forChild;
+
 - (void) setOptions:(CDVInvokedUrlCommand *)command;
 
 - (void)createBannerView:(CDVInvokedUrlCommand *)command;
