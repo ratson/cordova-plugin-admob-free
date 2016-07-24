@@ -410,8 +410,8 @@
 
     if (self.isTesting) {
         NSString* deviceId = [self __getAdMobDeviceId];
-        request.testDevices = [NSArray arrayWithObjects:deviceId, kGADSimulatorID, nil];
-        NSLog(@"request.testDevices: %@, <Google> tips handled", deviceId);
+        request.testDevices = @[ kGADSimulatorID, deviceId ];
+        NSLog(@"request.testDevices: %@", deviceId);
     }
     if (self.adExtras) {
         GADExtras *extras = [[GADExtras alloc] init];
@@ -470,8 +470,10 @@
     NSLog(@"__cycleInterstitial");
 
     // Clean up the old interstitial...
-    self.interstitialView.delegate = nil;
-    self.interstitialView = nil;
+    if (self.interstitialView) {
+        self.interstitialView.delegate = nil;
+        self.interstitialView = nil;
+    }
 
     // and create a new interstitial. We set the delegate so that we can be notified of when
     if (!self.interstitialView){
@@ -485,12 +487,14 @@
 - (void) __showInterstitial:(BOOL)show {
     NSLog(@"__showInterstitial");
 
-    if (! self.interstitialView){
+    if (!self.interstitialView){
         [self __cycleInterstitial];
     }
 
-    if(self.interstitialView && self.interstitialView.isReady) {
+    if (self.interstitialView && self.interstitialView.isReady) {
         [self.interstitialView presentFromRootViewController:self.viewController];
+    } else {
+        NSLog(@"Ad wasn't ready");
     }
 }
 
@@ -605,6 +609,14 @@
     [self fireEvent:@"" event:@"onDismissAd" withData:nil];
 }
 
+#pragma mark GADInterstitialDelegate implementation
+
+- (void)interstitial:(GADInterstitial *)ad
+    didFailToReceiveAdWithError:(GADRequestError *)error {
+    NSString* jsonData = [NSString stringWithFormat:@"{ 'error': '%@' }", [error localizedFailureReason]];
+    [self fireEvent:@"" event:@"onFailedToReceiveAd" withData:jsonData];
+}
+
 - (void)interstitialDidReceiveAd:(GADInterstitial *)interstitial {
     [self fireEvent:@"" event:@"onReceiveInterstitialAd" withData:nil];
     if (self.interstitialView){
@@ -621,7 +633,10 @@
 
 - (void)interstitialDidDismissScreen:(GADInterstitial *)interstitial {
     [self fireEvent:@"" event:@"onDismissInterstitialAd" withData:nil];
-    self.interstitialView = nil;
+    if (self.interstitialView) {
+        self.interstitialView.delegate = nil;
+        self.interstitialView = nil;
+    }
 }
 
 #pragma mark Cleanup
