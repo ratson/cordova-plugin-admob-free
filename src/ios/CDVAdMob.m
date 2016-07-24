@@ -304,7 +304,7 @@
 
 - (NSString *) __getAdMobDeviceId {
     NSUUID* adid = [[ASIdentifierManager sharedManager] advertisingIdentifier];
-    return [self md5:adid.UUIDString];
+    return [self __md5:adid.UUIDString];
 }
 
 - (NSString*) __md5:(NSString *) s {
@@ -475,8 +475,7 @@
 
     // and create a new interstitial. We set the delegate so that we can be notified of when
     if (!self.interstitialView){
-        self.interstitialView = [[GADInterstitial alloc] init];
-        self.interstitialView.adUnitID = self.interstitialAdId;
+        self.interstitialView = [[GADInterstitial alloc] initWithAdUnitID:self.interstitialAdId];
         self.interstitialView.delegate = self;
 
         [self.interstitialView loadRequest:[self __buildAdRequest]];

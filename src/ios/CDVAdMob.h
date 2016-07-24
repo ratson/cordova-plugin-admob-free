@@ -45,7 +45,7 @@
 @property (assign) BOOL autoShowInterstitial;
 
 @property (nonatomic, retain) NSString* gender;
-@property (assign) BOOL forChild;
+@property (nonatomic, retain) NSString* forChild;
 
 - (void) setOptions:(CDVInvokedUrlCommand *)command;
 
