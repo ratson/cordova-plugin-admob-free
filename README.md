@@ -92,7 +92,7 @@ AdMob.destroyBannerView();
 ```javascript
 // preppare and load ad resource in background, e.g. at begining of game level
 AdMob.prepareInterstitial({
-  adId: admobid.interstitial,
+  interstitialId: admobid.interstitial,
   autoShow: false,
 });
 
