@@ -14,7 +14,7 @@ A free, no ad-sharing version of Google AdMob plugin for Cordova.
 
 - **No Remote Control**
 
-  Do not [send your application information to a remote server](https://github.com/floatinghotpot/cordova-admob-pro/issues/326) to control whether ad could be displayed.
+  Do not [send your application information to a remote server](https://github.com/floatinghotpot/cordova-admob-pro/issues/326) to control whether ad could be displayed. Therefore, you don't lose revenue because [some server bug](https://github.com/floatinghotpot/cordova-admob-pro/issues/450#issuecomment-244837346),
 
 ### Compare to other projects
 
@@ -25,7 +25,9 @@ A free, no ad-sharing version of Google AdMob plugin for Cordova.
   [cordova-plugin-ad-admob](https://github.com/cranberrygame/cordova-plugin-ad-admob) | [❌](https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/7aaa397b19ab63579d6aa68fbf20ffdf795a15fc/src/android/AdMobPlugin.java#L330) | ✅ | ✅
   [cordova-plugin-admob-free](https://github.com/ratson/cordova-plugin-admob-free) | ✅ | ✅ | ✅
   [cordova-plugin-admob-simple](https://github.com/sunnycupertino/cordova-plugin-admob-simple) | [❌](https://github.com/sunnycupertino/cordova-plugin-admob-simple/blob/a58846c1ea14188a4aef44381ccd28ffdcae3bfa/src/android/AdMob.java#L207) | ✅ | ✅
-  [cordova-plugin-admobpro](https://github.com/floatinghotpot/cordova-admob-pro) | [❌](https://github.com/floatinghotpot/cordova-admob-pro/wiki/License-Agreement#2-win-win-partnership) | [❌](https://github.com/floatinghotpot/cordova-extension/blob/master/src/android/cordova-generic-ad.jar) [❌](https://github.com/floatinghotpot/cordova-extension/blob/master/src/ios/libCordovaGenericAd.a)  | [❌](https://github.com/floatinghotpot/cordova-admob-pro/issues/326)
+  [cordova-plugin-admobpro](https://github.com/floatinghotpot/cordova-admob-pro) | [❌](https://github.com/floatinghotpot/cordova-admob-pro/wiki/License-Agreement#2-win-win-partnership) | [❌](https://github.com/floatinghotpot/cordova-extension/blob/master/src/android/cordova-generic-ad.jar) [❌](https://github.com/floatinghotpot/cordova-extension/blob/master/src/ios/libCordovaGenericAd.a)  | [❌](https://github.com/floatinghotpot/cordova-admob-pro/issues/326) [❌](https://github.com/floatinghotpot/cordova-admob-pro/issues/450)
+
+Click ❌ to see the detail.
 
 ## Installation
 
