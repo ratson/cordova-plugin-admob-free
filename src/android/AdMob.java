@@ -32,6 +32,7 @@ import java.util.Random;
  * This class represents the native implementation for the AdMob Cordova plugin.
  * This plugin can be used to request AdMob ads natively via the Google AdMob SDK.
  * The Google AdMob SDK is a dependency for this plugin.
+ * The class is accessed via the Cordova Plugin cordova-plugin-admob-simple
  */
 public class AdMob extends CordovaPlugin {
     /** Common tag used for logging statements. */
