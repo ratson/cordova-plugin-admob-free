@@ -315,7 +315,7 @@ public class AdMob extends CordovaPlugin {
                 adView.loadAd(buildAdRequest());
 
                 //if(autoShowBanner) {
-                executeShowAd(true, null);
+                // executeShowAd(true, null);
                 //}
                 Log.w("banner", publisherId);
 
@@ -651,6 +651,9 @@ public class AdMob extends CordovaPlugin {
         @Override
         public void onAdLoaded() {
             Log.w("AdMob", "BannerAdLoaded");
+            if (autoShowBanner && !bannerVisible) {
+                executeShowAd(true, null);
+            }
             webView.loadUrl("javascript:cordova.fireDocumentEvent('onReceiveAd');");
         }
 
