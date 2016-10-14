@@ -14,7 +14,7 @@ A free, no ad-sharing version of Google AdMob plugin for Cordova.
 
 - **No Remote Control**
 
-  Do not [send your application information to a remote server](https://github.com/floatinghotpot/cordova-admob-pro/issues/326) to control whether ad could be displayed. Therefore, you don't lose revenue because [some server bug](https://github.com/floatinghotpot/cordova-admob-pro/issues/450#issuecomment-244837346),
+  Do not [send your application information to a remote server](https://github.com/floatinghotpot/cordova-admob-pro/issues/326) to control whether ad could be displayed. Therefore, you don't lose revenue because [some server bugs](https://github.com/floatinghotpot/cordova-admob-pro/issues/450#issuecomment-244837346),
 
 ### Compare to other projects
 
