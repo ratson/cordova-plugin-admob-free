@@ -593,12 +593,13 @@
 }
 
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error {
-    NSString* jsonData = [NSString stringWithFormat:@"{ 'error': '%@' }", [error localizedFailureReason]];
+    NSString* jsonData = [NSString stringWithFormat:@"{ 'error': '%@', 'adType':'banner' }", [error localizedFailureReason]];
     [self fireEvent:@"" event:@"onFailedToReceiveAd" withData:jsonData];
 }
 
 - (void)adViewWillLeaveApplication:(GADBannerView *)adView {
-    [self fireEvent:@"" event:@"onLeaveToAd" withData:nil];
+    NSString* jsonData = @"{ 'adType':'banner' }";
+    [self fireEvent:@"" event:@"onLeaveToAd" withData:jsonData];
 }
 
 - (void)adViewWillPresentScreen:(GADBannerView *)adView {
@@ -613,8 +614,13 @@
 
 - (void)interstitial:(GADInterstitial *)ad
     didFailToReceiveAdWithError:(GADRequestError *)error {
-    NSString* jsonData = [NSString stringWithFormat:@"{ 'error': '%@' }", [error localizedFailureReason]];
+    NSString* jsonData = [NSString stringWithFormat:@"{ 'error': '%@', 'adType':'interstitial' }", [error localizedFailureReason]];
     [self fireEvent:@"" event:@"onFailedToReceiveAd" withData:jsonData];
+}
+
+- (void)interstitialWillLeaveApplication:(GADInterstitial *)interstitial {
+    NSString* jsonData = @"{ 'adType':'interstitial' }";
+    [self fireEvent:@"" event:@"onLeaveToAd" withData:jsonData];
 }
 
 - (void)interstitialDidReceiveAd:(GADInterstitial *)interstitial {

@@ -633,47 +633,83 @@ public class AdMob extends CordovaPlugin {
      * document.addEventListener('onDismissAd', function());
      * document.addEventListener('onLeaveToAd', function());
      */
-    public class BasicListener extends AdListener {
+    abstract class BasicListener extends AdListener {
+        abstract String getAdType();
+
+        void fireAdEvent(String eventName) {
+            new CordovaEventBuilder(eventName).fire(webView);
+        }
+
+        void fireAdEvent(String eventName, JSONObject data) {
+            new CordovaEventBuilder(eventName).withData(data).fire(webView);
+        }
+
         @Override
         public void onAdFailedToLoad(int errorCode) {
-            webView.loadUrl(String.format(
-                    "javascript:cordova.fireDocumentEvent('onFailedToReceiveAd', { 'error': %d, 'reason':'%s' });",
-                    errorCode, getErrorReason(errorCode)));
+            JSONObject data = new JSONObject();
+            try {
+                data.put("error", errorCode);
+                data.put("reason", getErrorReason(errorCode));
+                data.put("adType", this.getAdType());
+            } catch (JSONException e) {
+                e.printStackTrace();
+                this.fireAdEvent("onFailedToReceiveAd");
+                return;
+            }
+            this.fireAdEvent("onFailedToReceiveAd", data);
         }
 
         @Override
         public void onAdLeftApplication() {
-            webView.loadUrl("javascript:cordova.fireDocumentEvent('onLeaveToAd');");
+            JSONObject data = new JSONObject();
+            try {
+                data.put("adType", this.getAdType());
+            } catch (JSONException e) {
+                e.printStackTrace();
+                this.fireAdEvent("onLeaveToAd");
+                return;
+            }
+            this.fireAdEvent("onLeaveToAd", data);
         }
     }
 
     private class BannerListener extends BasicListener {
+        @Override
+        String getAdType() {
+            return "banner";
+        }
+
         @Override
         public void onAdLoaded() {
             Log.w("AdMob", "BannerAdLoaded");
             if (autoShowBanner && !bannerVisible) {
                 executeShowAd(true, null);
             }
-            webView.loadUrl("javascript:cordova.fireDocumentEvent('onReceiveAd');");
+            this.fireAdEvent("onReceiveAd");
         }
 
         @Override
         public void onAdOpened() {
-            webView.loadUrl("javascript:cordova.fireDocumentEvent('onPresentAd');");
+            this.fireAdEvent("onPresentAd");
         }
 
         @Override
         public void onAdClosed() {
-            webView.loadUrl("javascript:cordova.fireDocumentEvent('onDismissAd');");
+            this.fireAdEvent("onDismissAd");
         }
 
     }
 
     private class InterstitialListener extends BasicListener {
         @Override
+        String getAdType() {
+            return "interstitial";
+        }
+
+        @Override
         public void onAdLoaded() {
             Log.w("AdMob", "InterstitialAdLoaded");
-            webView.loadUrl("javascript:cordova.fireDocumentEvent('onReceiveInterstitialAd');");
+            this.fireAdEvent("onReceiveInterstitialAd");
 
             if (autoShowInterstitial) {
                 executeShowInterstitialAd(true, null);
@@ -685,12 +721,12 @@ public class AdMob extends CordovaPlugin {
 
         @Override
         public void onAdOpened() {
-            webView.loadUrl("javascript:cordova.fireDocumentEvent('onPresentInterstitialAd');");
+            this.fireAdEvent("onPresentInterstitialAd");
         }
 
         @Override
         public void onAdClosed() {
-            webView.loadUrl("javascript:cordova.fireDocumentEvent('onDismissInterstitialAd');");
+            this.fireAdEvent("onDismissInterstitialAd");
             clearInterstitial();
         }
 
