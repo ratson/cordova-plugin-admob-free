@@ -39,11 +39,11 @@
         </config-file>
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="AdMob">
-                <param name="android-package" value="com.cupertino.cordova.plugin.AdMob" />
+                <param name="android-package" value="name.ratson.cordova.admob.AdMob" />
                 <param name="onload" value="true" />
             </feature>
         </config-file>
-        <source-file src="src/android/AdMob.java" target-dir="src/com/cupertino/cordova/plugin" />
+        <source-file src="src/android/name/ratson/cordova/admob/AdMob.java" target-dir="src/name/ratson/cordova/admob" />
         <!-- cordova CLI using gradle and it's working well        <framework src="com.google.android.gms:play-services-ads:+" /> -->
         <!-- but unfortunately, build.phonegap.com, Intel XDK, and some other tools still use ant -->
         <!-- dependency id="cordova-plugin-googleplayservices"/ -->

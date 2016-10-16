@@ -1,4 +1,4 @@
-package com.cupertino.cordova.plugin;
+package name.ratson.cordova.admob;
 
 import android.location.Location;
 import android.os.Bundle;
