@@ -17,6 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+      main {
+        java {
+          srcDirs = ['src/main/java', '../../../src/android', '../../../node_modules/cordova-android/framework/src']
+        }
+      }
+    }
 }
 
 dependencies {
@@ -25,5 +32,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.google.android.gms:play-services-ads:9.6.1'
     testCompile 'junit:junit:4.12'
+    testCompile 'org.json:json:20140107'
 }
