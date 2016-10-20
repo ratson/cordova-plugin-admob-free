@@ -2,6 +2,22 @@
 
 The FASTEST and EASIEST TO USE Cordova Admob plugin for Android, iOS and Windows phone. We do not send your apps details to our servers. Pure OpenSource Admob code. Allows preloading and automatic loading of interstitials and banners plus more. Works with Cordova, Phonegap, Intel XDK/Crosswalk, Ionic, Meteor and more.
 
+## CONTENTS
+1. [DESCRIPTION](#description)
+2. [QUICK START](#quick-start)
+3. [CODING DETAILS - Load interstitial first, show it later](#coding-details1)
+4. [CODING DETAILS - Show interstitial as soon as it's loaded](#coding-details2)
+5. [VIDEO DEMO](#video-demo)
+6. [ECLIPSE NOTES](#eclipse)
+7. [ANDROID STUDIO NOTES](#android-studio)
+8. [CAUTION](#caution)
+
+## DESCRIPTION
+
+A Cordova-Phonegap plugin that allows you to integrate Google Admob ads into your iOS or Android app and display banners or interstitials. Cordova allows you to build cross platform HTML 5 and Javascript apps without having to rewrite in Objective C or Java.
+
+## QUICK START
+
 - Create your app
 
 ```bash
@@ -22,7 +38,7 @@ cordova plugin add https://github.com/sunnycupertino/cordova-plugin-admob-simple
 ```
 
 
-## CODING DETAILS (Load interstitial first, show it later)
+## CODING DETAILS - Load interstitial first, show it later
 
 - Add the following javascript functions, put in your own ad code, play with the variables if you want.
 
@@ -94,7 +110,7 @@ function showInterstitialFunc(){
     window.plugins.AdMob.destroyBannerView();
 ```
 
-## CODING DETAILS (Show interstitial as soon as it's loaded)
+## CODING DETAILS - Show interstitial as soon as it's loaded
 
 - Add the following javascript functions, put in your own ad code, play with the variables if you want.
 
@@ -161,7 +177,13 @@ function showInterstitialFunc(){
     window.plugins.AdMob.destroyBannerView();
 ```
 
-## ECLIPSE STUFF
+## VIDEO DEMO
+
+* Watch the video below to see a tutorial on how to install the Cordova Admob Plugin with Android Studio:
+
+[![Video](https://github.com/sunnycupertino/cordova-plugin-admob-simple/raw/master/docs/cordova-admob-plugin-video.jpg)](https://youtu.be/esHGZxmXOMg)
+
+## ECLIPSE NOTES
 
 - Import your cordova project into eclipse, make sure you import the folder 'platforms/android', not the base folder of the project.
 
@@ -173,7 +195,7 @@ function showInterstitialFunc(){
 ```
 - If your play services is a different version, then use the right value above. The console will warn you when you try run it if it's wrong. 
    
-## ANDROID STUDIO STUFF
+## ANDROID STUDIO NOTES
 
 - Import your Cordova project with File->new->import project
 
