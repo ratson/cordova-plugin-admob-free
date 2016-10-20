@@ -549,6 +549,10 @@ return kGADAdSizeBanner;
 
 return kGADAdSizeMediumRectangle;
 
+} else if ([string isEqualToString:@"LARGE_BANNER"]) {
+
+return kGADAdSizeLargeBanner;
+
 } else if ([string isEqualToString:@"IAB_BANNER"]) {
 
 return kGADAdSizeFullBanner;
