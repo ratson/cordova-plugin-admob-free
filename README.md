@@ -46,7 +46,7 @@ function initAd(){
             window.plugins.AdMob.setOptions( {
                 publisherId: admobid.banner,
                 interstitialAdId: admobid.interstitial,
-                adSize: window.plugins.AdMob.AD_SIZE.SMART_BANNER,	//use SMART_BANNER, BANNER, IAB_MRECT, IAB_BANNER, IAB_LEADERBOARD
+                adSize: window.plugins.AdMob.AD_SIZE.SMART_BANNER,	//use SMART_BANNER, BANNER, LARGE_BANNER, IAB_MRECT, IAB_BANNER, IAB_LEADERBOARD
                 bannerAtTop: false, // set to true, to put banner at top
                 overlap: true, // banner will overlap webview 
                 offsetTopBar: false, // set to true to avoid ios7 status bar overlap
@@ -118,7 +118,7 @@ function initAd(){
             window.plugins.AdMob.setOptions( {
                 publisherId: admobid.banner,
                 interstitialAdId: admobid.interstitial,
-                adSize: window.plugins.AdMob.AD_SIZE.SMART_BANNER,	//use SMART_BANNER, BANNER, IAB_MRECT, IAB_BANNER, IAB_LEADERBOARD
+                adSize: window.plugins.AdMob.AD_SIZE.SMART_BANNER,	//use SMART_BANNER, BANNER, LARGE_BANNER, IAB_MRECT, IAB_BANNER, IAB_LEADERBOARD
                 bannerAtTop: false, // set to true, to put banner at top
                 overlap: true, // banner will overlap webview
                 offsetTopBar: false, // set to true to avoid ios7 status bar overlap
