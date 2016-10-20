@@ -6,7 +6,7 @@ The FASTEST and EASIEST TO USE Cordova Admob plugin for Android, iOS and Windows
 1. [DESCRIPTION](#description)
 2. [QUICK START](#quick-start)
 3. [CODING DETAILS - Load interstitial first and show later](#coding-details-load-interstitial-first-and-show-later)
-4. [CODING DETAILS - Show interstitial when it's loaded](#coding-details-show-interstitial-when-it's-loaded)
+4. [CODING DETAILS - Show interstitial when it's loaded](#coding-details-show-interstitial-when-it-is-loaded)
 5. [VIDEO DEMO](#video-demo)
 6. [ECLIPSE NOTES](#eclipse-notes)
 7. [ANDROID STUDIO NOTES](#android-studio-notes)
@@ -110,7 +110,7 @@ function showInterstitialFunc(){
     window.plugins.AdMob.destroyBannerView();
 ```
 
-## CODING DETAILS Show interstitial when it's loaded
+## CODING DETAILS Show interstitial when it is loaded
 
 - Add the following javascript functions, put in your own ad code, play with the variables if you want.
 
@@ -199,7 +199,7 @@ function showInterstitialFunc(){
 
 - Import your Cordova project with File->new->import project
 
-- Make sure you import the folder 'platforms/android', not the base folder of the project.
+- Make sure you import the folder 'platforms/android' or 'platforms/ios', not the base folder of the project.
 
 - Now you have to launch the sdk manager and download and install the following files located under "extras" (if you don't have them already): 
 	Android support repository, Google play services, Google repository.
