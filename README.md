@@ -5,11 +5,11 @@ The FASTEST and EASIEST TO USE Cordova Admob plugin for Android, iOS and Windows
 ## CONTENTS
 1. [DESCRIPTION](#description)
 2. [QUICK START](#quick-start)
-3. [CODING DETAILS - Load interstitial first, show it later](#coding-details1)
-4. [CODING DETAILS - Show interstitial as soon as it's loaded](#coding-details2)
+3. [CODING DETAILS - Load interstitial first and show later](#coding-details-load-interstitial-first-and-show-later)
+4. [CODING DETAILS - Show interstitial when it's loaded](#coding-details-show-interstitial-when-it's-loaded)
 5. [VIDEO DEMO](#video-demo)
-6. [ECLIPSE NOTES](#eclipse)
-7. [ANDROID STUDIO NOTES](#android-studio)
+6. [ECLIPSE NOTES](#eclipse-notes)
+7. [ANDROID STUDIO NOTES](#android-studio-notes)
 8. [CAUTION](#caution)
 
 ## DESCRIPTION
@@ -38,7 +38,7 @@ cordova plugin add https://github.com/sunnycupertino/cordova-plugin-admob-simple
 ```
 
 
-## CODING DETAILS - Load interstitial first, show it later
+## CODING DETAILS Load interstitial first and show later
 
 - Add the following javascript functions, put in your own ad code, play with the variables if you want.
 
@@ -110,7 +110,7 @@ function showInterstitialFunc(){
     window.plugins.AdMob.destroyBannerView();
 ```
 
-## CODING DETAILS - Show interstitial as soon as it's loaded
+## CODING DETAILS Show interstitial when it's loaded
 
 - Add the following javascript functions, put in your own ad code, play with the variables if you want.
 
