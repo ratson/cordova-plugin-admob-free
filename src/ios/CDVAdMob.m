@@ -410,7 +410,7 @@
 
     if (self.isTesting) {
         NSString* deviceId = [self __getAdMobDeviceId];
-        request.testDevices = @[ kGADSimulatorID, deviceId ];
+        request.testDevices = @[ kGADSimulatorID, deviceId, [deviceId lowercaseString] ];
         NSLog(@"request.testDevices: %@", deviceId);
     }
     if (self.adExtras) {
