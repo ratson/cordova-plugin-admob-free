@@ -2,11 +2,12 @@ import argscheck from 'cordova/argscheck'
 import exec from 'cordova/exec'
 
 export const AD_SIZE = {
-  SMART_BANNER: 'SMART_BANNER',
   BANNER: 'BANNER',
-  IAB_MRECT: 'IAB_MRECT',
   IAB_BANNER: 'IAB_BANNER',
   IAB_LEADERBOARD: 'IAB_LEADERBOARD',
+  IAB_MRECT: 'IAB_MRECT',
+  LARGE_BANNER: 'LARGE_BANNER',
+  SMART_BANNER: 'SMART_BANNER',
 }
 
 export function setOptions(options, successCallback, failureCallback) {
