@@ -87,12 +87,18 @@ AdMob.createBannerView();
 
 // Close the banner
 AdMob.destroyBannerView();
+
+// Hide the banner
+AdMob.showAd(false);
+
+// Show the banner
+AdMob.showAd(true);
 ```
 
 #### Interstitial Ad
 
 ```javascript
-// preppare and load ad resource in background, e.g. at begining of game level
+// prepare and load ad resource in background, e.g. at the beginning of game level
 AdMob.prepareInterstitial({
   interstitialId: admobid.interstitial,
   autoShow: false,
@@ -124,6 +130,7 @@ AdMob.setOptions(options, success, fail);
 // use banner
 AdMob.createBannerView();
 AdMob.destroyBannerView();
+AdMob.showAd();
 
 // use interstitial
 AdMob.prepareInterstitial(adId/options, success, fail);
