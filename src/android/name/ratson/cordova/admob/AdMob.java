@@ -577,6 +577,7 @@ public class AdMob extends CordovaPlugin {
                         }
                         parentView.bringToFront();
                         parentView.requestLayout();
+                        parentView.requestFocus();
                     }
 
                     adView.setVisibility(View.VISIBLE);

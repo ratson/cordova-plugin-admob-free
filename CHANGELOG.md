@@ -1,3 +1,10 @@
+## 0.3.1 (2016-10-26)
+
+### Fixed
+
+* Fix banner focus for Android. ([@raulpopi](https://github.com/raulpopi) in [#19](https://github.com/ratson/cordova-plugin-admob-free/issues/19))
+
+
 ## 0.3.0 (2016-10-23)
 
 ### Added
