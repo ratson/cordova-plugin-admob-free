@@ -7,7 +7,7 @@
     "build": "babel src/js --out-dir www",
     "prepublish": "npm-run-all clean build",
     "version": "sync-package-version --cordova-plugin",
-    "test": "cd tests/android && ./gradlew test"
+    "test": "cordova-test"
   },
   "cordova": {
     "id": "cordova-plugin-admob-free",
@@ -36,10 +36,11 @@
   "author": "Ratson",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.16.0",
-    "babel-preset-es2015": "^6.16.0",
-    "cordova-android": "^5.2.2",
-    "npm-run-all": "^3.1.0",
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "cordova-android": "^6.0.0",
+    "cordova-test-cli": "0.0.1",
+    "npm-run-all": "^3.1.1",
     "rimraf": "^2.5.4",
     "sync-package-version": "0.0.3"
   },

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="cordova-plugin-admob-free-tests"
+    version="1.0.0-dev">
+    <name>Cordova AdMob Tests</name>
+    <license>MIT</license>
+
+    <platform name="android">
+        <source-file src="android/CordovaEventBuilderTest.java" target-dir="src/test/java/name/ratson/cordova/admob" />
+    </platform>
+</plugin>

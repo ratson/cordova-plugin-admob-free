@@ -1,3 +1,0 @@
-include ':app'
-include ":CordovaLib"
-project(':CordovaLib').projectDir = new File('../../node_modules/cordova-android/framework')

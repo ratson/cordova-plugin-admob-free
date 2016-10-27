@@ -1,4 +1,4 @@
-package name.ratson.testapplication;
+package name.ratson.cordova.admob;
 
 import org.json.JSONException;
 import org.json.JSONObject;
