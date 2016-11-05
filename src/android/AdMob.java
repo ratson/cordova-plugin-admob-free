@@ -46,8 +46,6 @@ public class AdMob extends CordovaPlugin {
     private static final String LOGTAG = "AdMob";
     private static final String DEFAULT_PUBLISHER_ID = "";
 
-    private static final boolean CORDOVA_MIN_4 = Integer.valueOf(CordovaWebView.CORDOVA_VERSION.split("\\.")[0]) >= 4;
-
     /**
      * Cordova Actions.
      */
@@ -551,22 +549,17 @@ public class AdMob extends CordovaPlugin {
                         adViewLayout.addView(adView, params2);
                         adViewLayout.bringToFront();
                     } else {
-                        if (CORDOVA_MIN_4) {
-                            ViewGroup wvParentView = (ViewGroup) getWebView().getParent();
-                            if (parentView == null) {
-                                parentView = new LinearLayout(webView.getContext());
-                            }
-                            if (wvParentView != null && wvParentView != parentView) {
-                                wvParentView.removeView(getWebView());
-                                ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
-                                parentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
-                                getWebView().setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0F));
-                                parentView.addView(getWebView());
-                                cordova.getActivity().setContentView(parentView);
-                            }
-
-                        } else {
-                            parentView = (ViewGroup) ((ViewGroup) webView).getParent();
+                        ViewGroup wvParentView = (ViewGroup) getWebView().getParent();
+                        if (parentView == null) {
+                            parentView = new LinearLayout(webView.getContext());
+                        }
+                        if (wvParentView != null && wvParentView != parentView) {
+                            wvParentView.removeView(getWebView());
+                            ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
+                            parentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
+                            getWebView().setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0F));
+                            parentView.addView(getWebView());
+                            cordova.getActivity().setContentView(parentView);
                         }
 
 

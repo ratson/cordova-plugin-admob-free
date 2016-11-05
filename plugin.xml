@@ -15,7 +15,7 @@
     <issue>https://github.com/ratson/cordova-plugin-admob-free/issues</issue>
 
     <engines>
-        <engine name="cordova" version=">=3.0" />
+        <engine name="cordova" version=">=4.0" />
     </engines>
 
     <js-module name="AdMob" src="www/AdMob.js">
