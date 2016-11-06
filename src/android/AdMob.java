@@ -630,12 +630,14 @@ public class AdMob extends CordovaPlugin {
     abstract class BasicListener extends AdListener {
         abstract String getAdType();
 
-        void fireAdEvent(String eventName) {
-            new CordovaEventBuilder(eventName).fire(webView);
+        protected void fireAdEvent(String eventName) {
+            Stirng js = new CordovaEventBuilder(eventName).build();
+            webView.loadUrl(js);
         }
 
-        void fireAdEvent(String eventName, JSONObject data) {
-            new CordovaEventBuilder(eventName).withData(data).fire(webView);
+        protected void fireAdEvent(String eventName, JSONObject data) {
+            Stirng js = new CordovaEventBuilder(eventName).withData(data).build();
+            webView.loadUrl(js);
         }
 
         @Override

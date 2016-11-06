@@ -1,6 +1,5 @@
 package name.ratson.cordova.admob;
 
-import org.apache.cordova.CordovaWebView;
 import org.json.JSONObject;
 
 public class CordovaEventBuilder {
@@ -34,10 +33,5 @@ public class CordovaEventBuilder {
         }
         js.append(");");
         return js.toString();
-    }
-
-    public void fire(CordovaWebView webView) {
-        String js = build();
-        webView.loadUrl(js);
     }
 }
