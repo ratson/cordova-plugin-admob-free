@@ -26,7 +26,6 @@
     <dependency id="cordova-admob-sdk" version="~0.1.0" />
 
     <!-- android -->
-    <!-- android, now build with gradle instead of ant -->
     <platform name="android">
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
             <activity android:name="com.google.android.gms.ads.AdActivity"
@@ -43,11 +42,8 @@
                 <param name="onload" value="true" />
             </feature>
         </config-file>
-        <source-file src="src/android/name/ratson/cordova/admob/AdMob.java" target-dir="src/name/ratson/cordova/admob" />
-        <source-file src="src/android/name/ratson/cordova/admob/CordovaEventBuilder.java" target-dir="src/name/ratson/cordova/admob" />
-        <!-- cordova CLI using gradle and it's working well        <framework src="com.google.android.gms:play-services-ads:+" /> -->
-        <!-- but unfortunately, build.phonegap.com, Intel XDK, and some other tools still use ant -->
-        <!-- dependency id="cordova-plugin-googleplayservices"/ -->
+        <source-file src="src/android/AdMob.java" target-dir="src/name/ratson/cordova/admob" />
+        <source-file src="src/android/CordovaEventBuilder.java" target-dir="src/name/ratson/cordova/admob" />
     </platform>
 
     <!-- ios -->
