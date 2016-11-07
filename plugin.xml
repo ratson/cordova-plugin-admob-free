@@ -43,6 +43,7 @@
             </feature>
         </config-file>
         <source-file src="src/android/AdMob.java" target-dir="src/name/ratson/cordova/admob" />
+        <source-file src="src/android/AdMobConfig.java" target-dir="src/name/ratson/cordova/admob" />
         <source-file src="src/android/CordovaEventBuilder.java" target-dir="src/name/ratson/cordova/admob" />
     </platform>
 

@@ -1,6 +1,5 @@
 package name.ratson.cordova.admob;
 
-import android.location.Location;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.widget.RelativeLayout;
 import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.common.ConnectionResult;
@@ -30,9 +28,7 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * This class represents the native implementation for the AdMob Cordova plugin.
@@ -44,7 +40,8 @@ public class AdMob extends CordovaPlugin {
      * Common tag used for logging statements.
      */
     private static final String LOGTAG = "AdMob";
-    private static final String DEFAULT_PUBLISHER_ID = "";
+
+    private static final AdMobConfig config = new AdMobConfig();
 
     /**
      * Cordova Actions.
@@ -60,30 +57,9 @@ public class AdMob extends CordovaPlugin {
     private static final String ACTION_REQUEST_INTERSTITIAL_AD = "requestInterstitialAd";
     private static final String ACTION_SHOW_INTERSTITIAL_AD = "showInterstitialAd";
 
-    /* options */
-    private static final String OPT_PUBLISHER_ID = "publisherId";
-    private static final String OPT_INTERSTITIAL_AD_ID = "interstitialAdId";
-    private static final String OPT_AD_SIZE = "adSize";
-    private static final String OPT_BANNER_AT_TOP = "bannerAtTop";
-    private static final String OPT_OVERLAP = "overlap";
-    private static final String OPT_OFFSET_TOPBAR = "offsetTopBar";
-    private static final String OPT_IS_TESTING = "isTesting";
-    private static final String OPT_AD_EXTRAS = "adExtras";
-    private static final String OPT_AUTO_SHOW = "autoShow";
-
-    private static final String OPT_LOCATION = "location";
-    private Location mLocation = null;
-
-    private static final String OPT_GENDER = "gender";
-    private static final String OPT_FORCHILD = "forChild";
-    private static final String OPT_FORFAMILY = "forFamily";
-    private static final String OPT_CONTENTURL = "contentUrl";
-    private static final String OPT_EXCLUDE = "exclude";
-
-    public static final String OPT_TEST_DEVICES = "testDevices";
-    private List<String> testDeviceList = null;
-
     private ViewGroup parentView;
+
+    private boolean bannerShow = true;
 
     /**
      * The adView to display to the user.
@@ -98,29 +74,6 @@ public class AdMob extends CordovaPlugin {
      * The interstitial ad to display to the user.
      */
     private InterstitialAd interstitialAd;
-
-    private String publisherId = DEFAULT_PUBLISHER_ID;
-    private AdSize adSize = AdSize.SMART_BANNER;
-    private String interstialAdId = "";
-    /**
-     * Whether or not the ad should be positioned at top or bottom of screen.
-     */
-    private boolean bannerAtTop = false;
-    /**
-     * Whether or not the banner will overlap the webview instead of push it up or down
-     */
-    private boolean bannerOverlap = false;
-    private boolean offsetTopBar = false;
-    private boolean isTesting = false;
-    private boolean bannerShow = true;
-    private JSONObject adExtras = null;
-    private boolean autoShow = true;
-
-    private String mGender = null;
-    private String mForChild = null;
-    private String mForFamily = null;
-    private String mContentURL = null;
-    private JSONArray mExclude = null;
 
     private boolean autoShowBanner = true;
     private boolean autoShowInterstitial = true;
@@ -196,79 +149,10 @@ public class AdMob extends CordovaPlugin {
     private PluginResult executeSetOptions(JSONObject options, CallbackContext callbackContext) {
         Log.w(LOGTAG, "executeSetOptions");
 
-        this.setOptions(options);
+        config.setOptions(options);
 
         callbackContext.success();
         return null;
-    }
-
-    private void setOptions(JSONObject options) {
-        if (options == null) {
-            return;
-        }
-
-        if (options.has(OPT_PUBLISHER_ID)) {
-            this.publisherId = options.optString(OPT_PUBLISHER_ID);
-        }
-        if (options.has(OPT_INTERSTITIAL_AD_ID)) {
-            this.interstialAdId = options.optString(OPT_INTERSTITIAL_AD_ID);
-        }
-        if (options.has(OPT_AD_SIZE)) {
-            this.adSize = adSizeFromString(options.optString(OPT_AD_SIZE));
-        }
-        if (options.has(OPT_BANNER_AT_TOP)) {
-            this.bannerAtTop = options.optBoolean(OPT_BANNER_AT_TOP);
-        }
-        if (options.has(OPT_OVERLAP)) {
-            this.bannerOverlap = options.optBoolean(OPT_OVERLAP);
-        }
-        if (options.has(OPT_OFFSET_TOPBAR)) {
-            this.offsetTopBar = options.optBoolean(OPT_OFFSET_TOPBAR);
-        }
-        if (options.has(OPT_IS_TESTING)) {
-            this.isTesting = options.optBoolean(OPT_IS_TESTING);
-        }
-        if (options.has(OPT_AD_EXTRAS)) {
-            this.adExtras = options.optJSONObject(OPT_AD_EXTRAS);
-        }
-        if (options.has(OPT_AUTO_SHOW)) {
-            this.autoShow = options.optBoolean(OPT_AUTO_SHOW);
-        }
-
-        if (options.has(OPT_LOCATION)) {
-            JSONArray location = options.optJSONArray(OPT_LOCATION);
-            if (location != null) {
-                mLocation = new Location("dummyprovider");
-                mLocation.setLatitude(location.optDouble(0, 0.0));
-                mLocation.setLongitude(location.optDouble(1, 0));
-            }
-        }
-
-        if (options.has(OPT_GENDER)) {
-            mGender = options.optString(OPT_GENDER);
-        }
-        if (options.has(OPT_FORCHILD)) {
-            mForChild = options.optString(OPT_FORCHILD);
-        }
-        if (options.has(OPT_FORFAMILY)) {
-            mForFamily = options.optString(OPT_FORFAMILY);
-        }
-        if (options.has(OPT_CONTENTURL)) {
-            mContentURL = options.optString(OPT_CONTENTURL);
-        }
-        if (options.has(OPT_EXCLUDE)) {
-            mExclude = options.optJSONArray(OPT_EXCLUDE);
-        }
-
-        if (options.has(OPT_TEST_DEVICES)) {
-            JSONArray testDevices = options.optJSONArray(OPT_TEST_DEVICES);
-            if (testDevices != null) {
-                testDeviceList = new ArrayList<String>();
-                for (int i = 0; i < testDevices.length(); i++) {
-                    testDeviceList.add(testDevices.optString(i));
-                }
-            }
-        }
     }
 
     /**
@@ -283,26 +167,24 @@ public class AdMob extends CordovaPlugin {
      * successfully.
      */
     private PluginResult executeCreateBannerView(JSONObject options, final CallbackContext callbackContext) {
+        config.setOptions(options);
+        autoShowBanner = config.autoShow;
 
-        this.setOptions(options);
-        autoShowBanner = autoShow;
-
-        if (this.publisherId.length() == 0) {
+        if (config.bannerAdUnitId.length() == 0) {
             // in case the user does not enter their own publisher id
-            this.publisherId = getTempBanner();
+            config.bannerAdUnitId = getTempBanner();
         }
-        if (this.publisherId.indexOf("xxxx") > 0) {
+        if (config.bannerAdUnitId.indexOf("xxxx") > 0) {
             Log.e("banner", "Please put your admob id into the javascript code. No ad to display.");
             return null;
         }
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
                 if (adView == null) {
                     adView = new AdView(cordova.getActivity());
-                    adView.setAdUnitId(publisherId);
-                    adView.setAdSize(adSize);
+                    adView.setAdUnitId(config.bannerAdUnitId);
+                    adView.setAdSize(config.adSize);
                     adView.setAdListener(new BannerListener());
                 }
                 if (adView.getParent() != null) {
@@ -315,7 +197,7 @@ public class AdMob extends CordovaPlugin {
                 //if(autoShowBanner) {
                 // executeShowAd(true, null);
                 //}
-                Log.w("banner", publisherId);
+                Log.w("banner", config.bannerAdUnitId);
 
                 callbackContext.success();
             }
@@ -359,12 +241,12 @@ public class AdMob extends CordovaPlugin {
      * successfully.
      */
     private PluginResult executeCreateInterstitialView(JSONObject options, CallbackContext callbackContext) {
-        this.setOptions(options);
-        autoShowInterstitial = autoShow;
+        config.setOptions(options);
+        autoShowInterstitial = config.autoShow;
 
-        if (this.interstialAdId.length() == 0 || this.interstialAdId.indexOf("xxxx") > 0) {
+        if (config.interstitialAdUnitId.length() == 0 || config.interstitialAdUnitId.indexOf("xxxx") > 0) {
             //in case the user does not enter their own publisher id
-            this.interstialAdId = getTempInterstitial();
+            config.interstitialAdUnitId = getTempInterstitial();
 
             Log.e("interstitial", "Please put your admob id into the javascript code. Test ad is used.");
         }
@@ -375,9 +257,9 @@ public class AdMob extends CordovaPlugin {
             public void run() {
                 clearInterstitial();
                 interstitialAd = new InterstitialAd(cordova.getActivity());
-                interstitialAd.setAdUnitId(interstialAdId);
+                interstitialAd.setAdUnitId(config.interstitialAdUnitId);
                 interstitialAd.setAdListener(new InterstitialListener());
-                Log.w("interstitial", interstialAdId);
+                Log.w("interstitial", config.interstitialAdUnitId);
                 interstitialAd.loadAd(buildAdRequest());
                 delayCallback.success();
             }
@@ -395,15 +277,15 @@ public class AdMob extends CordovaPlugin {
 
     private AdRequest buildAdRequest() {
         AdRequest.Builder builder = new AdRequest.Builder();
-        if (isTesting) {
+        if (config.isTesting) {
             // This will request test ads on the emulator and deviceby passing this hashed device ID.
             String ANDROID_ID = Settings.Secure.getString(cordova.getActivity().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
             String deviceId = md5(ANDROID_ID).toUpperCase();
             builder = builder.addTestDevice(deviceId).addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
         }
 
-        if (testDeviceList != null) {
-            Iterator<String> iterator = testDeviceList.iterator();
+        if (config.testDeviceList != null) {
+            Iterator<String> iterator = config.testDeviceList.iterator();
             while (iterator.hasNext()) {
                 builder = builder.addTestDevice(iterator.next());
             }
@@ -411,12 +293,12 @@ public class AdMob extends CordovaPlugin {
 
         Bundle bundle = new Bundle();
         bundle.putInt("cordova", 1);
-        if (adExtras != null) {
-            Iterator<String> it = adExtras.keys();
+        if (config.adExtras != null) {
+            Iterator<String> it = config.adExtras.keys();
             while (it.hasNext()) {
                 String key = it.next();
                 try {
-                    bundle.putString(key, adExtras.get(key).toString());
+                    bundle.putString(key, config.adExtras.get(key).toString());
                 } catch (JSONException exception) {
                     Log.w(LOGTAG, String.format("Caught JSON Exception: %s", exception.getMessage()));
                 }
@@ -424,26 +306,26 @@ public class AdMob extends CordovaPlugin {
         }
         builder = builder.addNetworkExtrasBundle(AdMobAdapter.class, bundle);
 
-        if (mGender != null) {
-            if ("male".compareToIgnoreCase(mGender) != 0) {
+        if (config.gender != null) {
+            if ("male".compareToIgnoreCase(config.gender) != 0) {
                 builder.setGender(AdRequest.GENDER_MALE);
-            } else if ("female".compareToIgnoreCase(mGender) != 0) {
+            } else if ("female".compareToIgnoreCase(config.gender) != 0) {
                 builder.setGender(AdRequest.GENDER_FEMALE);
             } else {
                 builder.setGender(AdRequest.GENDER_UNKNOWN);
             }
         }
-        if (mLocation != null) {
-            builder.setLocation(mLocation);
+        if (config.location != null) {
+            builder.setLocation(config.location);
         }
-        if (mForFamily != null) {
+        if (config.forFamily != null) {
             builder.setIsDesignedForFamilies(true);
         }
-        if (mForChild != null) {
+        if (config.forChild != null) {
             builder.tagForChildDirectedTreatment(true);
         }
-        if (mContentURL != null) {
-            builder.setContentUrl(mContentURL);
+        if (config.contentURL != null) {
+            builder.setContentUrl(config.contentURL);
         }
 
         return builder.build();
@@ -461,7 +343,7 @@ public class AdMob extends CordovaPlugin {
      * callbacks to see if an ad was successfully retrieved.
      */
     private PluginResult executeRequestAd(JSONObject options, CallbackContext callbackContext) {
-        this.setOptions(options);
+        config.setOptions(options);
 
         if (adView == null) {
             callbackContext.error("adView is null, call createBannerView first");
@@ -482,7 +364,7 @@ public class AdMob extends CordovaPlugin {
     }
 
     private PluginResult executeRequestInterstitialAd(JSONObject options, CallbackContext callbackContext) {
-        this.setOptions(options);
+        config.setOptions(options);
 
         if (adView == null) {
             callbackContext.error("interstitialAd is null, call createInterstitialView first");
@@ -530,11 +412,11 @@ public class AdMob extends CordovaPlugin {
                     if (adView.getParent() != null) {
                         ((ViewGroup) adView.getParent()).removeView(adView);
                     }
-                    if (bannerOverlap) {
+                    if (config.bannerOverlap) {
                         RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
                                 RelativeLayout.LayoutParams.MATCH_PARENT,
                                 RelativeLayout.LayoutParams.WRAP_CONTENT);
-                        params2.addRule(bannerAtTop ? RelativeLayout.ALIGN_PARENT_TOP : RelativeLayout.ALIGN_PARENT_BOTTOM);
+                        params2.addRule(config.bannerAtTop ? RelativeLayout.ALIGN_PARENT_TOP : RelativeLayout.ALIGN_PARENT_BOTTOM);
 
                         if (adViewLayout == null) {
                             adViewLayout = new RelativeLayout(cordova.getActivity());
@@ -563,7 +445,7 @@ public class AdMob extends CordovaPlugin {
                         }
 
 
-                        if (bannerAtTop) {
+                        if (config.bannerAtTop) {
                             parentView.addView(adView, 0);
                         } else {
                             parentView.addView(adView);
@@ -631,12 +513,12 @@ public class AdMob extends CordovaPlugin {
         abstract String getAdType();
 
         protected void fireAdEvent(String eventName) {
-            Stirng js = new CordovaEventBuilder(eventName).build();
+            String js = new CordovaEventBuilder(eventName).build();
             webView.loadUrl(js);
         }
 
         protected void fireAdEvent(String eventName, JSONObject data) {
-            Stirng js = new CordovaEventBuilder(eventName).withData(data).build();
+            String js = new CordovaEventBuilder(eventName).withData(data).build();
             webView.loadUrl(js);
         }
 
@@ -766,31 +648,6 @@ public class AdMob extends CordovaPlugin {
             return (View) webView.getClass().getMethod("getView").invoke(webView);
         } catch (Exception e) {
             return (View) webView;
-        }
-    }
-
-    /**
-     * Gets an AdSize object from the string size passed in from JavaScript.
-     * Returns null if an improper string is provided.
-     *
-     * @param size The string size representing an ad format constant.
-     * @return An AdSize object used to create a banner.
-     */
-    public static AdSize adSizeFromString(String size) {
-        if ("BANNER".equals(size)) {
-            return AdSize.BANNER;
-        } else if ("IAB_MRECT".equals(size)) {
-            return AdSize.MEDIUM_RECTANGLE;
-        } else if ("IAB_BANNER".equals(size)) {
-            return AdSize.FULL_BANNER;
-        } else if ("IAB_LEADERBOARD".equals(size)) {
-            return AdSize.LEADERBOARD;
-        } else if ("LARGE_BANNER".equals(size)) {
-            return AdSize.LARGE_BANNER;
-        } else if ("SMART_BANNER".equals(size)) {
-            return AdSize.SMART_BANNER;
-        } else {
-            return null;
         }
     }
 

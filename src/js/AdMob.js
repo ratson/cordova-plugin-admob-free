@@ -8,6 +8,14 @@ export const AD_SIZE = {
   IAB_MRECT: 'IAB_MRECT',
   LARGE_BANNER: 'LARGE_BANNER',
   SMART_BANNER: 'SMART_BANNER',
+  // android-only
+  FLUID: 'FLUID',
+  FULL_BANNER: 'FULL_BANNER',
+  LARGE_BANNER: 'LARGE_BANNER',
+  LEADERBOARD: 'LEADERBOARD',
+  MEDIUM_RECTANGLE: 'MEDIUM_RECTANGLE',
+  SEARCH: 'SEARCH',
+  WIDE_SKYSCRAPER: 'WIDE_SKYSCRAPER',
 }
 
 export function setOptions(options, successCallback, failureCallback) {
