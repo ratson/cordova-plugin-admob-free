@@ -291,6 +291,8 @@
         return kGADAdSizeLeaderboard;
     } else if ([string isEqualToString:@"LARGE_BANNER"]) {
         return kGADAdSizeLargeBanner;
+    } else if ([string isEqualToString:@"FLUID"]) {
+        return kGADAdSizeFluid;
     } else if ([string isEqualToString:@"SMART_BANNER"]) {
         CGRect pr = self.webView.superview.bounds;
         if(pr.size.width > pr.size.height) {
