@@ -16,6 +16,10 @@ document.addEventListener('deviceready', function() {
     isTesting: true,
   })
 
+  AdMob.createBannerView({
+    autoShow: true,
+  });
+
   AdMob.prepareInterstitial({
     adId: admobid.interstitial,
     autoShow: false,
@@ -25,6 +29,7 @@ document.addEventListener('deviceready', function() {
   document.getElementById('showAd').onclick = function() {
     AdMob.showInterstitial()
   }
+
 }, false)
 
 document.addEventListener('onFailedToReceiveAd', function(event) {
