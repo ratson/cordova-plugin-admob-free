@@ -1,3 +1,10 @@
+## 0.4.1 (2016-11-22)
+
+### Fixed
+
+* Remove duplicated `LARGE_BANNER`. ([@warcry2000](https://github.com/warcry2000) in [#28](https://github.com/ratson/cordova-plugin-admob-free/issues/28))
+
+
 ## 0.4.0 (2016-11-07)
 
 ### Breaking

@@ -37,8 +37,8 @@
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.18.0",
-    "babel-preset-env": "0.0.7",
-    "cordova-android": "^6.0.0",
+    "babel-preset-env": "0.0.8",
+    "cordova-android": "^6.1.0",
     "cordova-test-cli": "0.0.1",
     "npm-run-all": "^3.1.1",
     "rimraf": "^2.5.4",
