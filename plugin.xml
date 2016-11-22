@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-admob-free"
-    version="0.4.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="huedawn-plugin-admob-free"
+    version="0.4.6" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>Cordova AdMob Plugin</name>
     <description>Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows
         phone. Allows preloading and automatic loading of interstitials and banners plus more.
     </description>
     <author>Ratson</author>
     <license>MIT</license>
-    <keywords>admob, google, cordova-ios, cordova-android, ecosystem:cordova, android, ios, windows,
+    <keywords>admob, google, cordova-ios, cordova-android, android, ios, windows,
         money, monetization, iad, services, play, win, earn, publicity, advertisment, advertising,
         ads, ad, eclipse, android studio
     </keywords>
@@ -18,7 +18,7 @@
         <engine name="cordova" version=">=4.0" />
     </engines>
 
-    <js-module name="AdMob" src="src/js/AdMob.js">
+    <js-module name="AdMob" src="www/AdMob.js">
         <clobbers target="AdMob" />
         <clobbers target="plugins.AdMob" />
     </js-module>

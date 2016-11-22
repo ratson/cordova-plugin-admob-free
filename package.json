@@ -1,71 +1,55 @@
 {
-  "name": "cordova-plugin-admob-free",
-  "version": "0.4.0",
-  "description": "Cordova AdMob Plugin for Google AdMob",
-  "scripts": {
-    "clean": "rimraf www",
-    "build": "babel src/js --out-dir www",
-    "prepublish": "npm-run-all clean build",
-    "version": "sync-package-version --cordova-plugin",
-    "test": "cordova-test"
-  },
+  "name": "huedawn-plugin-admob-free",
+  "version": "0.4.6",
+  "description": "Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows\n        phone. Allows preloading and automatic loading of interstitials and banners plus more.\n    ",
   "cordova": {
-    "id": "cordova-plugin-admob-free",
+    "id": "huedawn-plugin-admob-free",
     "platforms": [
       "android",
       "ios",
-      "wp8"
+      "wp8",
+      "windows"
     ]
   },
-  "repository": "ratson/cordova-plugin-admob-free",
+  "repository": {
+    "type": "git",
+    "url": "git+https://rona_dinihari@bitbucket.org/rona_dinihari/cordova-plugin-admob-free.git"
+  },
   "keywords": [
-    "cordova",
     "admob",
+    "google",
+    "cordova-ios",
+    "cordova-android",
+    "android",
+    "ios",
+    "windows",
+    "money",
+    "monetization",
+    "iad",
+    "services",
+    "play",
+    "win",
+    "earn",
+    "publicity",
+    "advertisment",
+    "advertising",
+    "ads",
+    "ad",
+    "eclipse",
+    "android studio",
     "ecosystem:cordova",
-    "cordova-plugin-admob",
-    "cordova-admob",
     "cordova-android",
     "cordova-ios",
-    "cordova-windows",
     "cordova-wp8",
-    "plugin",
-    "google",
-    "admobpro"
+    "cordova-windows"
   ],
-  "tonicExampleFilename": "test.js",
-  "author": "Ratson",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=4.0"
+    }
+  ],
+  "author": "Rona Dini Hari",
   "license": "MIT",
-  "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-preset-env": "0.0.7",
-    "cordova-android": "^6.0.0",
-    "cordova-test-cli": "0.0.1",
-    "npm-run-all": "^3.1.1",
-    "rimraf": "^2.5.4",
-    "sync-package-version": "0.0.3"
-  },
-  "files": [
-    "*.js",
-    "*.md",
-    "*.xml",
-    "LICENSE",
-    "src",
-    "www"
-  ],
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "browsers": [
-              "last 2 versions",
-              "Android > 2",
-              "last 2 ChromeAndroid versions"
-            ]
-          }
-        }
-      ]
-    ]
-  }
+  "homepage": "https://bitbucket.org/rona_dinihari/cordova-plugin-admob-free#readme"
 }
