@@ -11,8 +11,8 @@
         money, monetization, iad, services, play, win, earn, publicity, advertisment, advertising,
         ads, ad, eclipse, android studio
     </keywords>
-    <repo>https://github.com/ratson/cordova-plugin-admob-free.git</repo>
-    <issue>https://github.com/ratson/cordova-plugin-admob-free/issues</issue>
+    <repo>https://rona_dinihari@bitbucket.org/rona_dinihari/cordova-plugin-admob-free.git</repo>
+    <issue>https://bitbucket.org/rona_dinihari/cordova-plugin-admob-free/issues</issue>
 
     <engines>
         <engine name="cordova" version=">=4.0" />
