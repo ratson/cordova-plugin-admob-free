@@ -1,7 +1,8 @@
 var argscheck = require('cordova/argscheck');
 var exec = require('cordova/exec');
+var AdMob = {};
 
-exports.AD_SIZE = {
+AdMob.AD_SIZE = {
   BANNER: 'BANNER',
   IAB_BANNER: 'IAB_BANNER',
   IAB_LEADERBOARD: 'IAB_LEADERBOARD',
@@ -18,7 +19,7 @@ exports.AD_SIZE = {
   WIDE_SKYSCRAPER: 'WIDE_SKYSCRAPER',
 }
 
-exports.setOptions = function(options, successCallback, failureCallback) {
+AdMob.setOptions = function(options, successCallback, failureCallback) {
   if (typeof options === 'object') {
     cordova.exec( successCallback, failureCallback, 'AdMob', 'setOptions', [ options ] )
   } else {
@@ -28,39 +29,39 @@ exports.setOptions = function(options, successCallback, failureCallback) {
   }
 }
 
-exports.createBannerView = function(options, successCallback, failureCallback) {
+AdMob.createBannerView = function(options, successCallback, failureCallback) {
   if (typeof options == 'undefined') {
     options = {};
   }
   cordova.exec( successCallback, failureCallback, 'AdMob', 'createBannerView', [ options ] )
 }
 
-exports.createInterstitialView = function(options, successCallback, failureCallback) {
+AdMob.createInterstitialView = function(options, successCallback, failureCallback) {
   cordova.exec( successCallback, failureCallback, 'AdMob', 'createInterstitialView', [ options ] )
 }
 
-exports.destroyBannerView = function(options, successCallback, failureCallback) {
+AdMob.destroyBannerView = function(options, successCallback, failureCallback) {
   if (typeof options == 'undefined') {
     options = {};
   }
   cordova.exec( successCallback, failureCallback, 'AdMob', 'destroyBannerView', [] )
 }
 
-exports.requestInterstitialAd = function(options, successCallback, failureCallback) {
+AdMob.requestInterstitialAd = function(options, successCallback, failureCallback) {
   if (typeof options == 'undefined') {
     options = {};
   }
   cordova.exec( successCallback, failureCallback, 'AdMob', 'requestInterstitialAd', [ options ] )
 }
 
-exports.showAd = function(show, successCallback, failureCallback) {
+AdMob.showAd = function(show, successCallback, failureCallback) {
   if (typeof options == 'undefined') {
     options = true;
   }
   cordova.exec( successCallback, failureCallback, 'AdMob', 'showAd', [ show ] )
 }
 
-exports.showInterstitialAd = function(show, successCallback, failureCallback) {
+AdMob.showInterstitialAd = function(show, successCallback, failureCallback) {
   if (typeof options == 'undefined') {
     options = true;
   }
@@ -69,11 +70,13 @@ exports.showInterstitialAd = function(show, successCallback, failureCallback) {
 
 // emulate cordova-admob-pro interface
 
-exports.prepareInterstitial = function(args, successCallback, failureCallback) {
-  createInterstitialView(args, successCallback, failureCallback)
-  requestInterstitialAd(args, successCallback, failureCallback)
+AdMob.prepareInterstitial = function(args, successCallback, failureCallback) {
+  AdMob.createInterstitialView(args, successCallback, failureCallback)
+  AdMob.requestInterstitialAd(args, successCallback, failureCallback)
 }
 
-exports.showInterstitial = function(successCallback, failureCallback) {
-  showInterstitialAd(true, successCallback, failureCallback)
+AdMob.showInterstitial = function(successCallback, failureCallback) {
+  AdMob.showInterstitialAd(true, successCallback, failureCallback)
 }
+
+module.exports = AdMob;
