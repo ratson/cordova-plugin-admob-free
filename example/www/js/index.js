@@ -21,7 +21,7 @@ document.addEventListener('deviceready', function() {
   });
 
   AdMob.prepareInterstitial({
-    adId: admobid.interstitial,
+    interstitialAdId: admobid.interstitial,
     autoShow: false,
   })
 
@@ -45,7 +45,7 @@ document.addEventListener('onDismissInterstitialAd', function(event) {
   console.log(event)
 
   AdMob.prepareInterstitial({
-    adId: admobid.interstitial,
+    interstitialAdId: admobid.interstitial,
     autoShow: false,
   })
 })
