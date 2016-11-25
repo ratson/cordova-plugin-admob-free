@@ -77,7 +77,6 @@ public class AdMob extends CordovaPlugin {
 
     private boolean autoShowBanner = true;
     private boolean autoShowInterstitial = true;
-    private boolean autoShowInterstitialTemp = false;        //if people call it when it's not ready
 
     private boolean bannerVisible = false;
     private boolean isGpsAvailable = false;
@@ -481,17 +480,18 @@ public class AdMob extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
+                
                 if (interstitialAd.isLoaded()) {
                     interstitialAd.show();
-                } else {
-                    Log.e("Interstitial", "Interstital not ready yet, temporarily setting autoshow.");
-                    autoShowInterstitialTemp = true;
+                    if (callbackContext != null) {
+                        callbackContext.success();
+                    }
+                } else if (!autoShowInterstitial) {
+                    if (callbackContext != null) {
+                        callbackContext.error("Interstital not ready yet");
+                    }
                 }
-
-                if (callbackContext != null) {
-                    callbackContext.success();
-                }
+                
             }
         });
 
@@ -591,9 +591,6 @@ public class AdMob extends CordovaPlugin {
 
             if (autoShowInterstitial) {
                 executeShowInterstitialAd(true, null);
-            } else if (autoShowInterstitialTemp) {
-                executeShowInterstitialAd(true, null);
-                autoShowInterstitialTemp = false;
             }
         }
 
