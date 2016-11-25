@@ -37,11 +37,11 @@ cordova plugin add cordova-plugin-admob-free --save
 
 ## Usage
 
-### 1. Ceate Ad Unit ID for your banner and interstitial.
+### 1. Create Ad Unit ID for your banner and interstitial.
 
 Go to [AdMob portal](https://www.google.com/admob/), click "Monetize a new app" button to create new ad unit.
 
-### 2. Define configiration for differrent platforms.
+### 2. Define configuration for different platforms.
 
 ```javascript
 var admobid = {};
@@ -73,7 +73,7 @@ AdMob.setOptions({
   overlap: true,  // set to true, to allow banner overlap webview
   offsetTopBar: false,  // set to true to avoid ios7 status bar overlap
   isTesting: false,  // receiving test ad
-  autoShow: false,  // auto show interstitial ad when loaded
+  autoShow: false  // auto show interstitial ad when loaded
 });
 ```
 
@@ -101,7 +101,7 @@ AdMob.showAd(true);
 // prepare and load ad resource in background, e.g. at the beginning of game level
 AdMob.prepareInterstitial({
   interstitialId: admobid.interstitial,
-  autoShow: false,
+  autoShow: false
 });
 
 // show the interstitial later, e.g. at end of game level
@@ -133,7 +133,7 @@ AdMob.destroyBannerView();
 AdMob.showAd();
 
 // use interstitial
-AdMob.prepareInterstitial(adId/options, success, fail);
+AdMob.prepareInterstitial(options, success, fail);
 AdMob.showInterstitial();
 // low-level methods
 AdMob.createInterstitialView();
