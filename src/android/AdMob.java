@@ -13,6 +13,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
@@ -86,7 +87,6 @@ public class AdMob extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         isGpsAvailable = (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(cordova.getActivity()) == ConnectionResult.SUCCESS);
-        Log.w(LOGTAG, String.format("isGooglePlayServicesAvailable: %s", isGpsAvailable ? "true" : "false"));
     }
 
     /**
@@ -151,6 +151,8 @@ public class AdMob extends CordovaPlugin {
 
         config.setOptions(options);
 
+        MobileAds.initialize(getApplicationContext(), config.appId);
+
         callbackContext.success();
         return null;
     }
@@ -170,14 +172,6 @@ public class AdMob extends CordovaPlugin {
         config.setOptions(options);
         autoShowBanner = config.autoShow;
 
-        if (config.bannerAdUnitId.length() == 0) {
-            // in case the user does not enter their own publisher id
-            config.bannerAdUnitId = getTempBanner();
-        }
-        if (config.bannerAdUnitId.indexOf("xxxx") > 0) {
-            Log.e("banner", "Please put your admob id into the javascript code. No ad to display.");
-            return null;
-        }
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -197,7 +191,6 @@ public class AdMob extends CordovaPlugin {
                 //if(autoShowBanner) {
                 // executeShowAd(true, null);
                 //}
-                Log.w("banner", config.bannerAdUnitId);
 
                 callbackContext.success();
             }
@@ -244,13 +237,6 @@ public class AdMob extends CordovaPlugin {
         config.setOptions(options);
         autoShowInterstitial = config.autoShow;
 
-        if (config.interstitialAdUnitId.length() == 0 || config.interstitialAdUnitId.indexOf("xxxx") > 0) {
-            //in case the user does not enter their own publisher id
-            config.interstitialAdUnitId = getTempInterstitial();
-
-            Log.e("interstitial", "Please put your admob id into the javascript code. Test ad is used.");
-        }
-
         final CallbackContext delayCallback = callbackContext;
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -259,7 +245,6 @@ public class AdMob extends CordovaPlugin {
                 interstitialAd = new InterstitialAd(cordova.getActivity());
                 interstitialAd.setAdUnitId(config.interstitialAdUnitId);
                 interstitialAd.setAdListener(new InterstitialListener());
-                Log.w("interstitial", config.interstitialAdUnitId);
                 interstitialAd.loadAd(buildAdRequest());
                 delayCallback.success();
             }
@@ -671,14 +656,6 @@ public class AdMob extends CordovaPlugin {
                 break;
         }
         return errorReason;
-    }
-
-    private String getTempInterstitial() {
-        return "ca-app-pub-3940256099942544/1033173712";
-    }
-
-    private String getTempBanner() {
-        return "ca-app-pub-3940256099942544/6300978111";
     }
 
     public static final String md5(final String s) {
