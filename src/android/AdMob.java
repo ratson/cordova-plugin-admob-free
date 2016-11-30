@@ -351,7 +351,7 @@ public class AdMob extends CordovaPlugin {
     private PluginResult executeRequestInterstitialAd(JSONObject options, CallbackContext callbackContext) {
         config.setOptions(options);
 
-        if (adView == null) {
+        if (interstitialAd == null) {
             callbackContext.error("interstitialAd is null, call createInterstitialView first");
             return null;
         }
@@ -618,6 +618,7 @@ public class AdMob extends CordovaPlugin {
             adView.destroy();
             adView = null;
         }
+        clearInterstitial();
         if (adViewLayout != null) {
             ViewGroup parentView = (ViewGroup) adViewLayout.getParent();
             if (parentView != null) {
