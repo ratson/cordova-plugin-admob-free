@@ -7,7 +7,10 @@
     "build": "babel src/js --out-dir www",
     "prepublish": "npm-run-all clean build",
     "version": "sync-package-version --cordova-plugin",
-    "test": "cordova-test"
+    "pretest": "npm run build",
+    "test:js": "BABEL_ENV=test jest",
+    "test:cordova": "cordova-test",
+    "test": "npm-run-all test:*"
   },
   "cordova": {
     "id": "cordova-plugin-admob-free",
@@ -34,9 +37,14 @@
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.18.0",
+    "babel-jest": "^17.0.2",
+    "babel-plugin-module-resolver": "2.4.0",
+    "babel-polyfill": "^6.16.0",
     "babel-preset-env": "0.0.9",
     "cordova-android": "^6.1.0",
     "cordova-test-cli": "0.0.1",
+    "jest": "17.0.3",
+    "lodash": "4.17.2",
     "npm-run-all": "^3.1.2",
     "rimraf": "^2.5.4",
     "sync-package-version": "0.0.3"

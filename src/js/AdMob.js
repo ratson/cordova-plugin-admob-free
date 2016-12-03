@@ -1,4 +1,3 @@
-import argscheck from 'cordova/argscheck'
 import exec from 'cordova/exec'
 
 export const AD_SIZE = {

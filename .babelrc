@@ -10,5 +10,17 @@
         ]
       }
     }]
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        ["module-resolver", {
+          "alias": {
+            "AdMob":  "./www/AdMob.js",
+            "cordova/exec": "./tests/js/stub/cordova-exec.js"
+          }
+        }]
+      ]
+    }
+  }
 }
