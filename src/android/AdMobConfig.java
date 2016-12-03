@@ -1,6 +1,7 @@
 package name.ratson.cordova.admob;
 
 import android.location.Location;
+import android.util.Log;
 
 import com.google.android.gms.ads.AdSize;
 
@@ -11,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdMobConfig {
+    private static final String TEST_BANNER_ID = "ca-app-pub-3940256099942544/6300978111";
+    private static final String TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712";
+
     /* options */
     private static final String OPT_PUBLISHER_ID = "publisherId";
     private static final String OPT_INTERSTITIAL_AD_ID = "interstitialAdId";
@@ -47,7 +51,7 @@ public class AdMobConfig {
     public Location location = null;
 
     // banner
-    public String bannerAdUnitId = "";
+    private String bannerAdUnitId = "";
     public AdSize adSize = AdSize.SMART_BANNER;
     /**
      * Whether or not the ad should be positioned at top or bottom of screen.
@@ -60,7 +64,7 @@ public class AdMobConfig {
     public boolean offsetTopBar = false;
 
     // interstial
-    public String interstitialAdUnitId = "";
+    private String interstitialAdUnitId = "";
 
     public void setOptions(JSONObject options) {
         if (options == null) {
@@ -165,5 +169,23 @@ public class AdMobConfig {
             return AdSize.LEADERBOARD;
         }
         return null;
+    }
+
+    public String getBannerAdUnitId() {
+        if (bannerAdUnitId.length() == 0 || bannerAdUnitId.indexOf("xxxx") > 0) {
+            // in case the user does not enter their own publisher id
+            Log.e("banner", "Please put your AdMob id into the javascript code. Test ad is used.");
+            return TEST_BANNER_ID;
+        }
+        return bannerAdUnitId;
+    }
+
+    public String getInterstitialAdUnitId() {
+        if (interstitialAdUnitId.length() == 0 || interstitialAdUnitId.indexOf("xxxx") > 0) {
+            // in case the user does not enter their own publisher id
+            Log.e("interstitial", "Please put your AdMob id into the javascript code. Test ad is used.");
+            return TEST_INTERSTITIAL_ID;
+        }
+        return interstitialAdUnitId;
     }
 }

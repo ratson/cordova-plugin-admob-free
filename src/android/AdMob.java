@@ -169,20 +169,12 @@ public class AdMob extends CordovaPlugin {
         config.setOptions(options);
         autoShowBanner = config.autoShow;
 
-        if (config.bannerAdUnitId.length() == 0) {
-            // in case the user does not enter their own publisher id
-            config.bannerAdUnitId = getTempBanner();
-        }
-        if (config.bannerAdUnitId.indexOf("xxxx") > 0) {
-            Log.e("banner", "Please put your admob id into the javascript code. No ad to display.");
-            return null;
-        }
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (adView == null) {
                     adView = new AdView(cordova.getActivity());
-                    adView.setAdUnitId(config.bannerAdUnitId);
+                    adView.setAdUnitId(config.getBannerAdUnitId());
                     adView.setAdSize(config.adSize);
                     adView.setAdListener(new BannerListener());
                 }
@@ -196,7 +188,7 @@ public class AdMob extends CordovaPlugin {
                 //if(autoShowBanner) {
                 // executeShowAd(true, null);
                 //}
-                Log.w("banner", config.bannerAdUnitId);
+                Log.w("banner", config.getBannerAdUnitId());
 
                 callbackContext.success();
             }
@@ -243,22 +235,15 @@ public class AdMob extends CordovaPlugin {
         config.setOptions(options);
         autoShowInterstitial = config.autoShow;
 
-        if (config.interstitialAdUnitId.length() == 0 || config.interstitialAdUnitId.indexOf("xxxx") > 0) {
-            //in case the user does not enter their own publisher id
-            config.interstitialAdUnitId = getTempInterstitial();
-
-            Log.e("interstitial", "Please put your admob id into the javascript code. Test ad is used.");
-        }
-
         final CallbackContext delayCallback = callbackContext;
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 clearInterstitial();
                 interstitialAd = new InterstitialAd(cordova.getActivity());
-                interstitialAd.setAdUnitId(config.interstitialAdUnitId);
+                interstitialAd.setAdUnitId(config.getInterstitialAdUnitId());
                 interstitialAd.setAdListener(new InterstitialListener());
-                Log.w("interstitial", config.interstitialAdUnitId);
+                Log.w("interstitial", config.getInterstitialAdUnitId());
                 interstitialAd.loadAd(buildAdRequest());
                 delayCallback.success();
             }
@@ -668,14 +653,6 @@ public class AdMob extends CordovaPlugin {
                 break;
         }
         return errorReason;
-    }
-
-    private String getTempInterstitial() {
-        return "ca-app-pub-3940256099942544/1033173712";
-    }
-
-    private String getTempBanner() {
-        return "ca-app-pub-3940256099942544/6300978111";
     }
 
     public static final String md5(final String s) {
