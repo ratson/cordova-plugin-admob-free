@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.google.ads.mediation.admob.AdMobAdapter;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -29,6 +28,9 @@ import org.json.JSONObject;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
+
+import name.ratson.cordova.admob.adlistener.BannerListener;
+import name.ratson.cordova.admob.adlistener.InterstitialListener;
 
 /**
  * This class represents the native implementation for the AdMob Cordova plugin.
@@ -75,10 +77,10 @@ public class AdMob extends CordovaPlugin {
      */
     private InterstitialAd interstitialAd;
 
-    private boolean autoShowBanner = true;
-    private boolean autoShowInterstitial = true;
+    public boolean autoShowBanner = true;
+    public boolean autoShowInterstitial = true;
 
-    private boolean bannerVisible = false;
+    public boolean bannerVisible = false;
     private boolean isGpsAvailable = false;
 
     @Override
@@ -176,7 +178,7 @@ public class AdMob extends CordovaPlugin {
                     adView = new AdView(cordova.getActivity());
                     adView.setAdUnitId(config.getBannerAdUnitId());
                     adView.setAdSize(config.adSize);
-                    adView.setAdListener(new BannerListener());
+                    adView.setAdListener(new BannerListener(AdMob.this));
                 }
                 if (adView.getParent() != null) {
                     ((ViewGroup) adView.getParent()).removeView(adView);
@@ -242,7 +244,7 @@ public class AdMob extends CordovaPlugin {
                 clearInterstitial();
                 interstitialAd = new InterstitialAd(cordova.getActivity());
                 interstitialAd.setAdUnitId(config.getInterstitialAdUnitId());
-                interstitialAd.setAdListener(new InterstitialListener());
+                interstitialAd.setAdListener(new InterstitialListener(AdMob.this));
                 Log.w("interstitial", config.getInterstitialAdUnitId());
                 interstitialAd.loadAd(buildAdRequest());
                 delayCallback.success();
@@ -251,7 +253,7 @@ public class AdMob extends CordovaPlugin {
         return null;
     }
 
-    private void clearInterstitial() {
+    public void clearInterstitial() {
         if (interstitialAd == null) {
             return;
         }
@@ -372,14 +374,14 @@ public class AdMob extends CordovaPlugin {
      * Parses the show ad input parameters and runs the show ad action on
      * the UI thread.
      *
-     * @param options The JSONArray representing input parameters.  This function
+     * @param show The JSONArray representing input parameters.  This function
      *                expects the first object in the array to be a JSONObject with the
      *                input parameters.
      * @return A PluginResult representing whether or not an ad was requested
      * succcessfully.  Listen for onReceiveAd() and onFailedToReceiveAd()
      * callbacks to see if an ad was successfully retrieved.
      */
-    private PluginResult executeShowAd(final boolean show, final CallbackContext callbackContext) {
+    public PluginResult executeShowAd(final boolean show, final CallbackContext callbackContext) {
 
         bannerShow = show;
 
@@ -456,7 +458,7 @@ public class AdMob extends CordovaPlugin {
         return null;
     }
 
-    private PluginResult executeShowInterstitialAd(final boolean show, final CallbackContext callbackContext) {
+    public PluginResult executeShowInterstitialAd(final boolean show, final CallbackContext callbackContext) {
 
         if (interstitialAd == null) {
             return new PluginResult(Status.ERROR, "interstitialAd is null, call createInterstitialView first.");
@@ -483,114 +485,6 @@ public class AdMob extends CordovaPlugin {
         return null;
     }
 
-
-    /**
-     * This class implements the AdMob ad listener events.  It forwards the events
-     * to the JavaScript layer.  To listen for these events, use:
-     * <p>
-     * document.addEventListener('onReceiveAd', function());
-     * document.addEventListener('onFailedToReceiveAd', function(data){});
-     * document.addEventListener('onPresentAd', function());
-     * document.addEventListener('onDismissAd', function());
-     * document.addEventListener('onLeaveToAd', function());
-     */
-    abstract class BasicListener extends AdListener {
-        abstract String getAdType();
-
-        protected void fireAdEvent(String eventName) {
-            String js = new CordovaEventBuilder(eventName).build();
-            webView.loadUrl(js);
-        }
-
-        protected void fireAdEvent(String eventName, JSONObject data) {
-            String js = new CordovaEventBuilder(eventName).withData(data).build();
-            webView.loadUrl(js);
-        }
-
-        @Override
-        public void onAdFailedToLoad(int errorCode) {
-            JSONObject data = new JSONObject();
-            try {
-                data.put("error", errorCode);
-                data.put("reason", getErrorReason(errorCode));
-                data.put("adType", this.getAdType());
-            } catch (JSONException e) {
-                e.printStackTrace();
-                this.fireAdEvent("onFailedToReceiveAd");
-                return;
-            }
-            this.fireAdEvent("onFailedToReceiveAd", data);
-        }
-
-        @Override
-        public void onAdLeftApplication() {
-            JSONObject data = new JSONObject();
-            try {
-                data.put("adType", this.getAdType());
-            } catch (JSONException e) {
-                e.printStackTrace();
-                this.fireAdEvent("onLeaveToAd");
-                return;
-            }
-            this.fireAdEvent("onLeaveToAd", data);
-        }
-    }
-
-    private class BannerListener extends BasicListener {
-        @Override
-        String getAdType() {
-            return "banner";
-        }
-
-        @Override
-        public void onAdLoaded() {
-            Log.w("AdMob", "BannerAdLoaded");
-            if (autoShowBanner && !bannerVisible) {
-                executeShowAd(true, null);
-            }
-            this.fireAdEvent("onReceiveAd");
-        }
-
-        @Override
-        public void onAdOpened() {
-            this.fireAdEvent("onPresentAd");
-        }
-
-        @Override
-        public void onAdClosed() {
-            this.fireAdEvent("onDismissAd");
-        }
-
-    }
-
-    private class InterstitialListener extends BasicListener {
-        @Override
-        String getAdType() {
-            return "interstitial";
-        }
-
-        @Override
-        public void onAdLoaded() {
-            Log.w("AdMob", "InterstitialAdLoaded");
-            this.fireAdEvent("onReceiveInterstitialAd");
-
-            if (autoShowInterstitial) {
-                executeShowInterstitialAd(true, null);
-            }
-        }
-
-        @Override
-        public void onAdOpened() {
-            this.fireAdEvent("onPresentInterstitialAd");
-        }
-
-        @Override
-        public void onAdClosed() {
-            this.fireAdEvent("onDismissInterstitialAd");
-            clearInterstitial();
-        }
-
-    }
 
     @Override
     public void onPause(boolean multitasking) {
