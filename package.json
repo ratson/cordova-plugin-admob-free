@@ -13,8 +13,7 @@
     "id": "cordova-plugin-admob-free",
     "platforms": [
       "android",
-      "ios",
-      "wp8"
+      "ios"
     ]
   },
   "repository": "ratson/cordova-plugin-admob-free",
@@ -26,8 +25,6 @@
     "cordova-admob",
     "cordova-android",
     "cordova-ios",
-    "cordova-windows",
-    "cordova-wp8",
     "plugin",
     "google",
     "admobpro"

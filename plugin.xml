@@ -2,13 +2,13 @@
 <plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-admob-free"
     version="0.4.1" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>Cordova AdMob Plugin</name>
-    <description>Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows
+    <description>Robust, reliable and easy to use Cordova Admob plugin for Android and iOS
         phone. Allows preloading and automatic loading of interstitials and banners plus more.
     </description>
     <author>Ratson</author>
     <license>MIT</license>
-    <keywords>admob, google, cordova-ios, cordova-android, ecosystem:cordova, android, ios, windows,
-        money, monetization, iad, services, play, win, earn, publicity, advertisment, advertising,
+    <keywords>admob, google, cordova-ios, cordova-android, ecosystem:cordova, android, ios,
+        money, monetization, iad, services, play, earn, publicity, advertisment, advertising,
         ads, ad, eclipse, android studio
     </keywords>
     <repo>https://github.com/ratson/cordova-plugin-admob-free.git</repo>
@@ -56,31 +56,5 @@
         </config-file>
         <header-file src="src/ios/CDVAdMob.h" />
         <source-file src="src/ios/CDVAdMob.m" />
-    </platform>
-
-    <!-- Windows Phone 8 -->
-    <platform name="wp8">
-        <config-file parent="/Deployment/App/Capabilities" target="Properties/WMAppManifest.xml">
-            <Capability Name="ID_CAP_LOCATION" />
-        </config-file>
-        <config-file parent="/*" target="config.xml">
-            <feature name="AdMob">
-                <param name="wp-package" value="AdMob" />
-            </feature>
-        </config-file>
-        <source-file src="src/wp8/AdMob.cs" />
-    </platform>
-
-    <!-- Windows Phone 8.1+ -->
-    <platform name="windows">
-        <config-file parent="/Deployment/App/Capabilities" target="Properties/WMAppManifest.xml">
-            <Capability Name="ID_CAP_LOCATION" />
-        </config-file>
-        <config-file parent="/*" target="config.xml">
-            <feature name="AdMob">
-                <param name="wp-package" value="AdMob" />
-            </feature>
-        </config-file>
-        <source-file src="src/wp8/AdMob.cs" />
     </platform>
 </plugin>

@@ -50,12 +50,7 @@ if ( /(android)/i.test(navigator.userAgent) ) {  // for android & amazon-fireos
     banner: 'ca-app-pub-xxx/xxx',
     interstitial: 'ca-app-pub-xxx/xxx',
   };
-} else if ( /(ipod|iphone|ipad)/i.test(navigator.userAgent) ) {  // for ios
-  admobid = {
-    banner: 'ca-app-pub-xxx/xxx',
-    interstitial: 'ca-app-pub-xxx/xxx',
-  };
-} else {  // for windows phone
+} else {  // for ios
   admobid = {
     banner: 'ca-app-pub-xxx/xxx',
     interstitial: 'ca-app-pub-xxx/xxx',
