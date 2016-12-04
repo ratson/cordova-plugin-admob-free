@@ -21,6 +21,33 @@ export const AD_SIZE = {
   WIDE_SKYSCRAPER: 'WIDE_SKYSCRAPER',
 }
 
+/**
+ *
+ * @param {Object} options
+ * @param {string} options.publisherId
+ * @param {string} options.interstitialAdId
+ *
+ * @param {boolean} [options.bannerAtTop=false]    Set to true, to put banner at top
+ * @param {boolean} [options.overlap=true]   Set to true, to allow banner overlap webview
+ * @param {boolean} [options.offsetTopBar=false]    Set to true to avoid ios7 status bar overlap
+ * @param {boolean} [options.isTesting=false]    Receiving test ad
+ * @param {boolean} [options.autoShow=false]    Auto show interstitial ad when loaded
+ *
+ * @param {string} [options.forChild=null]
+ * Android-only.
+ * Default is not calling `tagForChildDirectedTreatment`.
+ * Set to "yes" for `tagForChildDirectedTreatment(true)`.
+ * Set to "no" for `tagForChildDirectedTreatment(false)`.
+ *
+ * @param {string} [options.forFamily=null]
+ * Android-only.
+ * Default is not calling `setIsDesignedForFamilies`.
+ * Set to "yes" for `setIsDesignedForFamilies(true)`.
+ * Set to "no" for `setIsDesignedForFamilies(false)`.
+ *
+ * @param {function()} [successCallback]
+ * @param {function()} [failureCallback]
+ */
 export function setOptions(options, successCallback, failureCallback) {
   if (typeof options === 'object') {
     cordova.exec( successCallback, failureCallback, 'AdMob', 'setOptions', [ options ] )

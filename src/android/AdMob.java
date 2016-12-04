@@ -287,11 +287,15 @@ public class AdMob extends CordovaPlugin {
         if (config.location != null) {
             builder.setLocation(config.location);
         }
-        if (config.forFamily != null) {
+        if ("yes".equals(config.forFamily)) {
             builder.setIsDesignedForFamilies(true);
+        } else if ("no".equals(config.forFamily)) {
+            builder.setIsDesignedForFamilies(false);
         }
-        if (config.forChild != null) {
+        if ("yes".equals(config.forChild)) {
             builder.tagForChildDirectedTreatment(true);
+        } else if ("no".equals(config.forChild)) {
+            builder.tagForChildDirectedTreatment(false);
         }
         if (config.contentURL != null) {
             builder.setContentUrl(config.contentURL);
