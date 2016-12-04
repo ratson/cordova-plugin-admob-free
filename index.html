@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl">
+  <title data-ice="title">Cordova AdMob Plugin API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  <a href="./manual/index.html" data-ice="manualHeaderLink">Manual</a>
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/ratson/cordova-plugin-admob-free" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createBannerView">createBannerView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createInterstitialView">createInterstitialView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-destroyBannerView">destroyBannerView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepareInterstitial">prepareInterstitial</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-requestInterstitialAd">requestInterstitialAd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setOptions">setOptions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-showAd">showAd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-showInterstitial">showInterstitial</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-showInterstitialAd">showInterstitialAd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AD_SIZE">AD_SIZE</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="cordova-admob-plugin">Cordova AdMob Plugin</h1>
+<p>A free, no ad-sharing version of Google AdMob plugin for Cordova.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><p><strong>No Ad-Sharing</strong></p>
+<p>Unlike <a href="https://github.com/appfeel/admob-google-cordova/blob/3f122f278a323a4bc9e580f400182a7bd690a346/src/android/AdMobAds.java#L569">some</a> <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple/blob/a58846c1ea14188a4aef44381ccd28ffdcae3bfa/src/android/AdMob.java#L207">other</a> <a href="https://github.com/floatinghotpot/cordova-admob-pro/wiki/License-Agreement#2-win-win-partnership">plugins</a>, this plugin does not share your advertising revenue by randomly display developer&apos;s owned ads.</p>
+</li>
+<li><p><strong>Fully Open Sourced</strong></p>
+<p>Except Google provided <a href="https://github.com/ratson/cordova-plugin-admob-free/tree/master/sdk">AdMob SDKs</a>, every line of code are on Github. You don&apos;t <a href="https://github.com/admob-google/admob-cordova/blob/master/src/android/libs/admobadplugin.jar">execute</a> <a href="https://github.com/floatinghotpot/cordova-extension/blob/master/src/android/cordova-generic-ad.jar">compiled</a> <a href="https://github.com/floatinghotpot/cordova-extension/blob/master/src/ios/libCordovaGenericAd.a">binary</a> without seeing the source code.</p>
+</li>
+<li><p><strong>No Remote Control</strong></p>
+<p>Do not <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/326">send your application information to a remote server</a> to control whether ad could be displayed. Therefore, you don&apos;t lose revenue because <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/450#issuecomment-244837346">some server bugs</a>,</p>
+</li>
+</ul>
+<h3 id="compare-to-other-projects">Compare to other projects</h3>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>No Ad-Sharing</th>
+<th>Fully Open Sourced</th>
+<th>No Remote Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>  <a href="https://github.com/admob-google/admob-cordova">admob</a></td>
+<td>Not Sure</td>
+<td><a href="https://github.com/admob-google/admob-cordova/blob/master/src/android/libs/admobadplugin.jar">&#x274C;</a> <a href="https://github.com/admob-google/admob-cordova/blob/master/src/ios/AdmobAPI.framework/AdmobAPI">&#x274C;</a></td>
+<td>Not Sure</td>
+</tr>
+<tr>
+<td>  <a href="https://github.com/appfeel/admob-google-cordova">cordova-admob</a></td>
+<td><a href="https://github.com/appfeel/admob-google-cordova/blob/3f122f278a323a4bc9e580f400182a7bd690a346/src/android/AdMobAds.java#L569">&#x274C;</a></td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>  <a href="https://github.com/cranberrygame/cordova-plugin-ad-admob">cordova-plugin-ad-admob</a></td>
+<td><a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/7aaa397b19ab63579d6aa68fbf20ffdf795a15fc/src/android/AdMobPlugin.java#L330">&#x274C;</a></td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>  <a href="https://github.com/ratson/cordova-plugin-admob-free">cordova-plugin-admob-free</a></td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>  <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple">cordova-plugin-admob-simple</a></td>
+<td><a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple/blob/a58846c1ea14188a4aef44381ccd28ffdcae3bfa/src/android/AdMob.java#L207">&#x274C;</a></td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>  <a href="https://github.com/floatinghotpot/cordova-admob-pro">cordova-plugin-admobpro</a></td>
+<td><a href="https://github.com/floatinghotpot/cordova-admob-pro/wiki/License-Agreement#2-win-win-partnership">&#x274C;</a></td>
+<td><a href="https://github.com/floatinghotpot/cordova-extension/blob/master/src/android/cordova-generic-ad.jar">&#x274C;</a> <a href="https://github.com/floatinghotpot/cordova-extension/blob/master/src/ios/libCordovaGenericAd.a">&#x274C;</a></td>
+<td><a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/326">&#x274C;</a> <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/450">&#x274C;</a></td>
+</tr>
+</tbody>
+</table>
+<p>Click &#x274C; to see the detail.</p>
+<h2 id="installation">Installation</h2>
+<pre><code class="lang-bash"><code class="source-code prettyprint">cordova plugin add cordova-plugin-admob-free --save</code>
+</code></pre>
+<h2 id="usage">Usage</h2>
+<h3 id="1-create-ad-unit-id-for-your-banner-and-interstitial-">1. Create Ad Unit ID for your banner and interstitial.</h3>
+<p>Go to <a href="https://www.google.com/admob/">AdMob portal</a>, click &quot;Monetize a new app&quot; button to create new ad unit.</p>
+<h3 id="2-define-configuration-for-different-platforms-">2. Define configuration for different platforms.</h3>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">var admobid = {};
+if ( /(android)/i.test(navigator.userAgent) ) {  // for android &amp; amazon-fireos
+  admobid = {
+    banner: &apos;ca-app-pub-xxx/xxx&apos;,
+    interstitial: &apos;ca-app-pub-xxx/xxx&apos;,
+  };
+} else {  // for ios
+  admobid = {
+    banner: &apos;ca-app-pub-xxx/xxx&apos;,
+    interstitial: &apos;ca-app-pub-xxx/xxx&apos;,
+  };
+}</code>
+</code></pre>
+<h3 id="3-set-options">3. Set options</h3>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">AdMob.setOptions({
+  publisherId: admobid.banner,
+  interstitialAdId: admobid.interstitial,
+  bannerAtTop: false,  // set to true, to put banner at top
+  overlap: true,  // set to true, to allow banner overlap webview
+  offsetTopBar: false,  // set to true to avoid ios7 status bar overlap
+  isTesting: false,  // receiving test ad
+  autoShow: false  // auto show interstitial ad when loaded
+});</code>
+</code></pre>
+<h3 id="4-display-advertisements">4. Display advertisements</h3>
+<h4 id="banner-ad">Banner Ad</h4>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">// Create banner
+AdMob.createBannerView();
+
+// Close the banner
+AdMob.destroyBannerView();
+
+// Hide the banner
+AdMob.showAd(false);
+
+// Show the banner
+AdMob.showAd(true);</code>
+</code></pre>
+<h4 id="interstitial-ad">Interstitial Ad</h4>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">// prepare and load ad resource in background, e.g. at the beginning of game level
+AdMob.prepareInterstitial({
+  interstitialId: admobid.interstitial,
+  autoShow: false
+});
+
+// show the interstitial later, e.g. at end of game level
+AdMob.showInterstitial();</code>
+</code></pre>
+<h3 id="5-profit">5. Profit</h3>
+<p>If you find this plugin useful, please <a href="https://github.com/ratson/cordova-plugin-admob-free">star it on Github</a>.</p>
+<h2 id="screenshots">Screenshots</h2>
+<table>
+<thead>
+<tr>
+<th>Android Banner</th>
+<th>Android Interstitial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="docs/screenshots/banner-android.jpg" alt="ScreenShot"></td>
+<td><img src="docs/screenshot/interstitial-android.jpg" alt="ScreenShot"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>iOS Banner</th>
+<th>iOS Interstitial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="docs/screenshot/banner-ios.jpg" alt="ScreenShot"></td>
+<td><img src="docs/screenshot/interstitial-ios.jpg" alt="ScreenShot"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="api">API</h2>
+<p>Methods:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">// set default value for other methods
+AdMob.setOptions(options, success, fail);
+
+// use banner
+AdMob.createBannerView();
+AdMob.destroyBannerView();
+AdMob.showAd();
+
+// use interstitial
+AdMob.prepareInterstitial(options, success, fail);
+AdMob.showInterstitial();
+// low-level methods
+AdMob.createInterstitialView();
+AdMob.requestInterstitialAd();
+AdMob.showInterstitialAd();</code>
+</code></pre>
+<p>Events:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">document.addEventListener(&apos;onReceiveAd&apos;, function() {});
+document.addEventListener(&apos;onFailedToReceiveAd&apos;, function(data) {});
+document.addEventListener(&apos;onPresentAd&apos;, function() {});
+document.addEventListener(&apos;onDismissAd&apos;, function() {});
+document.addEventListener(&apos;onLeaveToAd&apos;, function() {});
+document.addEventListener(&apos;onReceiveInterstitialAd&apos;, function() {});
+document.addEventListener(&apos;onPresentInterstitialAd&apos;, function() {});
+document.addEventListener(&apos;onDismissInterstitialAd&apos;, function() {});</code>
+</code></pre>
+<h2 id="status">Status</h2>
+<p>This plugin is forked from <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple">cordova-plugin-admob-simple</a> and removed the ad-sharing related code. All APIs are remaining the same as the original fork.</p>
+<p>The code for Android has almost all rewritten to be more maintainable, plus some extra features.</p>
+<p>For iOS, while it is working,
+For Android, there are also some enhanced options. If anyone wants them on iOS, feel free open an issue. However,</p>
+<h2 id="contributing">Contributing</h2>
+<p>You can use this Cordova plugin for free. You can contribute to this project in many ways:</p>
+<ul>
+<li><a href="https://github.com/ratson/cordova-plugin-admob-free/issues">Reporting issues</a>.</li>
+<li>Patching and bug fixing, especially when submitted with test code. <a href="https://github.com/ratson/cordova-plugin-admob-free/pulls">Open a pull request</a>.</li>
+<li>Other enhancements.</li>
+</ul>
+<p>Help with documentation is always appreciated and can be done via pull requests.</p>
+<h2 id="credits">Credits</h2>
+<p>Thanks for the <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple">cordova-plugin-admob-simple</a> author for forking the original project <a href="https://github.com/floatinghotpot/cordova-plugin-admob">cordova-plugin-admob</a> to <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple/issues/1">make it functional</a> and open source it.</p>
+<p>Screenshots are copied from <a href="https://github.com/floatinghotpot/cordova-admob-pro">cordova-admob-pro</a>.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>This is NOT an official Google product. It is just a community-driven project, which use the Google AdMob SDKs.</p>
+<h2 id="license">License</h2>
+<p><a href="LICENSE">MIT</a></p>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

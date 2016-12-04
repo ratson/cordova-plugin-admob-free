@@ -1,0 +1,21 @@
+{
+  "coverage": "20%",
+  "expectCount": 10,
+  "actualCount": 2,
+  "files": {
+    "js/AdMob.js": {
+      "expectCount": 10,
+      "actualCount": 2,
+      "undocumentLines": [
+        61,
+        65,
+        69,
+        87,
+        73,
+        77,
+        92,
+        81
+      ]
+    }
+  }
+}

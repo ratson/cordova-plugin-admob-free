@@ -1,0 +1,64 @@
+{
+  "name": "cordova-plugin-admob-free",
+  "version": "0.4.1",
+  "description": "Cordova AdMob Plugin for Google AdMob",
+  "scripts": {
+    "clean": "rimraf www",
+    "build": "babel src/js --out-dir www",
+    "docs": "esdoc -c esdoc.json",
+    "prepublish": "npm-run-all clean build",
+    "version": "sync-package-version --cordova-plugin",
+    "pretest": "npm run build",
+    "test:js": "BABEL_ENV=test jest",
+    "test:cordova": "cordova-test",
+    "test": "npm-run-all test:*"
+  },
+  "cordova": {
+    "id": "cordova-plugin-admob-free",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": "ratson/cordova-plugin-admob-free",
+  "keywords": [
+    "cordova",
+    "admob",
+    "ecosystem:cordova",
+    "cordova-plugin-admob",
+    "cordova-admob",
+    "cordova-android",
+    "cordova-ios",
+    "plugin",
+    "google",
+    "admobpro"
+  ],
+  "tonicExampleFilename": "test.js",
+  "author": "Ratson",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-jest": "^17.0.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-module-resolver": "^2.4.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-env": "^0.0.9",
+    "cordova-android": "^6.1.0",
+    "cordova-test-cli": "^0.0.1",
+    "esdoc": "^0.4.8",
+    "esdoc-importpath-plugin": "^0.0.1",
+    "jest": "^17.0.3",
+    "lodash": "^4.17.2",
+    "npm-run-all": "^3.1.2",
+    "rimraf": "^2.5.4",
+    "sync-package-version": "^0.0.3"
+  },
+  "files": [
+    "*.js",
+    "*.md",
+    "*.xml",
+    "LICENSE",
+    "src",
+    "www"
+  ]
+}
