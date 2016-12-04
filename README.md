@@ -10,7 +10,7 @@ A free, no ad-sharing version of Google AdMob plugin for Cordova.
 
 - **Fully Open Sourced**
 
-  Except Google provided [AdMob SDKs](https://github.com/rehy/cordova-admob-sdk), every line of code are on Github. You don't [execute](https://github.com/admob-google/admob-cordova/blob/master/src/android/libs/admobadplugin.jar) [compiled](https://github.com/floatinghotpot/cordova-extension/blob/master/src/android/cordova-generic-ad.jar) [binary](https://github.com/floatinghotpot/cordova-extension/blob/master/src/ios/libCordovaGenericAd.a) without seeing the source code.
+  Except Google provided [AdMob SDKs](https://github.com/ratson/cordova-plugin-admob-free/tree/master/sdk), every line of code are on Github. You don't [execute](https://github.com/admob-google/admob-cordova/blob/master/src/android/libs/admobadplugin.jar) [compiled](https://github.com/floatinghotpot/cordova-extension/blob/master/src/android/cordova-generic-ad.jar) [binary](https://github.com/floatinghotpot/cordova-extension/blob/master/src/ios/libCordovaGenericAd.a) without seeing the source code.
 
 - **No Remote Control**
 
@@ -105,15 +105,24 @@ AdMob.showInterstitial();
 
 ### 5. Profit
 
+If you find this plugin useful, please [star it on Github](https://github.com/ratson/cordova-plugin-admob-free).
+
 ## Screenshots
 
-Android Banner                  |  Android Interstitial
---------------------------------|--------------------------------------------
-![ScreenShot](docs/android.jpg) | ![ScreenShot](docs/android_interstitial.jpg)
+Android Banner                                  |  Android Interstitial
+------------------------------------------------|--------------------------------------------
+![ScreenShot][banner-android-screenshot]        | ![ScreenShot][interstitial-android-screenshot]
 
-iPhone Banner                   |  iPhone Interstitial
---------------------------------|--------------------------------------------
-![ScreenShot](docs/iphone.jpg)  | ![ScreenShot](docs/iphone_interstitial.jpg)
+iOS Banner                                      |  iOS Interstitial
+------------------------------------------------|--------------------------------------------
+![ScreenShot][banner-ios-screenshot]            | ![ScreenShot][interstitial-ios-screenshot]
+
+
+[banner-android-screenshot]: docs/screenshots/banner-android.jpg
+[banner-ios-screenshot]: docs/screenshot/banner-ios.jpg
+[interstitial-android-screenshot]: docs/screenshot/interstitial-android.jpg
+[interstitial-ios-screenshot]: docs/screenshot/interstitial-ios.jpg
+
 
 ## API
 
@@ -152,9 +161,10 @@ document.addEventListener('onDismissInterstitialAd', function() {});
 
 This plugin is forked from [cordova-plugin-admob-simple](https://github.com/sunnycupertino/cordova-plugin-admob-simple) and removed the ad-sharing related code. All APIs are remaining the same as the original fork.
 
-For Android, there are also some enhanced options. If anyone wants them on iOS, please open an issue and let me know.
+The code for Android has almost all rewritten to be more maintainable, plus some extra features.
 
-If you find this plugin useful, please [star it on Github](https://github.com/ratson/cordova-plugin-admob-free).
+For iOS, while it is working,
+For Android, there are also some enhanced options. If anyone wants them on iOS, feel free open an issue. However,
 
 ## Contributing
 
