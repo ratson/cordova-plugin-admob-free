@@ -6,6 +6,7 @@
     "clean": "rimraf www",
     "build": "babel src/js --out-dir www",
     "docs": "esdoc -c esdoc.json",
+    "postdocs": "cd gh-pages && git commit -a -m 'Update page'",
     "prepublish": "npm-run-all clean build",
     "version": "sync-package-version --cordova-plugin",
     "pretest": "npm run build",
