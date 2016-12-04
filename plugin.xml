@@ -25,7 +25,6 @@
 
     <dependency id="cordova-admob-sdk" version="~0.1.0" />
 
-    <!-- android -->
     <platform name="android">
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
             <activity android:name="com.google.android.gms.ads.AdActivity"
@@ -42,12 +41,14 @@
                 <param name="onload" value="true" />
             </feature>
         </config-file>
+
+        <source-file src="src/android/Actions.java" target-dir="src/name/ratson/cordova/admob" />
+        <source-file src="src/android/adlistener" target-dir="src/name/ratson/cordova/admob" />
         <source-file src="src/android/AdMob.java" target-dir="src/name/ratson/cordova/admob" />
         <source-file src="src/android/AdMobConfig.java" target-dir="src/name/ratson/cordova/admob" />
         <source-file src="src/android/CordovaEventBuilder.java" target-dir="src/name/ratson/cordova/admob" />
     </platform>
 
-    <!-- ios -->
     <platform name="ios">
         <config-file parent="/*" target="config.xml">
             <feature name="AdMob">
