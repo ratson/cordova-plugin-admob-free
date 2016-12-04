@@ -41,7 +41,7 @@ public class AdMob extends CordovaPlugin {
     /**
      * Common tag used for logging statements.
      */
-    private static final String LOGTAG = "AdMob";
+    private static final String TAG = "AdMob";
 
     private static final AdMobConfig config = new AdMobConfig();
 
@@ -87,7 +87,7 @@ public class AdMob extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         isGpsAvailable = (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(cordova.getActivity()) == ConnectionResult.SUCCESS);
-        Log.w(LOGTAG, String.format("isGooglePlayServicesAvailable: %s", isGpsAvailable ? "true" : "false"));
+        Log.w(TAG, String.format("isGooglePlayServicesAvailable: %s", isGpsAvailable ? "true" : "false"));
     }
 
     /**
@@ -136,7 +136,7 @@ public class AdMob extends CordovaPlugin {
             result = executeShowInterstitialAd(show, callbackContext);
 
         } else {
-            Log.d(LOGTAG, String.format("Invalid action passed: %s", action));
+            Log.d(TAG, String.format("Invalid action passed: %s", action));
             result = new PluginResult(Status.INVALID_ACTION);
         }
 
@@ -148,7 +148,7 @@ public class AdMob extends CordovaPlugin {
     }
 
     private PluginResult executeSetOptions(JSONObject options, CallbackContext callbackContext) {
-        Log.w(LOGTAG, "executeSetOptions");
+        Log.w(TAG, "executeSetOptions");
 
         config.setOptions(options);
 
@@ -200,7 +200,7 @@ public class AdMob extends CordovaPlugin {
     }
 
     private PluginResult executeDestroyBannerView(CallbackContext callbackContext) {
-        Log.w(LOGTAG, "executeDestroyBannerView");
+        Log.w(TAG, "executeDestroyBannerView");
 
         final CallbackContext delayCallback = callbackContext;
         cordova.getActivity().runOnUiThread(new Runnable() {
@@ -254,11 +254,10 @@ public class AdMob extends CordovaPlugin {
     }
 
     public void clearInterstitial() {
-        if (interstitialAd == null) {
-            return;
+        if (interstitialAd != null) {
+            interstitialAd.setAdListener(null);
+            interstitialAd = null;
         }
-        interstitialAd.setAdListener(null);
-        interstitialAd = null;
     }
 
     private AdRequest buildAdRequest() {
@@ -286,7 +285,7 @@ public class AdMob extends CordovaPlugin {
                 try {
                     bundle.putString(key, config.adExtras.get(key).toString());
                 } catch (JSONException exception) {
-                    Log.w(LOGTAG, String.format("Caught JSON Exception: %s", exception.getMessage()));
+                    Log.w(TAG, String.format("Caught JSON Exception: %s", exception.getMessage()));
                 }
             }
         }
@@ -505,10 +504,8 @@ public class AdMob extends CordovaPlugin {
 
     @Override
     public void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-            adView = null;
-        }
+        destroyAdView();
+        clearInterstitial();
         if (adViewLayout != null) {
             ViewGroup parentView = (ViewGroup) adViewLayout.getParent();
             if (parentView != null) {
@@ -517,6 +514,13 @@ public class AdMob extends CordovaPlugin {
             adViewLayout = null;
         }
         super.onDestroy();
+    }
+
+    private void destroyAdView() {
+        if (adView != null) {
+            adView.destroy();
+            adView = null;
+        }
     }
 
     private View getWebView() {
