@@ -2,6 +2,7 @@ package name.ratson.cordova.admob;
 
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -249,10 +250,7 @@ public class AdMob extends CordovaPlugin {
     private AdRequest buildAdRequest() {
         AdRequest.Builder builder = new AdRequest.Builder();
         if (config.isTesting) {
-            // This will request test ads on the emulator and deviceby passing this hashed device ID.
-            String ANDROID_ID = Settings.Secure.getString(cordova.getActivity().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
-            String deviceId = md5(ANDROID_ID).toUpperCase();
-            builder = builder.addTestDevice(deviceId).addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+            builder = builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(getDeviceId());
         }
 
         if (config.testDeviceList != null) {
@@ -517,7 +515,14 @@ public class AdMob extends CordovaPlugin {
         }
     }
 
-    public static final String md5(final String s) {
+    @NonNull
+    private String getDeviceId() {
+        // This will request test ads on the emulator and deviceby passing this hashed device ID.
+        String ANDROID_ID = Settings.Secure.getString(cordova.getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
+        return md5(ANDROID_ID).toUpperCase();
+    }
+
+    private static String md5(final String s) {
         try {
             MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
             digest.update(s.getBytes());
