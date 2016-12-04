@@ -1,5 +1,10 @@
 import exec from 'cordova/exec'
 
+/**
+ * Ad sizes.
+ * @constant
+ * @type {Object}
+ */
 export const AD_SIZE = {
   BANNER: 'BANNER',
   IAB_BANNER: 'IAB_BANNER',

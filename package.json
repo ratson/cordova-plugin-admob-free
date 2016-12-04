@@ -46,6 +46,7 @@
     "cordova-android": "^6.1.0",
     "cordova-test-cli": "^0.0.1",
     "esdoc": "^0.4.8",
+    "esdoc-importpath-plugin": "^0.0.1",
     "jest": "^17.0.3",
     "lodash": "^4.17.2",
     "npm-run-all": "^3.1.2",
