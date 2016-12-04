@@ -45,20 +45,6 @@ public class AdMob extends CordovaPlugin {
 
     private static final AdMobConfig config = new AdMobConfig();
 
-    /**
-     * Cordova Actions.
-     */
-    private static final String ACTION_SET_OPTIONS = "setOptions";
-
-    private static final String ACTION_CREATE_BANNER_VIEW = "createBannerView";
-    private static final String ACTION_DESTROY_BANNER_VIEW = "destroyBannerView";
-    private static final String ACTION_REQUEST_AD = "requestAd";
-    private static final String ACTION_SHOW_AD = "showAd";
-
-    private static final String ACTION_CREATE_INTERSTITIAL_VIEW = "createInterstitialView";
-    private static final String ACTION_REQUEST_INTERSTITIAL_AD = "requestInterstitialAd";
-    private static final String ACTION_SHOW_INTERSTITIAL_AD = "showInterstitialAd";
-
     private ViewGroup parentView;
 
     private boolean bannerShow = true;
@@ -104,34 +90,34 @@ public class AdMob extends CordovaPlugin {
     public boolean execute(String action, JSONArray inputs, CallbackContext callbackContext) throws JSONException {
         PluginResult result = null;
 
-        if (ACTION_SET_OPTIONS.equals(action)) {
+        if (Actions.SET_OPTIONS.equals(action)) {
             JSONObject options = inputs.optJSONObject(0);
             result = executeSetOptions(options, callbackContext);
 
-        } else if (ACTION_CREATE_BANNER_VIEW.equals(action)) {
+        } else if (Actions.CREATE_BANNER.equals(action)) {
             JSONObject options = inputs.optJSONObject(0);
             result = executeCreateBannerView(options, callbackContext);
 
-        } else if (ACTION_CREATE_INTERSTITIAL_VIEW.equals(action)) {
+        } else if (Actions.CREATE_INTERSTITIAL.equals(action)) {
             JSONObject options = inputs.optJSONObject(0);
             result = executeCreateInterstitialView(options, callbackContext);
 
-        } else if (ACTION_DESTROY_BANNER_VIEW.equals(action)) {
+        } else if (Actions.DESTROY_BANNER.equals(action)) {
             result = executeDestroyBannerView(callbackContext);
 
-        } else if (ACTION_REQUEST_INTERSTITIAL_AD.equals(action)) {
+        } else if (Actions.REQUEST_INTERSTITIAL.equals(action)) {
             JSONObject options = inputs.optJSONObject(0);
             result = executeRequestInterstitialAd(options, callbackContext);
 
-        } else if (ACTION_REQUEST_AD.equals(action)) {
+        } else if (Actions.REQUEST_AD.equals(action)) {
             JSONObject options = inputs.optJSONObject(0);
             result = executeRequestAd(options, callbackContext);
 
-        } else if (ACTION_SHOW_AD.equals(action)) {
+        } else if (Actions.SHOW_AD.equals(action)) {
             boolean show = inputs.optBoolean(0);
             result = executeShowAd(show, callbackContext);
 
-        } else if (ACTION_SHOW_INTERSTITIAL_AD.equals(action)) {
+        } else if (Actions.SHOW_INTERSTITIAL.equals(action)) {
             boolean show = inputs.optBoolean(0);
             result = executeShowInterstitialAd(show, callbackContext);
 
