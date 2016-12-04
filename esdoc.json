@@ -1,0 +1,4 @@
+{
+  "source": "./src/js",
+  "destination": "./gh-pages"
+}
