@@ -119,9 +119,9 @@ iOS Banner                                      |  iOS Interstitial
 
 
 [banner-android-screenshot]: docs/screenshots/banner-android.jpg
-[banner-ios-screenshot]: docs/screenshot/banner-ios.jpg
-[interstitial-android-screenshot]: docs/screenshot/interstitial-android.jpg
-[interstitial-ios-screenshot]: docs/screenshot/interstitial-ios.jpg
+[banner-ios-screenshot]: docs/screenshots/banner-ios.jpg
+[interstitial-android-screenshot]: docs/screenshots/interstitial-android.jpg
+[interstitial-ios-screenshot]: docs/screenshots/interstitial-ios.jpg
 
 
 ## API
