@@ -163,8 +163,7 @@ This plugin is forked from [cordova-plugin-admob-simple](https://github.com/sunn
 
 The code for Android has almost all rewritten to be more maintainable, plus some extra features.
 
-For iOS, while it is working,
-For Android, there are also some enhanced options. If anyone wants them on iOS, feel free open an issue. However,
+For iOS, while it is working, I have less interest in writing Objective-C code these days. If someone is will to help, feel free to send a pull request, I will review it.
 
 ## Contributing
 
