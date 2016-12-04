@@ -375,8 +375,8 @@ public class AdMob extends CordovaPlugin {
      * the UI thread.
      *
      * @param show The JSONArray representing input parameters.  This function
-     *                expects the first object in the array to be a JSONObject with the
-     *                input parameters.
+     *             expects the first object in the array to be a JSONObject with the
+     *             input parameters.
      * @return A PluginResult representing whether or not an ad was requested
      * succcessfully.  Listen for onReceiveAd() and onFailedToReceiveAd()
      * callbacks to see if an ad was successfully retrieved.
@@ -467,7 +467,7 @@ public class AdMob extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                
+
                 if (interstitialAd.isLoaded()) {
                     interstitialAd.show();
                     if (callbackContext != null) {
@@ -478,7 +478,7 @@ public class AdMob extends CordovaPlugin {
                         callbackContext.error("Interstital not ready yet");
                     }
                 }
-                
+
             }
         });
 
@@ -525,28 +525,6 @@ public class AdMob extends CordovaPlugin {
         } catch (Exception e) {
             return (View) webView;
         }
-    }
-
-    /**
-     * Gets a string error reason from an error code.
-     */
-    public String getErrorReason(int errorCode) {
-        String errorReason = "";
-        switch (errorCode) {
-            case AdRequest.ERROR_CODE_INTERNAL_ERROR:
-                errorReason = "Internal error";
-                break;
-            case AdRequest.ERROR_CODE_INVALID_REQUEST:
-                errorReason = "Invalid request";
-                break;
-            case AdRequest.ERROR_CODE_NETWORK_ERROR:
-                errorReason = "Network Error";
-                break;
-            case AdRequest.ERROR_CODE_NO_FILL:
-                errorReason = "No fill";
-                break;
-        }
-        return errorReason;
     }
 
     public static final String md5(final String s) {

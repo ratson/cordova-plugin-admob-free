@@ -1,6 +1,7 @@
 package name.ratson.cordova.admob.adlistener;
 
 import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +43,7 @@ public abstract class BaseAdListener extends AdListener {
         JSONObject data = new JSONObject();
         try {
             data.put("error", errorCode);
-            data.put("reason", adMob.getErrorReason(errorCode));
+            data.put("reason", this.getErrorReason(errorCode));
             data.put("adType", this.getAdType());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -63,5 +64,27 @@ public abstract class BaseAdListener extends AdListener {
             return;
         }
         this.fireAdEvent("onLeaveToAd", data);
+    }
+
+    /**
+     * Gets a string error reason from an error code.
+     */
+    public String getErrorReason(int errorCode) {
+        String errorReason = "";
+        switch (errorCode) {
+            case AdRequest.ERROR_CODE_INTERNAL_ERROR:
+                errorReason = "Internal error";
+                break;
+            case AdRequest.ERROR_CODE_INVALID_REQUEST:
+                errorReason = "Invalid request";
+                break;
+            case AdRequest.ERROR_CODE_NETWORK_ERROR:
+                errorReason = "Network Error";
+                break;
+            case AdRequest.ERROR_CODE_NO_FILL:
+                errorReason = "No fill";
+                break;
+        }
+        return errorReason;
     }
 }
