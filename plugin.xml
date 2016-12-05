@@ -23,7 +23,7 @@
         <clobbers target="plugins.AdMob" />
     </js-module>
 
-    <dependency id="cordova-admob-sdk" version="~0.1.0" />
+    <dependency id="cordova-admob-sdk" version="~0.2.0" />
 
     <platform name="android">
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
