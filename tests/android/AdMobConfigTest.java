@@ -80,4 +80,37 @@ public class AdMobConfigTest {
         config.setOptions(new JSONObject("{\"adSize\": \"IAB_LEADERBOARD\"}"));
         assertEquals(config.adSize, AdSize.LEADERBOARD);
     }
+
+    @Test
+    public void canSetAutoShow() throws JSONException {
+        AdMobConfig config = new AdMobConfig();
+        assertEquals(true, config.autoShow);
+        assertEquals(true, config.autoShowBanner);
+        assertEquals(true, config.autoShowInterstitial);
+
+        config.setOptions(new JSONObject("{\"autoShow\": false}"));
+        assertEquals(false, config.autoShow);
+        assertEquals(true, config.autoShowBanner);
+        assertEquals(true, config.autoShowInterstitial);
+
+        config.setOptions(new JSONObject("{\"autoShow\": true}"));
+        assertEquals(true, config.autoShow);
+        assertEquals(true, config.autoShowBanner);
+        assertEquals(true, config.autoShowInterstitial);
+
+        config.setBannerOptions(new JSONObject("{\"autoShow\": false}"));
+        assertEquals(true, config.autoShow);
+        assertEquals(false, config.autoShowBanner);
+        assertEquals(true, config.autoShowInterstitial);
+
+        config.setBannerOptions(new JSONObject("{\"autoShowBanner\": true}"));
+        assertEquals(true, config.autoShow);
+        assertEquals(true, config.autoShowBanner);
+        assertEquals(true, config.autoShowInterstitial);
+
+        config.setInterstitialOptions(new JSONObject("{\"autoShow\": false}"));
+        assertEquals(true, config.autoShow);
+        assertEquals(true, config.autoShowBanner);
+        assertEquals(false, config.autoShowInterstitial);
+    }
 }

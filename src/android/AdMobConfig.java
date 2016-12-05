@@ -24,7 +24,10 @@ public class AdMobConfig {
     private static final String OPT_OFFSET_TOPBAR = "offsetTopBar";
     private static final String OPT_IS_TESTING = "isTesting";
     private static final String OPT_AD_EXTRAS = "adExtras";
+
     private static final String OPT_AUTO_SHOW = "autoShow";
+    private static final String OPT_AUTO_SHOW_BANNER = "autoShowBanner";
+    private static final String OPT_AUTO_SHOW_INTERSTITIAL = "autoShowInterstitial";
 
     public static final String OPT_TEST_DEVICES = "testDevices";
 
@@ -38,7 +41,10 @@ public class AdMobConfig {
 
     public boolean isTesting = false;
     public JSONObject adExtras = null;
+
     public boolean autoShow = true;
+    public boolean autoShowBanner = true;
+    public boolean autoShowInterstitial = true;
 
     public String gender = null;
     public String forChild = null;
@@ -98,6 +104,12 @@ public class AdMobConfig {
         if (options.has(OPT_AUTO_SHOW)) {
             this.autoShow = options.optBoolean(OPT_AUTO_SHOW);
         }
+        if (options.has(OPT_AUTO_SHOW_BANNER)) {
+            this.autoShowBanner = options.optBoolean(OPT_AUTO_SHOW_BANNER);
+        }
+        if (options.has(OPT_AUTO_SHOW_INTERSTITIAL)) {
+            this.autoShowInterstitial = options.optBoolean(OPT_AUTO_SHOW_INTERSTITIAL);
+        }
 
         if (options.has(OPT_LOCATION)) {
             JSONArray location = options.optJSONArray(OPT_LOCATION);
@@ -133,6 +145,22 @@ public class AdMobConfig {
                 }
             }
         }
+    }
+
+    public void setBannerOptions(JSONObject options) {
+        try {
+            this.autoShowBanner = (Boolean) options.remove(OPT_AUTO_SHOW);
+        } catch (NullPointerException e) {
+        }
+        this.setOptions(options);
+    }
+
+    public void setInterstitialOptions(JSONObject options) {
+        try {
+            this.autoShowInterstitial = (Boolean) options.remove(OPT_AUTO_SHOW);
+        } catch (NullPointerException e) {
+        }
+        this.setOptions(options);
     }
 
     /**

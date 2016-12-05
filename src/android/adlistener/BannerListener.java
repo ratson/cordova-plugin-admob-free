@@ -17,7 +17,7 @@ public class BannerListener extends BaseAdListener {
     @Override
     public void onAdLoaded() {
         Log.w("AdMob", "BannerAdLoaded");
-        if (this.adMob.autoShowBanner && !this.adMob.bannerVisible) {
+        if (this.adMob.config.autoShowBanner && !this.adMob.bannerVisible) {
             this.adMob.executeShowAd(true, null);
         }
         super.fireAdEvent("onReceiveAd");

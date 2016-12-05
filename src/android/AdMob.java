@@ -44,7 +44,7 @@ public class AdMob extends CordovaPlugin {
      */
     private static final String TAG = "AdMob";
 
-    private static final AdMobConfig config = new AdMobConfig();
+    public final AdMobConfig config = new AdMobConfig();
 
     private ViewGroup parentView;
 
@@ -63,9 +63,6 @@ public class AdMob extends CordovaPlugin {
      * The interstitial ad to display to the user.
      */
     private InterstitialAd interstitialAd;
-
-    public boolean autoShowBanner = true;
-    public boolean autoShowInterstitial = true;
 
     public boolean bannerVisible = false;
     private boolean isGpsAvailable = false;
@@ -155,8 +152,7 @@ public class AdMob extends CordovaPlugin {
      * successfully.
      */
     private PluginResult executeCreateBannerView(JSONObject options, final CallbackContext callbackContext) {
-        config.setOptions(options);
-        autoShowBanner = config.autoShow;
+        config.setBannerOptions(options);
 
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -174,9 +170,9 @@ public class AdMob extends CordovaPlugin {
                 bannerVisible = false;
                 adView.loadAd(buildAdRequest());
 
-                //if(autoShowBanner) {
-                // executeShowAd(true, null);
-                //}
+//                if (config.autoShowBanner) {
+//                    executeShowAd(true, null);
+//                }
                 Log.w("banner", config.getBannerAdUnitId());
 
                 callbackContext.success();
@@ -221,8 +217,7 @@ public class AdMob extends CordovaPlugin {
      * successfully.
      */
     private PluginResult executeCreateInterstitialView(JSONObject options, CallbackContext callbackContext) {
-        config.setOptions(options);
-        autoShowInterstitial = config.autoShow;
+        config.setInterstitialOptions(options);
 
         final CallbackContext delayCallback = callbackContext;
         cordova.getActivity().runOnUiThread(new Runnable() {
@@ -460,7 +455,7 @@ public class AdMob extends CordovaPlugin {
                     if (callbackContext != null) {
                         callbackContext.success();
                     }
-                } else if (!autoShowInterstitial) {
+                } else if (!config.autoShowInterstitial) {
                     if (callbackContext != null) {
                         callbackContext.error("Interstital not ready yet");
                     }

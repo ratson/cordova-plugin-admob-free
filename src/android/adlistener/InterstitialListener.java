@@ -19,7 +19,7 @@ public class InterstitialListener extends BaseAdListener {
         Log.w("AdMob", "InterstitialAdLoaded");
         this.fireAdEvent("onReceiveInterstitialAd");
 
-        if (this.adMob.autoShowInterstitial) {
+        if (this.adMob.config.autoShowInterstitial) {
             this.adMob.executeShowInterstitialAd(true, null);
         }
     }
