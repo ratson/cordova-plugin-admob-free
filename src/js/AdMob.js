@@ -21,6 +21,42 @@ export const AD_SIZE = {
   WIDE_SKYSCRAPER: 'WIDE_SKYSCRAPER',
 }
 
+function boolean2string(x) {
+  if (x === null) {
+    return ''
+  }
+  if (x === true) {
+    return 'yes'
+  }
+  if (x === false) {
+    return 'no'
+  }
+  return x
+}
+
+function isUndefined(x) {
+  return typeof x === 'undefined'
+}
+
+function translateOptions(options) {
+  const opts = {}
+  if (!isUndefined(options.forChild)) {
+    opts.forChild = boolean2string(options.forChild)
+    if (typeof options.forChild === 'string') {
+      console.warn('`forChild` will not accept string in future, pass boolean instead')
+    }
+  }
+  if (!isUndefined(options.forFamily)) {
+    opts.forFamily = boolean2string(options.forFamily)
+    if (typeof options.forFamily === 'string') {
+      console.warn('`forFamily` will not accept string in future, pass boolean instead')
+    }
+  }
+  return Object.assign({}, options, opts)
+}
+// export for testing
+export const _translateOptions = translateOptions
+
 /**
  *
  * @param {Object} options
@@ -33,35 +69,35 @@ export const AD_SIZE = {
  * @param {boolean} [options.isTesting=false]    Receiving test ad
  * @param {boolean} [options.autoShow=false]    Auto show interstitial ad when loaded
  *
- * @param {string} [options.forChild=null]
+ * @param {boolean|null} [options.forChild=null]
  * Android-only.
  * Default is not calling `tagForChildDirectedTreatment`.
- * Set to "yes" for `tagForChildDirectedTreatment(true)`.
- * Set to "no" for `tagForChildDirectedTreatment(false)`.
+ * Set to "true" for `tagForChildDirectedTreatment(true)`.
+ * Set to "false" for `tagForChildDirectedTreatment(false)`.
  *
- * @param {string} [options.forFamily=null]
+ * @param {boolean|null} [options.forFamily=null]
  * Android-only.
  * Default is not calling `setIsDesignedForFamilies`.
- * Set to "yes" for `setIsDesignedForFamilies(true)`.
- * Set to "no" for `setIsDesignedForFamilies(false)`.
+ * Set to "true" for `setIsDesignedForFamilies(true)`.
+ * Set to "false" for `setIsDesignedForFamilies(false)`.
  *
  * @param {function()} [successCallback]
  * @param {function()} [failureCallback]
  */
 export function setOptions(options, successCallback, failureCallback) {
   if (typeof options === 'object') {
-    cordova.exec(successCallback, failureCallback, 'AdMob', 'setOptions', [options])
+    cordova.exec(successCallback, failureCallback, 'AdMob', 'setOptions', [translateOptions(options)])
   } else if (typeof failureCallback === 'function') {
     failureCallback('options should be specified.')
   }
 }
 
 export function createBannerView(options = {}, successCallback, failureCallback) {
-  cordova.exec(successCallback, failureCallback, 'AdMob', 'createBannerView', [options])
+  cordova.exec(successCallback, failureCallback, 'AdMob', 'createBannerView', [translateOptions(options)])
 }
 
 export function createInterstitialView(options, successCallback, failureCallback) {
-  cordova.exec(successCallback, failureCallback, 'AdMob', 'createInterstitialView', [options])
+  cordova.exec(successCallback, failureCallback, 'AdMob', 'createInterstitialView', [translateOptions(options)])
 }
 
 export function destroyBannerView(options = {}, successCallback, failureCallback) {
@@ -69,7 +105,7 @@ export function destroyBannerView(options = {}, successCallback, failureCallback
 }
 
 export function requestInterstitialAd(options = {}, successCallback, failureCallback) {
-  cordova.exec(successCallback, failureCallback, 'AdMob', 'requestInterstitialAd', [options])
+  cordova.exec(successCallback, failureCallback, 'AdMob', 'requestInterstitialAd', [translateOptions(options)])
 }
 
 export function showAd(show = true, successCallback, failureCallback) {
