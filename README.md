@@ -126,6 +126,8 @@ iOS Banner                                      |  iOS Interstitial
 
 ## API
 
+For more details, refer to [documentation page](https://ratson.github.io/cordova-plugin-admob-free/).
+
 Methods:
 ```javascript
 // set default value for other methods

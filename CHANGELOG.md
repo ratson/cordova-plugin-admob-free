@@ -1,3 +1,21 @@
+## 0.5.0 (2016-12-08)
+
+### Breaking
+
+* Drop support for WP8.
+* Update Google AdMob SDK for iOS to v7.15.0.
+
+### Added
+
+* [Documentation page](https://ratson.github.io/cordova-plugin-admob-free/) is available.
+* Support Child-directed setting. ([@Venkat-TTapp](https://github.com/Venkat-TTapp) in [#32](https://github.com/ratson/cordova-plugin-admob-free/issues/32))
+
+### Fixed
+
+* Babel generated more compatible code.
+* Separate autoShow for banner and interstitial. ([@oangelo](https://github.com/oangelo) in [#27](https://github.com/ratson/cordova-plugin-admob-free/issues/27))
+
+
 ## 0.4.1 (2016-11-22)
 
 ### Fixed
@@ -9,8 +27,8 @@
 
 ### Breaking
 
-* Drop support for Cordova < 4
-* Update Google AdMob SDK for iOS to v7.14.0
+* Drop support for Cordova < 4.
+* Update Google AdMob SDK for iOS to v7.14.0.
 
 ### Added
 
