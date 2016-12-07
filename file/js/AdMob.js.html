@@ -70,6 +70,42 @@ export const AD_SIZE = {
   WIDE_SKYSCRAPER: &apos;WIDE_SKYSCRAPER&apos;,
 }
 
+function boolean2string(x) {
+  if (x === null) {
+    return &apos;&apos;
+  }
+  if (x === true) {
+    return &apos;yes&apos;
+  }
+  if (x === false) {
+    return &apos;no&apos;
+  }
+  return x
+}
+
+function isUndefined(x) {
+  return typeof x === &apos;undefined&apos;
+}
+
+function translateOptions(options) {
+  const opts = {}
+  if (!isUndefined(options.forChild)) {
+    opts.forChild = boolean2string(options.forChild)
+    if (typeof options.forChild === &apos;string&apos;) {
+      console.warn(&apos;`forChild` will not accept string in future, pass boolean instead&apos;)
+    }
+  }
+  if (!isUndefined(options.forFamily)) {
+    opts.forFamily = boolean2string(options.forFamily)
+    if (typeof options.forFamily === &apos;string&apos;) {
+      console.warn(&apos;`forFamily` will not accept string in future, pass boolean instead&apos;)
+    }
+  }
+  return Object.assign({}, options, opts)
+}
+// export for testing
+export const _translateOptions = translateOptions
+
 /**
  *
  * @param {Object} options
@@ -82,53 +118,50 @@ export const AD_SIZE = {
  * @param {boolean} [options.isTesting=false]    Receiving test ad
  * @param {boolean} [options.autoShow=false]    Auto show interstitial ad when loaded
  *
- * @param {string} [options.forChild=null]
- * Android-only.
+ * @param {boolean|null} [options.forChild=null]
  * Default is not calling `tagForChildDirectedTreatment`.
- * Set to &quot;yes&quot; for `tagForChildDirectedTreatment(true)`.
- * Set to &quot;no&quot; for `tagForChildDirectedTreatment(false)`.
+ * Set to &quot;true&quot; for `tagForChildDirectedTreatment(true)`.
+ * Set to &quot;false&quot; for `tagForChildDirectedTreatment(false)`.
  *
- * @param {string} [options.forFamily=null]
+ * @param {boolean|null} [options.forFamily=null]
  * Android-only.
  * Default is not calling `setIsDesignedForFamilies`.
- * Set to &quot;yes&quot; for `setIsDesignedForFamilies(true)`.
- * Set to &quot;no&quot; for `setIsDesignedForFamilies(false)`.
+ * Set to &quot;true&quot; for `setIsDesignedForFamilies(true)`.
+ * Set to &quot;false&quot; for `setIsDesignedForFamilies(false)`.
  *
  * @param {function()} [successCallback]
  * @param {function()} [failureCallback]
  */
 export function setOptions(options, successCallback, failureCallback) {
   if (typeof options === &apos;object&apos;) {
-    cordova.exec( successCallback, failureCallback, &apos;AdMob&apos;, &apos;setOptions&apos;, [ options ] )
-  } else {
-    if (typeof failureCallback === &apos;function&apos;) {
-      failureCallback(&apos;options should be specified.&apos;)
-    }
+    cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;setOptions&apos;, [translateOptions(options)])
+  } else if (typeof failureCallback === &apos;function&apos;) {
+    failureCallback(&apos;options should be specified.&apos;)
   }
 }
 
 export function createBannerView(options = {}, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, &apos;AdMob&apos;, &apos;createBannerView&apos;, [ options ] )
+  cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;createBannerView&apos;, [translateOptions(options)])
 }
 
 export function createInterstitialView(options, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, &apos;AdMob&apos;, &apos;createInterstitialView&apos;, [ options ] )
+  cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;createInterstitialView&apos;, [translateOptions(options)])
 }
 
 export function destroyBannerView(options = {}, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, &apos;AdMob&apos;, &apos;destroyBannerView&apos;, [] )
+  cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;destroyBannerView&apos;, [])
 }
 
 export function requestInterstitialAd(options = {}, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, &apos;AdMob&apos;, &apos;requestInterstitialAd&apos;, [ options ] )
+  cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;requestInterstitialAd&apos;, [translateOptions(options)])
 }
 
 export function showAd(show = true, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, &apos;AdMob&apos;, &apos;showAd&apos;, [ show ] )
+  cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;showAd&apos;, [show])
 }
 
 export function showInterstitialAd(show = true, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, &apos;AdMob&apos;, &apos;showInterstitialAd&apos;, [ show ] )
+  cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;showInterstitialAd&apos;, [show])
 }
 
 // emulate cordova-admob-pro interface
