@@ -1,3 +1,5 @@
+Forked from https://github.com/ratson/cordova-plugin-admob-free - Rona Dini Hari (rona.dinihari@gmail.com)
+
 # Cordova AdMob Plugin
 
 A free, no ad-sharing version of Google AdMob plugin for Cordova.
