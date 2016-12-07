@@ -11,7 +11,7 @@
     "version": "sync-package-version --cordova-plugin",
     "lint": "eslint src/js tests/js",
     "pretest": "npm run build",
-    "test:js": "BABEL_ENV=test jest",
+    "test:js": "cross-env BABEL_ENV=test jest",
     "test:cordova": "cordova-test",
     "test": "npm-run-all test:*"
   },
@@ -47,6 +47,7 @@
     "babel-preset-env": "^0.0.9",
     "cordova-android": "^6.1.0",
     "cordova-test-cli": "^0.0.1",
+    "cross-env": "^3.1.3",
     "esdoc": "^0.4.8",
     "esdoc-importpath-plugin": "^0.0.1",
     "eslint": "^3.11.1",
@@ -69,5 +70,10 @@
     "LICENSE",
     "src",
     "www"
-  ]
+  ],
+  "jest": {
+    "testPathDirs": [
+      "<rootDir>/tests/js"
+    ]
+  }
 }
