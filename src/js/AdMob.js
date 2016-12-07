@@ -50,36 +50,34 @@ export const AD_SIZE = {
  */
 export function setOptions(options, successCallback, failureCallback) {
   if (typeof options === 'object') {
-    cordova.exec( successCallback, failureCallback, 'AdMob', 'setOptions', [ options ] )
-  } else {
-    if (typeof failureCallback === 'function') {
-      failureCallback('options should be specified.')
-    }
+    cordova.exec(successCallback, failureCallback, 'AdMob', 'setOptions', [options])
+  } else if (typeof failureCallback === 'function') {
+    failureCallback('options should be specified.')
   }
 }
 
 export function createBannerView(options = {}, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, 'AdMob', 'createBannerView', [ options ] )
+  cordova.exec(successCallback, failureCallback, 'AdMob', 'createBannerView', [options])
 }
 
 export function createInterstitialView(options, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, 'AdMob', 'createInterstitialView', [ options ] )
+  cordova.exec(successCallback, failureCallback, 'AdMob', 'createInterstitialView', [options])
 }
 
 export function destroyBannerView(options = {}, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, 'AdMob', 'destroyBannerView', [] )
+  cordova.exec(successCallback, failureCallback, 'AdMob', 'destroyBannerView', [])
 }
 
 export function requestInterstitialAd(options = {}, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, 'AdMob', 'requestInterstitialAd', [ options ] )
+  cordova.exec(successCallback, failureCallback, 'AdMob', 'requestInterstitialAd', [options])
 }
 
 export function showAd(show = true, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, 'AdMob', 'showAd', [ show ] )
+  cordova.exec(successCallback, failureCallback, 'AdMob', 'showAd', [show])
 }
 
 export function showInterstitialAd(show = true, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, 'AdMob', 'showInterstitialAd', [ show ] )
+  cordova.exec(successCallback, failureCallback, 'AdMob', 'showInterstitialAd', [show])
 }
 
 // emulate cordova-admob-pro interface
