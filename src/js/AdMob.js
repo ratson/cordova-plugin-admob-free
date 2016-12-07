@@ -70,7 +70,6 @@ export const _translateOptions = translateOptions
  * @param {boolean} [options.autoShow=false]    Auto show interstitial ad when loaded
  *
  * @param {boolean|null} [options.forChild=null]
- * Android-only.
  * Default is not calling `tagForChildDirectedTreatment`.
  * Set to "true" for `tagForChildDirectedTreatment(true)`.
  * Set to "false" for `tagForChildDirectedTreatment(false)`.

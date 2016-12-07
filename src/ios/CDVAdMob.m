@@ -384,6 +384,8 @@
     str = [options objectForKey:OPT_FORCHILD];
     if (str && [str length] > 0) {
         forChild = str;
+    } else if (str && [str length] == 0) {
+        forChild = nil;
     }
 }
 
@@ -436,8 +438,10 @@
             request.gender = kGADGenderUnknown;
         }
     }
-    if (self.forChild != nil) {
+    if ([self.forChild caseInsensitiveCompare:@"yes"] == NSOrderedSame) {
         [request tagForChildDirectedTreatment:YES];
+    } else if ([self.forChild caseInsensitiveCompare:@"no"] == NSOrderedSame) {
+        [request tagForChildDirectedTreatment:NO];
     }
 
     return request;
