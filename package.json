@@ -10,10 +10,9 @@
     "prepublish": "npm-run-all clean build",
     "version": "sync-package-version --cordova-plugin",
     "lint": "eslint src/js tests/js",
-    "pretest": "npm run build",
     "test:js": "cross-env BABEL_ENV=test jest",
     "test:cordova": "cordova-test",
-    "test": "npm-run-all test:*"
+    "test": "npm-run-all build test:js lint"
   },
   "cordova": {
     "id": "cordova-plugin-admob-free",
@@ -43,6 +42,9 @@
     "babel-jest": "^17.0.2",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-module-resolver": "^2.4.0",
+    "babel-plugin-transform-es3-member-expression-literals": "^6.8.0",
+    "babel-plugin-transform-es3-property-literals": "^6.8.0",
+    "babel-plugin-transform-object-assign": "^6.8.0",
     "babel-polyfill": "^6.16.0",
     "babel-preset-env": "^0.0.9",
     "cordova-android": "^6.1.0",

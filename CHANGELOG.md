@@ -1,3 +1,10 @@
+## 0.5.1 (2016-12-08)
+
+### Fixed
+
+* Add more Babel transforms for more compatible code.
+
+
 ## 0.5.0 (2016-12-08)
 
 ### Breaking
