@@ -13,6 +13,9 @@ import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
@@ -32,6 +35,7 @@ import java.util.Iterator;
 
 import name.ratson.cordova.admob.adlistener.BannerListener;
 import name.ratson.cordova.admob.adlistener.InterstitialListener;
+import name.ratson.cordova.admob.adlistener.RewardedVideoListener;
 
 /**
  * This class represents the native implementation for the AdMob Cordova plugin.
@@ -63,6 +67,14 @@ public class AdMob extends CordovaPlugin {
      * The interstitial ad to display to the user.
      */
     private InterstitialAd interstitialAd;
+	
+	/**
+     * RewardVideo
+     */
+	private RewardedVideoAd rewardedVideoAd;
+	public boolean isRewardedVideoLoading = false;
+	public final Object rewardedVideoLock = new Object();	
+
 
     public boolean bannerVisible = false;
     private boolean isGpsAvailable = false;
@@ -118,7 +130,15 @@ public class AdMob extends CordovaPlugin {
         } else if (Actions.SHOW_INTERSTITIAL.equals(action)) {
             boolean show = inputs.optBoolean(0);
             result = executeShowInterstitialAd(show, callbackContext);
-
+		
+		} else if (Actions.ACTION_CREATE_REWARD_VIDEO_AD.equals(action)) {
+			JSONObject options = inputs.optJSONObject(0);            
+			result = executeCreateRewardVideoAd(options, callbackContext);
+			
+		} else if (Actions.ACTION_SHOW_REWARD_VIDEO_AD.equals(action)) {
+			boolean show = inputs.optBoolean(0);
+            result = executeShowRewardVideoAd(show, callbackContext);
+        
         } else {
             Log.d(TAG, String.format("Invalid action passed: %s", action));
             result = new PluginResult(Status.INVALID_ACTION);
@@ -467,6 +487,71 @@ public class AdMob extends CordovaPlugin {
         return null;
     }
 
+	
+	private PluginResult executeCreateRewardVideoAd(JSONObject options, CallbackContext callbackContext) {		
+		config.setRewardVideoOptions(options);
+				
+		final CallbackContext delayCallback = callbackContext;
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                clearRewardedVideo();
+				
+				rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(cordova.getActivity());
+				rewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoListener(AdMob.this));
+				Log.w("rewardedvideo", config.getRewardedVideoAdUnitId());				
+				
+				synchronized (rewardedVideoLock) {
+					if (!isRewardedVideoLoading) {
+						isRewardedVideoLoading = true;
+						Bundle extras = new Bundle();
+						extras.putBoolean("_noRefresh", true);
+						AdRequest adRequest = new AdRequest.Builder()
+								.addNetworkExtrasBundle(AdMobAdapter.class, extras)
+								.build();
+						rewardedVideoAd.loadAd(config.getRewardedVideoAdUnitId(), adRequest);
+						delayCallback.success();
+					}
+				}                
+            }
+        });
+        return null;       
+    }
+	
+	public void clearRewardedVideo() {
+        if (rewardedVideoAd == null) {
+            return;
+        }
+        rewardedVideoAd.setRewardedVideoAdListener(null);
+        rewardedVideoAd = null;
+    }
+
+    public PluginResult executeShowRewardVideoAd(final boolean show, final CallbackContext callbackContext) {
+		if (rewardedVideoAd == null) {
+            return new PluginResult(Status.ERROR, "rewardedVideoAd is null, call createRewardVideo first.");
+        }
+		
+		cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+				
+				if(rewardedVideoAd instanceof RewardedVideoAd) {
+					RewardedVideoAd rvad = (RewardedVideoAd) rewardedVideoAd;
+					if(rvad.isLoaded()){
+						rvad.show();
+					}
+				}
+
+				if (callbackContext != null) {
+                    callbackContext.success();
+                }
+            }
+        });
+
+        return null;
+    }
+	
+	
 
     @Override
     public void onPause(boolean multitasking) {

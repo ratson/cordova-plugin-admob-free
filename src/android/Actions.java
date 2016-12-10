@@ -12,4 +12,6 @@ final class Actions {
     static final String CREATE_INTERSTITIAL = "createInterstitialView";
     static final String REQUEST_INTERSTITIAL = "requestInterstitialAd";
     static final String SHOW_INTERSTITIAL = "showInterstitialAd";
+	static final String ACTION_CREATE_REWARD_VIDEO_AD = "createRewardVideoAd";
+    static final String ACTION_SHOW_REWARD_VIDEO_AD = "showRewardVideoAd";
 }
