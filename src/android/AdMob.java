@@ -151,7 +151,7 @@ public class AdMob extends CordovaPlugin {
 
         config.setOptions(options);
 
-        MobileAds.initialize(getApplicationContext(), config.appId);
+        MobileAds.initialize(this.cordova.getActivity().getApplicationContext(), config.appId);
 
         callbackContext.success();
         return null;
@@ -181,9 +181,9 @@ public class AdMob extends CordovaPlugin {
                     adView.setAdSize(config.adSize);
                     adView.setAdListener(new BannerListener());
                 }
-                if (adView.getParent() != null) {
-                    ((ViewGroup) adView.getParent()).removeView(adView);
-                }
+                // if (adView.getParent() != null) {
+                //     ((ViewGroup) adView.getParent()).removeView(adView);
+                // }
 
                 bannerVisible = false;
                 adView.loadAd(buildAdRequest());
@@ -394,9 +394,9 @@ public class AdMob extends CordovaPlugin {
                 if (bannerVisible == bannerShow) {
                     // no change
                 } else if (bannerShow) {
-                    if (adView.getParent() != null) {
-                        ((ViewGroup) adView.getParent()).removeView(adView);
-                    }
+                    // if (adView.getParent() != null) {
+                    //     ((ViewGroup) adView.getParent()).removeView(adView);
+                    // }
                     if (config.bannerOverlap) {
                         RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
                                 RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -413,8 +413,10 @@ public class AdMob extends CordovaPlugin {
                             }
                         }
 
-                        adViewLayout.addView(adView, params2);
-                        adViewLayout.bringToFront();
+                        if (adView.getParent() == null) {
+                          adViewLayout.addView(adView, params2);
+                          adViewLayout.bringToFront();
+                        }
                     } else {
                         ViewGroup wvParentView = (ViewGroup) getWebView().getParent();
                         if (parentView == null) {
@@ -430,14 +432,16 @@ public class AdMob extends CordovaPlugin {
                         }
 
 
-                        if (config.bannerAtTop) {
-                            parentView.addView(adView, 0);
-                        } else {
-                            parentView.addView(adView);
+                        if (adView.getParent() == null) {
+                          if (config.bannerAtTop) {
+                              parentView.addView(adView, 0);
+                          } else {
+                              parentView.addView(adView);
+                          }
+                          parentView.bringToFront();
+                          parentView.requestLayout();
+                          parentView.requestFocus();
                         }
-                        parentView.bringToFront();
-                        parentView.requestLayout();
-                        parentView.requestFocus();
                     }
 
                     adView.setVisibility(View.VISIBLE);
