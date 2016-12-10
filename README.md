@@ -49,7 +49,7 @@ if ( /(android)/i.test(navigator.userAgent) ) {  // for android & amazon-fireos
   admobid = {
     banner: 'ca-app-pub-xxx/xxx',
     interstitial: 'ca-app-pub-xxx/xxx',
-	
+	rewardvideo: 'ca-app-pub-xxx/xxx',
   };
 } else {  // for ios
   admobid = {
