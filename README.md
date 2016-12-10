@@ -112,7 +112,7 @@ AdMob.showInterstitial();
 ```javascript
 // prepare and load ad resource in background, e.g. at the beginning of game level
 AdMob.createRewardVideoAd({
-  rewardVideoId: admobid.rewardVideoId,
+  rewardVideoId: admobid.rewardvideo,
 });
 
 // show the RewardVideo later, e.g. at end of game level
