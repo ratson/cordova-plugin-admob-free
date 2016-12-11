@@ -13,6 +13,7 @@
     }
   ],
   "manual": {
+    "tutorial": ["./CONTRIBUTING.md"],
     "changelog": ["./CHANGELOG.md"]
   }
 }
