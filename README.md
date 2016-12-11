@@ -72,6 +72,9 @@ AdMob.setOptions({
 });
 ```
 
+Note that `AdMob` is not defined until `deviceready` event is triggered.
+
+
 ### 4. Display advertisements
 
 #### Banner Ad
@@ -176,6 +179,8 @@ You can use this Cordova plugin for free. You can contribute to this project in 
 * Other enhancements.
 
 Help with documentation is always appreciated and can be done via pull requests.
+
+Read [Contributing Guide](https://ratson.github.io/cordova-plugin-admob-free/manual/tutorial.html#contributing-guide) to learn how to contribute.
 
 ## Credits
 
