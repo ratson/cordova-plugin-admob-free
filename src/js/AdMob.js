@@ -117,11 +117,11 @@ export function showInterstitialAd(show = true, successCallback, failureCallback
 
 
 export function createRewardVideoAd(options, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, 'AdMob', 'createRewardVideoAd', [translateOptions(options)])
+  cordova.exec(successCallback, failureCallback, 'AdMob', 'createRewardVideoAd', [translateOptions(options)])
 }
 
 export function showRewardVideoAd(show = true, successCallback, failureCallback) {
-  cordova.exec( successCallback, failureCallback, 'AdMob', 'showRewardVideoAd', [ show ] )
+  cordova.exec(successCallback, failureCallback, 'AdMob', 'showRewardVideoAd', [show])
 }
 
 // emulate cordova-admob-pro interface
