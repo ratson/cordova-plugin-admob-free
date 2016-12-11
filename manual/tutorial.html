@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../">
-  <title data-ice="title">Manual</title>
+  <title data-ice="title">Tutorial</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -76,50 +76,58 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="github-markdown manual-toc-root">
-  
-<div data-ice="manual" data-toc-name="tutorial">
-    <h1 class="manual-toc-title"><a href="manual/tutorial.html" data-ice="title">Tutorial</a></h1>
-    <ul class="manual-toc">
-      
-    <li data-ice="manualNav" class="indent-h1"><span class="manual-dot"></span><a href="manual/tutorial.html#contributing-guide" data-ice="link">Contributing Guide</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/tutorial.html#issues" data-ice="link">Issues</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/tutorial.html#pull-requests" data-ice="link">Pull Requests</a></li>
-<li data-ice="manualNav" class="indent-h3"><span class="manual-dot"></span><a href="manual/tutorial.html#getting-started" data-ice="link">Getting Started</a></li>
-<li data-ice="manualNav" class="indent-h3"><span class="manual-dot"></span><a href="manual/tutorial.html#building-docs" data-ice="link">Building Docs</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/tutorial.html#license" data-ice="link">License</a></li>
-</ul>
+<div class="content" data-ice="content"><div class="github-markdown">
+  <div class="manual-breadcrumb-list">
+    <a href="./manual/./index.html">Manual</a>
+    <span>&#xBB;</span>
+    <span data-ice="title">Tutorial</span>
   </div>
-<div data-ice="manual" data-toc-name="reference">
-    <h1 class="manual-toc-title"><a href="identifiers.html" data-ice="title">Reference</a></h1>
-    <ul class="manual-toc">
-      
-    <li data-ice="manualNav" class="indent-h1"><span class="manual-dot"></span><a href="identifiers.html#function" data-ice="link">Function</a></li>
-<li data-ice="manualNav" class="indent-h1"><span class="manual-dot"></span><a href="identifiers.html#variable" data-ice="link">Variable</a></li>
-</ul>
-  </div>
-<div data-ice="manual" data-toc-name="changelog">
-    <h1 class="manual-toc-title"><a href="manual/changelog.html" data-ice="title">Changelog</a></h1>
-    <ul class="manual-toc">
-      
-    <li data-ice="manualNav" class="indent-h1"><span class="manual-dot"></span><a href="manual/changelog.html#0-5-1-2016-12-08-" data-ice="link">0.5.1 (2016-12-08)</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/changelog.html#fixed" data-ice="link">Fixed</a></li>
-<li data-ice="manualNav" class="indent-h1"><span class="manual-dot"></span><a href="manual/changelog.html#0-5-0-2016-12-08-" data-ice="link">0.5.0 (2016-12-08)</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/changelog.html#breaking" data-ice="link">Breaking</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/changelog.html#added" data-ice="link">Added</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/changelog.html#fixed" data-ice="link">Fixed</a></li>
-<li data-ice="manualNav" class="indent-h1"><span class="manual-dot"></span><a href="manual/changelog.html#0-4-1-2016-11-22-" data-ice="link">0.4.1 (2016-11-22)</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/changelog.html#fixed" data-ice="link">Fixed</a></li>
-<li data-ice="manualNav" class="indent-h1"><span class="manual-dot"></span><a href="manual/changelog.html#0-4-0-2016-11-07-" data-ice="link">0.4.0 (2016-11-07)</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/changelog.html#breaking" data-ice="link">Breaking</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/changelog.html#added" data-ice="link">Added</a></li>
-<li data-ice="manualNav" class="indent-h1"><span class="manual-dot"></span><a href="manual/changelog.html#0-3-1-2016-10-26-" data-ice="link">0.3.1 (2016-10-26)</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/changelog.html#fixed" data-ice="link">Fixed</a></li>
-<li data-ice="manualNav" class="indent-h1"><span class="manual-dot"></span><a href="manual/changelog.html#0-3-0-2016-10-23-" data-ice="link">0.3.0 (2016-10-23)</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/changelog.html#added" data-ice="link">Added</a></li>
-<li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/changelog.html#fixed" data-ice="link">Fixed</a></li>
-</ul>
-  </div>
+  <div data-ice="content"><h1 id="contributing-guide">Contributing Guide</h1>
+<p>I want to make contributing to this project as easy and transparent as
+possible. Hopefully this document makes the process for contributing clear and
+answers any questions you may have. If not, feel free to open an
+<a href="https://github.com/ratson/cordova-plugin-admob-free/issues">Issue</a>.</p>
+<h2 id="issues">Issues</h2>
+<p>Please ensure your bug description is clear and has sufficient instructions
+to be able to reproduce the issue. The best way is to provide a reduced
+test case as a Github repository.</p>
+<h2 id="pull-requests">Pull Requests</h2>
+<p>Your <a href="https://help.github.com/articles/creating-a-pull-request">pull requests</a>
+are always welcome and are greatly appreciated! Every little bit helps, and
+credit will always be given.</p>
+<h3 id="getting-started">Getting Started</h3>
+<ol>
+<li><p>Fork this repo by using the &quot;Fork&quot; button in the upper-right</p>
+</li>
+<li><p>Check out your fork</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">git clone git@github.com:yournamehere/cordova-plugin-admob-free.git
+
+cd cordova-plugin-admob-free</code>
+</code></pre>
+</li>
+<li><p>Install all dependencies</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm install</code>
+</code></pre>
+</li>
+<li><p>Start coding!
+If you&apos;ve added code, try add tests.
+If you&apos;ve changed APIs, update any relevant documentation or tests.
+Ensure your work is committed within a feature branch.</p>
+</li>
+<li><p>Ensure all tests pass</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm test</code>
+</code></pre>
+</li>
+</ol>
+<h3 id="building-docs">Building Docs</h3>
+<p>Building the docs locally is extremely simple. First execute the following commands:</p>
+<pre><code class="lang-bash"><code class="source-code prettyprint">npm run docs</code>
+</code></pre>
+<p>After this, you can open <code>gh-pages/index.html</code> in your browser.</p>
+<h2 id="license">License</h2>
+<p>By contributing to <code>cordova-plugin-admob-free</code>, you agree that
+your contributions will be licensed under its MIT license.</p>
+</div>
 </div>
 </div>
 
