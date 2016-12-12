@@ -15,7 +15,6 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
@@ -131,11 +130,11 @@ public class AdMob extends CordovaPlugin {
             boolean show = inputs.optBoolean(0);
             result = executeShowInterstitialAd(show, callbackContext);
 
-        } else if (Actions.ACTION_CREATE_REWARD_VIDEO.equals(action)) {
+        } else if (Actions.CREATE_REWARD_VIDEO.equals(action)) {
             JSONObject options = inputs.optJSONObject(0);            
-            result = executePrepareRewardVideo(options, callbackContext);
+            result = executeCreateRewardVideo(options, callbackContext);
 
-        } else if (Actions.ACTION_SHOW_REWARD_VIDEO.equals(action)) {
+        } else if (Actions.SHOW_REWARD_VIDEO.equals(action)) {
             boolean show = inputs.optBoolean(0);
             result = executeShowRewardVideo(show, callbackContext);
         
@@ -488,7 +487,7 @@ public class AdMob extends CordovaPlugin {
     }
 
 
-    private PluginResult executePrepareRewardVideo(JSONObject options, CallbackContext callbackContext) {
+    private PluginResult executeCreateRewardVideo(JSONObject options, CallbackContext callbackContext) {
         config.setRewardVideoOptions(options);
 
         final CallbackContext delayCallback = callbackContext;

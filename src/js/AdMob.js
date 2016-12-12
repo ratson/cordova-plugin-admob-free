@@ -117,7 +117,7 @@ export function showInterstitialAd(show = true, successCallback, failureCallback
 
 
 export function prepareRewardVideo(options, successCallback, failureCallback) {
-  cordova.exec(successCallback, failureCallback, 'AdMob', 'prepareRewardVideo', [translateOptions(options)])
+  cordova.exec(successCallback, failureCallback, 'AdMob', 'createRewardVideo', [translateOptions(options)])
 }
 
 export function showRewardVideo(show = true, successCallback, failureCallback) {

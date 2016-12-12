@@ -292,8 +292,8 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
-- (void)prepareRewardVideo:(CDVInvokedUrlCommand *)command {
-    NSLog(@"prepareRewardVideo");
+- (void)createRewardVideo:(CDVInvokedUrlCommand *)command {
+    NSLog(@"createRewardVideo");
 
     CDVPluginResult *pluginResult;
     NSString *callbackId = command.callbackId;
@@ -321,7 +321,7 @@
     NSString *callbackId = command.callbackId;
 
     if(! self.rewardVideoView) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"rewardVideoAd is null, call prepareRewardVideo first."];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"rewardVideoAd is null, call createRewardVideo first."];
 
     } else {
         [self __showRewardedVideo:YES];
