@@ -40,6 +40,7 @@
 <li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/tutorial.html#pull-requests" data-ice="link">Pull Requests</a></li>
 <li data-ice="manualNav" class="indent-h3"><span class="manual-dot"></span><a href="manual/tutorial.html#getting-started" data-ice="link">Getting Started</a></li>
 <li data-ice="manualNav" class="indent-h3"><span class="manual-dot"></span><a href="manual/tutorial.html#building-docs" data-ice="link">Building Docs</a></li>
+<li data-ice="manualNav" class="indent-h3"><span class="manual-dot"></span><a href="manual/tutorial.html#keeping-fork-updated" data-ice="link">Keeping Fork Updated</a></li>
 <li data-ice="manualNav" class="indent-h2"><span class="manual-dot"></span><a href="manual/tutorial.html#license" data-ice="link">License</a></li>
 </ul>
   </div>
@@ -121,9 +122,23 @@ Ensure your work is committed within a feature branch.</p>
 </ol>
 <h3 id="building-docs">Building Docs</h3>
 <p>Building the docs locally is extremely simple. First execute the following commands:</p>
-<pre><code class="lang-bash"><code class="source-code prettyprint">npm run docs</code>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm run docs</code>
 </code></pre>
 <p>After this, you can open <code>gh-pages/index.html</code> in your browser.</p>
+<h3 id="keeping-fork-updated">Keeping Fork Updated</h3>
+<p>Add git remote, call it <code>upstream</code>:</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">git remote add upstream https://github.com/ratson/cordova-plugin-admob-free.git</code>
+</code></pre>
+<p>Each time you want to update, from your local <code>master</code> branch:</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">git fetch upstream
+git rebase upstream/master</code>
+</code></pre>
+<p>If you&apos;ve rebased your branch onto <code>upstream/master</code> you may need to
+force the push in order to push it to your own forked repository on GitHub.
+You&apos;d do that with:</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">git push -f origin master</code>
+</code></pre>
+<p>For more reference, read <a href="http://eslint.org/docs/developer-guide/contributing/pull-requests#working-with-code">ESLint&apos;s excellent one</a>.</p>
 <h2 id="license">License</h2>
 <p>By contributing to <code>cordova-plugin-admob-free</code>, you agree that
 your contributions will be licensed under its MIT license.</p>

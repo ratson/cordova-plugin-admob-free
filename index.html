@@ -54,7 +54,7 @@
 <p>Unlike <a href="https://github.com/appfeel/admob-google-cordova/blob/3f122f278a323a4bc9e580f400182a7bd690a346/src/android/AdMobAds.java#L569">some</a> <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple/blob/a58846c1ea14188a4aef44381ccd28ffdcae3bfa/src/android/AdMob.java#L207">other</a> <a href="https://github.com/floatinghotpot/cordova-admob-pro/wiki/License-Agreement#2-win-win-partnership">plugins</a>, this plugin does not share your advertising revenue by randomly display developer&apos;s owned ads.</p>
 </li>
 <li><p><strong>Fully Open Sourced</strong></p>
-<p>Except Google provided <a href="https://github.com/ratson/cordova-plugin-admob-free/tree/master/sdk">AdMob SDKs</a>, every line of code are on Github. You don&apos;t <a href="https://github.com/admob-google/admob-cordova/blob/master/src/android/libs/admobadplugin.jar">execute</a> <a href="https://github.com/floatinghotpot/cordova-extension/blob/master/src/android/cordova-generic-ad.jar">compiled</a> <a href="https://github.com/floatinghotpot/cordova-extension/blob/master/src/ios/libCordovaGenericAd.a">binary</a> without seeing the source code.</p>
+<p>Except Google provided <a href="https://github.com/rehy/cordova-admob-sdk">AdMob SDKs</a>, every line of code are on Github. You don&apos;t <a href="https://github.com/admob-google/admob-cordova/blob/master/src/android/libs/admobadplugin.jar">execute</a> <a href="https://github.com/floatinghotpot/cordova-extension/blob/master/src/android/cordova-generic-ad.jar">compiled</a> <a href="https://github.com/floatinghotpot/cordova-extension/blob/master/src/ios/libCordovaGenericAd.a">binary</a> without seeing the source code.</p>
 </li>
 <li><p><strong>No Remote Control</strong></p>
 <p>Do not <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/326">send your application information to a remote server</a> to control whether ad could be displayed. Therefore, you don&apos;t lose revenue because <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/450#issuecomment-244837346">some server bugs</a>,</p>
@@ -141,6 +141,7 @@ if ( /(android)/i.test(navigator.userAgent) ) {  // for android &amp; amazon-fir
   autoShow: false  // auto show interstitial ad when loaded
 });</code>
 </code></pre>
+<p>Note that <code>AdMob</code> is not defined until <code>deviceready</code> event is triggered.</p>
 <h3 id="4-display-advertisements">4. Display advertisements</h3>
 <h4 id="banner-ad">Banner Ad</h4>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">// Create banner
@@ -237,6 +238,7 @@ document.addEventListener(&apos;onDismissInterstitialAd&apos;, function() {});</
 <li>Other enhancements.</li>
 </ul>
 <p>Help with documentation is always appreciated and can be done via pull requests.</p>
+<p>Read <a href="https://ratson.github.io/cordova-plugin-admob-free/manual/tutorial.html#contributing-guide">Contributing Guide</a> to learn how to contribute.</p>
 <h2 id="credits">Credits</h2>
 <p>Thanks for the <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple">cordova-plugin-admob-simple</a> author for forking the original project <a href="https://github.com/floatinghotpot/cordova-plugin-admob">cordova-plugin-admob</a> to <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple/issues/1">make it functional</a> and open source it.</p>
 <p>Screenshots are copied from <a href="https://github.com/floatinghotpot/cordova-admob-pro">cordova-admob-pro</a>.</p>

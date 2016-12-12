@@ -10,7 +10,9 @@
     "prepublish": "npm-run-all clean build",
     "postpublish": "npm-run-all docs docs:commit",
     "version": "sync-package-version --cordova-plugin",
-    "lint": "eslint src/js tests/js",
+    "lint:js": "eslint src/js tests/js",
+    "lint:spaces": "lintspaces -n -t -d spaces *.* src/**/*.* tests/**/*.* example/*.* example/www/*.*",
+    "lint": "npm-run-all lint:*",
     "test:js": "cross-env BABEL_ENV=test jest",
     "test:cordova": "cordova-test",
     "test": "npm-run-all build test:js lint"
@@ -22,6 +24,7 @@
       "ios"
     ]
   },
+  "homepage": "https://ratson.github.io/cordova-plugin-admob-free/",
   "repository": "ratson/cordova-plugin-admob-free",
   "keywords": [
     "cordova",
@@ -61,6 +64,7 @@
     "eslint-plugin-node": "^3.0.5",
     "eslint-plugin-promise": "^3.4.0",
     "jest": "^17.0.3",
+    "lintspaces-cli": "^0.5.0",
     "lodash": "^4.17.2",
     "npm-run-all": "^3.1.2",
     "rimraf": "^2.5.4",
