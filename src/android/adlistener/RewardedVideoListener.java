@@ -21,79 +21,79 @@ public class RewardedVideoListener extends BaseAdListener implements RewardedVid
     }
 
     @Override
-	public void onRewardedVideoAdFailedToLoad(int errorCode) {			
-		synchronized (this.adMob.rewardedVideoLock) {
-			this.adMob.isRewardedVideoLoading = false;
-		}
-			
-		JSONObject data = new JSONObject();
-		try {
-			data.put("error", errorCode);
-			data.put("reason", getErrorReason(errorCode));
-			data.put("adType", this.getAdType());
-		} catch (JSONException e) {
-			e.printStackTrace();
-			this.fireAdEvent("onFailedToReceiveAd");
-			return;
-		}
-		this.fireAdEvent("onFailedToReceiveAd", data);
-	}
-		
-	@Override
-	public void onRewardedVideoAdLeftApplication() {
-		JSONObject data = new JSONObject();
-		try {
-			data.put("adType", this.getAdType());
-		} catch (JSONException e) {
-			e.printStackTrace();
-			this.fireAdEvent("onLeaveToAd");
-			return;
-		}
-		this.fireAdEvent("onLeaveToAd", data);
-	}
+    public void onRewardedVideoAdFailedToLoad(int errorCode) {
+        synchronized (this.adMob.rewardedVideoLock) {
+            this.adMob.isRewardedVideoLoading = false;
+        }
 
-	@Override
-	public void onRewardedVideoAdLoaded() {
-		synchronized (this.adMob.rewardedVideoLock) {
-			this.adMob.isRewardedVideoLoading = false;
-		}
-		Log.w("AdMob", "RewardedVideoAdLoaded");
-		this.fireAdEvent("onReceiveRewardVideoAd");
+        JSONObject data = new JSONObject();
+        try {
+            data.put("error", errorCode);
+            data.put("reason", getErrorReason(errorCode));
+            data.put("adType", this.getAdType());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            this.fireAdEvent("onFailedToReceiveAd");
+            return;
+        }
+        this.fireAdEvent("onFailedToReceiveAd", data);
+    }
 
-		if(this.adMob.config.autoShowRewardVideo) {
-			this.adMob.executeShowRewardVideoAd(true,null); 
-		}
-	}
+    @Override
+    public void onRewardedVideoAdLeftApplication() {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("adType", this.getAdType());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            this.fireAdEvent("onLeaveToAd");
+            return;
+        }
+        this.fireAdEvent("onLeaveToAd", data);
+    }
 
-	@Override
-	public void onRewardedVideoAdOpened() {
-		this.fireAdEvent("onPresentRewardVideoAd");
-	}
-		
-	@Override
-	public void onRewardedVideoStarted() {
-		this.fireAdEvent("onPresentStartedRewardVideoAd");
-	}
+    @Override
+    public void onRewardedVideoAdLoaded() {
+        synchronized (this.adMob.rewardedVideoLock) {
+            this.adMob.isRewardedVideoLoading = false;
+        }
+        Log.w("AdMob", "RewardedVideoAdLoaded");
+        this.fireAdEvent("onReceiveRewardVideoAd");
 
-	@Override
-	public void onRewardedVideoAdClosed() {
-		this.fireAdEvent("onDismissRewardVideoAd");
-		this.adMob.clearRewardedVideo();
-	}
-		
-	@Override
-	public void onRewarded(RewardItem reward) {
-		JSONObject data = new JSONObject();
-		try {
-			data.put("adType", this.getAdType());
-			data.put("rewardType", reward.getType());
-			data.put("rewardAmount", reward.getAmount());
-		} catch (JSONException e) {
-			e.printStackTrace();
-			this.fireAdEvent("onRewardedVideo");
-			return;
-		}
-	
-		this.fireAdEvent("onRewardedVideo", data);
-	}
+        if(this.adMob.config.autoShowRewardVideo) {
+            this.adMob.executeShowRewardVideo(true,null); 
+        }
+    }
+
+    @Override
+    public void onRewardedVideoAdOpened() {
+        this.fireAdEvent("onPresentRewardVideoAd");
+    }
+
+    @Override
+    public void onRewardedVideoStarted() {
+        this.fireAdEvent("onPresentStartedRewardVideoAd");
+    }
+
+    @Override
+    public void onRewardedVideoAdClosed() {
+        this.fireAdEvent("onDismissRewardVideoAd");
+        this.adMob.clearRewardedVideo();
+    }
+
+    @Override
+    public void onRewarded(RewardItem reward) {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("adType", this.getAdType());
+            data.put("rewardType", reward.getType());
+            data.put("rewardAmount", reward.getAmount());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            this.fireAdEvent("onRewardedVideo");
+            return;
+        }
+
+        this.fireAdEvent("onRewardedVideo", data);
+    }
 }

@@ -14,12 +14,12 @@ import java.util.List;
 public class AdMobConfig {
     private static final String TEST_BANNER_ID = "ca-app-pub-3940256099942544/6300978111";
     private static final String TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712";
-	private static final String  TEST_REWARDED_VIDEO_ID = "ca-app-pub-3940256099942544/1033173712";
+    private static final String  TEST_REWARDED_VIDEO_ID = "ca-app-pub-3940256099942544/1033173712";
 
     /* options */
     private static final String OPT_PUBLISHER_ID = "publisherId";
     private static final String OPT_INTERSTITIAL_AD_ID = "interstitialAdId";
-	private static final String OPT_REWARD_VIDEO_ID = "rewardVideoId";
+    private static final String OPT_REWARD_VIDEO_ID = "rewardVideoId";
     private static final String OPT_AD_SIZE = "adSize";
     private static final String OPT_BANNER_AT_TOP = "bannerAtTop";
     private static final String OPT_OVERLAP = "overlap";
@@ -47,7 +47,7 @@ public class AdMobConfig {
     public boolean autoShow = true;
     public boolean autoShowBanner = true;
     public boolean autoShowInterstitial = true;
-	public boolean autoShowRewardVideo = false;
+    public boolean autoShowRewardVideo = false;
 
     public String gender = null;
     public String forChild = null;
@@ -74,9 +74,9 @@ public class AdMobConfig {
 
     // interstial
     private String interstitialAdUnitId = "";
-	
-	// RewardVideo
-	private String rewardVideoId = "";	
+
+    // RewardVideo
+    private String rewardVideoId = "";
 
 
     public void setOptions(JSONObject options) {
@@ -90,7 +90,7 @@ public class AdMobConfig {
         if (options.has(OPT_INTERSTITIAL_AD_ID)) {
             this.interstitialAdUnitId = options.optString(OPT_INTERSTITIAL_AD_ID);
         }
-		if (options.has(OPT_REWARD_VIDEO_ID)) {
+        if (options.has(OPT_REWARD_VIDEO_ID)) {
             this.rewardVideoId = options.optString(OPT_REWARD_VIDEO_ID);
         }
         if (options.has(OPT_AD_SIZE)) {
@@ -173,14 +173,14 @@ public class AdMobConfig {
         this.setOptions(options);
     }
 
-	public void setRewardVideoOptions(JSONObject options) {
+    public void setRewardVideoOptions(JSONObject options) {
         try {
             this.autoShowRewardVideo = (Boolean) options.remove(OPT_AUTO_SHOW);
         } catch (NullPointerException e) {
         }
         this.setOptions(options);
     }
-	
+
     /**
      * Gets an AdSize object from the string size passed in from JavaScript.
      * Returns null if an improper string is provided.
@@ -234,9 +234,9 @@ public class AdMobConfig {
         }
         return interstitialAdUnitId;
     }
-	
-	public String getRewardedVideoAdUnitId() {
-		if (rewardVideoId.length() == 0 || rewardVideoId.indexOf("xxxx") > 0) {
+
+    public String getRewardedVideoAdUnitId() {
+        if (rewardVideoId.length() == 0 || rewardVideoId.indexOf("xxxx") > 0) {
             // in case the user does not enter their own publisher id
             Log.e("rewardedvideo", "Please put your AdMob id into the javascript code. Test ad is used.");
             return TEST_REWARDED_VIDEO_ID;

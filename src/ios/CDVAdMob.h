@@ -69,7 +69,7 @@
 - (void)requestInterstitialAd:(CDVInvokedUrlCommand *)command;
 - (void)showInterstitialAd:(CDVInvokedUrlCommand *)command;
 
-- (void)createRewardVideoAd:(CDVInvokedUrlCommand *)command;
-- (void)showRewardVideoAd:(CDVInvokedUrlCommand *)command;
+- (void)prepareRewardVideo:(CDVInvokedUrlCommand *)command;
+- (void)showRewardVideo:(CDVInvokedUrlCommand *)command;
 
 @end

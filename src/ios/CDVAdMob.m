@@ -45,7 +45,7 @@
 
 @synthesize gender, forChild;
 
-@synthesize rewardedVideoLock, isRewardedVideoLoading;	
+@synthesize rewardedVideoLock, isRewardedVideoLoading;
 
 #define DEFAULT_BANNER_ID    @"ca-app-pub-3940256099942544/2934735716"
 #define DEFAULT_INTERSTITIAL_ID @"ca-app-pub-3940256099942544/4411468910"
@@ -53,7 +53,7 @@
 
 #define OPT_PUBLISHER_ID    @"publisherId"
 #define OPT_INTERSTITIAL_ADID   @"interstitialAdId"
-#define OPT_REWARD_VIDEO_ADID   @"rewardVideoId"
+#define OPT_REWARD_VIDEO_ID   @"rewardVideoId"
 #define OPT_AD_SIZE         @"adSize"
 #define OPT_BANNER_AT_TOP   @"bannerAtTop"
 #define OPT_OVERLAP         @"overlap"
@@ -84,7 +84,7 @@
     bannerShow = true;
     publisherId = DEFAULT_BANNER_ID;
     interstitialAdId = DEFAULT_INTERSTITIAL_ID;
-	rewardVideoId = DEFAULT_REWARD_VIDEO_ID;    
+    rewardVideoId = DEFAULT_REWARD_VIDEO_ID;    
     adSize = [self __AdSizeFromString:@"SMART_BANNER"];
 
     bannerAtTop = false;
@@ -95,16 +95,16 @@
     autoShow = true;
     autoShowBanner = true;
     autoShowInterstitial = false;
-	autoShowRewardVideo = false;
+    autoShowRewardVideo = false;
 
     bannerIsInitialized = false;
     bannerIsVisible = false;
 
     gender = nil;
     forChild = nil;
-	
-	isRewardedVideoLoading = false;
-	rewardedVideoLock = nil;
+
+    isRewardedVideoLoading = false;
+    rewardedVideoLock = nil;
 
     srand((unsigned int)time(NULL));
 }
@@ -292,10 +292,10 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
-- (void)createRewardVideoAd:(CDVInvokedUrlCommand *)command {
-    NSLog(@"createRewardVideoAd");
-	
-	CDVPluginResult *pluginResult;
+- (void)prepareRewardVideo:(CDVInvokedUrlCommand *)command {
+    NSLog(@"prepareRewardVideo");
+
+    CDVPluginResult *pluginResult;
     NSString *callbackId = command.callbackId;
     NSArray* args = command.arguments;
 
@@ -314,14 +314,14 @@
 }
 
 
-- (void)showRewardVideoAd:(CDVInvokedUrlCommand *)command {
-    NSLog(@"showRewardVideoAd");
-	
-	CDVPluginResult *pluginResult;
+- (void)showRewardVideo:(CDVInvokedUrlCommand *)command {
+    NSLog(@"showRewardVideo");
+
+    CDVPluginResult *pluginResult;
     NSString *callbackId = command.callbackId;
 
     if(! self.rewardVideoView) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"rewardVideoAd is null, call createRewardVideoAd first."];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"rewardVideoAd is null, call prepareRewardVideo first."];
 
     } else {
         [self __showRewardedVideo:YES];
@@ -335,25 +335,25 @@
 - (void) __cycleRewardVideo {
     NSLog(@"__cycleRewardVideo");
 
-	@synchronized(self.rewardedVideoLock) {
-		if (!self.isRewardedVideoLoading) {
-			self.isRewardedVideoLoading = true;
-			
-			// Clean up the old video...
-			if (self.rewardVideoView) {
-				self.rewardVideoView.delegate = nil;
-				self.rewardVideoView = nil;
-			}
-			
-			// and create a new video. We set the delegate so that we can be notified of when
-			if (!self.rewardVideoView){
-				self.rewardVideoView = [GADRewardBasedVideoAd sharedInstance];
-				self.rewardVideoView.delegate = self;
+    @synchronized(self.rewardedVideoLock) {
+        if (!self.isRewardedVideoLoading) {
+            self.isRewardedVideoLoading = true;
 
-				[self.rewardVideoView loadRequest:[GADRequest request] withAdUnitID:self.rewardVideoId];
-			}
-		}
-	}
+            // Clean up the old video...
+            if (self.rewardVideoView) {
+                self.rewardVideoView.delegate = nil;
+                self.rewardVideoView = nil;
+            }
+
+            // and create a new video. We set the delegate so that we can be notified of when
+            if (!self.rewardVideoView){
+                self.rewardVideoView = [GADRewardBasedVideoAd sharedInstance];
+                self.rewardVideoView.delegate = self;
+
+                [self.rewardVideoView loadRequest:[GADRequest request] withAdUnitID:self.rewardVideoId];
+            }
+        }
+    }
 }
 
 
@@ -418,8 +418,8 @@
     if (str && [str length] > 0) {
         interstitialAdId = str;
     }
-	
-	str = [options objectForKey:OPT_REWARD_VIDEO_ADID];
+
+    str = [options objectForKey:OPT_REWARD_VIDEO_ID];
     if (str && [str length] > 0) {
         rewardVideoId = str;
     }
@@ -754,17 +754,17 @@
 
 - (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd
    didRewardUserWithReward:(GADAdReward *)reward {
-   	NSString* obj = @"AdMob";
-	NSString* jsonData = [NSString stringWithFormat:@"{'adNetwork':'%@','adType':'rewardvideo','adEvent':'onRewardedVideo','rewardType':'%@','rewardAmount':%lf}", 
-						obj, reward.type, [reward.amount doubleValue]];
-	[self fireEvent:@"" event:@"onRewardedVideo" withData:jsonData];
+    NSString* obj = @"AdMob";
+    NSString* jsonData = [NSString stringWithFormat:@"{'adNetwork':'%@','adType':'rewardvideo','adEvent':'onRewardedVideo','rewardType':'%@','rewardAmount':%lf}", 
+                        obj, reward.type, [reward.amount doubleValue]];
+    [self fireEvent:@"" event:@"onRewardedVideo" withData:jsonData];
 }
 
 - (void)rewardBasedVideoAdDidReceiveAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-	@synchronized(self.rewardedVideoLock) {
-		self.isRewardedVideoLoading = false;
-	}
-	[self fireEvent:@"" event:@"onReceiveRewardVideoAd" withData:nil];
+    @synchronized(self.rewardedVideoLock) {
+        self.isRewardedVideoLoading = false;
+    }
+    [self fireEvent:@"" event:@"onReceiveRewardVideoAd" withData:nil];
     if (self.rewardVideoView){
         if(self.autoShowRewardVideo) {
             [self __showRewardedVideo:YES];
@@ -773,16 +773,16 @@
 }
 
 - (void)rewardBasedVideoAdDidOpen:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-	[self fireEvent:@"" event:@"onPresentRewardVideoAd" withData:nil];
+    [self fireEvent:@"" event:@"onPresentRewardVideoAd" withData:nil];
 }
 
 - (void)rewardBasedVideoAdDidStartPlaying:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-	[self fireEvent:@"" event:@"onPresentStartedRewardVideoAd" withData:nil];
+    [self fireEvent:@"" event:@"onPresentStartedRewardVideoAd" withData:nil];
 }
 
 - (void)rewardBasedVideoAdDidClose:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-	[self fireEvent:@"" event:@"onDismissRewardVideoAd" withData:nil];
-	if (self.rewardVideoView) {
+    [self fireEvent:@"" event:@"onDismissRewardVideoAd" withData:nil];
+    if (self.rewardVideoView) {
         self.rewardVideoView.delegate = nil;
         self.rewardVideoView = nil;
     }
@@ -795,10 +795,10 @@
 
 - (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd
     didFailToLoadWithError:(NSError *)error {
-	@synchronized(self.rewardedVideoLock) {
-		self.isRewardedVideoLoading = false;
-	}
-	NSString* jsonData = [NSString stringWithFormat:@"{ 'error': '%@', 'adType':'rewardvideo' }", [error localizedFailureReason]];
+    @synchronized(self.rewardedVideoLock) {
+        self.isRewardedVideoLoading = false;
+    }
+    NSString* jsonData = [NSString stringWithFormat:@"{ 'error': '%@', 'adType':'rewardvideo' }", [error localizedFailureReason]];
     [self fireEvent:@"" event:@"onFailedToReceiveAd" withData:jsonData];
 }
 
@@ -817,12 +817,12 @@
     bannerView_ = nil;
     interstitialView_.delegate = nil;
     interstitialView_ = nil;
-	rewardVideoView_.delegate = nil;
-	rewardVideoView_ =  nil;
+    rewardVideoView_.delegate = nil;
+    rewardVideoView_ =  nil;
 
     self.bannerView = nil;
     self.interstitialView = nil;
-	self.rewardVideoView = nil;
+    self.rewardVideoView = nil;
 }
 
 @end

@@ -49,13 +49,13 @@ if ( /(android)/i.test(navigator.userAgent) ) {  // for android & amazon-fireos
   admobid = {
     banner: 'ca-app-pub-xxx/xxx',
     interstitial: 'ca-app-pub-xxx/xxx',
-	rewardvideo: 'ca-app-pub-xxx/xxx',
+    rewardvideo: 'ca-app-pub-xxx/xxx',
   };
 } else {  // for ios
   admobid = {
     banner: 'ca-app-pub-xxx/xxx',
     interstitial: 'ca-app-pub-xxx/xxx',
-	rewardvideo: 'ca-app-pub-xxx/xxx',
+    rewardvideo: 'ca-app-pub-xxx/xxx',
   };
 }
 ```
@@ -111,12 +111,12 @@ AdMob.showInterstitial();
 
 ```javascript
 // prepare and load ad resource in background, e.g. at the beginning of game level
-AdMob.createRewardVideoAd({
+AdMob.prepareRewardVideo({
   rewardVideoId: admobid.rewardvideo,
 });
 
 // show the RewardVideo later, e.g. at end of game level
-AdMob.showRewardVideoAd();
+AdMob.showRewardVideo();
 ```
 
 
@@ -164,8 +164,8 @@ AdMob.requestInterstitialAd();
 AdMob.showInterstitialAd();
 
 // use rewardvideo
-AdMob.createRewardVideoAd();
-AdMob.showRewardVideoAd();
+AdMob.prepareRewardVideo();
+AdMob.showRewardVideo();
 ```
 
 Events:
@@ -182,7 +182,7 @@ document.addEventListener('onReceiveRewardVideoAd', function() {});
 document.addEventListener('onPresentRewardVideoAd', function() {});
 document.addEventListener('onPresentStartedRewardVideoAd', function() {});
 document.addEventListener('onDismissRewardVideoAd', function() {});
-document.addEventListener('onRewardedVideo', function(data) {}); 	// data.rewardType, data.rewardAmount 
+document.addEventListener('onRewardedVideo', function(data) {});     // data.rewardType, data.rewardAmount 
 ```
 
 ## Status
