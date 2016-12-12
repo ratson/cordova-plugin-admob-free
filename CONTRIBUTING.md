@@ -54,11 +54,37 @@ credit will always be given.
 
 Building the docs locally is extremely simple. First execute the following commands:
 
-```bash
+```sh
 npm run docs
 ```
 
 After this, you can open `gh-pages/index.html` in your browser.
+
+
+### Keeping Fork Updated
+
+Add git remote, call it `upstream`:
+
+```sh
+git remote add upstream https://github.com/ratson/cordova-plugin-admob-free.git
+```
+
+Each time you want to update, from your local `master` branch:
+
+```sh
+git fetch upstream
+git rebase upstream/master
+```
+
+If you've rebased your branch onto `upstream/master` you may need to
+force the push in order to push it to your own forked repository on GitHub.
+You'd do that with:
+
+```sh
+git push -f origin master
+```
+
+For more reference, read [ESLint's excellent one](http://eslint.org/docs/developer-guide/contributing/pull-requests#working-with-code).
 
 
 ## License
