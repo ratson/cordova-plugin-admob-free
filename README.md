@@ -49,11 +49,13 @@ if ( /(android)/i.test(navigator.userAgent) ) {  // for android & amazon-fireos
   admobid = {
     banner: 'ca-app-pub-xxx/xxx',
     interstitial: 'ca-app-pub-xxx/xxx',
+    rewardvideo: 'ca-app-pub-xxx/xxx',
   };
 } else {  // for ios
   admobid = {
     banner: 'ca-app-pub-xxx/xxx',
     interstitial: 'ca-app-pub-xxx/xxx',
+    rewardvideo: 'ca-app-pub-xxx/xxx',
   };
 }
 ```
@@ -64,6 +66,7 @@ if ( /(android)/i.test(navigator.userAgent) ) {  // for android & amazon-fireos
 AdMob.setOptions({
   publisherId: admobid.banner,
   interstitialAdId: admobid.interstitial,
+  rewardVideoId: admobid.rewardvideo,
   bannerAtTop: false,  // set to true, to put banner at top
   overlap: true,  // set to true, to allow banner overlap webview
   offsetTopBar: false,  // set to true to avoid ios7 status bar overlap
@@ -105,6 +108,20 @@ AdMob.prepareInterstitial({
 // show the interstitial later, e.g. at end of game level
 AdMob.showInterstitial();
 ```
+
+
+#### RewardVideo Ad
+
+```javascript
+// prepare and load ad resource in background, e.g. at the beginning of game level
+AdMob.prepareRewardVideo({
+  rewardVideoId: admobid.rewardvideo,
+});
+
+// show the RewardVideo later, e.g. at end of game level
+AdMob.showRewardVideo();
+```
+
 
 ### 5. Profit
 
@@ -148,6 +165,10 @@ AdMob.showInterstitial();
 AdMob.createInterstitialView();
 AdMob.requestInterstitialAd();
 AdMob.showInterstitialAd();
+
+// use rewardvideo
+AdMob.prepareRewardVideo();
+AdMob.showRewardVideo();
 ```
 
 Events:
@@ -160,6 +181,11 @@ document.addEventListener('onLeaveToAd', function() {});
 document.addEventListener('onReceiveInterstitialAd', function() {});
 document.addEventListener('onPresentInterstitialAd', function() {});
 document.addEventListener('onDismissInterstitialAd', function() {});
+document.addEventListener('onReceiveRewardVideoAd', function() {});
+document.addEventListener('onPresentRewardVideoAd', function() {});
+document.addEventListener('onPresentStartedRewardVideoAd', function() {});
+document.addEventListener('onDismissRewardVideoAd', function() {});
+document.addEventListener('onRewardedVideo', function(data) {});     // data.rewardType, data.rewardAmount 
 ```
 
 ## Status
