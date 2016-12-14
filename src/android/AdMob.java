@@ -1,6 +1,7 @@
 package name.ratson.cordova.admob;
 
 import android.os.Bundle;
+import android.os.TransactionTooLargeException;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -414,7 +415,12 @@ public class AdMob extends CordovaPlugin {
                         }
 
                         if (adView.getParent() == null) {
-                          adViewLayout.addView(adView, params2);
+                          try {
+                            adViewLayout.addView(adView, params2);
+                          } catch (Exception e) {
+                            callbackContext.error(e.getClass().getSimpleName() + ": " + adView.getAdUnitId());
+                            return;
+                          }
                           adViewLayout.bringToFront();
                         }
                     } else {
@@ -427,16 +433,26 @@ public class AdMob extends CordovaPlugin {
                             ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
                             parentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
                             getWebView().setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0F));
-                            parentView.addView(getWebView());
+                            try {
+                              parentView.addView(getWebView());
+                            } catch (Exception e) {
+                              callbackContext.error(e.getClass().getSimpleName() + ": " + adView.getAdUnitId());
+                              return;
+                            }
                             cordova.getActivity().setContentView(parentView);
                         }
 
 
                         if (adView.getParent() == null) {
-                          if (config.bannerAtTop) {
-                              parentView.addView(adView, 0);
-                          } else {
-                              parentView.addView(adView);
+                          try {
+                            if (config.bannerAtTop) {
+                                parentView.addView(adView, 0);
+                            } else {
+                                parentView.addView(adView);
+                            }
+                          } catch (Exception e) {
+                            callbackContext.error(e.getClass().getSimpleName() + ": " + adView.getAdUnitId());
+                            return;
                           }
                           parentView.bringToFront();
                           parentView.requestLayout();

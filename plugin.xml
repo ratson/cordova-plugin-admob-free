@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns:android="http://schemas.android.com/apk/res/android" id="huedawn-plugin-admob-free"
-    version="0.4.20" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+    version="0.4.31" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>Huedawn AdMob Plugin</name>
     <description>Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows
         phone. Allows preloading and automatic loading of interstitials and banners plus more.

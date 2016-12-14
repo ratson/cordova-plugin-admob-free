@@ -1,6 +1,6 @@
 {
   "name": "huedawn-plugin-admob-free",
-  "version": "0.4.20",
+  "version": "0.4.31",
   "description": "Robust, reliable and easy to use Cordova Admob plugin for Android, iOS and Windows\n        phone. Allows preloading and automatic loading of interstitials and banners plus more.\n    ",
   "cordova": {
     "id": "huedawn-plugin-admob-free",
