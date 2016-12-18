@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.common.ConnectionResult;
@@ -33,7 +32,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 
 import name.ratson.cordova.admob.banner.BannerListener;
-import name.ratson.cordova.admob.interstitial.InterstitialListener;
+import name.ratson.cordova.admob.interstitial.InterstitialExecutor;
 import name.ratson.cordova.admob.rewardvideo.RewardVideoListener;
 
 /**
@@ -62,10 +61,8 @@ public class AdMob extends CordovaPlugin {
      */
     private RelativeLayout adViewLayout = null;
 
-    /**
-     * The interstitial ad to display to the user.
-     */
-    private InterstitialAd interstitialAd;
+
+    private InterstitialExecutor interstitialExecutor = null;
 
     /**
      * RewardVideo
@@ -97,6 +94,10 @@ public class AdMob extends CordovaPlugin {
      */
     @Override
     public boolean execute(String action, JSONArray inputs, CallbackContext callbackContext) throws JSONException {
+        if (interstitialExecutor == null) {
+            interstitialExecutor = new InterstitialExecutor(this);
+        }
+
         PluginResult result = null;
 
         if (Actions.SET_OPTIONS.equals(action)) {
@@ -107,16 +108,8 @@ public class AdMob extends CordovaPlugin {
             JSONObject options = inputs.optJSONObject(0);
             result = executeCreateBannerView(options, callbackContext);
 
-        } else if (Actions.CREATE_INTERSTITIAL.equals(action)) {
-            JSONObject options = inputs.optJSONObject(0);
-            result = executeCreateInterstitialView(options, callbackContext);
-
         } else if (Actions.DESTROY_BANNER.equals(action)) {
             result = executeDestroyBannerView(callbackContext);
-
-        } else if (Actions.REQUEST_INTERSTITIAL.equals(action)) {
-            JSONObject options = inputs.optJSONObject(0);
-            result = executeRequestInterstitialAd(options, callbackContext);
 
         } else if (Actions.REQUEST_AD.equals(action)) {
             JSONObject options = inputs.optJSONObject(0);
@@ -126,9 +119,17 @@ public class AdMob extends CordovaPlugin {
             boolean show = inputs.optBoolean(0);
             result = executeShowAd(show, callbackContext);
 
+        } else if (Actions.CREATE_INTERSTITIAL.equals(action)) {
+            JSONObject options = inputs.optJSONObject(0);
+            result = interstitialExecutor.createAd(options, callbackContext);
+
+        } else if (Actions.REQUEST_INTERSTITIAL.equals(action)) {
+            JSONObject options = inputs.optJSONObject(0);
+            result = interstitialExecutor.requestAd(options, callbackContext);
+
         } else if (Actions.SHOW_INTERSTITIAL.equals(action)) {
             boolean show = inputs.optBoolean(0);
-            result = executeShowInterstitialAd(show, callbackContext);
+            result = interstitialExecutor.showAd(show, callbackContext);
 
         } else if (Actions.CREATE_REWARD_VIDEO.equals(action)) {
             JSONObject options = inputs.optJSONObject(0);            
@@ -160,7 +161,7 @@ public class AdMob extends CordovaPlugin {
     }
 
     /**
-     * Parses the create banner view input parameters and runs the create banner
+     * Parses the createAd banner view input parameters and runs the createAd banner
      * view action on the UI thread.  If this request is successful, the developer
      * should make the requestAd call to request an ad for the banner.
      *
@@ -224,44 +225,7 @@ public class AdMob extends CordovaPlugin {
         return null;
     }
 
-    /**
-     * Parses the create interstitial view input parameters and runs the create interstitial
-     * view action on the UI thread.  If this request is successful, the developer
-     * should make the requestAd call to request an ad for the banner.
-     *
-     * @param options The JSONArray representing input parameters.  This function
-     *                expects the first object in the array to be a JSONObject with the
-     *                input parameters.
-     * @return A PluginResult representing whether or not the banner was created
-     * successfully.
-     */
-    private PluginResult executeCreateInterstitialView(JSONObject options, CallbackContext callbackContext) {
-        config.setInterstitialOptions(options);
-
-        final CallbackContext delayCallback = callbackContext;
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                clearInterstitial();
-                interstitialAd = new InterstitialAd(cordova.getActivity());
-                interstitialAd.setAdUnitId(config.getInterstitialAdUnitId());
-                interstitialAd.setAdListener(new InterstitialListener(AdMob.this));
-                Log.w("interstitial", config.getInterstitialAdUnitId());
-                interstitialAd.loadAd(buildAdRequest());
-                delayCallback.success();
-            }
-        });
-        return null;
-    }
-
-    public void clearInterstitial() {
-        if (interstitialAd != null) {
-            interstitialAd.setAdListener(null);
-            interstitialAd = null;
-        }
-    }
-
-    private AdRequest buildAdRequest() {
+    public AdRequest buildAdRequest() {
         AdRequest.Builder builder = new AdRequest.Builder();
         if (config.isTesting) {
             builder = builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(getDeviceId());
@@ -342,27 +306,6 @@ public class AdMob extends CordovaPlugin {
             @Override
             public void run() {
                 adView.loadAd(buildAdRequest());
-
-                delayCallback.success();
-            }
-        });
-
-        return null;
-    }
-
-    private PluginResult executeRequestInterstitialAd(JSONObject options, CallbackContext callbackContext) {
-        config.setOptions(options);
-
-        if (adView == null) {
-            callbackContext.error("interstitialAd is null, call createInterstitialView first");
-            return null;
-        }
-
-        final CallbackContext delayCallback = callbackContext;
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                interstitialAd.loadAd(buildAdRequest());
 
                 delayCallback.success();
             }
@@ -459,34 +402,6 @@ public class AdMob extends CordovaPlugin {
         return null;
     }
 
-    public PluginResult executeShowInterstitialAd(final boolean show, final CallbackContext callbackContext) {
-
-        if (interstitialAd == null) {
-            return new PluginResult(Status.ERROR, "interstitialAd is null, call createInterstitialView first.");
-        }
-
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-                if (interstitialAd.isLoaded()) {
-                    interstitialAd.show();
-                    if (callbackContext != null) {
-                        callbackContext.success();
-                    }
-                } else if (!config.autoShowInterstitial) {
-                    if (callbackContext != null) {
-                        callbackContext.error("Interstital not ready yet");
-                    }
-                }
-
-            }
-        });
-
-        return null;
-    }
-
-
     private PluginResult executeCreateRewardVideo(JSONObject options, CallbackContext callbackContext) {
         config.setRewardVideoOptions(options);
 
@@ -572,7 +487,9 @@ public class AdMob extends CordovaPlugin {
     @Override
     public void onDestroy() {
         destroyAdView();
-        clearInterstitial();
+        if (interstitialExecutor != null) {
+            interstitialExecutor.clearAd();
+        }
         if (adViewLayout != null) {
             ViewGroup parentView = (ViewGroup) adViewLayout.getParent();
             if (parentView != null) {
