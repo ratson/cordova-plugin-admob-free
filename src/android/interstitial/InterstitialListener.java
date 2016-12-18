@@ -5,9 +5,12 @@ import android.util.Log;
 import name.ratson.cordova.admob.AdMob;
 import name.ratson.cordova.admob.AbstractAdListener;
 
-public class InterstitialListener extends AbstractAdListener {
-    public InterstitialListener(AdMob adMob) {
+class InterstitialListener extends AbstractAdListener {
+    private final InterstitialExecutor interstitialExecutor;
+
+    InterstitialListener(AdMob adMob, InterstitialExecutor interstitialExecutor) {
         super(adMob);
+        this.interstitialExecutor = interstitialExecutor;
     }
 
     @Override
@@ -21,7 +24,7 @@ public class InterstitialListener extends AbstractAdListener {
         this.fireAdEvent("onReceiveInterstitialAd");
 
         if (this.adMob.config.autoShowInterstitial) {
-            this.adMob.executeShowInterstitialAd(true, null);
+            interstitialExecutor.showAd(true, null);
         }
     }
 
@@ -33,6 +36,6 @@ public class InterstitialListener extends AbstractAdListener {
     @Override
     public void onAdClosed() {
         this.fireAdEvent("onDismissInterstitialAd");
-        this.adMob.clearInterstitial();
+        interstitialExecutor.clearAd();
     }
 }
