@@ -92,40 +92,21 @@ export function setOptions(options, successCallback, failureCallback) {
   }
 }
 
-export function createBannerView(options = {}, successCallback, failureCallback) {
+export function prepareBanner(options = {}, successCallback, failureCallback) {
   exec(successCallback, failureCallback, 'AdMob', 'createBannerView', [translateOptions(options)])
 }
 
-export function createInterstitialView(options, successCallback, failureCallback) {
-  exec(successCallback, failureCallback, 'AdMob', 'createInterstitialView', [translateOptions(options)])
-}
-
-export function destroyBannerView(options = {}, successCallback, failureCallback) {
+export function removeBanner(successCallback, failureCallback) {
   exec(successCallback, failureCallback, 'AdMob', 'destroyBannerView', [])
 }
 
-export function requestInterstitialAd(options = {}, successCallback, failureCallback) {
-  exec(successCallback, failureCallback, 'AdMob', 'requestInterstitialAd', [translateOptions(options)])
+export function showBanner(successCallback, failureCallback) {
+  exec(successCallback, failureCallback, 'AdMob', 'showAd', [true])
 }
 
-export function showAd(show = true, successCallback, failureCallback) {
-  exec(successCallback, failureCallback, 'AdMob', 'showAd', [show])
+export function hideBanner(successCallback, failureCallback) {
+  exec(successCallback, failureCallback, 'AdMob', 'showAd', [false])
 }
-
-export function showInterstitialAd(show = true, successCallback, failureCallback) {
-  exec(successCallback, failureCallback, 'AdMob', 'showInterstitialAd', [show])
-}
-
-
-export function prepareRewardVideo(options, successCallback, failureCallback) {
-  cordova.exec(successCallback, failureCallback, 'AdMob', 'createRewardVideo', [translateOptions(options)])
-}
-
-export function showRewardVideo(show = true, successCallback, failureCallback) {
-  cordova.exec(successCallback, failureCallback, 'AdMob', 'showRewardVideo', [show])
-}
-
-// emulate cordova-admob-pro interface
 
 export function prepareInterstitial(args, successCallback, failureCallback) {
   createInterstitialView(args, successCallback, failureCallback)
@@ -133,5 +114,45 @@ export function prepareInterstitial(args, successCallback, failureCallback) {
 }
 
 export function showInterstitial(successCallback, failureCallback) {
-  showInterstitialAd(true, successCallback, failureCallback)
+  exec(successCallback, failureCallback, 'AdMob', 'showInterstitialAd', [true])
+}
+
+export function prepareRewardVideo(options, successCallback, failureCallback) {
+  exec(successCallback, failureCallback, 'AdMob', 'createRewardVideo', [translateOptions(options)])
+}
+
+export function showRewardVideo(successCallback, failureCallback) {
+  exec(successCallback, failureCallback, 'AdMob', 'showRewardVideo', [true])
+}
+
+// Old APIs
+
+export const createBannerView = (...args) => {
+  console.warn('Use prepareBanner() instead.')
+  prepareBanner(...args)
+}
+
+export function destroyBannerView(options = {}, successCallback, failureCallback) {
+  console.warn('Use removeBanner() instead.')
+  removeBanner(successCallback, failureCallback)
+}
+
+export function createInterstitialView(options, successCallback, failureCallback) {
+  console.warn('Use prepareInterstitial() instead, it will do both createInterstitialView() and requestInterstitialAd().')
+  exec(successCallback, failureCallback, 'AdMob', 'createInterstitialView', [translateOptions(options)])
+}
+
+export function requestInterstitialAd(options = {}, successCallback, failureCallback) {
+  console.warn('Use prepareInterstitial() instead, it will do both createInterstitialView() and requestInterstitialAd().')
+  exec(successCallback, failureCallback, 'AdMob', 'requestInterstitialAd', [translateOptions(options)])
+}
+
+export function showAd(show = true, successCallback, failureCallback) {
+  console.warn('Use showBanner() and hideBanner() instead.')
+  exec(successCallback, failureCallback, 'AdMob', 'showAd', [show])
+}
+
+export function showInterstitialAd(show = true, successCallback, failureCallback) {
+  console.warn('Use showInterstitial() instead.')
+  exec(successCallback, failureCallback, 'AdMob', 'showInterstitialAd', [show])
 }
