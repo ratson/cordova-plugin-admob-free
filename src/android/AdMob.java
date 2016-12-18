@@ -32,9 +32,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 
-import name.ratson.cordova.admob.adlistener.BannerListener;
-import name.ratson.cordova.admob.adlistener.InterstitialListener;
-import name.ratson.cordova.admob.adlistener.RewardedVideoListener;
+import name.ratson.cordova.admob.banner.BannerListener;
+import name.ratson.cordova.admob.interstitial.InterstitialListener;
+import name.ratson.cordova.admob.rewardvideo.RewardVideoListener;
 
 /**
  * This class represents the native implementation for the AdMob Cordova plugin.
@@ -497,7 +497,7 @@ public class AdMob extends CordovaPlugin {
                 clearRewardedVideo();
 
                 rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(cordova.getActivity());
-                rewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoListener(AdMob.this));
+                rewardedVideoAd.setRewardedVideoAdListener(new RewardVideoListener(AdMob.this));
                 Log.w("rewardedvideo", config.getRewardedVideoAdUnitId());
 
                 synchronized (rewardedVideoLock) {
@@ -535,7 +535,7 @@ public class AdMob extends CordovaPlugin {
             public void run() {
 
                 if(rewardedVideoAd instanceof RewardedVideoAd) {
-                    RewardedVideoAd rvad = (RewardedVideoAd) rewardedVideoAd;
+                    RewardedVideoAd rvad = rewardedVideoAd;
                     if(rvad.isLoaded()){
                         rvad.show();
                     }

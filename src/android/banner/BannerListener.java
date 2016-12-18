@@ -1,16 +1,17 @@
-package name.ratson.cordova.admob.adlistener;
+package name.ratson.cordova.admob.banner;
 
 import android.util.Log;
 
 import name.ratson.cordova.admob.AdMob;
+import name.ratson.cordova.admob.AbstractAdListener;
 
-public class BannerListener extends BaseAdListener {
+public class BannerListener extends AbstractAdListener {
     public BannerListener(AdMob adMob) {
         super(adMob);
     }
 
     @Override
-    String getAdType() {
+    public String getAdType() {
         return "banner";
     }
 

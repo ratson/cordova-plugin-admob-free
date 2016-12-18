@@ -1,16 +1,17 @@
-package name.ratson.cordova.admob.adlistener;
+package name.ratson.cordova.admob.interstitial;
 
 import android.util.Log;
 
 import name.ratson.cordova.admob.AdMob;
+import name.ratson.cordova.admob.AbstractAdListener;
 
-public class InterstitialListener extends BaseAdListener {
+public class InterstitialListener extends AbstractAdListener {
     public InterstitialListener(AdMob adMob) {
         super(adMob);
     }
 
     @Override
-    String getAdType() {
+    public String getAdType() {
         return "interstitial";
     }
 

@@ -1,4 +1,4 @@
-package name.ratson.cordova.admob.adlistener;
+package name.ratson.cordova.admob;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -19,14 +19,14 @@ import name.ratson.cordova.admob.CordovaEventBuilder;
  * document.addEventListener('onDismissAd', function());
  * document.addEventListener('onLeaveToAd', function());
  */
-public abstract class BaseAdListener extends AdListener {
+public abstract class AbstractAdListener extends AdListener {
     protected AdMob adMob;
 
-    public BaseAdListener(AdMob adMob) {
+    public AbstractAdListener(AdMob adMob) {
         this.adMob = adMob;
     }
 
-    abstract String getAdType();
+    public abstract String getAdType();
 
     protected void fireAdEvent(String eventName) {
         String js = new CordovaEventBuilder(eventName).build();
