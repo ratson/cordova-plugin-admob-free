@@ -1,4 +1,4 @@
-package name.ratson.cordova.admob.adlistener;
+package name.ratson.cordova.admob.rewardvideo;
 
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
@@ -9,14 +9,15 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import name.ratson.cordova.admob.AdMob;
+import name.ratson.cordova.admob.AbstractAdListener;
 
-public class RewardedVideoListener extends BaseAdListener implements RewardedVideoAdListener {
-    public RewardedVideoListener(AdMob adMob) {
+public class RewardVideoListener extends AbstractAdListener implements RewardedVideoAdListener {
+    public RewardVideoListener(AdMob adMob) {
         super(adMob);
     }
 
     @Override
-    String getAdType() {
+    public String getAdType() {
         return "rewardvideo";
     }
 
