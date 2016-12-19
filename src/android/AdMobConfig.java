@@ -12,10 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdMobConfig {
-    private static final String TEST_BANNER_ID = "ca-app-pub-3940256099942544/6300978111";
-    private static final String TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712";
-    private static final String  TEST_REWARDED_VIDEO_ID = "ca-app-pub-3940256099942544/1033173712";
-
     /* options */
     private static final String OPT_PUBLISHER_ID = "publisherId";
     private static final String OPT_INTERSTITIAL_AD_ID = "interstitialAdId";
@@ -59,7 +55,8 @@ public class AdMobConfig {
 
     public Location location = null;
 
-    // banner
+    // Banner
+    private static final String TEST_BANNER_ID = "ca-app-pub-3940256099942544/6300978111";
     private String bannerAdUnitId = "";
     public AdSize adSize = AdSize.SMART_BANNER;
     /**
@@ -72,10 +69,12 @@ public class AdMobConfig {
     public boolean bannerOverlap = false;
     public boolean offsetTopBar = false;
 
-    // interstial
+    // Interstial
+    private static final String TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712";
     private String interstitialAdUnitId = "";
 
-    // RewardVideo
+    // Reward Video
+    private static final String TEST_REWARDED_VIDEO_ID = "ca-app-pub-3940256099942544/1033173712";
     private String rewardVideoId = "";
 
 
@@ -218,7 +217,7 @@ public class AdMobConfig {
     }
 
     public String getBannerAdUnitId() {
-        if (bannerAdUnitId.length() == 0 || bannerAdUnitId.indexOf("xxxx") > 0) {
+        if (isEmptyAdUnitId(bannerAdUnitId)) {
             // in case the user does not enter their own publisher id
             Log.e("banner", "Please put your AdMob id into the javascript code. Test ad is used.");
             return TEST_BANNER_ID;
@@ -227,7 +226,7 @@ public class AdMobConfig {
     }
 
     public String getInterstitialAdUnitId() {
-        if (interstitialAdUnitId.length() == 0 || interstitialAdUnitId.indexOf("xxxx") > 0) {
+        if (isEmptyAdUnitId(interstitialAdUnitId)) {
             // in case the user does not enter their own publisher id
             Log.e("interstitial", "Please put your AdMob id into the javascript code. Test ad is used.");
             return TEST_INTERSTITIAL_ID;
@@ -236,11 +235,15 @@ public class AdMobConfig {
     }
 
     public String getRewardedVideoAdUnitId() {
-        if (rewardVideoId.length() == 0 || rewardVideoId.indexOf("xxxx") > 0) {
+        if (isEmptyAdUnitId(rewardVideoId)) {
             // in case the user does not enter their own publisher id
             Log.e("rewardedvideo", "Please put your AdMob id into the javascript code. Test ad is used.");
             return TEST_REWARDED_VIDEO_ID;
         }
         return rewardVideoId;
+    }
+
+    private static boolean isEmptyAdUnitId(String adId) {
+        return adId.length() == 0 || adId.indexOf("xxxx") > 0;
     }
 }

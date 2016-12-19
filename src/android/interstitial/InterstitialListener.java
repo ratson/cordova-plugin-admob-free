@@ -2,40 +2,66 @@ package name.ratson.cordova.admob.interstitial;
 
 import android.util.Log;
 
-import name.ratson.cordova.admob.AdMob;
-import name.ratson.cordova.admob.AbstractAdListener;
+import com.google.android.gms.ads.AdListener;
 
-class InterstitialListener extends AbstractAdListener {
-    private final InterstitialExecutor interstitialExecutor;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    InterstitialListener(AdMob adMob, InterstitialExecutor interstitialExecutor) {
-        super(adMob);
-        this.interstitialExecutor = interstitialExecutor;
+import name.ratson.cordova.admob.AbstractExecutor;
+
+class InterstitialListener extends AdListener {
+    private final InterstitialExecutor executor;
+
+    InterstitialListener(InterstitialExecutor executor) {
+        this.executor = executor;
     }
 
     @Override
-    public String getAdType() {
-        return "interstitial";
+    public void onAdFailedToLoad(int errorCode) {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("error", errorCode);
+            data.put("reason", AbstractExecutor.getErrorReason(errorCode));
+            data.put("adType", executor.getAdType());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            executor.fireAdEvent("onFailedToReceiveAd");
+            return;
+        }
+        executor.fireAdEvent("onFailedToReceiveAd", data);
+    }
+
+    @Override
+    public void onAdLeftApplication() {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("adType", executor.getAdType());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            executor.fireAdEvent("onLeaveToAd");
+            return;
+        }
+        executor.fireAdEvent("onLeaveToAd", data);
     }
 
     @Override
     public void onAdLoaded() {
         Log.w("AdMob", "InterstitialAdLoaded");
-        this.fireAdEvent("onReceiveInterstitialAd");
+        executor.fireAdEvent("onReceiveInterstitialAd");
 
-        if (this.adMob.config.autoShowInterstitial) {
-            interstitialExecutor.showAd(true, null);
+        if (executor.shouldAutoShow()) {
+            executor.showAd(true, null);
         }
     }
 
     @Override
     public void onAdOpened() {
-        this.fireAdEvent("onPresentInterstitialAd");
+        executor.fireAdEvent("onPresentInterstitialAd");
     }
 
     @Override
     public void onAdClosed() {
-        this.fireAdEvent("onDismissInterstitialAd");
-        interstitialExecutor.destroy();
+        executor.fireAdEvent("onDismissInterstitialAd");
+        executor.destroy();
     }
 }

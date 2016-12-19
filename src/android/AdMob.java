@@ -67,13 +67,13 @@ public class AdMob extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray inputs, CallbackContext callbackContext) throws JSONException {
         if (bannerExecutor == null) {
-            bannerExecutor = new BannerExecutor(this, config);
+            bannerExecutor = new BannerExecutor(this);
         }
         if (interstitialExecutor == null) {
             interstitialExecutor = new InterstitialExecutor(this);
         }
         if (rewardVideoExecutor == null) {
-            rewardVideoExecutor = new RewardVideoExecutor(this, config);
+            rewardVideoExecutor = new RewardVideoExecutor(this);
         }
 
         PluginResult result = null;
@@ -110,13 +110,13 @@ public class AdMob extends CordovaPlugin {
             result = interstitialExecutor.showAd(show, callbackContext);
 
         } else if (Actions.CREATE_REWARD_VIDEO.equals(action)) {
-            JSONObject options = inputs.optJSONObject(0);            
+            JSONObject options = inputs.optJSONObject(0);
             result = rewardVideoExecutor.prepareAd(options, callbackContext);
 
         } else if (Actions.SHOW_REWARD_VIDEO.equals(action)) {
             boolean show = inputs.optBoolean(0);
             result = rewardVideoExecutor.showAd(show, callbackContext);
-        
+
         } else {
             Log.d(TAG, String.format("Invalid action passed: %s", action));
             result = new PluginResult(Status.INVALID_ACTION);

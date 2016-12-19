@@ -9,19 +9,23 @@ import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.PluginResult;
 import org.json.JSONObject;
 
+import name.ratson.cordova.admob.AbstractExecutor;
 import name.ratson.cordova.admob.AdMob;
 import name.ratson.cordova.admob.AdMobConfig;
 
-public class InterstitialExecutor {
-    private final AdMob adMob;
-
+public class InterstitialExecutor extends AbstractExecutor {
     /**
      * The interstitial ad to display to the user.
      */
     private InterstitialAd interstitialAd;
 
-    public InterstitialExecutor(AdMob adMob) {
-        this.adMob = adMob;
+    public InterstitialExecutor(AdMob plugin) {
+        super(plugin);
+    }
+
+    @Override
+    public String getAdType() {
+        return "interstitial";
     }
 
     /**
@@ -36,8 +40,8 @@ public class InterstitialExecutor {
      * successfully.
      */
     public PluginResult createAd(JSONObject options, CallbackContext callbackContext) {
-        AdMobConfig config = adMob.config;
-        CordovaInterface cordova = adMob.cordova;
+        AdMobConfig config = plugin.config;
+        CordovaInterface cordova = plugin.cordova;
 
         config.setInterstitialOptions(options);
 
@@ -45,15 +49,15 @@ public class InterstitialExecutor {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                AdMobConfig config = adMob.config;
-                CordovaInterface cordova = adMob.cordova;
+                AdMobConfig config = plugin.config;
+                CordovaInterface cordova = plugin.cordova;
 
                 destroy();
                 interstitialAd = new InterstitialAd(cordova.getActivity());
                 interstitialAd.setAdUnitId(config.getInterstitialAdUnitId());
-                interstitialAd.setAdListener(new InterstitialListener(adMob, InterstitialExecutor.this));
+                interstitialAd.setAdListener(new InterstitialListener(InterstitialExecutor.this));
                 Log.w("interstitial", config.getInterstitialAdUnitId());
-                interstitialAd.loadAd(adMob.buildAdRequest());
+                interstitialAd.loadAd(plugin.buildAdRequest());
                 delayCallback.success();
             }
         });
@@ -68,8 +72,8 @@ public class InterstitialExecutor {
     }
 
     public PluginResult requestAd(JSONObject options, CallbackContext callbackContext) {
-        AdMobConfig config = adMob.config;
-        CordovaInterface cordova = adMob.cordova;
+        AdMobConfig config = plugin.config;
+        CordovaInterface cordova = plugin.cordova;
 
         config.setOptions(options);
 
@@ -82,7 +86,7 @@ public class InterstitialExecutor {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                interstitialAd.loadAd(adMob.buildAdRequest());
+                interstitialAd.loadAd(plugin.buildAdRequest());
 
                 delayCallback.success();
             }
@@ -95,12 +99,12 @@ public class InterstitialExecutor {
         if (interstitialAd == null) {
             return new PluginResult(PluginResult.Status.ERROR, "interstitialAd is null, call createInterstitialView first.");
         }
-        CordovaInterface cordova = adMob.cordova;
+        CordovaInterface cordova = plugin.cordova;
 
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                AdMobConfig config = adMob.config;
+                AdMobConfig config = plugin.config;
 
                 if (interstitialAd.isLoaded()) {
                     interstitialAd.show();
@@ -116,5 +120,9 @@ public class InterstitialExecutor {
         });
 
         return null;
+    }
+
+    boolean shouldAutoShow() {
+        return plugin.config.autoShowInterstitial;
     }
 }
