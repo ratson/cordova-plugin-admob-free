@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production babel src/js --out-dir www",
     "docs": "esdoc -c esdoc.json",
     "docs:commit": "cd gh-pages && git add -A . && git commit -a -m 'Update page'",
-    "example:clean": "cd example && cordova clean android",
+    "example:clean": "rimraf example/plugins example/platforms",
     "example:prepare": "cd example && cordova prepare android",
     "example:link": "cd example && cordova plugin add .. --link",
     "example:build": "cd example && cordova build android",
