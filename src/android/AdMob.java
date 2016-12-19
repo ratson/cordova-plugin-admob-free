@@ -7,8 +7,6 @@ import android.util.Log;
 
 import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
@@ -28,7 +26,7 @@ import java.util.Iterator;
 
 import name.ratson.cordova.admob.banner.BannerExecutor;
 import name.ratson.cordova.admob.interstitial.InterstitialExecutor;
-import name.ratson.cordova.admob.rewardvideo.RewardVideoListener;
+import name.ratson.cordova.admob.rewardvideo.RewardVideoExecutor;
 
 /**
  * This class represents the native implementation for the AdMob Cordova plugin.
@@ -45,14 +43,7 @@ public class AdMob extends CordovaPlugin {
 
     private BannerExecutor bannerExecutor = null;
     private InterstitialExecutor interstitialExecutor = null;
-
-    /**
-     * RewardVideo
-     */
-    private RewardedVideoAd rewardedVideoAd;
-    public boolean isRewardedVideoLoading = false;
-    public final Object rewardedVideoLock = new Object();
-
+    private RewardVideoExecutor rewardVideoExecutor = null;
 
     private boolean isGpsAvailable = false;
 
@@ -80,6 +71,9 @@ public class AdMob extends CordovaPlugin {
         }
         if (interstitialExecutor == null) {
             interstitialExecutor = new InterstitialExecutor(this);
+        }
+        if (rewardVideoExecutor == null) {
+            rewardVideoExecutor = new RewardVideoExecutor(this, config);
         }
 
         PluginResult result = null;
@@ -117,11 +111,11 @@ public class AdMob extends CordovaPlugin {
 
         } else if (Actions.CREATE_REWARD_VIDEO.equals(action)) {
             JSONObject options = inputs.optJSONObject(0);            
-            result = executeCreateRewardVideo(options, callbackContext);
+            result = rewardVideoExecutor.prepareAd(options, callbackContext);
 
         } else if (Actions.SHOW_REWARD_VIDEO.equals(action)) {
             boolean show = inputs.optBoolean(0);
-            result = executeShowRewardVideo(show, callbackContext);
+            result = rewardVideoExecutor.showAd(show, callbackContext);
         
         } else {
             Log.d(TAG, String.format("Invalid action passed: %s", action));
@@ -201,70 +195,6 @@ public class AdMob extends CordovaPlugin {
         return builder.build();
     }
 
-    private PluginResult executeCreateRewardVideo(JSONObject options, CallbackContext callbackContext) {
-        config.setRewardVideoOptions(options);
-
-        final CallbackContext delayCallback = callbackContext;
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                clearRewardedVideo();
-
-                rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(cordova.getActivity());
-                rewardedVideoAd.setRewardedVideoAdListener(new RewardVideoListener(AdMob.this));
-                Log.w("rewardedvideo", config.getRewardedVideoAdUnitId());
-
-                synchronized (rewardedVideoLock) {
-                    if (!isRewardedVideoLoading) {
-                        isRewardedVideoLoading = true;
-                        Bundle extras = new Bundle();
-                        extras.putBoolean("_noRefresh", true);
-                        AdRequest adRequest = new AdRequest.Builder()
-                                .addNetworkExtrasBundle(AdMobAdapter.class, extras)
-                                .build();
-                        rewardedVideoAd.loadAd(config.getRewardedVideoAdUnitId(), adRequest);
-                        delayCallback.success();
-                    }
-                }                
-            }
-        });
-        return null;       
-    }
-
-    public void clearRewardedVideo() {
-        if (rewardedVideoAd == null) {
-            return;
-        }
-        rewardedVideoAd.setRewardedVideoAdListener(null);
-        rewardedVideoAd = null;
-    }
-
-    public PluginResult executeShowRewardVideo(final boolean show, final CallbackContext callbackContext) {
-        if (rewardedVideoAd == null) {
-            return new PluginResult(Status.ERROR, "rewardedVideoAd is null, call createRewardVideo first.");
-        }
-
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-                if(rewardedVideoAd instanceof RewardedVideoAd) {
-                    RewardedVideoAd rvad = rewardedVideoAd;
-                    if(rvad.isLoaded()){
-                        rvad.show();
-                    }
-                }
-
-                if (callbackContext != null) {
-                    callbackContext.success();
-                }
-            }
-        });
-
-        return null;
-    }
-
-
 
     @Override
     public void onPause(boolean multitasking) {
@@ -292,6 +222,10 @@ public class AdMob extends CordovaPlugin {
         if (interstitialExecutor != null) {
             interstitialExecutor.destroy();
             interstitialExecutor = null;
+        }
+        if (rewardVideoExecutor != null) {
+            rewardVideoExecutor.destroy();
+            rewardVideoExecutor = null;
         }
         super.onDestroy();
     }
