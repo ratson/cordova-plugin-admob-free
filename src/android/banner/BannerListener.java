@@ -5,9 +5,12 @@ import android.util.Log;
 import name.ratson.cordova.admob.AdMob;
 import name.ratson.cordova.admob.AbstractAdListener;
 
-public class BannerListener extends AbstractAdListener {
-    public BannerListener(AdMob adMob) {
-        super(adMob);
+class BannerListener extends AbstractAdListener {
+    private final BannerExecutor bannerExecutor;
+
+    BannerListener(AdMob plugin, BannerExecutor bannerExecutor) {
+        super(plugin);
+        this.bannerExecutor = bannerExecutor;
     }
 
     @Override
@@ -18,8 +21,8 @@ public class BannerListener extends AbstractAdListener {
     @Override
     public void onAdLoaded() {
         Log.w("AdMob", "BannerAdLoaded");
-        if (this.adMob.config.autoShowBanner && !this.adMob.bannerVisible) {
-            this.adMob.executeShowAd(true, null);
+        if (this.bannerExecutor.config.autoShowBanner && !this.bannerExecutor.bannerVisible) {
+            this.bannerExecutor.showAd(true, null);
         }
         super.fireAdEvent("onReceiveAd");
     }

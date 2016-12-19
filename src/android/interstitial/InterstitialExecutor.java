@@ -48,7 +48,7 @@ public class InterstitialExecutor {
                 AdMobConfig config = adMob.config;
                 CordovaInterface cordova = adMob.cordova;
 
-                clearAd();
+                destroy();
                 interstitialAd = new InterstitialAd(cordova.getActivity());
                 interstitialAd.setAdUnitId(config.getInterstitialAdUnitId());
                 interstitialAd.setAdListener(new InterstitialListener(adMob, InterstitialExecutor.this));
@@ -60,7 +60,7 @@ public class InterstitialExecutor {
         return null;
     }
 
-    public void clearAd() {
+    public void destroy() {
         if (interstitialAd != null) {
             interstitialAd.setAdListener(null);
             interstitialAd = null;

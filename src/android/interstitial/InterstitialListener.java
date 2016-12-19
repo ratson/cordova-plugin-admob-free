@@ -36,6 +36,6 @@ class InterstitialListener extends AbstractAdListener {
     @Override
     public void onAdClosed() {
         this.fireAdEvent("onDismissInterstitialAd");
-        interstitialExecutor.clearAd();
+        interstitialExecutor.destroy();
     }
 }
