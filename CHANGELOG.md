@@ -1,3 +1,34 @@
+## Next
+
+Introduce whole new set of API, which focus on consistency and
+conciseness. All old API should just work as before, but emit warnings,
+it is strongly recommended to migrate to new API and give feedback.
+
+### New API
+
+* `window.admob` is introduced to replace `window.AdMob` and `window.plugins.AdMob`. Developer should no longer need to worry about missed upper-case causing `Admob is not defined` error.
+
+* `prepareBanner()` is replacing `createBannerView()`.
+
+* `showBanner()` and `hideBanner()` are replacing `showAd()`.
+
+* `removeBanner()` is replacing `destroyBannerView()`.
+
+* `showInterstitial()` is replacing `showInterstitialAd()`
+
+### Breaking
+
+* Update Google AdMob SDK for iOS to v7.16.0.
+
+### Fixed
+
+* `prepareInterstitial()` is now implemented natively, should fix some race condition bugs.
+
+### Added
+
+* Support Rewarded Video
+
+
 ## 0.5.1 (2016-12-08)
 
 ### Fixed

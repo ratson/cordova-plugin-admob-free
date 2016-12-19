@@ -20,6 +20,7 @@
 
     <js-module name="AdMob" src="www/AdMob.js">
         <clobbers target="admob" />
+        <!-- the following export will be removed in future -->
         <clobbers target="AdMob" />
         <clobbers target="plugins.AdMob" />
     </js-module>

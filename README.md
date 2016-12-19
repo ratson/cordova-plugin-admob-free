@@ -43,9 +43,9 @@ Go to [AdMob portal](https://www.google.com/admob/), click "Monetize a new app" 
 
 ### 2. Define configuration for different platforms.
 
-```javascript
+```js
 var admobid = {};
-if ( /(android)/i.test(navigator.userAgent) ) {  // for android & amazon-fireos
+if ( /(android)/i.test(navigator.userAgent) ) {  // for android
   admobid = {
     banner: 'ca-app-pub-xxx/xxx',
     interstitial: 'ca-app-pub-xxx/xxx',
@@ -62,8 +62,8 @@ if ( /(android)/i.test(navigator.userAgent) ) {  // for android & amazon-fireos
 
 ### 3. Set options
 
-```javascript
-AdMob.setOptions({
+```js
+admob.setOptions({
   publisherId: admobid.banner,
   interstitialAdId: admobid.interstitial,
   rewardVideoId: admobid.rewardvideo,
@@ -72,54 +72,55 @@ AdMob.setOptions({
   offsetTopBar: false,  // set to true to avoid ios7 status bar overlap
   isTesting: false,  // receiving test ad
   autoShow: false  // auto show interstitial ad when loaded
-});
+})
 ```
 
-Note that `AdMob` is not defined until `deviceready` event is triggered.
+Note that `admob` is not defined until `deviceready` event is triggered.
+
+Make sure `<script src="cordova.js"></script>` is in your HTML, otherwise `deviceready` event won't be triggered.
 
 
 ### 4. Display advertisements
 
 #### Banner Ad
 
-```javascript
+```js
 // Create banner
-AdMob.createBannerView();
-
-// Close the banner
-AdMob.destroyBannerView();
-
-// Hide the banner
-AdMob.showAd(false);
+admob.prepareBanner()
 
 // Show the banner
-AdMob.showAd(true);
+admob.showBanner()
+
+// Hide the banner
+admob.hideBanner()
+
+// Close the banner
+admob.removeBanner()
 ```
 
 #### Interstitial Ad
 
-```javascript
+```js
 // prepare and load ad resource in background, e.g. at the beginning of game level
-AdMob.prepareInterstitial({
+admob.prepareInterstitial({
   interstitialId: admobid.interstitial,
-  autoShow: false
-});
+  autoShow: false,
+})
 
 // show the interstitial later, e.g. at end of game level
-AdMob.showInterstitial();
+admob.showInterstitial()
 ```
 
+#### Reward Video Ad
 
-#### RewardVideo Ad
-
-```javascript
+```js
 // prepare and load ad resource in background, e.g. at the beginning of game level
-AdMob.prepareRewardVideo({
+admob.prepareRewardVideo({
   rewardVideoId: admobid.rewardvideo,
-});
+})
 
 // show the RewardVideo later, e.g. at end of game level
-AdMob.showRewardVideo();
+admob.showRewardVideo()
 ```
 
 
@@ -146,33 +147,10 @@ iOS Banner                                      |  iOS Interstitial
 
 ## API
 
-For more details, refer to [documentation page](https://ratson.github.io/cordova-plugin-admob-free/).
+See [documentation page](https://ratson.github.io/cordova-plugin-admob-free/).
 
-Methods:
-```javascript
-// set default value for other methods
-AdMob.setOptions(options, success, fail);
-
-// use banner
-AdMob.createBannerView();
-AdMob.destroyBannerView();
-AdMob.showAd();
-
-// use interstitial
-AdMob.prepareInterstitial(options, success, fail);
-AdMob.showInterstitial();
-// low-level methods
-AdMob.createInterstitialView();
-AdMob.requestInterstitialAd();
-AdMob.showInterstitialAd();
-
-// use rewardvideo
-AdMob.prepareRewardVideo();
-AdMob.showRewardVideo();
-```
-
-Events:
-```javascript
+### Events
+```js
 document.addEventListener('onReceiveAd', function() {});
 document.addEventListener('onFailedToReceiveAd', function(data) {});
 document.addEventListener('onPresentAd', function() {});
@@ -185,7 +163,7 @@ document.addEventListener('onReceiveRewardVideoAd', function() {});
 document.addEventListener('onPresentRewardVideoAd', function() {});
 document.addEventListener('onPresentStartedRewardVideoAd', function() {});
 document.addEventListener('onDismissRewardVideoAd', function() {});
-document.addEventListener('onRewardedVideo', function(data) {});     // data.rewardType, data.rewardAmount 
+document.addEventListener('onRewardedVideo', function(data) {});     // data.rewardType, data.rewardAmount
 ```
 
 ## Status
@@ -194,7 +172,7 @@ This plugin is forked from [cordova-plugin-admob-simple](https://github.com/sunn
 
 The code for Android has almost all rewritten to be more maintainable, plus some extra features.
 
-For iOS, while it is working, I have less interest in writing Objective-C code these days. If someone is will to help, feel free to send a pull request, I will review it.
+For iOS, while it is working, I have less interest in writing Objective-C code these days. If someone is willing to help, feel free to send a pull request, I will review it.
 
 ## Contributing
 
