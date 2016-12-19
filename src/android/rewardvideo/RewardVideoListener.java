@@ -12,8 +12,11 @@ import name.ratson.cordova.admob.AdMob;
 import name.ratson.cordova.admob.AbstractAdListener;
 
 public class RewardVideoListener extends AbstractAdListener implements RewardedVideoAdListener {
-    public RewardVideoListener(AdMob adMob) {
+    private final RewardVideoExecutor rewardVideoExecutor;
+
+    public RewardVideoListener(AdMob adMob, RewardVideoExecutor rewardVideoExecutor) {
         super(adMob);
+        this.rewardVideoExecutor = rewardVideoExecutor;
     }
 
     @Override
@@ -23,8 +26,8 @@ public class RewardVideoListener extends AbstractAdListener implements RewardedV
 
     @Override
     public void onRewardedVideoAdFailedToLoad(int errorCode) {
-        synchronized (this.adMob.rewardedVideoLock) {
-            this.adMob.isRewardedVideoLoading = false;
+        synchronized (this.rewardVideoExecutor.rewardedVideoLock) {
+            this.rewardVideoExecutor.isRewardedVideoLoading = false;
         }
 
         JSONObject data = new JSONObject();
@@ -55,14 +58,14 @@ public class RewardVideoListener extends AbstractAdListener implements RewardedV
 
     @Override
     public void onRewardedVideoAdLoaded() {
-        synchronized (this.adMob.rewardedVideoLock) {
-            this.adMob.isRewardedVideoLoading = false;
+        synchronized (this.rewardVideoExecutor.rewardedVideoLock) {
+            this.rewardVideoExecutor.isRewardedVideoLoading = false;
         }
         Log.w("AdMob", "RewardedVideoAdLoaded");
         this.fireAdEvent("onReceiveRewardVideoAd");
 
-        if(this.adMob.config.autoShowRewardVideo) {
-            this.adMob.executeShowRewardVideo(true,null); 
+        if (this.adMob.config.autoShowRewardVideo) {
+            this.rewardVideoExecutor.showAd(true, null);
         }
     }
 
@@ -79,7 +82,7 @@ public class RewardVideoListener extends AbstractAdListener implements RewardedV
     @Override
     public void onRewardedVideoAdClosed() {
         this.fireAdEvent("onDismissRewardVideoAd");
-        this.adMob.clearRewardedVideo();
+        this.rewardVideoExecutor.clearAd();
     }
 
     @Override
