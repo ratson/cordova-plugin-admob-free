@@ -14,14 +14,11 @@ import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 import org.json.JSONObject;
 
+import name.ratson.cordova.admob.AbstractExecutor;
 import name.ratson.cordova.admob.AdMob;
-import name.ratson.cordova.admob.AdMobConfig;
 
-public class BannerExecutor {
+public class BannerExecutor extends AbstractExecutor {
     private static final String TAG = "BannerExecutor";
-
-    private final AdMob plugin;
-    public final AdMobConfig config;
 
     /**
      * The adView to display to the user.
@@ -36,11 +33,15 @@ public class BannerExecutor {
 
     private boolean bannerShow = true;
 
-    public boolean bannerVisible = false;
+    boolean bannerVisible = false;
 
-    public BannerExecutor(AdMob adMob, AdMobConfig config) {
-        this.plugin = adMob;
-        this.config = config;
+    public BannerExecutor(AdMob plugin) {
+        super(plugin);
+    }
+
+    @Override
+    public String getAdType() {
+        return "banner";
     }
 
 
@@ -58,7 +59,7 @@ public class BannerExecutor {
     public PluginResult prepareAd(JSONObject options, final CallbackContext callbackContext) {
         CordovaInterface cordova = plugin.cordova;
 
-        config.setBannerOptions(options);
+        plugin.config.setBannerOptions(options);
 
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -67,9 +68,9 @@ public class BannerExecutor {
 
                 if (adView == null) {
                     adView = new AdView(cordova.getActivity());
-                    adView.setAdUnitId(config.getBannerAdUnitId());
-                    adView.setAdSize(config.adSize);
-                    adView.setAdListener(new BannerListener(plugin, BannerExecutor.this));
+                    adView.setAdUnitId(plugin.config.getBannerAdUnitId());
+                    adView.setAdSize(plugin.config.adSize);
+                    adView.setAdListener(new BannerListener(BannerExecutor.this));
                 }
                 if (adView.getParent() != null) {
                     ((ViewGroup) adView.getParent()).removeView(adView);
@@ -81,7 +82,7 @@ public class BannerExecutor {
 //                if (config.autoShowBanner) {
 //                    executeShowAd(true, null);
 //                }
-                Log.w("banner", config.getBannerAdUnitId());
+                Log.w("banner", plugin.config.getBannerAdUnitId());
 
                 callbackContext.success();
             }
@@ -104,7 +105,7 @@ public class BannerExecutor {
     public PluginResult requestAd(JSONObject options, CallbackContext callbackContext) {
         CordovaInterface cordova = plugin.cordova;
 
-        config.setOptions(options);
+        plugin.config.setOptions(options);
 
         if (adView == null) {
             callbackContext.error("adView is null, call createBannerView first");
@@ -180,11 +181,11 @@ public class BannerExecutor {
                     if (adView.getParent() != null) {
                         ((ViewGroup) adView.getParent()).removeView(adView);
                     }
-                    if (config.bannerOverlap) {
+                    if (plugin.config.bannerOverlap) {
                         RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
                                 RelativeLayout.LayoutParams.MATCH_PARENT,
                                 RelativeLayout.LayoutParams.WRAP_CONTENT);
-                        params2.addRule(config.bannerAtTop ? RelativeLayout.ALIGN_PARENT_TOP : RelativeLayout.ALIGN_PARENT_BOTTOM);
+                        params2.addRule(plugin.config.bannerAtTop ? RelativeLayout.ALIGN_PARENT_TOP : RelativeLayout.ALIGN_PARENT_BOTTOM);
 
                         if (adViewLayout == null) {
                             adViewLayout = new RelativeLayout(cordova.getActivity());
@@ -213,7 +214,7 @@ public class BannerExecutor {
                         }
 
 
-                        if (config.bannerAtTop) {
+                        if (plugin.config.bannerAtTop) {
                             parentView.addView(adView, 0);
                         } else {
                             parentView.addView(adView);
@@ -273,5 +274,9 @@ public class BannerExecutor {
         } catch (Exception e) {
             return (View) webView;
         }
+    }
+
+    boolean shouldAutoShow() {
+        return plugin.config.autoShowBanner;
     }
 }

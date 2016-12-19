@@ -13,28 +13,29 @@ import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.PluginResult;
 import org.json.JSONObject;
 
+import name.ratson.cordova.admob.AbstractExecutor;
 import name.ratson.cordova.admob.AdMob;
-import name.ratson.cordova.admob.AdMobConfig;
 
-public class RewardVideoExecutor {
-    private final AdMob plugin;
-    private final AdMobConfig config;
-
+public class RewardVideoExecutor extends AbstractExecutor {
     /**
      * RewardVideo
      */
     private RewardedVideoAd rewardedVideoAd;
-    public boolean isRewardedVideoLoading = false;
-    public final Object rewardedVideoLock = new Object();
+    boolean isRewardedVideoLoading = false;
+    final Object rewardedVideoLock = new Object();
 
-    public RewardVideoExecutor(AdMob adMob, AdMobConfig config) {
-        this.plugin = adMob;
-        this.config = config;
+    public RewardVideoExecutor(AdMob plugin) {
+        super(plugin);
+    }
+
+    @Override
+    public String getAdType() {
+        return "rewardvideo";
     }
 
     public PluginResult prepareAd(JSONObject options, CallbackContext callbackContext) {
         CordovaInterface cordova = plugin.cordova;
-        config.setRewardVideoOptions(options);
+        plugin.config.setRewardVideoOptions(options);
 
         final CallbackContext delayCallback = callbackContext;
         cordova.getActivity().runOnUiThread(new Runnable() {
@@ -44,8 +45,8 @@ public class RewardVideoExecutor {
                 clearAd();
 
                 rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(cordova.getActivity());
-                rewardedVideoAd.setRewardedVideoAdListener(new RewardVideoListener(plugin, RewardVideoExecutor.this));
-                Log.w("rewardedvideo", config.getRewardedVideoAdUnitId());
+                rewardedVideoAd.setRewardedVideoAdListener(new RewardVideoListener(RewardVideoExecutor.this));
+                Log.w("rewardedvideo", plugin.config.getRewardedVideoAdUnitId());
 
                 synchronized (rewardedVideoLock) {
                     if (!isRewardedVideoLoading) {
@@ -55,7 +56,7 @@ public class RewardVideoExecutor {
                         AdRequest adRequest = new AdRequest.Builder()
                                 .addNetworkExtrasBundle(AdMobAdapter.class, extras)
                                 .build();
-                        rewardedVideoAd.loadAd(config.getRewardedVideoAdUnitId(), adRequest);
+                        rewardedVideoAd.loadAd(plugin.config.getRewardedVideoAdUnitId(), adRequest);
                         delayCallback.success();
                     }
                 }
@@ -82,9 +83,9 @@ public class RewardVideoExecutor {
             @Override
             public void run() {
 
-                if(rewardedVideoAd instanceof RewardedVideoAd) {
+                if (rewardedVideoAd instanceof RewardedVideoAd) {
                     RewardedVideoAd rvad = rewardedVideoAd;
-                    if(rvad.isLoaded()){
+                    if (rvad.isLoaded()) {
                         rvad.show();
                     }
                 }
@@ -100,5 +101,9 @@ public class RewardVideoExecutor {
 
     public void destroy() {
         this.clearAd();
+    }
+
+    boolean shouldAutoShow() {
+        return plugin.config.autoShowRewardVideo;
     }
 }

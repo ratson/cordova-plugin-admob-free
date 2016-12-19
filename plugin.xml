@@ -19,6 +19,7 @@
     </engines>
 
     <js-module name="AdMob" src="www/AdMob.js">
+        <clobbers target="admob" />
         <clobbers target="AdMob" />
         <clobbers target="plugins.AdMob" />
     </js-module>
@@ -46,7 +47,7 @@
         <source-file src="src/android/interstitial" target-dir="src/name/ratson/cordova/admob" />
         <source-file src="src/android/rewardvideo" target-dir="src/name/ratson/cordova/admob" />
 
-        <source-file src="src/android/AbstractAdListener.java" target-dir="src/name/ratson/cordova/admob" />
+        <source-file src="src/android/AbstractExecutor.java" target-dir="src/name/ratson/cordova/admob" />
         <source-file src="src/android/Actions.java" target-dir="src/name/ratson/cordova/admob" />
         <source-file src="src/android/AdMob.java" target-dir="src/name/ratson/cordova/admob" />
         <source-file src="src/android/AdMobConfig.java" target-dir="src/name/ratson/cordova/admob" />

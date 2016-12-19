@@ -1,13 +1,8 @@
 package name.ratson.cordova.admob;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import name.ratson.cordova.admob.AdMob;
-import name.ratson.cordova.admob.CordovaEventBuilder;
 
 /**
  * This class implements the AdMob ad listener events.  It forwards the events
@@ -19,57 +14,29 @@ import name.ratson.cordova.admob.CordovaEventBuilder;
  * document.addEventListener('onDismissAd', function());
  * document.addEventListener('onLeaveToAd', function());
  */
-public abstract class AbstractAdListener extends AdListener {
-    protected AdMob adMob;
+public abstract class AbstractExecutor {
+    protected AdMob plugin;
 
-    public AbstractAdListener(AdMob adMob) {
-        this.adMob = adMob;
+    public AbstractExecutor(AdMob plugin) {
+        this.plugin = plugin;
     }
 
     public abstract String getAdType();
 
-    protected void fireAdEvent(String eventName) {
+    public void fireAdEvent(String eventName) {
         String js = new CordovaEventBuilder(eventName).build();
-        adMob.webView.loadUrl(js);
+        plugin.webView.loadUrl(js);
     }
 
-    protected void fireAdEvent(String eventName, JSONObject data) {
+    public void fireAdEvent(String eventName, JSONObject data) {
         String js = new CordovaEventBuilder(eventName).withData(data).build();
-        adMob.webView.loadUrl(js);
-    }
-
-    @Override
-    public void onAdFailedToLoad(int errorCode) {
-        JSONObject data = new JSONObject();
-        try {
-            data.put("error", errorCode);
-            data.put("reason", this.getErrorReason(errorCode));
-            data.put("adType", this.getAdType());
-        } catch (JSONException e) {
-            e.printStackTrace();
-            this.fireAdEvent("onFailedToReceiveAd");
-            return;
-        }
-        this.fireAdEvent("onFailedToReceiveAd", data);
-    }
-
-    @Override
-    public void onAdLeftApplication() {
-        JSONObject data = new JSONObject();
-        try {
-            data.put("adType", this.getAdType());
-        } catch (JSONException e) {
-            e.printStackTrace();
-            this.fireAdEvent("onLeaveToAd");
-            return;
-        }
-        this.fireAdEvent("onLeaveToAd", data);
+        plugin.webView.loadUrl(js);
     }
 
     /**
      * Gets a string error reason from an error code.
      */
-    public String getErrorReason(int errorCode) {
+    public static String getErrorReason(int errorCode) {
         String errorReason = "";
         switch (errorCode) {
             case AdRequest.ERROR_CODE_INTERNAL_ERROR:
