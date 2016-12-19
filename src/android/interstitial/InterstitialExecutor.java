@@ -28,6 +28,30 @@ public class InterstitialExecutor extends AbstractExecutor {
         return "interstitial";
     }
 
+    public PluginResult prepareAd(JSONObject options, CallbackContext callbackContext) {
+        AdMobConfig config = plugin.config;
+        CordovaInterface cordova = plugin.cordova;
+        config.setInterstitialOptions(options);
+
+        final CallbackContext delayCallback = callbackContext;
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AdMobConfig config = plugin.config;
+                CordovaInterface cordova = plugin.cordova;
+
+                destroy();
+                interstitialAd = new InterstitialAd(cordova.getActivity());
+                interstitialAd.setAdUnitId(config.getInterstitialAdUnitId());
+                interstitialAd.setAdListener(new InterstitialListener(InterstitialExecutor.this));
+                Log.i("interstitial", config.getInterstitialAdUnitId());
+                interstitialAd.loadAd(plugin.buildAdRequest());
+                delayCallback.success();
+            }
+        });
+        return null;
+    }
+
     /**
      * Parses the createAd interstitial view input parameters and runs the createAd interstitial
      * view action on the UI thread.  If this request is successful, the developer
@@ -64,6 +88,7 @@ public class InterstitialExecutor extends AbstractExecutor {
         return null;
     }
 
+    @Override
     public void destroy() {
         if (interstitialAd != null) {
             interstitialAd.setAdListener(null);
@@ -72,10 +97,9 @@ public class InterstitialExecutor extends AbstractExecutor {
     }
 
     public PluginResult requestAd(JSONObject options, CallbackContext callbackContext) {
-        AdMobConfig config = plugin.config;
         CordovaInterface cordova = plugin.cordova;
 
-        config.setOptions(options);
+        plugin.config.setInterstitialOptions(options);
 
         if (interstitialAd == null) {
             callbackContext.error("interstitialAd is null, call createInterstitialView first");

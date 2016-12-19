@@ -105,7 +105,7 @@ public class BannerExecutor extends AbstractExecutor {
     public PluginResult requestAd(JSONObject options, CallbackContext callbackContext) {
         CordovaInterface cordova = plugin.cordova;
 
-        plugin.config.setOptions(options);
+        plugin.config.setBannerOptions(options);
 
         if (adView == null) {
             callbackContext.error("adView is null, call createBannerView first");
@@ -253,6 +253,7 @@ public class BannerExecutor extends AbstractExecutor {
         }
     }
 
+    @Override
     public void destroy() {
         if (adView != null) {
             adView.destroy();

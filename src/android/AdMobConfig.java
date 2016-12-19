@@ -23,9 +23,9 @@ public class AdMobConfig {
     private static final String OPT_IS_TESTING = "isTesting";
     private static final String OPT_AD_EXTRAS = "adExtras";
 
-    private static final String OPT_AUTO_SHOW = "autoShow";
+    public static final String OPT_AUTO_SHOW = "autoShow";
     private static final String OPT_AUTO_SHOW_BANNER = "autoShowBanner";
-    private static final String OPT_AUTO_SHOW_INTERSTITIAL = "autoShowInterstitial";
+    public static final String OPT_AUTO_SHOW_INTERSTITIAL = "autoShowInterstitial";
 
     public static final String OPT_TEST_DEVICES = "testDevices";
 
@@ -159,7 +159,7 @@ public class AdMobConfig {
     public void setBannerOptions(JSONObject options) {
         try {
             this.autoShowBanner = (Boolean) options.remove(OPT_AUTO_SHOW);
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
         }
         this.setOptions(options);
     }
@@ -167,7 +167,7 @@ public class AdMobConfig {
     public void setInterstitialOptions(JSONObject options) {
         try {
             this.autoShowInterstitial = (Boolean) options.remove(OPT_AUTO_SHOW);
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
         }
         this.setOptions(options);
     }
@@ -175,7 +175,7 @@ public class AdMobConfig {
     public void setRewardVideoOptions(JSONObject options) {
         try {
             this.autoShowRewardVideo = (Boolean) options.remove(OPT_AUTO_SHOW);
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
         }
         this.setOptions(options);
     }

@@ -21,18 +21,6 @@ public abstract class AbstractExecutor {
         this.plugin = plugin;
     }
 
-    public abstract String getAdType();
-
-    public void fireAdEvent(String eventName) {
-        String js = new CordovaEventBuilder(eventName).build();
-        plugin.webView.loadUrl(js);
-    }
-
-    public void fireAdEvent(String eventName, JSONObject data) {
-        String js = new CordovaEventBuilder(eventName).withData(data).build();
-        plugin.webView.loadUrl(js);
-    }
-
     /**
      * Gets a string error reason from an error code.
      */
@@ -53,5 +41,23 @@ public abstract class AbstractExecutor {
                 break;
         }
         return errorReason;
+    }
+
+    public abstract String getAdType();
+
+    public abstract void destroy();
+
+    public void fireAdEvent(String eventName) {
+        String js = new CordovaEventBuilder(eventName).build();
+        loadJS(js);
+    }
+
+    public void fireAdEvent(String eventName, JSONObject data) {
+        String js = new CordovaEventBuilder(eventName).withData(data).build();
+        loadJS(js);
+    }
+
+    private void loadJS(String js) {
+        plugin.webView.loadUrl(js);
     }
 }

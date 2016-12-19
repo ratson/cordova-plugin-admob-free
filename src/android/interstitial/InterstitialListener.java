@@ -25,8 +25,6 @@ class InterstitialListener extends AdListener {
             data.put("adType", executor.getAdType());
         } catch (JSONException e) {
             e.printStackTrace();
-            executor.fireAdEvent("onFailedToReceiveAd");
-            return;
         }
         executor.fireAdEvent("onFailedToReceiveAd", data);
     }
@@ -38,8 +36,6 @@ class InterstitialListener extends AdListener {
             data.put("adType", executor.getAdType());
         } catch (JSONException e) {
             e.printStackTrace();
-            executor.fireAdEvent("onLeaveToAd");
-            return;
         }
         executor.fireAdEvent("onLeaveToAd", data);
     }
