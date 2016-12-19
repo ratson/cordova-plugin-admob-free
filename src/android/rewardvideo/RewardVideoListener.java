@@ -30,8 +30,6 @@ class RewardVideoListener implements RewardedVideoAdListener {
             data.put("adType", executor.getAdType());
         } catch (JSONException e) {
             e.printStackTrace();
-            executor.fireAdEvent("onFailedToReceiveAd");
-            return;
         }
         executor.fireAdEvent("onFailedToReceiveAd", data);
     }
@@ -43,8 +41,6 @@ class RewardVideoListener implements RewardedVideoAdListener {
             data.put("adType", executor.getAdType());
         } catch (JSONException e) {
             e.printStackTrace();
-            executor.fireAdEvent("onLeaveToAd");
-            return;
         }
         executor.fireAdEvent("onLeaveToAd", data);
     }
@@ -87,10 +83,7 @@ class RewardVideoListener implements RewardedVideoAdListener {
             data.put("rewardAmount", reward.getAmount());
         } catch (JSONException e) {
             e.printStackTrace();
-            executor.fireAdEvent("onRewardedVideo");
-            return;
         }
-
         executor.fireAdEvent("onRewardedVideo", data);
     }
 }

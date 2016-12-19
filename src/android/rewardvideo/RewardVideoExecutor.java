@@ -99,6 +99,7 @@ public class RewardVideoExecutor extends AbstractExecutor {
         return null;
     }
 
+    @Override
     public void destroy() {
         this.clearAd();
     }

@@ -108,9 +108,8 @@ export function hideBanner(successCallback, failureCallback) {
   exec(successCallback, failureCallback, 'AdMob', 'showAd', [false])
 }
 
-export function prepareInterstitial(args, successCallback, failureCallback) {
-  createInterstitialView(args, successCallback, failureCallback)
-  requestInterstitialAd(args, successCallback, failureCallback)
+export function prepareInterstitial(options, successCallback, failureCallback) {
+  exec(successCallback, failureCallback, 'AdMob', 'prepareInterstitial', [translateOptions(options)])
 }
 
 export function showInterstitial(successCallback, failureCallback) {

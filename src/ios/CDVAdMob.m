@@ -178,6 +178,28 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
+- (void)prepareInterstitial:(CDVInvokedUrlCommand *)command {
+    NSLog(@"prepareInterstitial");
+
+    CDVPluginResult *pluginResult;
+    NSString *callbackId = command.callbackId;
+    NSArray* args = command.arguments;
+
+    NSUInteger argc = [args count];
+    if (argc >= 1) {
+        NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
+        [self __setOptions:options];
+        autoShowInterstitial = autoShow;
+    }
+
+    [self __cycleInterstitial];
+    [self.interstitialView loadRequest:[self __buildAdRequest]];
+
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+
+}
+
 - (void)createInterstitialView:(CDVInvokedUrlCommand *)command {
     NSLog(@"createInterstitialView");
 

@@ -97,6 +97,10 @@ public class AdMob extends CordovaPlugin {
             boolean show = inputs.optBoolean(0);
             result = bannerExecutor.showAd(show, callbackContext);
 
+        } else if (Actions.PREPARE_INTERSTITIAL.equals(action)) {
+            JSONObject options = inputs.optJSONObject(0);
+            result = interstitialExecutor.prepareAd(options, callbackContext);
+
         } else if (Actions.CREATE_INTERSTITIAL.equals(action)) {
             JSONObject options = inputs.optJSONObject(0);
             result = interstitialExecutor.createAd(options, callbackContext);
