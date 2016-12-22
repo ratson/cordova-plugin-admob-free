@@ -12,21 +12,23 @@
     }]
   ],
   "env": {
+    "production": {
+      "plugins": [
+        "add-module-exports",
+        "transform-es3-member-expression-literals",
+        "transform-es3-property-literals",
+        "transform-object-assign"
+      ]
+    },
     "test": {
       "plugins": [
         ["module-resolver", {
           "alias": {
-            "AdMob":  "./www/AdMob.js",
-            "cordova/exec": "./tests/js/stub/cordova-exec.js"
+            "AdMob":  "./www/admob",
+            "cordova/exec": "./tests/js/stub/cordova-exec"
           }
         }]
       ]
     }
-  },
-  "plugins": [
-    "add-module-exports",
-    "transform-es3-member-expression-literals",
-    "transform-es3-property-literals",
-    "transform-object-assign"
-  ]
+  }
 }
