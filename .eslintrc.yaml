@@ -1,2 +1,3 @@
 extends:
   - concise
+  - concise-esnext
