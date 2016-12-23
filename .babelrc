@@ -1,30 +1,17 @@
 {
   "presets": [
-    ["env", {
-      "targets": {
-        "browsers": [
-          "> 1%",
-          "last 4 versions",
-          "Android > 2",
-          "last 2 ChromeAndroid versions"
-        ]
-      }
-    }]
+    ["env", {"targets": {"node": "current"}}],
+    "stage-2"
   ],
   "env": {
     "production": {
-      "plugins": [
-        "add-module-exports",
-        "transform-es3-member-expression-literals",
-        "transform-es3-property-literals",
-        "transform-object-assign"
-      ]
+      "plugins": []
     },
     "test": {
       "plugins": [
         ["module-resolver", {
           "alias": {
-            "AdMob":  "./www/admob",
+            "admob":  "./www/admob",
             "cordova/exec": "./tests/js/stub/cordova-exec"
           }
         }]
