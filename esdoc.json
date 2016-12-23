@@ -7,10 +7,11 @@
       "name": "esdoc-importpath-plugin",
       "option": {
         "replaces": [
-          {"from": ".+", "to": "AdMob"}
+          {"from": ".+", "to": "admob"}
         ]
       }
-    }
+    },
+    {"name": "esdoc-es7-plugin"}
   ],
   "manual": {
     "tutorial": ["./CONTRIBUTING.md"],
