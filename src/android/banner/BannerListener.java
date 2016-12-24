@@ -27,6 +27,7 @@ class BannerListener extends AdListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        executor.fireAdEvent("admob.banner.events.LOAD_FAIL", data);
         executor.fireAdEvent("onFailedToReceiveAd", data);
     }
 
@@ -38,6 +39,7 @@ class BannerListener extends AdListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        executor.fireAdEvent("admob.banner.events.EXIT_APP", data);
         executor.fireAdEvent("onLeaveToAd", data);
     }
 
@@ -47,16 +49,19 @@ class BannerListener extends AdListener {
         if (executor.shouldAutoShow() && !executor.bannerVisible) {
             executor.showAd(true, null);
         }
+        executor.fireAdEvent("admob.banner.events.LOAD", data);
         executor.fireAdEvent("onReceiveAd");
     }
 
     @Override
     public void onAdOpened() {
+        executor.fireAdEvent("admob.banner.events.OPEN");
         executor.fireAdEvent("onPresentAd");
     }
 
     @Override
     public void onAdClosed() {
+        executor.fireAdEvent("admob.banner.events.CLOSE");
         executor.fireAdEvent("onDismissAd");
     }
 }

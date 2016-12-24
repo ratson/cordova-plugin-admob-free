@@ -70,3 +70,13 @@ export function translateOptions(options) {
     ...opts,
   }
 }
+
+/**
+ * @ignore
+ */
+export function buildEvents(adType, eventKeys) {
+  return eventKeys.reduce((r, eventKey) => {
+    r[eventKey] = `admob.${adType}.events.${eventKey}`
+    return r
+  }, {})
+}

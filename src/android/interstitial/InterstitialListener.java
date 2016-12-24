@@ -26,6 +26,7 @@ class InterstitialListener extends AdListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        executor.fireAdEvent("admob.interstitial.events.LOAD_FAIL", data);
         executor.fireAdEvent("onFailedToReceiveAd", data);
     }
 
@@ -37,12 +38,14 @@ class InterstitialListener extends AdListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        executor.fireAdEvent("admob.interstitial.events.EXIT_APP", data);
         executor.fireAdEvent("onLeaveToAd", data);
     }
 
     @Override
     public void onAdLoaded() {
         Log.w("AdMob", "InterstitialAdLoaded");
+        executor.fireAdEvent("admob.interstitial.events.LOAD");
         executor.fireAdEvent("onReceiveInterstitialAd");
 
         if (executor.shouldAutoShow()) {
@@ -52,11 +55,13 @@ class InterstitialListener extends AdListener {
 
     @Override
     public void onAdOpened() {
+        executor.fireAdEvent("admob.interstitial.events.OPEN");
         executor.fireAdEvent("onPresentInterstitialAd");
     }
 
     @Override
     public void onAdClosed() {
+        executor.fireAdEvent("admob.interstitial.events.CLOSE");
         executor.fireAdEvent("onDismissInterstitialAd");
         executor.destroy();
     }

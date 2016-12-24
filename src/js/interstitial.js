@@ -1,4 +1,4 @@
-import {exec, translateOptions} from './utils'
+import {buildEvents, exec, translateOptions} from './utils'
 
 /**
  * Interstitial config object.
@@ -8,12 +8,22 @@ import {exec, translateOptions} from './utils'
  * @property {boolean} [autoShow=false] - auto show ad when loaded
  */
 
+const events = buildEvents('interstitial', [
+  'LOAD',
+  'LOAD_FAIL',
+  'OPEN',
+  'CLOSE',
+  'EXIT_APP',
+])
+
 /**
  * @protected
  * @desc
  * See usage in {@link interstitial}.
  */
 class Interstitial {
+  static events = events
+
   /**
    * @protected
    * @param {InterstitialConfig} opts - initial config.

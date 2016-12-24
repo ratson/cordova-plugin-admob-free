@@ -33,16 +33,20 @@ document.addEventListener('deviceready', function() {
 
 }, false)
 
-document.addEventListener('onFailedToReceiveAd', function(event) {
+document.addEventListener('admob.banner.events.LOAD_FAIL', function(event) {
   console.log(event)
 })
 
-document.addEventListener('onReceiveInterstitialAd', function(event) {
+document.addEventListener('admob.interstitial.events.LOAD_FAIL', function(event) {
+  console.log(event)
+})
+
+document.addEventListener('admob.interstitial.events.LOAD', function(event) {
   console.log(event)
   document.getElementById('showAd').disabled = false
 })
 
-document.addEventListener('onDismissInterstitialAd', function(event) {
+document.addEventListener('admob.interstitial.events.CLOSE', function(event) {
   console.log(event)
 
   admob.interstitial.prepare()

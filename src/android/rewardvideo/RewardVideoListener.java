@@ -31,7 +31,7 @@ class RewardVideoListener implements RewardedVideoAdListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        executor.fireAdEvent("onFailedToReceiveAd", data);
+        executor.fireAdEvent("admob.rewardvideo.events.LOAD_FAIL", data);
     }
 
     @Override
@@ -42,7 +42,7 @@ class RewardVideoListener implements RewardedVideoAdListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        executor.fireAdEvent("onLeaveToAd", data);
+        executor.fireAdEvent("admob.rewardvideo.events.EXIT_APP", data);
     }
 
     @Override
@@ -51,7 +51,7 @@ class RewardVideoListener implements RewardedVideoAdListener {
             executor.isRewardedVideoLoading = false;
         }
         Log.w("AdMob", "RewardedVideoAdLoaded");
-        executor.fireAdEvent("onReceiveRewardVideoAd");
+        executor.fireAdEvent("admob.rewardvideo.events.LOAD");
 
         if (executor.shouldAutoShow()) {
             executor.showAd(true, null);
@@ -60,17 +60,17 @@ class RewardVideoListener implements RewardedVideoAdListener {
 
     @Override
     public void onRewardedVideoAdOpened() {
-        executor.fireAdEvent("onPresentRewardVideoAd");
+        executor.fireAdEvent("admob.rewardvideo.events.OPEN");
     }
 
     @Override
     public void onRewardedVideoStarted() {
-        executor.fireAdEvent("onPresentStartedRewardVideoAd");
+        executor.fireAdEvent("admob.rewardvideo.events.START");
     }
 
     @Override
     public void onRewardedVideoAdClosed() {
-        executor.fireAdEvent("onDismissRewardVideoAd");
+        executor.fireAdEvent("admob.rewardvideo.events.CLOSE");
         executor.clearAd();
     }
 
@@ -84,6 +84,6 @@ class RewardVideoListener implements RewardedVideoAdListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        executor.fireAdEvent("onRewardedVideo", data);
+        executor.fireAdEvent("admob.rewardvideo.events.REWARD", data);
     }
 }

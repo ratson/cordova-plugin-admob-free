@@ -84,7 +84,7 @@
     bannerShow = true;
     publisherId = DEFAULT_BANNER_ID;
     interstitialAdId = DEFAULT_INTERSTITIAL_ID;
-    rewardVideoId = DEFAULT_REWARD_VIDEO_ID;    
+    rewardVideoId = DEFAULT_REWARD_VIDEO_ID;
     adSize = [self __AdSizeFromString:@"SMART_BANNER"];
 
     bannerAtTop = false;
@@ -332,7 +332,7 @@
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
-    
+
 }
 
 
@@ -352,7 +352,7 @@
     }
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
-    
+
 }
 - (void) __cycleRewardVideo {
     NSLog(@"__cycleRewardVideo");
@@ -715,24 +715,29 @@
     if(self.bannerShow) {
         [self __showAd:YES];
     }
+    [self fireEvent:@"" event:@"admob.banner.events.LOAD" withData:nil];
     [self fireEvent:@"" event:@"onReceiveAd" withData:nil];
 }
 
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error {
     NSString* jsonData = [NSString stringWithFormat:@"{ 'error': '%@', 'adType':'banner' }", [error localizedFailureReason]];
+    [self fireEvent:@"" event:@"admob.banner.events.LOAD_FAIL" withData:jsonData];
     [self fireEvent:@"" event:@"onFailedToReceiveAd" withData:jsonData];
 }
 
 - (void)adViewWillLeaveApplication:(GADBannerView *)adView {
     NSString* jsonData = @"{ 'adType':'banner' }";
+    [self fireEvent:@"" event:@"admob.banner.events.EXIT_APP" withData:jsonData];
     [self fireEvent:@"" event:@"onLeaveToAd" withData:jsonData];
 }
 
 - (void)adViewWillPresentScreen:(GADBannerView *)adView {
+    [self fireEvent:@"" event:@"admob.banner.events.OPEN" withData:nil];
     [self fireEvent:@"" event:@"onPresentAd" withData:nil];
 }
 
 - (void)adViewDidDismissScreen:(GADBannerView *)adView {
+    [self fireEvent:@"" event:@"admob.banner.events.CLOSE" withData:nil];
     [self fireEvent:@"" event:@"onDismissAd" withData:nil];
 }
 
@@ -741,15 +746,18 @@
 - (void)interstitial:(GADInterstitial *)ad
     didFailToReceiveAdWithError:(GADRequestError *)error {
     NSString* jsonData = [NSString stringWithFormat:@"{ 'error': '%@', 'adType':'interstitial' }", [error localizedFailureReason]];
+    [self fireEvent:@"" event:@"admob.interstitial.events.LOAD_FAIL" withData:jsonData];
     [self fireEvent:@"" event:@"onFailedToReceiveAd" withData:jsonData];
 }
 
 - (void)interstitialWillLeaveApplication:(GADInterstitial *)interstitial {
     NSString* jsonData = @"{ 'adType':'interstitial' }";
+    [self fireEvent:@"" event:@"admob.interstitial.events.EXIT_APP" withData:jsonData];
     [self fireEvent:@"" event:@"onLeaveToAd" withData:jsonData];
 }
 
 - (void)interstitialDidReceiveAd:(GADInterstitial *)interstitial {
+    [self fireEvent:@"" event:@"admob.interstitial.events.LOAD" withData:nil];
     [self fireEvent:@"" event:@"onReceiveInterstitialAd" withData:nil];
     if (self.interstitialView){
         if(self.autoShowInterstitial) {
@@ -759,11 +767,13 @@
 }
 
 - (void)interstitialWillPresentScreen:(GADInterstitial *)interstitial {
+    [self fireEvent:@"" event:@"admob.interstitial.events.OPEN" withData:nil];
     [self fireEvent:@"" event:@"onPresentInterstitialAd" withData:nil];
 }
 
 
 - (void)interstitialDidDismissScreen:(GADInterstitial *)interstitial {
+    [self fireEvent:@"" event:@"admob.interstitial.events.CLOSE" withData:nil];
     [self fireEvent:@"" event:@"onDismissInterstitialAd" withData:nil];
     if (self.interstitialView) {
         self.interstitialView.delegate = nil;
@@ -777,16 +787,16 @@
 - (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd
    didRewardUserWithReward:(GADAdReward *)reward {
     NSString* obj = @"AdMob";
-    NSString* jsonData = [NSString stringWithFormat:@"{'adNetwork':'%@','adType':'rewardvideo','adEvent':'onRewardedVideo','rewardType':'%@','rewardAmount':%lf}", 
+    NSString* jsonData = [NSString stringWithFormat:@"{'adNetwork':'%@','adType':'rewardvideo','adEvent':'onRewardedVideo','rewardType':'%@','rewardAmount':%lf}",
                         obj, reward.type, [reward.amount doubleValue]];
-    [self fireEvent:@"" event:@"onRewardedVideo" withData:jsonData];
+    [self fireEvent:@"" event:@"admob.rewardvideo.events.REWARD" withData:jsonData];
 }
 
 - (void)rewardBasedVideoAdDidReceiveAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
     @synchronized(self.rewardedVideoLock) {
         self.isRewardedVideoLoading = false;
     }
-    [self fireEvent:@"" event:@"onReceiveRewardVideoAd" withData:nil];
+    [self fireEvent:@"" event:@"admob.rewardvideo.events.LOAD" withData:nil];
     if (self.rewardVideoView){
         if(self.autoShowRewardVideo) {
             [self __showRewardedVideo:YES];
@@ -795,15 +805,15 @@
 }
 
 - (void)rewardBasedVideoAdDidOpen:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-    [self fireEvent:@"" event:@"onPresentRewardVideoAd" withData:nil];
+    [self fireEvent:@"" event:@"admob.rewardvideo.events.OPEN" withData:nil];
 }
 
 - (void)rewardBasedVideoAdDidStartPlaying:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-    [self fireEvent:@"" event:@"onPresentStartedRewardVideoAd" withData:nil];
+    [self fireEvent:@"" event:@"admob.rewardvideo.events.START" withData:nil];
 }
 
 - (void)rewardBasedVideoAdDidClose:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-    [self fireEvent:@"" event:@"onDismissRewardVideoAd" withData:nil];
+    [self fireEvent:@"" event:@"admob.rewardvideo.events.CLOSE" withData:nil];
     if (self.rewardVideoView) {
         self.rewardVideoView.delegate = nil;
         self.rewardVideoView = nil;
@@ -812,7 +822,7 @@
 
 - (void)rewardBasedVideoAdWillLeaveApplication:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
     NSString* jsonData = @"{ 'adType':'rewardvideo' }";
-    [self fireEvent:@"" event:@"onLeaveToAd" withData:jsonData];
+    [self fireEvent:@"" event:@"admob.rewardvideo.events.EXIT_APP" withData:jsonData];
 }
 
 - (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd
@@ -821,7 +831,7 @@
         self.isRewardedVideoLoading = false;
     }
     NSString* jsonData = [NSString stringWithFormat:@"{ 'error': '%@', 'adType':'rewardvideo' }", [error localizedFailureReason]];
-    [self fireEvent:@"" event:@"onFailedToReceiveAd" withData:jsonData];
+    [self fireEvent:@"" event:@"admob.rewardvideo.events.LOAD_FAIL" withData:jsonData];
 }
 
 

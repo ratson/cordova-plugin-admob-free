@@ -1,4 +1,4 @@
-import {exec, translateOptions} from './utils'
+import {buildEvents, exec, translateOptions} from './utils'
 
 /**
  * Banner config object.
@@ -11,6 +11,14 @@ import {exec, translateOptions} from './utils'
  * @property {boolean} [offsetTopBar=false] - set to true to avoid ios7 status bar overlap
  * @property {string} [size=SMART_BANNER] - {@link BANNER_SIZE}
  */
+
+const events = buildEvents('banner', [
+  'LOAD',
+  'LOAD_FAIL',
+  'OPEN',
+  'CLOSE',
+  'EXIT_APP',
+])
 
 /**
  * @typedef {Object} BANNER_SIZE
@@ -48,6 +56,8 @@ const sizes = {
  * See usage in {@link banner}.
  */
 class Banner {
+  static events = events
+
   /**
    * Banner sizes
    * @type {BANNER_SIZE}
