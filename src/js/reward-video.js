@@ -1,4 +1,4 @@
-import {exec, translateOptions} from './utils'
+import {buildEvents, exec, translateOptions} from './utils'
 
 /**
  * Reward Video config object.
@@ -8,12 +8,24 @@ import {exec, translateOptions} from './utils'
  * @property {boolean} [autoShow=false] - auto show ad when loaded
  */
 
+const events = buildEvents('rewardvideo', [
+  'LOAD',
+  'LOAD_FAIL',
+  'OPEN',
+  'CLOSE',
+  'EXIT_APP',
+  'START',
+  'REWARD',
+])
+
 /**
  * @protected
  * @desc
  * See usage in {@link rewardvideo}.
  */
 class RewardVideo {
+  static events = events
+
   /**
    * @protected
    * @param {RewardVideoConfig} opts - initial config.

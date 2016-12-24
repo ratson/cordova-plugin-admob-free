@@ -29,7 +29,8 @@ it is strongly recommended to migrate to new API and give feedback.
 ### Added
 
 * Support Rewarded Video. ([@warcry2000](https://github.com/warcry2000) in [#35](https://github.com/ratson/cordova-plugin-admob-free/pull/35))
-
+* Promise APIs.
+* Events now have namespace.
 
 ## 0.5.1 (2016-12-08)
 
