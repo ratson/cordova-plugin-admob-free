@@ -1,65 +1,67 @@
 /* eslint-disable no-console */
 import exec from 'cordova/exec'
 
+import {wrapCallbacks, translateOptions} from './utils'
+
+import {Banner} from './banner'
+import {Interstitial} from './interstitial'
+import {RewardVideo} from './reward-video'
+
 /**
- * Ad sizes.
- * @constant
- * @type {Object}
+ * @type {Banner}
+ * @since 0.6
+ * @example
+ * admob.banner.config({
+ *  id: 'ca-app-pub-xxx/xxx',
+ * })
+ *
+ * // Create banner
+ * admob.banner.prepare()
+ *
+ * // Show the banner
+ * admob.banner.show()
+ *
+ * // Hide the banner
+ * admob.banner.hide()
+ *
+ * // Remove the banner
+ * admob.banner.remove()
  */
-export const AD_SIZE = {
-  BANNER: 'BANNER',
-  IAB_BANNER: 'IAB_BANNER',
-  IAB_LEADERBOARD: 'IAB_LEADERBOARD',
-  IAB_MRECT: 'IAB_MRECT',
-  LARGE_BANNER: 'LARGE_BANNER',
-  SMART_BANNER: 'SMART_BANNER',
-  FLUID: 'FLUID',
-  // android-only
-  FULL_BANNER: 'FULL_BANNER',
-  LEADERBOARD: 'LEADERBOARD',
-  MEDIUM_RECTANGLE: 'MEDIUM_RECTANGLE',
-  SEARCH: 'SEARCH',
-  WIDE_SKYSCRAPER: 'WIDE_SKYSCRAPER',
-}
+export const banner = new Banner()
 
-function boolean2string(x) {
-  if (x === null) {
-    return ''
-  }
-  if (x === true) {
-    return 'yes'
-  }
-  if (x === false) {
-    return 'no'
-  }
-  return x
-}
+/**
+ * @type {Interstitial}
+ * @since 0.6
+ * @example
+ * admob.interstitial.config({
+ *  id: 'ca-app-pub-xxx/xxx',
+ * })
+ *
+ * admob.interstitial.prepare()
+ *
+ * admob.interstitial.show()
+ */
+export const interstitial = new Interstitial()
 
-function isUndefined(x) {
-  return typeof x === 'undefined'
-}
+/**
+ * @type {RewardVideo}
+ * @since 0.6
+ * @example
+ * admob.rewardvideo.config({
+ *  id: 'ca-app-pub-xxx/xxx',
+ * })
+ *
+ * admob.rewardvideo.prepare()
+ *
+ * admob.rewardvideo.show()
+ */
+export const rewardvideo = new RewardVideo()
 
-function translateOptions(options) {
-  const opts = {}
-  if (!isUndefined(options.forChild)) {
-    opts.forChild = boolean2string(options.forChild)
-    if (typeof options.forChild === 'string') {
-      console.warn('`forChild` will not accept string in future, pass boolean instead')
-    }
-  }
-  if (!isUndefined(options.forFamily)) {
-    opts.forFamily = boolean2string(options.forFamily)
-    if (typeof options.forFamily === 'string') {
-      console.warn('`forFamily` will not accept string in future, pass boolean instead')
-    }
-  }
-  return Object.assign({}, options, opts)
-}
-// export for testing
-export const _translateOptions = translateOptions
+// Old APIs
 
 /**
  *
+ * @deprecated since version 0.6
  * @param {Object} options
  * @param {string} options.publisherId
  * @param {string} options.interstitialAdId
@@ -86,72 +88,105 @@ export const _translateOptions = translateOptions
  */
 export function setOptions(options, successCallback, failureCallback) {
   if (typeof options === 'object') {
+    Object.keys(options).forEach((k) => {
+      switch (k) {
+        case 'publisherId':
+          banner._config.id = options[k]
+          break
+        case 'bannerAtTop':
+        case 'overlap':
+        case 'offsetTopBar':
+          banner._config[k] = options[k]
+          break
+        case 'interstitialAdId':
+          interstitial._config.id = options[k]
+          break
+        case 'rewardVideoId':
+          rewardvideo._config.id = options[k]
+          break
+        case 'isTesting':
+        case 'autoShow':
+          banner._config[k] = options[k]
+          interstitial._config[k] = options[k]
+          rewardvideo._config[k] = options[k]
+          break
+        default:
+      }
+    })
     exec(successCallback, failureCallback, 'AdMob', 'setOptions', [translateOptions(options)])
   } else if (typeof failureCallback === 'function') {
     failureCallback('options should be specified.')
   }
 }
 
-export function prepareBanner(options = {}, successCallback, failureCallback) {
+/**
+ * Ad sizes.
+ * @constant
+ * @type {BANNER_SIZE}
+ * @deprecated since version 0.6
+ */
+export const AD_SIZE = Banner.sizes
+
+/**
+ * @deprecated since version 0.6
+ */
+export function createBannerView(options = {}, successCallback, failureCallback) {
+  console.warn('Use admob.banner.prepare() instead.')
   exec(successCallback, failureCallback, 'AdMob', 'createBannerView', [translateOptions(options)])
 }
 
-export function removeBanner(successCallback, failureCallback) {
+/**
+ * @deprecated since version 0.6
+ */
+export function destroyBannerView(options = {}, successCallback, failureCallback) {
+  console.warn('Use admob.banner.remove() instead.')
   exec(successCallback, failureCallback, 'AdMob', 'destroyBannerView', [])
 }
 
-export function showBanner(successCallback, failureCallback) {
-  exec(successCallback, failureCallback, 'AdMob', 'showAd', [true])
-}
-
-export function hideBanner(successCallback, failureCallback) {
-  exec(successCallback, failureCallback, 'AdMob', 'showAd', [false])
-}
-
-export function prepareInterstitial(options, successCallback, failureCallback) {
-  exec(successCallback, failureCallback, 'AdMob', 'prepareInterstitial', [translateOptions(options)])
-}
-
-export function showInterstitial(successCallback, failureCallback) {
-  exec(successCallback, failureCallback, 'AdMob', 'showInterstitialAd', [true])
-}
-
-export function prepareRewardVideo(options, successCallback, failureCallback) {
-  exec(successCallback, failureCallback, 'AdMob', 'createRewardVideo', [translateOptions(options)])
-}
-
-export function showRewardVideo(successCallback, failureCallback) {
-  exec(successCallback, failureCallback, 'AdMob', 'showRewardVideo', [true])
-}
-
-// Old APIs
-
-export const createBannerView = (...args) => {
-  console.warn('Use prepareBanner() instead.')
-  prepareBanner(...args)
-}
-
-export function destroyBannerView(options = {}, successCallback, failureCallback) {
-  console.warn('Use removeBanner() instead.')
-  removeBanner(successCallback, failureCallback)
-}
-
-export function createInterstitialView(options, successCallback, failureCallback) {
-  console.warn('Use prepareInterstitial() instead, it will do both createInterstitialView() and requestInterstitialAd().')
-  exec(successCallback, failureCallback, 'AdMob', 'createInterstitialView', [translateOptions(options)])
-}
-
-export function requestInterstitialAd(options = {}, successCallback, failureCallback) {
-  console.warn('Use prepareInterstitial() instead, it will do both createInterstitialView() and requestInterstitialAd().')
-  exec(successCallback, failureCallback, 'AdMob', 'requestInterstitialAd', [translateOptions(options)])
-}
-
+/**
+ * @deprecated since version 0.6
+ */
 export function showAd(show = true, successCallback, failureCallback) {
-  console.warn('Use showBanner() and hideBanner() instead.')
+  console.warn('Use admob.banner.show() and admob.banner.hide() instead.')
   exec(successCallback, failureCallback, 'AdMob', 'showAd', [show])
 }
 
+/**
+ * @deprecated since version 0.6
+ */
+export function createInterstitialView(options, successCallback, failureCallback) {
+  console.warn('Use admob.interstitial.prepare() instead, it will do both createInterstitialView() and requestInterstitialAd().')
+  exec(successCallback, failureCallback, 'AdMob', 'createInterstitialView', [translateOptions(options)])
+}
+
+/**
+ * @deprecated since version 0.6
+ */
+export function requestInterstitialAd(options = {}, successCallback, failureCallback) {
+  console.warn('Use admob.interstitial.prepare() instead, it will do both createInterstitialView() and requestInterstitialAd().')
+  exec(successCallback, failureCallback, 'AdMob', 'requestInterstitialAd', [translateOptions(options)])
+}
+
+/**
+ * @deprecated since version 0.6
+ */
+export function prepareInterstitial(options = {}, successCallback, failureCallback) {
+  console.warn('Use admob.interstitial.prepare() instead.')
+  exec(successCallback, failureCallback, 'AdMob', 'prepareInterstitial', [translateOptions(options)])
+}
+
+/**
+ * @deprecated since version 0.6
+ */
+export function showInterstitial(successCallback, failureCallback) {
+  console.warn('Use admob.interstitial.show() instead.')
+  wrapCallbacks(interstitial.show(), successCallback, failureCallback)
+}
+
+/**
+ * @deprecated since version 0.6
+ */
 export function showInterstitialAd(show = true, successCallback, failureCallback) {
-  console.warn('Use showInterstitial() instead.')
+  console.warn('Use admob.interstitial.show() instead.')
   exec(successCallback, failureCallback, 'AdMob', 'showInterstitialAd', [show])
 }
