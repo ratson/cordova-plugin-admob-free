@@ -65,5 +65,8 @@ export function translateOptions(options) {
       console.warn('`forFamily` will not accept string in future, pass boolean instead')
     }
   }
-  return Object.assign({}, options, opts)
+  return {
+    ...options,
+    ...opts,
+  }
 }

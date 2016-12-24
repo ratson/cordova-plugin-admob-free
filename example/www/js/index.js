@@ -12,22 +12,23 @@ if (/(android)/i.test(navigator.userAgent)) {  // for android & amazon-fireos
 }
 
 document.addEventListener('deviceready', function() {
-  AdMob.setOptions({
+  admob.banner.config({
+    id: admobid.banner,
     isTesting: true,
-  })
-
-  AdMob.createBannerView({
     autoShow: true,
-  });
+  })
+  admob.banner.prepare()
 
-  AdMob.prepareInterstitial({
-    interstitialAdId: admobid.interstitial,
+  admob.interstitial.config({
+    id: admobid.interstitial,
+    isTesting: true,
     autoShow: false,
   })
+  admob.interstitial.prepare()
 
   document.getElementById('showAd').disabled = true
   document.getElementById('showAd').onclick = function() {
-    AdMob.showInterstitial()
+    admob.interstitial.show()
   }
 
 }, false)
@@ -44,8 +45,5 @@ document.addEventListener('onReceiveInterstitialAd', function(event) {
 document.addEventListener('onDismissInterstitialAd', function(event) {
   console.log(event)
 
-  AdMob.prepareInterstitial({
-    interstitialAdId: admobid.interstitial,
-    autoShow: false,
-  })
+  admob.interstitial.prepare()
 })
