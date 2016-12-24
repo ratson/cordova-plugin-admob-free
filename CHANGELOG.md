@@ -8,25 +8,27 @@ it is strongly recommended to migrate to new API and give feedback.
 
 * `window.admob` is introduced to replace `window.AdMob` and `window.plugins.AdMob`. Developer should no longer need to worry about missed upper-case causing `Admob is not defined` error.
 
-* `prepareBanner()` is replacing `createBannerView()`.
+* `admob.banner.prepare()` is replacing `createBannerView()`.
 
-* `showBanner()` and `hideBanner()` are replacing `showAd()`.
+* `admob.banner.show()` and `admob.banner.hide()` are replacing `showAd()`.
 
-* `removeBanner()` is replacing `destroyBannerView()`.
+* `admob.banner.remove()` is replacing `destroyBannerView()`.
 
-* `showInterstitial()` is replacing `showInterstitialAd()`
+* `admob.interstitial.prepare()` is replacing `prepareInterstitial()`
+
+* `admob.interstitial.show()` is replacing `showInterstitialAd()`
 
 ### Breaking
 
 * Update Google AdMob SDK for iOS to v7.16.0.
 
-### Fixed
+### Internal
 
-* `prepareInterstitial()` is now implemented natively, should fix some race condition bugs.
+* `prepareInterstitial` is now implemented natively, which should fix some race condition bugs.
 
 ### Added
 
-* Support Rewarded Video
+* Support Rewarded Video. ([@warcry2000](https://github.com/warcry2000) in [#35](https://github.com/ratson/cordova-plugin-admob-free/pull/35))
 
 
 ## 0.5.1 (2016-12-08)
