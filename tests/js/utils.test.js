@@ -1,4 +1,4 @@
-import {_translateOptions as translateOptions} from '../../src/js/AdMob'
+import {translateOptions} from '../../src/js/utils'
 
 describe('translateOptions', () => {
   it('translate forChild from boolean/null to string', () => {

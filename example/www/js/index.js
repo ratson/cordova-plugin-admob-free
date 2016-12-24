@@ -16,7 +16,7 @@ document.addEventListener('deviceready', function() {
     isTesting: true,
   })
 
-  AdMob.prepareBanner({
+  AdMob.createBannerView({
     autoShow: true,
   });
 
