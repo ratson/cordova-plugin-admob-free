@@ -31,7 +31,7 @@ Click ❌ to see the detail.
 
 ## Installation
 
-```bash
+```sh
 cordova plugin add cordova-plugin-admob-free --save
 ```
 
@@ -41,90 +41,15 @@ cordova plugin add cordova-plugin-admob-free --save
 
 Go to [AdMob portal](https://www.google.com/admob/), click "Monetize a new app" button to create new ad unit.
 
-### 2. Define configuration for different platforms.
+### 2. Display advertisements
 
-```js
-var admobid = {};
-if ( /(android)/i.test(navigator.userAgent) ) {  // for android
-  admobid = {
-    banner: 'ca-app-pub-xxx/xxx',
-    interstitial: 'ca-app-pub-xxx/xxx',
-    rewardvideo: 'ca-app-pub-xxx/xxx',
-  };
-} else {  // for ios
-  admobid = {
-    banner: 'ca-app-pub-xxx/xxx',
-    interstitial: 'ca-app-pub-xxx/xxx',
-    rewardvideo: 'ca-app-pub-xxx/xxx',
-  };
-}
-```
+#### [Banner Ad](https://ratson.github.io/cordova-plugin-admob-free/variable/index.html#static-variable-banner)
 
-### 3. Set options
+#### [Interstitial Ad](https://ratson.github.io/cordova-plugin-admob-free/variable/index.html#static-variable-interstitial)
 
-```js
-admob.setOptions({
-  publisherId: admobid.banner,
-  interstitialAdId: admobid.interstitial,
-  rewardVideoId: admobid.rewardvideo,
-  bannerAtTop: false,  // set to true, to put banner at top
-  overlap: true,  // set to true, to allow banner overlap webview
-  offsetTopBar: false,  // set to true to avoid ios7 status bar overlap
-  isTesting: false,  // receiving test ad
-  autoShow: false  // auto show interstitial ad when loaded
-})
-```
+#### [Reward Video Ad](https://ratson.github.io/cordova-plugin-admob-free/variable/index.html#static-variable-rewardvideo)
 
-Note that `admob` is not defined until `deviceready` event is triggered.
-
-Make sure `<script src="cordova.js"></script>` is in your HTML, otherwise `deviceready` event won't be triggered.
-
-
-### 4. Display advertisements
-
-#### Banner Ad
-
-```js
-// Create banner
-admob.prepareBanner()
-
-// Show the banner
-admob.showBanner()
-
-// Hide the banner
-admob.hideBanner()
-
-// Close the banner
-admob.removeBanner()
-```
-
-#### Interstitial Ad
-
-```js
-// prepare and load ad resource in background, e.g. at the beginning of game level
-admob.prepareInterstitial({
-  interstitialId: admobid.interstitial,
-  autoShow: false,
-})
-
-// show the interstitial later, e.g. at end of game level
-admob.showInterstitial()
-```
-
-#### Reward Video Ad
-
-```js
-// prepare and load ad resource in background, e.g. at the beginning of game level
-admob.prepareRewardVideo({
-  rewardVideoId: admobid.rewardvideo,
-})
-
-// show the RewardVideo later, e.g. at end of game level
-admob.showRewardVideo()
-```
-
-
-### 5. Profit
+### 3. Profit
 
 If you find this plugin useful, please [star it on Github](https://github.com/ratson/cordova-plugin-admob-free).
 
@@ -147,24 +72,8 @@ iOS Banner                                      |  iOS Interstitial
 
 ## API
 
-See [documentation page](https://ratson.github.io/cordova-plugin-admob-free/).
+See [documentation page](https://ratson.github.io/cordova-plugin-admob-free/identifiers.html).
 
-### Events
-```js
-document.addEventListener('onReceiveAd', function() {});
-document.addEventListener('onFailedToReceiveAd', function(data) {});
-document.addEventListener('onPresentAd', function() {});
-document.addEventListener('onDismissAd', function() {});
-document.addEventListener('onLeaveToAd', function() {});
-document.addEventListener('onReceiveInterstitialAd', function() {});
-document.addEventListener('onPresentInterstitialAd', function() {});
-document.addEventListener('onDismissInterstitialAd', function() {});
-document.addEventListener('onReceiveRewardVideoAd', function() {});
-document.addEventListener('onPresentRewardVideoAd', function() {});
-document.addEventListener('onPresentStartedRewardVideoAd', function() {});
-document.addEventListener('onDismissRewardVideoAd', function() {});
-document.addEventListener('onRewardedVideo', function(data) {});     // data.rewardType, data.rewardAmount
-```
 
 ## Status
 
