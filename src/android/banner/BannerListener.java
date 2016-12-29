@@ -49,7 +49,7 @@ class BannerListener extends AdListener {
         if (executor.shouldAutoShow() && !executor.bannerVisible) {
             executor.showAd(true, null);
         }
-        executor.fireAdEvent("admob.banner.events.LOAD", data);
+        executor.fireAdEvent("admob.banner.events.LOAD");
         executor.fireAdEvent("onReceiveAd");
     }
 
