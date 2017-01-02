@@ -1,1 +1,1 @@
-console.log("Can only be used with Cordova.");
+console.log('Can only be used with Cordova.')

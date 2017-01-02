@@ -1,2 +1,4 @@
-example/**
-www/**
+/example/**
+/gh-pages/**
+/www/**
+test.js
