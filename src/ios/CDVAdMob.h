@@ -51,7 +51,7 @@
 @property (assign) BOOL autoShowBanner;
 @property (assign) BOOL autoShowInterstitial;
 @property (assign) BOOL autoShowRewardVideo;
-@property (assign) NSObject* rewardedVideoLock; 
+@property (assign) NSObject* rewardedVideoLock;
 @property (assign) BOOL isRewardedVideoLoading;
 
 
