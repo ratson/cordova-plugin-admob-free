@@ -3,7 +3,7 @@
   "version": "0.5.1",
   "description": "Cordova AdMob Plugin for Google AdMob",
   "scripts": {
-    "clean": "rimraf dist www",
+    "clean": "rimraf coverage dist www",
     "build": "cross-env NODE_ENV=production rollup -c -o www/admob.js",
     "docs": "esdoc -c esdoc.json",
     "docs:commit": "cd gh-pages && git add -A . && git commit -a -m 'Update page'",
@@ -102,6 +102,7 @@
     "www"
   ],
   "jest": {
+    "collectCoverage": true,
     "testPathDirs": [
       "<rootDir>/tests/js"
     ]

@@ -4,5 +4,6 @@
 .idea
 *.iml
 node_modules/
+coverage/
 www/
 gh-pages/
