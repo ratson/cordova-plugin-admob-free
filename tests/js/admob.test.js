@@ -52,6 +52,13 @@ describe('Banner', () => {
 })
 
 describe('Interstitial', () => {
+  it('prepare() call correct native method', () => {
+    admob.interstitial.prepare(options, success, error)
+    expect(mockFn).toBeCalledWith(
+      expect.any(Function), expect.any(Function),
+      'AdMob', 'prepareInterstitial', [options])
+  })
+
   it('show() call correct native method', () => {
     admob.interstitial.show(success, error)
     expect(mockFn).toBeCalledWith(
