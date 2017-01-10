@@ -25,5 +25,5 @@
     </platform>
     <engine name="android" spec="~6.1.0" />
     <engine name="ios" spec="~4.3.1" />
-    <plugin name="cordova-plugin-admob-free" spec=".." />
+    <plugin name="cordova-plugin-admob-free" spec="../.." />
 </widget>
