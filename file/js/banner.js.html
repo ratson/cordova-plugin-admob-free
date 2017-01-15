@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="">
-  <title data-ice="title">Source | Cordova AdMob Plugin API Document</title>
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">js/banner.js | Cordova AdMob Plugin API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -56,75 +56,138 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">31/34</span></h1>
+<div class="content" data-ice="content"><h1 data-ice="title">js/banner.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import {buildEvents, exec, translateOptions} from &apos;./utils&apos;
 
-<table class="files-summary" data-ice="files" data-use-coverage="true">
-  <thead>
-    <tr>
-      <td>File</td>
-      <td>Identifier</td>
-      <td class="coverage">Document</td>
-      <td style="display: none;">Size</td>
-      <td style="display: none;">Lines</td>
-      <td style="display: none;">Updated</td>
-    </tr>
-  </thead>
-  <tbody>
-    
-  <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/js/admob.js.html">js/admob.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-AD_SIZE">AD_SIZE</a></span>
-<span><a href="variable/index.html#static-variable-banner">banner</a></span>
-<span><a href="function/index.html#static-function-createBannerView">createBannerView</a></span>
-<span><a href="function/index.html#static-function-createInterstitialView">createInterstitialView</a></span>
-<span><a href="function/index.html#static-function-destroyBannerView">destroyBannerView</a></span>
-<span><a href="variable/index.html#static-variable-interstitial">interstitial</a></span>
-<span><a href="function/index.html#static-function-prepareInterstitial">prepareInterstitial</a></span>
-<span><a href="function/index.html#static-function-requestInterstitialAd">requestInterstitialAd</a></span>
-<span><a href="variable/index.html#static-variable-rewardvideo">rewardvideo</a></span>
-<span><a href="function/index.html#static-function-setOptions">setOptions</a></span>
-<span><a href="function/index.html#static-function-showAd">showAd</a></span>
-<span><a href="function/index.html#static-function-showInterstitial">showInterstitial</a></span>
-<span><a href="function/index.html#static-function-showInterstitialAd">showInterstitialAd</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">13/13</span></td>
-      <td style="display: none;" data-ice="size">5678 byte</td>
-      <td style="display: none;" data-ice="lines">192</td>
-      <td style="display: none;" data-ice="updated">2017-01-01 16:31:00 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/js/banner.js.html#errorLines=59">js/banner.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/js/banner.js~Banner.html">Banner</a></span></td>
-      <td class="coverage"><span data-ice="coverage">88 %</span><span data-ice="coverageCount" class="coverage-count">8/9</span></td>
-      <td style="display: none;" data-ice="size">2714 byte</td>
-      <td style="display: none;" data-ice="lines">129</td>
-      <td style="display: none;" data-ice="updated">2017-01-01 16:31:00 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/js/interstitial.js.html#errorLines=25">js/interstitial.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/js/interstitial.js~Interstitial.html">Interstitial</a></span></td>
-      <td class="coverage"><span data-ice="coverage">83 %</span><span data-ice="coverageCount" class="coverage-count">5/6</span></td>
-      <td style="display: none;" data-ice="size">1301 byte</td>
-      <td style="display: none;" data-ice="lines">70</td>
-      <td style="display: none;" data-ice="updated">2017-01-01 16:31:00 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/js/reward-video.js.html#errorLines=27">js/reward-video.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/js/reward-video.js~RewardVideo.html">RewardVideo</a></span></td>
-      <td class="coverage"><span data-ice="coverage">83 %</span><span data-ice="coverageCount" class="coverage-count">5/6</span></td>
-      <td style="display: none;" data-ice="size">1308 byte</td>
-      <td style="display: none;" data-ice="lines">72</td>
-      <td style="display: none;" data-ice="updated">2017-01-01 16:31:00 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/js/utils.js.html">js/utils.js</a></span></td>
-      <td data-ice="identifier" class="identifiers">-</td>
-      <td class="coverage"><span data-ice="coverage">-</span></td>
-      <td style="display: none;" data-ice="size">1622 byte</td>
-      <td style="display: none;" data-ice="lines">82</td>
-      <td style="display: none;" data-ice="updated">2017-01-01 16:31:00 (UTC)</td>
-    </tr>
-</tbody>
-</table>
+/**
+ * Banner config object.
+ * @typedef {Object} BannerConfig
+ * @property {string} [id=TESTING_AD_ID] - Ad Unit ID
+ * @property {boolean} [isTesting=false] - receiving test ad
+ * @property {boolean} [autoShow=false] - auto show ad when loaded
+ * @property {boolean} [bannerAtTop=false] - set to true, to put banner at top
+ * @property {boolean} [overlap=true] - set to true, to allow banner overlap webview
+ * @property {boolean} [offsetTopBar=false] - set to true to avoid ios7 status bar overlap
+ * @property {string} [size=SMART_BANNER] - {@link BANNER_SIZE}
+ */
+
+const events = buildEvents(&apos;banner&apos;, [
+  &apos;LOAD&apos;,
+  &apos;LOAD_FAIL&apos;,
+  &apos;OPEN&apos;,
+  &apos;CLOSE&apos;,
+  &apos;EXIT_APP&apos;,
+])
+
+/**
+ * @typedef {Object} BANNER_SIZE
+ * @property {string} BANNER - BANNER
+ * @property {string} IAB_BANNER - IAB_BANNER
+ * @property {string} IAB_LEADERBOARD - IAB_LEADERBOARD
+ * @property {string} IAB_MRECT - IAB_MRECT
+ * @property {string} LARGE_BANNER - LARGE_BANNER
+ * @property {string} SMART_BANNER - SMART_BANNER
+ * @property {string} FLUID - FLUID
+ */
+/**
+ * @constant
+ * @type {Object}
+ */
+const sizes = {
+  BANNER: &apos;BANNER&apos;,
+  IAB_BANNER: &apos;IAB_BANNER&apos;,
+  IAB_LEADERBOARD: &apos;IAB_LEADERBOARD&apos;,
+  IAB_MRECT: &apos;IAB_MRECT&apos;,
+  LARGE_BANNER: &apos;LARGE_BANNER&apos;,
+  SMART_BANNER: &apos;SMART_BANNER&apos;,
+  FLUID: &apos;FLUID&apos;,
+  // android-only
+  FULL_BANNER: &apos;FULL_BANNER&apos;,
+  LEADERBOARD: &apos;LEADERBOARD&apos;,
+  MEDIUM_RECTANGLE: &apos;MEDIUM_RECTANGLE&apos;,
+  SEARCH: &apos;SEARCH&apos;,
+  WIDE_SKYSCRAPER: &apos;WIDE_SKYSCRAPER&apos;,
+}
+
+/**
+ * @protected
+ * @desc
+ * See usage in {@link banner}.
+ */
+class Banner {
+  static events = events
+
+  /**
+   * Banner sizes
+   * @type {BANNER_SIZE}
+   */
+  static sizes = sizes
+
+  /**
+   * @protected
+   * @param {BannerConfig} opts - initial config.
+   */
+  constructor(opts) {
+    this.config({
+      size: sizes.SMART_BANNER,
+      ...opts,
+    })
+  }
+
+  /**
+   * Update config.
+   * @param {BannerConfig} opts - new config.
+   * @return {BannerConfig} updated config.
+   */
+  config(opts) {
+    this._config = {
+      ...this._config,
+      ...opts,
+    }
+    return this._config
+  }
+
+  /**
+   * Create banner.
+   * @return {Promise}
+   */
+  prepare() {
+    const options = {
+      publisherId: this._config.id,
+      ...this._config,
+    }
+    delete options.id
+    return exec(&apos;createBannerView&apos;, [translateOptions(options)])
+  }
+
+  /**
+   * Show the banner.
+   * @return {Promise}
+   */
+  show() {
+    return exec(&apos;showAd&apos;, [true])
+  }
+
+  /**
+   * Hide the banner.
+   * @return {Promise}
+   */
+  hide() {
+    return exec(&apos;showAd&apos;, [false])
+  }
+
+  /**
+   * Remove the banner.
+   * @return {Promise}
+   */
+  remove() {
+    return exec(&apos;destroyBannerView&apos;, [])
+  }
+}
+
+export {Banner}
+</code></pre>
+
 </div>
 
 <footer class="footer">

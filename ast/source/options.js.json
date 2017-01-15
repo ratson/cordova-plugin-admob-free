@@ -1,0 +1,603 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 1263,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 36,
+      "column": 0
+    }
+  },
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "start": 0,
+      "end": 46,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 46
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "start": 8,
+          "end": 12,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 8
+            },
+            "end": {
+              "line": 1,
+              "column": 12
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "start": 8,
+            "end": 12,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 8
+              },
+              "end": {
+                "line": 1,
+                "column": 12
+              }
+            },
+            "name": "exec"
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 8,
+            "end": 12,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 8
+              },
+              "end": {
+                "line": 1,
+                "column": 12
+              }
+            },
+            "name": "exec"
+          }
+        },
+        {
+          "type": "ImportSpecifier",
+          "start": 14,
+          "end": 30,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 14
+            },
+            "end": {
+              "line": 1,
+              "column": 30
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "start": 14,
+            "end": 30,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 14
+              },
+              "end": {
+                "line": 1,
+                "column": 30
+              }
+            },
+            "name": "translateOptions"
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 14,
+            "end": 30,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 14
+              },
+              "end": {
+                "line": 1,
+                "column": 30
+              }
+            },
+            "name": "translateOptions"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 37,
+        "end": 46,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 37
+          },
+          "end": {
+            "line": 1,
+            "column": 46
+          }
+        },
+        "value": "./utils",
+        "rawValue": "./utils",
+        "raw": "'./utils'"
+      }
+    },
+    {
+      "type": "Identifier",
+      "start": 48,
+      "end": 66,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 18
+        }
+      },
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "start": 54,
+          "end": 66,
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 6
+            },
+            "end": {
+              "line": 3,
+              "column": 18
+            }
+          },
+          "id": {
+            "type": "Identifier",
+            "start": 54,
+            "end": 61,
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 6
+              },
+              "end": {
+                "line": 3,
+                "column": 13
+              }
+            },
+            "name": "options"
+          },
+          "init": {
+            "type": "ObjectExpression",
+            "start": 64,
+            "end": 66,
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 16
+              },
+              "end": {
+                "line": 3,
+                "column": 18
+              }
+            },
+            "properties": [],
+            "leadingComments": null,
+            "trailingComments": null
+          },
+          "trailingComments": null
+        }
+      ],
+      "kind": "const",
+      "trailingComments": [],
+      "name": "_",
+      "leadingComments": []
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 1168,
+      "end": 1238,
+      "loc": {
+        "start": {
+          "line": 31,
+          "column": 0
+        },
+        "end": {
+          "line": 33,
+          "column": 1
+        }
+      },
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "start": 1175,
+        "end": 1238,
+        "loc": {
+          "start": {
+            "line": 31,
+            "column": 7
+          },
+          "end": {
+            "line": 33,
+            "column": 1
+          }
+        },
+        "id": {
+          "type": "Identifier",
+          "start": 1184,
+          "end": 1190,
+          "loc": {
+            "start": {
+              "line": 31,
+              "column": 16
+            },
+            "end": {
+              "line": 31,
+              "column": 22
+            }
+          },
+          "name": "config",
+          "leadingComments": null
+        },
+        "generator": false,
+        "expression": false,
+        "async": false,
+        "params": [
+          {
+            "type": "Identifier",
+            "start": 1191,
+            "end": 1195,
+            "loc": {
+              "start": {
+                "line": 31,
+                "column": 23
+              },
+              "end": {
+                "line": 31,
+                "column": 27
+              }
+            },
+            "name": "opts"
+          }
+        ],
+        "body": {
+          "type": "BlockStatement",
+          "start": 1197,
+          "end": 1238,
+          "loc": {
+            "start": {
+              "line": 31,
+              "column": 29
+            },
+            "end": {
+              "line": 33,
+              "column": 1
+            }
+          },
+          "body": [
+            {
+              "type": "ReturnStatement",
+              "start": 1201,
+              "end": 1236,
+              "loc": {
+                "start": {
+                  "line": 32,
+                  "column": 2
+                },
+                "end": {
+                  "line": 32,
+                  "column": 37
+                }
+              },
+              "argument": {
+                "type": "CallExpression",
+                "start": 1208,
+                "end": 1236,
+                "loc": {
+                  "start": {
+                    "line": 32,
+                    "column": 9
+                  },
+                  "end": {
+                    "line": 32,
+                    "column": 37
+                  }
+                },
+                "callee": {
+                  "type": "MemberExpression",
+                  "start": 1208,
+                  "end": 1221,
+                  "loc": {
+                    "start": {
+                      "line": 32,
+                      "column": 9
+                    },
+                    "end": {
+                      "line": 32,
+                      "column": 22
+                    }
+                  },
+                  "object": {
+                    "type": "Identifier",
+                    "start": 1208,
+                    "end": 1214,
+                    "loc": {
+                      "start": {
+                        "line": 32,
+                        "column": 9
+                      },
+                      "end": {
+                        "line": 32,
+                        "column": 15
+                      }
+                    },
+                    "name": "Object"
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "start": 1215,
+                    "end": 1221,
+                    "loc": {
+                      "start": {
+                        "line": 32,
+                        "column": 16
+                      },
+                      "end": {
+                        "line": 32,
+                        "column": 22
+                      }
+                    },
+                    "name": "assign"
+                  },
+                  "computed": false
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "start": 1222,
+                    "end": 1229,
+                    "loc": {
+                      "start": {
+                        "line": 32,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 32,
+                        "column": 30
+                      }
+                    },
+                    "name": "options"
+                  },
+                  {
+                    "type": "Identifier",
+                    "start": 1231,
+                    "end": 1235,
+                    "loc": {
+                      "start": {
+                        "line": 32,
+                        "column": 32
+                      },
+                      "end": {
+                        "line": 32,
+                        "column": 36
+                      }
+                    },
+                    "name": "opts"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n *\n * @param {Object} options\n * @param {string} options.publisherId\n * @param {string} options.interstitialAdId\n *\n * @param {boolean} [options.bannerAtTop=false]    Set to true, to put banner at top\n * @param {boolean} [options.overlap=true]   Set to true, to allow banner overlap webview\n * @param {boolean} [options.offsetTopBar=false]    Set to true to avoid ios7 status bar overlap\n * @param {boolean} [options.isTesting=false]    Receiving test ad\n * @param {boolean} [options.autoShow=false]    Auto show interstitial ad when loaded\n *\n * @param {boolean|null} [options.forChild=null]\n * Default is not calling `tagForChildDirectedTreatment`.\n * Set to \"true\" for `tagForChildDirectedTreatment(true)`.\n * Set to \"false\" for `tagForChildDirectedTreatment(false)`.\n *\n * @param {boolean|null} [options.forFamily=null]\n * Android-only.\n * Default is not calling `setIsDesignedForFamilies`.\n * Set to \"true\" for `setIsDesignedForFamilies(true)`.\n * Set to \"false\" for `setIsDesignedForFamilies(false)`.\n *\n * @param {function()} [successCallback]\n * @param {function()} [failureCallback]\n ",
+            "start": 68,
+            "end": 1167,
+            "loc": {
+              "start": {
+                "line": 5,
+                "column": 0
+              },
+              "end": {
+                "line": 30,
+                "column": 3
+              }
+            },
+            "range": [
+              68,
+              1167
+            ]
+          }
+        ],
+        "trailingComments": []
+      },
+      "specifiers": [],
+      "source": null,
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n *\n * @param {Object} options\n * @param {string} options.publisherId\n * @param {string} options.interstitialAdId\n *\n * @param {boolean} [options.bannerAtTop=false]    Set to true, to put banner at top\n * @param {boolean} [options.overlap=true]   Set to true, to allow banner overlap webview\n * @param {boolean} [options.offsetTopBar=false]    Set to true to avoid ios7 status bar overlap\n * @param {boolean} [options.isTesting=false]    Receiving test ad\n * @param {boolean} [options.autoShow=false]    Auto show interstitial ad when loaded\n *\n * @param {boolean|null} [options.forChild=null]\n * Default is not calling `tagForChildDirectedTreatment`.\n * Set to \"true\" for `tagForChildDirectedTreatment(true)`.\n * Set to \"false\" for `tagForChildDirectedTreatment(false)`.\n *\n * @param {boolean|null} [options.forFamily=null]\n * Android-only.\n * Default is not calling `setIsDesignedForFamilies`.\n * Set to \"true\" for `setIsDesignedForFamilies(true)`.\n * Set to \"false\" for `setIsDesignedForFamilies(false)`.\n *\n * @param {function()} [successCallback]\n * @param {function()} [failureCallback]\n ",
+          "start": 68,
+          "end": 1167,
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 0
+            },
+            "end": {
+              "line": 30,
+              "column": 3
+            }
+          },
+          "range": [
+            68,
+            1167
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Identifier",
+      "start": 1240,
+      "end": 1262,
+      "loc": {
+        "start": {
+          "line": 35,
+          "column": 0
+        },
+        "end": {
+          "line": 35,
+          "column": 22
+        }
+      },
+      "declaration": {
+        "type": "Identifier",
+        "start": 1255,
+        "end": 1262,
+        "loc": {
+          "start": {
+            "line": 35,
+            "column": 15
+          },
+          "end": {
+            "line": 35,
+            "column": 22
+          }
+        },
+        "name": "options"
+      },
+      "name": "_",
+      "leadingComments": [],
+      "trailingComments": []
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "start": 1240,
+      "end": 1262,
+      "loc": {
+        "start": {
+          "line": 35,
+          "column": 0
+        },
+        "end": {
+          "line": 35,
+          "column": 22
+        }
+      },
+      "declaration": {
+        "type": "VariableDeclaration",
+        "start": 48,
+        "end": 66,
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 18
+          }
+        },
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "start": 54,
+            "end": 66,
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 6
+              },
+              "end": {
+                "line": 3,
+                "column": 18
+              }
+            },
+            "id": {
+              "type": "Identifier",
+              "start": 54,
+              "end": 61,
+              "loc": {
+                "start": {
+                  "line": 3,
+                  "column": 6
+                },
+                "end": {
+                  "line": 3,
+                  "column": 13
+                }
+              },
+              "name": "options"
+            },
+            "init": {
+              "type": "ObjectExpression",
+              "start": 64,
+              "end": 66,
+              "loc": {
+                "start": {
+                  "line": 3,
+                  "column": 16
+                },
+                "end": {
+                  "line": 3,
+                  "column": 18
+                }
+              },
+              "properties": [],
+              "leadingComments": null,
+              "trailingComments": null
+            },
+            "trailingComments": null
+          }
+        ],
+        "kind": "const",
+        "trailingComments": [
+          {
+            "type": "Block",
+            "value": "*\n *\n * @param {Object} options\n * @param {string} options.publisherId\n * @param {string} options.interstitialAdId\n *\n * @param {boolean} [options.bannerAtTop=false]    Set to true, to put banner at top\n * @param {boolean} [options.overlap=true]   Set to true, to allow banner overlap webview\n * @param {boolean} [options.offsetTopBar=false]    Set to true to avoid ios7 status bar overlap\n * @param {boolean} [options.isTesting=false]    Receiving test ad\n * @param {boolean} [options.autoShow=false]    Auto show interstitial ad when loaded\n *\n * @param {boolean|null} [options.forChild=null]\n * Default is not calling `tagForChildDirectedTreatment`.\n * Set to \"true\" for `tagForChildDirectedTreatment(true)`.\n * Set to \"false\" for `tagForChildDirectedTreatment(false)`.\n *\n * @param {boolean|null} [options.forFamily=null]\n * Android-only.\n * Default is not calling `setIsDesignedForFamilies`.\n * Set to \"true\" for `setIsDesignedForFamilies(true)`.\n * Set to \"false\" for `setIsDesignedForFamilies(false)`.\n *\n * @param {function()} [successCallback]\n * @param {function()} [failureCallback]\n ",
+            "start": 68,
+            "end": 1167,
+            "loc": {
+              "start": {
+                "line": 5,
+                "column": 0
+              },
+              "end": {
+                "line": 30,
+                "column": 3
+              }
+            },
+            "range": [
+              68,
+              1167
+            ]
+          }
+        ],
+        "leadingComments": []
+      }
+    }
+  ]
+}

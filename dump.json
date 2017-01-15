@@ -2,40 +2,35 @@
   {
     "__docId__": 0,
     "kind": "file",
+    "name": "js/admob.js",
+    "content": "/* eslint-disable no-console */\nimport exec from 'cordova/exec'\n\nimport {wrapCallbacks, translateOptions} from './utils'\n\nimport {Banner} from './banner'\nimport {Interstitial} from './interstitial'\nimport {RewardVideo} from './reward-video'\n\n/**\n * @type {Banner}\n * @since 0.6\n * @example\n * admob.banner.config({\n *  id: 'ca-app-pub-xxx/xxx',\n * })\n *\n * // Create banner\n * admob.banner.prepare()\n *\n * // Show the banner\n * admob.banner.show()\n *\n * // Hide the banner\n * admob.banner.hide()\n *\n * // Remove the banner\n * admob.banner.remove()\n */\nexport const banner = new Banner()\n\n/**\n * @type {Interstitial}\n * @since 0.6\n * @example\n * admob.interstitial.config({\n *  id: 'ca-app-pub-xxx/xxx',\n * })\n *\n * admob.interstitial.prepare()\n *\n * admob.interstitial.show()\n */\nexport const interstitial = new Interstitial()\n\n/**\n * @type {RewardVideo}\n * @since 0.6\n * @example\n * admob.rewardvideo.config({\n *  id: 'ca-app-pub-xxx/xxx',\n * })\n *\n * admob.rewardvideo.prepare()\n *\n * admob.rewardvideo.show()\n */\nexport const rewardvideo = new RewardVideo()\n\n// Old APIs\n\n/**\n *\n * @deprecated since version 0.6\n * @param {Object} options\n * @param {string} options.publisherId\n * @param {string} options.interstitialAdId\n *\n * @param {boolean} [options.bannerAtTop=false]    Set to true, to put banner at top\n * @param {boolean} [options.overlap=true]   Set to true, to allow banner overlap webview\n * @param {boolean} [options.offsetTopBar=false]    Set to true to avoid ios7 status bar overlap\n * @param {boolean} [options.isTesting=false]    Receiving test ad\n * @param {boolean} [options.autoShow=false]    Auto show interstitial ad when loaded\n *\n * @param {boolean|null} [options.forChild=null]\n * Default is not calling `tagForChildDirectedTreatment`.\n * Set to \"true\" for `tagForChildDirectedTreatment(true)`.\n * Set to \"false\" for `tagForChildDirectedTreatment(false)`.\n *\n * @param {boolean|null} [options.forFamily=null]\n * Android-only.\n * Default is not calling `setIsDesignedForFamilies`.\n * Set to \"true\" for `setIsDesignedForFamilies(true)`.\n * Set to \"false\" for `setIsDesignedForFamilies(false)`.\n *\n * @param {function()} [successCallback]\n * @param {function()} [failureCallback]\n */\nexport function setOptions(options, successCallback, failureCallback) {\n  if (typeof options === 'object') {\n    Object.keys(options).forEach((k) => {\n      switch (k) {\n        case 'publisherId':\n          banner._config.id = options[k]\n          break\n        case 'bannerAtTop':\n        case 'overlap':\n        case 'offsetTopBar':\n          banner._config[k] = options[k]\n          break\n        case 'interstitialAdId':\n          interstitial._config.id = options[k]\n          break\n        case 'rewardVideoId':\n          rewardvideo._config.id = options[k]\n          break\n        case 'isTesting':\n        case 'autoShow':\n          banner._config[k] = options[k]\n          interstitial._config[k] = options[k]\n          rewardvideo._config[k] = options[k]\n          break\n        default:\n      }\n    })\n    exec(successCallback, failureCallback, 'AdMob', 'setOptions', [translateOptions(options)])\n  } else if (typeof failureCallback === 'function') {\n    failureCallback('options should be specified.')\n  }\n}\n\n/**\n * Ad sizes.\n * @constant\n * @type {BANNER_SIZE}\n * @deprecated since version 0.6\n */\nexport const AD_SIZE = Banner.sizes\n\n/**\n * @deprecated since version 0.6\n */\nexport function createBannerView(options = {}, successCallback, failureCallback) {\n  console.warn('Use admob.banner.prepare() instead.')\n  exec(successCallback, failureCallback, 'AdMob', 'createBannerView', [translateOptions(options)])\n}\n\n/**\n * @deprecated since version 0.6\n */\nexport function destroyBannerView(options = {}, successCallback, failureCallback) {\n  console.warn('Use admob.banner.remove() instead.')\n  exec(successCallback, failureCallback, 'AdMob', 'destroyBannerView', [])\n}\n\n/**\n * @deprecated since version 0.6\n */\nexport function showAd(show = true, successCallback, failureCallback) {\n  console.warn('Use admob.banner.show() and admob.banner.hide() instead.')\n  exec(successCallback, failureCallback, 'AdMob', 'showAd', [show])\n}\n\n/**\n * @deprecated since version 0.6\n */\nexport function createInterstitialView(options, successCallback, failureCallback) {\n  console.warn('Use admob.interstitial.prepare() instead, it will do both createInterstitialView() and requestInterstitialAd().')\n  exec(successCallback, failureCallback, 'AdMob', 'createInterstitialView', [translateOptions(options)])\n}\n\n/**\n * @deprecated since version 0.6\n */\nexport function requestInterstitialAd(options = {}, successCallback, failureCallback) {\n  console.warn('Use admob.interstitial.prepare() instead, it will do both createInterstitialView() and requestInterstitialAd().')\n  exec(successCallback, failureCallback, 'AdMob', 'requestInterstitialAd', [translateOptions(options)])\n}\n\n/**\n * @deprecated since version 0.6\n */\nexport function prepareInterstitial(options = {}, successCallback, failureCallback) {\n  console.warn('Use admob.interstitial.prepare() instead.')\n  exec(successCallback, failureCallback, 'AdMob', 'prepareInterstitial', [translateOptions(options)])\n}\n\n/**\n * @deprecated since version 0.6\n */\nexport function showInterstitial(successCallback, failureCallback) {\n  console.warn('Use admob.interstitial.show() instead.')\n  wrapCallbacks(interstitial.show(), successCallback, failureCallback)\n}\n\n/**\n * @deprecated since version 0.6\n */\nexport function showInterstitialAd(show = true, successCallback, failureCallback) {\n  console.warn('Use admob.interstitial.show() instead.')\n  exec(successCallback, failureCallback, 'AdMob', 'showInterstitialAd', [show])\n}\n",
     "static": true,
-    "variation": null,
-    "name": "js/AdMob.js",
-    "memberof": null,
-    "longname": "js/AdMob.js",
+    "longname": "js/admob.js",
     "access": null,
     "description": null,
-    "lineNumber": 1,
-    "content": "import exec from 'cordova/exec'\n\n/**\n * Ad sizes.\n * @constant\n * @type {Object}\n */\nexport const AD_SIZE = {\n  BANNER: 'BANNER',\n  IAB_BANNER: 'IAB_BANNER',\n  IAB_LEADERBOARD: 'IAB_LEADERBOARD',\n  IAB_MRECT: 'IAB_MRECT',\n  LARGE_BANNER: 'LARGE_BANNER',\n  SMART_BANNER: 'SMART_BANNER',\n  FLUID: 'FLUID',\n  // android-only\n  FULL_BANNER: 'FULL_BANNER',\n  LEADERBOARD: 'LEADERBOARD',\n  MEDIUM_RECTANGLE: 'MEDIUM_RECTANGLE',\n  SEARCH: 'SEARCH',\n  WIDE_SKYSCRAPER: 'WIDE_SKYSCRAPER',\n}\n\nfunction boolean2string(x) {\n  if (x === null) {\n    return ''\n  }\n  if (x === true) {\n    return 'yes'\n  }\n  if (x === false) {\n    return 'no'\n  }\n  return x\n}\n\nfunction isUndefined(x) {\n  return typeof x === 'undefined'\n}\n\nfunction translateOptions(options) {\n  const opts = {}\n  if (!isUndefined(options.forChild)) {\n    opts.forChild = boolean2string(options.forChild)\n    if (typeof options.forChild === 'string') {\n      console.warn('`forChild` will not accept string in future, pass boolean instead')\n    }\n  }\n  if (!isUndefined(options.forFamily)) {\n    opts.forFamily = boolean2string(options.forFamily)\n    if (typeof options.forFamily === 'string') {\n      console.warn('`forFamily` will not accept string in future, pass boolean instead')\n    }\n  }\n  return Object.assign({}, options, opts)\n}\n// export for testing\nexport const _translateOptions = translateOptions\n\n/**\n *\n * @param {Object} options\n * @param {string} options.publisherId\n * @param {string} options.interstitialAdId\n *\n * @param {boolean} [options.bannerAtTop=false]    Set to true, to put banner at top\n * @param {boolean} [options.overlap=true]   Set to true, to allow banner overlap webview\n * @param {boolean} [options.offsetTopBar=false]    Set to true to avoid ios7 status bar overlap\n * @param {boolean} [options.isTesting=false]    Receiving test ad\n * @param {boolean} [options.autoShow=false]    Auto show interstitial ad when loaded\n *\n * @param {boolean|null} [options.forChild=null]\n * Default is not calling `tagForChildDirectedTreatment`.\n * Set to \"true\" for `tagForChildDirectedTreatment(true)`.\n * Set to \"false\" for `tagForChildDirectedTreatment(false)`.\n *\n * @param {boolean|null} [options.forFamily=null]\n * Android-only.\n * Default is not calling `setIsDesignedForFamilies`.\n * Set to \"true\" for `setIsDesignedForFamilies(true)`.\n * Set to \"false\" for `setIsDesignedForFamilies(false)`.\n *\n * @param {function()} [successCallback]\n * @param {function()} [failureCallback]\n */\nexport function setOptions(options, successCallback, failureCallback) {\n  if (typeof options === 'object') {\n    cordova.exec(successCallback, failureCallback, 'AdMob', 'setOptions', [translateOptions(options)])\n  } else if (typeof failureCallback === 'function') {\n    failureCallback('options should be specified.')\n  }\n}\n\nexport function createBannerView(options = {}, successCallback, failureCallback) {\n  cordova.exec(successCallback, failureCallback, 'AdMob', 'createBannerView', [translateOptions(options)])\n}\n\nexport function createInterstitialView(options, successCallback, failureCallback) {\n  cordova.exec(successCallback, failureCallback, 'AdMob', 'createInterstitialView', [translateOptions(options)])\n}\n\nexport function destroyBannerView(options = {}, successCallback, failureCallback) {\n  cordova.exec(successCallback, failureCallback, 'AdMob', 'destroyBannerView', [])\n}\n\nexport function requestInterstitialAd(options = {}, successCallback, failureCallback) {\n  cordova.exec(successCallback, failureCallback, 'AdMob', 'requestInterstitialAd', [translateOptions(options)])\n}\n\nexport function showAd(show = true, successCallback, failureCallback) {\n  cordova.exec(successCallback, failureCallback, 'AdMob', 'showAd', [show])\n}\n\nexport function showInterstitialAd(show = true, successCallback, failureCallback) {\n  cordova.exec(successCallback, failureCallback, 'AdMob', 'showInterstitialAd', [show])\n}\n\n// emulate cordova-admob-pro interface\n\nexport function prepareInterstitial(args, successCallback, failureCallback) {\n  createInterstitialView(args, successCallback, failureCallback)\n  requestInterstitialAd(args, successCallback, failureCallback)\n}\n\nexport function showInterstitial(successCallback, failureCallback) {\n  showInterstitialAd(true, successCallback, failureCallback)\n}\n"
+    "lineNumber": 1
   },
   {
     "__docId__": 1,
     "kind": "variable",
+    "name": "banner",
+    "memberof": "js/admob.js",
     "static": true,
-    "variation": null,
-    "name": "AD_SIZE",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~AD_SIZE",
+    "longname": "js/admob.js~banner",
     "access": null,
     "export": true,
-    "importPath": "cordova-plugin-admob-free/AdMob",
-    "importStyle": "{AD_SIZE}",
-    "description": "Ad sizes.",
-    "lineNumber": 8,
-    "unknown": [
-      {
-        "tagName": "@constant",
-        "tagValue": ""
-      }
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{banner}",
+    "description": "",
+    "examples": [
+      "admob.banner.config({\n id: 'ca-app-pub-xxx/xxx',\n})\n\n// Create banner\nadmob.banner.prepare()\n\n// Show the banner\nadmob.banner.show()\n\n// Hide the banner\nadmob.banner.hide()\n\n// Remove the banner\nadmob.banner.remove()"
     ],
+    "lineNumber": 30,
+    "since": "0.6",
     "type": {
       "nullable": null,
       "types": [
-        "Object"
+        "Banner"
       ],
       "spread": false,
       "description": null
@@ -43,129 +38,72 @@
   },
   {
     "__docId__": 2,
-    "kind": "function",
+    "kind": "variable",
+    "name": "interstitial",
+    "memberof": "js/admob.js",
     "static": true,
-    "variation": null,
-    "name": "boolean2string",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~boolean2string",
+    "longname": "js/admob.js~interstitial",
     "access": null,
-    "export": false,
-    "importPath": "cordova-plugin-admob-free/AdMob",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 24,
-    "undocument": true,
-    "params": [
-      {
-        "name": "x",
-        "types": [
-          "*"
-        ]
-      }
+    "export": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{interstitial}",
+    "description": "",
+    "examples": [
+      "admob.interstitial.config({\n id: 'ca-app-pub-xxx/xxx',\n})\n\nadmob.interstitial.prepare()\n\nadmob.interstitial.show()"
     ],
-    "return": {
+    "lineNumber": 44,
+    "since": "0.6",
+    "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
-    },
-    "generator": false
+        "Interstitial"
+      ],
+      "spread": false,
+      "description": null
+    }
   },
   {
     "__docId__": 3,
-    "kind": "function",
+    "kind": "variable",
+    "name": "rewardvideo",
+    "memberof": "js/admob.js",
     "static": true,
-    "variation": null,
-    "name": "isUndefined",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~isUndefined",
+    "longname": "js/admob.js~rewardvideo",
     "access": null,
-    "export": false,
-    "importPath": "cordova-plugin-admob-free/AdMob",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 37,
-    "undocument": true,
-    "params": [
-      {
-        "name": "x",
-        "types": [
-          "*"
-        ]
-      }
+    "export": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{rewardvideo}",
+    "description": "",
+    "examples": [
+      "admob.rewardvideo.config({\n id: 'ca-app-pub-xxx/xxx',\n})\n\nadmob.rewardvideo.prepare()\n\nadmob.rewardvideo.show()"
     ],
-    "return": {
+    "lineNumber": 58,
+    "since": "0.6",
+    "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
-    },
-    "generator": false
+        "RewardVideo"
+      ],
+      "spread": false,
+      "description": null
+    }
   },
   {
     "__docId__": 4,
     "kind": "function",
-    "static": true,
-    "variation": null,
-    "name": "translateOptions",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~translateOptions",
-    "access": null,
-    "export": false,
-    "importPath": "cordova-plugin-admob-free/AdMob",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 41,
-    "undocument": true,
-    "params": [
-      {
-        "name": "options",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "generator": false
-  },
-  {
-    "__docId__": 5,
-    "kind": "variable",
-    "static": true,
-    "variation": null,
-    "name": "_translateOptions",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~_translateOptions",
-    "access": null,
-    "export": true,
-    "importPath": "cordova-plugin-admob-free/AdMob",
-    "importStyle": "{_translateOptions}",
-    "description": null,
-    "lineNumber": 58,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 6,
-    "kind": "function",
-    "static": true,
-    "variation": null,
     "name": "setOptions",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~setOptions",
+    "memberof": "js/admob.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "js/admob.js~setOptions",
     "access": null,
     "export": true,
-    "importPath": "cordova-plugin-admob-free/AdMob",
+    "importPath": "cordova-plugin-admob-free/admob",
     "importStyle": "{setOptions}",
     "description": "",
-    "lineNumber": 86,
+    "lineNumber": 89,
+    "deprecated": "since version 0.6",
     "params": [
       {
         "nullable": null,
@@ -303,24 +241,93 @@
         "name": "failureCallback",
         "description": ""
       }
+    ]
+  },
+  {
+    "__docId__": 5,
+    "kind": "variable",
+    "name": "AD_SIZE",
+    "memberof": "js/admob.js",
+    "static": true,
+    "longname": "js/admob.js~AD_SIZE",
+    "access": null,
+    "export": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{AD_SIZE}",
+    "description": "Ad sizes.",
+    "lineNumber": 128,
+    "deprecated": "since version 0.6",
+    "unknown": [
+      {
+        "tagName": "@constant",
+        "tagValue": ""
+      }
     ],
-    "generator": false
+    "type": {
+      "nullable": null,
+      "types": [
+        "BANNER_SIZE"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 6,
+    "kind": "function",
+    "name": "createBannerView",
+    "memberof": "js/admob.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "js/admob.js~createBannerView",
+    "access": null,
+    "export": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{createBannerView}",
+    "description": "",
+    "lineNumber": 133,
+    "deprecated": "since version 0.6",
+    "params": [
+      {
+        "name": "options",
+        "optional": true,
+        "types": [
+          "{}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      },
+      {
+        "name": "successCallback",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "failureCallback",
+        "types": [
+          "*"
+        ]
+      }
+    ]
   },
   {
     "__docId__": 7,
     "kind": "function",
+    "name": "destroyBannerView",
+    "memberof": "js/admob.js",
+    "generator": false,
+    "async": false,
     "static": true,
-    "variation": null,
-    "name": "createBannerView",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~createBannerView",
+    "longname": "js/admob.js~destroyBannerView",
     "access": null,
     "export": true,
-    "importPath": "cordova-plugin-admob-free/AdMob",
-    "importStyle": "{createBannerView}",
-    "description": null,
-    "lineNumber": 94,
-    "undocument": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{destroyBannerView}",
+    "description": "",
+    "lineNumber": 141,
+    "deprecated": "since version 0.6",
     "params": [
       {
         "name": "options",
@@ -343,30 +350,33 @@
           "*"
         ]
       }
-    ],
-    "generator": false
+    ]
   },
   {
     "__docId__": 8,
     "kind": "function",
+    "name": "showAd",
+    "memberof": "js/admob.js",
+    "generator": false,
+    "async": false,
     "static": true,
-    "variation": null,
-    "name": "createInterstitialView",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~createInterstitialView",
+    "longname": "js/admob.js~showAd",
     "access": null,
     "export": true,
-    "importPath": "cordova-plugin-admob-free/AdMob",
-    "importStyle": "{createInterstitialView}",
-    "description": null,
-    "lineNumber": 98,
-    "undocument": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{showAd}",
+    "description": "",
+    "lineNumber": 149,
+    "deprecated": "since version 0.6",
     "params": [
       {
-        "name": "options",
+        "name": "show",
+        "optional": true,
         "types": [
-          "*"
-        ]
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
       },
       {
         "name": "successCallback",
@@ -380,33 +390,30 @@
           "*"
         ]
       }
-    ],
-    "generator": false
+    ]
   },
   {
     "__docId__": 9,
     "kind": "function",
+    "name": "createInterstitialView",
+    "memberof": "js/admob.js",
+    "generator": false,
+    "async": false,
     "static": true,
-    "variation": null,
-    "name": "destroyBannerView",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~destroyBannerView",
+    "longname": "js/admob.js~createInterstitialView",
     "access": null,
     "export": true,
-    "importPath": "cordova-plugin-admob-free/AdMob",
-    "importStyle": "{destroyBannerView}",
-    "description": null,
-    "lineNumber": 102,
-    "undocument": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{createInterstitialView}",
+    "description": "",
+    "lineNumber": 157,
+    "deprecated": "since version 0.6",
     "params": [
       {
         "name": "options",
-        "optional": true,
         "types": [
-          "{}"
-        ],
-        "defaultRaw": {},
-        "defaultValue": "{}"
+          "*"
+        ]
       },
       {
         "name": "successCallback",
@@ -420,24 +427,24 @@
           "*"
         ]
       }
-    ],
-    "generator": false
+    ]
   },
   {
     "__docId__": 10,
     "kind": "function",
-    "static": true,
-    "variation": null,
     "name": "requestInterstitialAd",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~requestInterstitialAd",
+    "memberof": "js/admob.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "js/admob.js~requestInterstitialAd",
     "access": null,
     "export": true,
-    "importPath": "cordova-plugin-admob-free/AdMob",
+    "importPath": "cordova-plugin-admob-free/admob",
     "importStyle": "{requestInterstitialAd}",
-    "description": null,
-    "lineNumber": 106,
-    "undocument": true,
+    "description": "",
+    "lineNumber": 165,
+    "deprecated": "since version 0.6",
     "params": [
       {
         "name": "options",
@@ -460,33 +467,33 @@
           "*"
         ]
       }
-    ],
-    "generator": false
+    ]
   },
   {
     "__docId__": 11,
     "kind": "function",
+    "name": "prepareInterstitial",
+    "memberof": "js/admob.js",
+    "generator": false,
+    "async": false,
     "static": true,
-    "variation": null,
-    "name": "showAd",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~showAd",
+    "longname": "js/admob.js~prepareInterstitial",
     "access": null,
     "export": true,
-    "importPath": "cordova-plugin-admob-free/AdMob",
-    "importStyle": "{showAd}",
-    "description": null,
-    "lineNumber": 110,
-    "undocument": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{prepareInterstitial}",
+    "description": "",
+    "lineNumber": 173,
+    "deprecated": "since version 0.6",
     "params": [
       {
-        "name": "show",
+        "name": "options",
         "optional": true,
         "types": [
-          "boolean"
+          "{}"
         ],
-        "defaultRaw": true,
-        "defaultValue": "true"
+        "defaultRaw": {},
+        "defaultValue": "{}"
       },
       {
         "name": "successCallback",
@@ -500,24 +507,55 @@
           "*"
         ]
       }
-    ],
-    "generator": false
+    ]
   },
   {
     "__docId__": 12,
     "kind": "function",
+    "name": "showInterstitial",
+    "memberof": "js/admob.js",
+    "generator": false,
+    "async": false,
     "static": true,
-    "variation": null,
-    "name": "showInterstitialAd",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~showInterstitialAd",
+    "longname": "js/admob.js~showInterstitial",
     "access": null,
     "export": true,
-    "importPath": "cordova-plugin-admob-free/AdMob",
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{showInterstitial}",
+    "description": "",
+    "lineNumber": 181,
+    "deprecated": "since version 0.6",
+    "params": [
+      {
+        "name": "successCallback",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "failureCallback",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 13,
+    "kind": "function",
+    "name": "showInterstitialAd",
+    "memberof": "js/admob.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "js/admob.js~showInterstitialAd",
+    "access": null,
+    "export": true,
+    "importPath": "cordova-plugin-admob-free/admob",
     "importStyle": "{showInterstitialAd}",
-    "description": null,
-    "lineNumber": 114,
-    "undocument": true,
+    "description": "",
+    "lineNumber": 189,
+    "deprecated": "since version 0.6",
     "params": [
       {
         "name": "show",
@@ -540,593 +578,1191 @@
           "*"
         ]
       }
-    ],
-    "generator": false
+    ]
   },
   {
-    "__docId__": 13,
-    "kind": "function",
+    "__docId__": 14,
+    "kind": "file",
+    "name": "js/banner.js",
+    "content": "import {buildEvents, exec, translateOptions} from './utils'\n\n/**\n * Banner config object.\n * @typedef {Object} BannerConfig\n * @property {string} [id=TESTING_AD_ID] - Ad Unit ID\n * @property {boolean} [isTesting=false] - receiving test ad\n * @property {boolean} [autoShow=false] - auto show ad when loaded\n * @property {boolean} [bannerAtTop=false] - set to true, to put banner at top\n * @property {boolean} [overlap=true] - set to true, to allow banner overlap webview\n * @property {boolean} [offsetTopBar=false] - set to true to avoid ios7 status bar overlap\n * @property {string} [size=SMART_BANNER] - {@link BANNER_SIZE}\n */\n\nconst events = buildEvents('banner', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n])\n\n/**\n * @typedef {Object} BANNER_SIZE\n * @property {string} BANNER - BANNER\n * @property {string} IAB_BANNER - IAB_BANNER\n * @property {string} IAB_LEADERBOARD - IAB_LEADERBOARD\n * @property {string} IAB_MRECT - IAB_MRECT\n * @property {string} LARGE_BANNER - LARGE_BANNER\n * @property {string} SMART_BANNER - SMART_BANNER\n * @property {string} FLUID - FLUID\n */\n/**\n * @constant\n * @type {Object}\n */\nconst sizes = {\n  BANNER: 'BANNER',\n  IAB_BANNER: 'IAB_BANNER',\n  IAB_LEADERBOARD: 'IAB_LEADERBOARD',\n  IAB_MRECT: 'IAB_MRECT',\n  LARGE_BANNER: 'LARGE_BANNER',\n  SMART_BANNER: 'SMART_BANNER',\n  FLUID: 'FLUID',\n  // android-only\n  FULL_BANNER: 'FULL_BANNER',\n  LEADERBOARD: 'LEADERBOARD',\n  MEDIUM_RECTANGLE: 'MEDIUM_RECTANGLE',\n  SEARCH: 'SEARCH',\n  WIDE_SKYSCRAPER: 'WIDE_SKYSCRAPER',\n}\n\n/**\n * @protected\n * @desc\n * See usage in {@link banner}.\n */\nclass Banner {\n  static events = events\n\n  /**\n   * Banner sizes\n   * @type {BANNER_SIZE}\n   */\n  static sizes = sizes\n\n  /**\n   * @protected\n   * @param {BannerConfig} opts - initial config.\n   */\n  constructor(opts) {\n    this.config({\n      size: sizes.SMART_BANNER,\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   * @param {BannerConfig} opts - new config.\n   * @return {BannerConfig} updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * Create banner.\n   * @return {Promise}\n   */\n  prepare() {\n    const options = {\n      publisherId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('createBannerView', [translateOptions(options)])\n  }\n\n  /**\n   * Show the banner.\n   * @return {Promise}\n   */\n  show() {\n    return exec('showAd', [true])\n  }\n\n  /**\n   * Hide the banner.\n   * @return {Promise}\n   */\n  hide() {\n    return exec('showAd', [false])\n  }\n\n  /**\n   * Remove the banner.\n   * @return {Promise}\n   */\n  remove() {\n    return exec('destroyBannerView', [])\n  }\n}\n\nexport {Banner}\n",
     "static": true,
-    "variation": null,
-    "name": "prepareInterstitial",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~prepareInterstitial",
+    "longname": "js/banner.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 15,
+    "kind": "typedef",
+    "name": "BannerConfig",
+    "memberof": "js/banner.js",
+    "static": true,
+    "longname": "js/banner.js~BannerConfig",
+    "access": null,
+    "description": "Banner config object.",
+    "lineNumber": 15,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "TESTING_AD_ID",
+        "defaultRaw": "TESTING_AD_ID",
+        "name": "id",
+        "description": "Ad Unit ID"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "isTesting",
+        "description": "receiving test ad"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "autoShow",
+        "description": "auto show ad when loaded"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "bannerAtTop",
+        "description": "set to true, to put banner at top"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "true",
+        "defaultRaw": true,
+        "name": "overlap",
+        "description": "set to true, to allow banner overlap webview"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "offsetTopBar",
+        "description": "set to true to avoid ios7 status bar overlap"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "SMART_BANNER",
+        "defaultRaw": "SMART_BANNER",
+        "name": "size",
+        "description": "{@link BANNER_SIZE}"
+      }
+    ],
+    "type": {
+      "types": [
+        "Object"
+      ],
+      "optional": false,
+      "name": "BannerConfig"
+    }
+  },
+  {
+    "__docId__": 16,
+    "kind": "typedef",
+    "name": "BANNER_SIZE",
+    "memberof": "js/banner.js",
+    "static": true,
+    "longname": "js/banner.js~BANNER_SIZE",
+    "access": null,
+    "description": "",
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "BANNER",
+        "description": "BANNER"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "IAB_BANNER",
+        "description": "IAB_BANNER"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "IAB_LEADERBOARD",
+        "description": "IAB_LEADERBOARD"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "IAB_MRECT",
+        "description": "IAB_MRECT"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "LARGE_BANNER",
+        "description": "LARGE_BANNER"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "SMART_BANNER",
+        "description": "SMART_BANNER"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "FLUID",
+        "description": "FLUID"
+      }
+    ],
+    "type": {
+      "types": [
+        "Object"
+      ],
+      "optional": false,
+      "name": "BANNER_SIZE"
+    }
+  },
+  {
+    "__docId__": 17,
+    "kind": "variable",
+    "name": "sizes",
+    "memberof": "js/banner.js",
+    "static": true,
+    "longname": "js/banner.js~sizes",
+    "access": null,
+    "export": false,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": null,
+    "description": "",
+    "lineNumber": 37,
+    "unknown": [
+      {
+        "tagName": "@constant",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 18,
+    "kind": "class",
+    "name": "Banner",
+    "memberof": "js/banner.js",
+    "static": true,
+    "longname": "js/banner.js~Banner",
+    "access": "protected",
+    "export": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{Banner}",
+    "description": "See usage in {@link banner}.",
+    "lineNumber": 58,
+    "interface": false
+  },
+  {
+    "__docId__": 19,
+    "kind": "member",
+    "name": "events",
+    "memberof": "js/banner.js~Banner",
+    "static": true,
+    "longname": "js/banner.js~Banner.events",
+    "access": null,
+    "description": null,
+    "lineNumber": 59,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 20,
+    "kind": "member",
+    "name": "sizes",
+    "memberof": "js/banner.js~Banner",
+    "static": true,
+    "longname": "js/banner.js~Banner.sizes",
+    "access": null,
+    "description": "Banner sizes",
+    "lineNumber": 65,
+    "type": {
+      "nullable": null,
+      "types": [
+        "BANNER_SIZE"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 21,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "js/banner.js~Banner",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/banner.js~Banner#constructor",
+    "access": "protected",
+    "description": "",
+    "lineNumber": 71,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "BannerConfig"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": "initial config."
+      }
+    ]
+  },
+  {
+    "__docId__": 22,
+    "kind": "method",
+    "name": "config",
+    "memberof": "js/banner.js~Banner",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/banner.js~Banner#config",
+    "access": null,
+    "description": "Update config.",
+    "lineNumber": 83,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "BannerConfig"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": "new config."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "BannerConfig"
+      ],
+      "spread": false,
+      "description": "updated config."
+    }
+  },
+  {
+    "__docId__": 23,
+    "kind": "member",
+    "name": "_config",
+    "memberof": "js/banner.js~Banner",
+    "static": false,
+    "longname": "js/banner.js~Banner#_config",
+    "access": null,
+    "description": null,
+    "lineNumber": 84,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{...undefined: Object, ...opts: Object}"
+      ]
+    }
+  },
+  {
+    "__docId__": 24,
+    "kind": "method",
+    "name": "prepare",
+    "memberof": "js/banner.js~Banner",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/banner.js~Banner#prepare",
+    "access": null,
+    "description": "Create banner.",
+    "lineNumber": 95,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 25,
+    "kind": "method",
+    "name": "show",
+    "memberof": "js/banner.js~Banner",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/banner.js~Banner#show",
+    "access": null,
+    "description": "Show the banner.",
+    "lineNumber": 108,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 26,
+    "kind": "method",
+    "name": "hide",
+    "memberof": "js/banner.js~Banner",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/banner.js~Banner#hide",
+    "access": null,
+    "description": "Hide the banner.",
+    "lineNumber": 116,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 27,
+    "kind": "method",
+    "name": "remove",
+    "memberof": "js/banner.js~Banner",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/banner.js~Banner#remove",
+    "access": null,
+    "description": "Remove the banner.",
+    "lineNumber": 124,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 28,
+    "kind": "file",
+    "name": "js/interstitial.js",
+    "content": "import {buildEvents, exec, translateOptions} from './utils'\n\n/**\n * Interstitial config object.\n * @typedef {Object} InterstitialConfig\n * @property {string} [id=TESTING_AD_ID] - Ad Unit ID\n * @property {boolean} [isTesting=false] - receiving test ad\n * @property {boolean} [autoShow=false] - auto show ad when loaded\n */\n\nconst events = buildEvents('interstitial', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n])\n\n/**\n * @protected\n * @desc\n * See usage in {@link interstitial}.\n */\nclass Interstitial {\n  static events = events\n\n  /**\n   * @protected\n   * @param {InterstitialConfig} opts - initial config.\n   */\n  constructor(opts) {\n    this.config({\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   * @param {InterstitialConfig} opts - new config.\n   * @return {InterstitialConfig} updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * @return {Promise}\n   */\n  prepare() {\n    const options = {\n      interstitialAdId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('prepareInterstitial', [translateOptions(options)])\n  }\n\n  /**\n   * @return {Promise}\n   */\n  show() {\n    return exec('showInterstitialAd', [true])\n  }\n}\n\nexport {Interstitial}\n",
+    "static": true,
+    "longname": "js/interstitial.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 29,
+    "kind": "typedef",
+    "name": "InterstitialConfig",
+    "memberof": "js/interstitial.js",
+    "static": true,
+    "longname": "js/interstitial.js~InterstitialConfig",
+    "access": null,
+    "description": "Interstitial config object.",
+    "lineNumber": 11,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "TESTING_AD_ID",
+        "defaultRaw": "TESTING_AD_ID",
+        "name": "id",
+        "description": "Ad Unit ID"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "isTesting",
+        "description": "receiving test ad"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "autoShow",
+        "description": "auto show ad when loaded"
+      }
+    ],
+    "type": {
+      "types": [
+        "Object"
+      ],
+      "optional": false,
+      "name": "InterstitialConfig"
+    }
+  },
+  {
+    "__docId__": 30,
+    "kind": "class",
+    "name": "Interstitial",
+    "memberof": "js/interstitial.js",
+    "static": true,
+    "longname": "js/interstitial.js~Interstitial",
+    "access": "protected",
+    "export": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{Interstitial}",
+    "description": "See usage in {@link interstitial}.",
+    "lineNumber": 24,
+    "interface": false
+  },
+  {
+    "__docId__": 31,
+    "kind": "member",
+    "name": "events",
+    "memberof": "js/interstitial.js~Interstitial",
+    "static": true,
+    "longname": "js/interstitial.js~Interstitial.events",
+    "access": null,
+    "description": null,
+    "lineNumber": 25,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 32,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "js/interstitial.js~Interstitial",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/interstitial.js~Interstitial#constructor",
+    "access": "protected",
+    "description": "",
+    "lineNumber": 31,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "InterstitialConfig"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": "initial config."
+      }
+    ]
+  },
+  {
+    "__docId__": 33,
+    "kind": "method",
+    "name": "config",
+    "memberof": "js/interstitial.js~Interstitial",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/interstitial.js~Interstitial#config",
+    "access": null,
+    "description": "Update config.",
+    "lineNumber": 42,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "InterstitialConfig"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": "new config."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "InterstitialConfig"
+      ],
+      "spread": false,
+      "description": "updated config."
+    }
+  },
+  {
+    "__docId__": 34,
+    "kind": "member",
+    "name": "_config",
+    "memberof": "js/interstitial.js~Interstitial",
+    "static": false,
+    "longname": "js/interstitial.js~Interstitial#_config",
+    "access": null,
+    "description": null,
+    "lineNumber": 43,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{...undefined: Object, ...opts: Object}"
+      ]
+    }
+  },
+  {
+    "__docId__": 35,
+    "kind": "method",
+    "name": "prepare",
+    "memberof": "js/interstitial.js~Interstitial",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/interstitial.js~Interstitial#prepare",
+    "access": null,
+    "description": "",
+    "lineNumber": 53,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 36,
+    "kind": "method",
+    "name": "show",
+    "memberof": "js/interstitial.js~Interstitial",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/interstitial.js~Interstitial#show",
+    "access": null,
+    "description": "",
+    "lineNumber": 65,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 37,
+    "kind": "file",
+    "name": "js/reward-video.js",
+    "content": "import {buildEvents, exec, translateOptions} from './utils'\n\n/**\n * Reward Video config object.\n * @typedef {Object} RewardVideoConfig\n * @property {string} [id=TESTING_AD_ID] - Ad Unit ID\n * @property {boolean} [isTesting=false] - receiving test ad\n * @property {boolean} [autoShow=false] - auto show ad when loaded\n */\n\nconst events = buildEvents('rewardvideo', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n  'START',\n  'REWARD',\n])\n\n/**\n * @protected\n * @desc\n * See usage in {@link rewardvideo}.\n */\nclass RewardVideo {\n  static events = events\n\n  /**\n   * @protected\n   * @param {RewardVideoConfig} opts - initial config.\n   */\n  constructor(opts) {\n    this.config({\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   * @param {RewardVideoConfig} opts - new config.\n   * @return {RewardVideoConfig} updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * @return {Promise}\n   */\n  prepare() {\n    const options = {\n      rewardVideoId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('createRewardVideo', [translateOptions(options)])\n  }\n\n  /**\n   * @return {Promise}\n   */\n  show() {\n    return exec('showRewardVideo', [true])\n  }\n}\n\nexport {RewardVideo}\n",
+    "static": true,
+    "longname": "js/reward-video.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 38,
+    "kind": "typedef",
+    "name": "RewardVideoConfig",
+    "memberof": "js/reward-video.js",
+    "static": true,
+    "longname": "js/reward-video.js~RewardVideoConfig",
+    "access": null,
+    "description": "Reward Video config object.",
+    "lineNumber": 11,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "TESTING_AD_ID",
+        "defaultRaw": "TESTING_AD_ID",
+        "name": "id",
+        "description": "Ad Unit ID"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "isTesting",
+        "description": "receiving test ad"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "autoShow",
+        "description": "auto show ad when loaded"
+      }
+    ],
+    "type": {
+      "types": [
+        "Object"
+      ],
+      "optional": false,
+      "name": "RewardVideoConfig"
+    }
+  },
+  {
+    "__docId__": 39,
+    "kind": "class",
+    "name": "RewardVideo",
+    "memberof": "js/reward-video.js",
+    "static": true,
+    "longname": "js/reward-video.js~RewardVideo",
+    "access": "protected",
+    "export": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{RewardVideo}",
+    "description": "See usage in {@link rewardvideo}.",
+    "lineNumber": 26,
+    "interface": false
+  },
+  {
+    "__docId__": 40,
+    "kind": "member",
+    "name": "events",
+    "memberof": "js/reward-video.js~RewardVideo",
+    "static": true,
+    "longname": "js/reward-video.js~RewardVideo.events",
+    "access": null,
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 41,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "js/reward-video.js~RewardVideo",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/reward-video.js~RewardVideo#constructor",
+    "access": "protected",
+    "description": "",
+    "lineNumber": 33,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "RewardVideoConfig"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": "initial config."
+      }
+    ]
+  },
+  {
+    "__docId__": 42,
+    "kind": "method",
+    "name": "config",
+    "memberof": "js/reward-video.js~RewardVideo",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/reward-video.js~RewardVideo#config",
+    "access": null,
+    "description": "Update config.",
+    "lineNumber": 44,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "RewardVideoConfig"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": "new config."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "RewardVideoConfig"
+      ],
+      "spread": false,
+      "description": "updated config."
+    }
+  },
+  {
+    "__docId__": 43,
+    "kind": "member",
+    "name": "_config",
+    "memberof": "js/reward-video.js~RewardVideo",
+    "static": false,
+    "longname": "js/reward-video.js~RewardVideo#_config",
+    "access": null,
+    "description": null,
+    "lineNumber": 45,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{...undefined: Object, ...opts: Object}"
+      ]
+    }
+  },
+  {
+    "__docId__": 44,
+    "kind": "method",
+    "name": "prepare",
+    "memberof": "js/reward-video.js~RewardVideo",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/reward-video.js~RewardVideo#prepare",
+    "access": null,
+    "description": "",
+    "lineNumber": 55,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 45,
+    "kind": "method",
+    "name": "show",
+    "memberof": "js/reward-video.js~RewardVideo",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/reward-video.js~RewardVideo#show",
+    "access": null,
+    "description": "",
+    "lineNumber": 67,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 46,
+    "kind": "file",
+    "name": "js/utils.js",
+    "content": "import corodvaExec from 'cordova/exec'\nimport isUndefined from 'lodash/isUndefined'\n\n/**\n * @ignore\n */\nexport function exec(method, args) {\n  return new Promise((resolve, reject) => {\n    corodvaExec(resolve, reject, 'AdMob', method, args)\n  })\n}\n\n/**\n * @ignore\n */\nexport function isFunction(x) {\n  return typeof x === 'function'\n}\n\nfunction isString(x) {\n  return typeof x === 'string'\n}\n\n/**\n * @ignore\n */\nexport function wrapCallbacks(p, successCallback, failureCallback) {\n  if (isFunction(successCallback)) {\n    p = p.then(successCallback)\n  }\n  if (isFunction(failureCallback)) {\n    p = p.catch(failureCallback)\n  }\n  return p\n}\n\nfunction boolean2string(x) {\n  if (x === null) {\n    return ''\n  }\n  if (x === true) {\n    return 'yes'\n  }\n  if (x === false) {\n    return 'no'\n  }\n  return x\n}\n\n/**\n * @ignore\n */\nexport function translateOptions(options) {\n  /* eslint-disable no-console */\n  const opts = {}\n  if (!isUndefined(options.forChild)) {\n    opts.forChild = boolean2string(options.forChild)\n    if (isString(options.forChild)) {\n      console.warn('`forChild` will not accept string in future, pass boolean instead')\n    }\n  }\n  if (!isUndefined(options.forFamily)) {\n    opts.forFamily = boolean2string(options.forFamily)\n    if (isString(options.forFamily)) {\n      console.warn('`forFamily` will not accept string in future, pass boolean instead')\n    }\n  }\n  return {\n    ...options,\n    ...opts,\n  }\n}\n\n/**\n * @ignore\n */\nexport function buildEvents(adType, eventKeys) {\n  return eventKeys.reduce((r, eventKey) => {\n    r[eventKey] = `admob.${adType}.events.${eventKey}`\n    return r\n  }, {})\n}\n",
+    "static": true,
+    "longname": "js/utils.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 47,
+    "kind": "function",
+    "name": "exec",
+    "memberof": "js/utils.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "js/utils.js~exec",
     "access": null,
     "export": true,
-    "importPath": "cordova-plugin-admob-free/AdMob",
-    "importStyle": "{prepareInterstitial}",
-    "description": null,
-    "lineNumber": 120,
-    "undocument": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{exec}",
+    "description": "",
+    "lineNumber": 7,
+    "ignore": true,
     "params": [
+      {
+        "name": "method",
+        "types": [
+          "*"
+        ]
+      },
       {
         "name": "args",
         "types": [
           "*"
         ]
-      },
-      {
-        "name": "successCallback",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "failureCallback",
-        "types": [
-          "*"
-        ]
       }
     ],
-    "generator": false
-  },
-  {
-    "__docId__": 14,
-    "kind": "function",
-    "static": true,
-    "variation": null,
-    "name": "showInterstitial",
-    "memberof": "js/AdMob.js",
-    "longname": "js/AdMob.js~showInterstitial",
-    "access": null,
-    "export": true,
-    "importPath": "cordova-plugin-admob-free/AdMob",
-    "importStyle": "{showInterstitial}",
-    "description": null,
-    "lineNumber": 125,
-    "undocument": true,
-    "params": [
-      {
-        "name": "successCallback",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "failureCallback",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "generator": false
-  },
-  {
-    "__docId__": 16,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Infinity",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 17,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "NaN",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 18,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "undefined",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 19,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "null",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 20,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Object",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 21,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "object",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 22,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Function",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 23,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "function",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 24,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Boolean",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 25,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "boolean",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 26,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Symbol",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 27,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Error",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 28,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "EvalError",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 29,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "InternalError",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 30,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "RangeError",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 31,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "ReferenceError",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 32,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "SyntaxError",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 33,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "TypeError",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 34,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "URIError",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 35,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Number",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 36,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "number",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 37,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Date",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 38,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "String",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 39,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "string",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 40,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "RegExp",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 41,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Array",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 42,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Int8Array",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 43,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Uint8Array",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 44,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Uint8ClampedArray",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 45,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Int16Array",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 46,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Uint16Array",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 47,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Int32Array",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 48,
-    "kind": "external",
+    "kind": "function",
+    "name": "isFunction",
+    "memberof": "js/utils.js",
+    "generator": false,
+    "async": false,
     "static": true,
-    "variation": null,
-    "name": "Uint32Array",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "longname": "js/utils.js~isFunction",
     "access": null,
+    "export": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{isFunction}",
     "description": "",
-    "builtinExternal": true
+    "lineNumber": 16,
+    "ignore": true,
+    "params": [
+      {
+        "name": "x",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 49,
-    "kind": "external",
+    "kind": "function",
+    "name": "isString",
+    "memberof": "js/utils.js",
+    "generator": false,
+    "async": false,
     "static": true,
-    "variation": null,
-    "name": "Float32Array",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "longname": "js/utils.js~isString",
     "access": null,
-    "description": "",
-    "builtinExternal": true
+    "export": false,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "x",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 50,
-    "kind": "external",
+    "kind": "function",
+    "name": "wrapCallbacks",
+    "memberof": "js/utils.js",
+    "generator": false,
+    "async": false,
     "static": true,
-    "variation": null,
-    "name": "Float64Array",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "longname": "js/utils.js~wrapCallbacks",
     "access": null,
+    "export": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{wrapCallbacks}",
     "description": "",
-    "builtinExternal": true
+    "lineNumber": 27,
+    "ignore": true,
+    "params": [
+      {
+        "name": "p",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "successCallback",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "failureCallback",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 51,
-    "kind": "external",
+    "kind": "function",
+    "name": "boolean2string",
+    "memberof": "js/utils.js",
+    "generator": false,
+    "async": false,
     "static": true,
-    "variation": null,
-    "name": "Map",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "longname": "js/utils.js~boolean2string",
     "access": null,
-    "description": "",
-    "builtinExternal": true
+    "export": false,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 37,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "x",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 52,
-    "kind": "external",
+    "kind": "function",
+    "name": "translateOptions",
+    "memberof": "js/utils.js",
+    "generator": false,
+    "async": false,
     "static": true,
-    "variation": null,
-    "name": "Set",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "longname": "js/utils.js~translateOptions",
     "access": null,
+    "export": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{translateOptions}",
     "description": "",
-    "builtinExternal": true
+    "lineNumber": 53,
+    "ignore": true,
+    "params": [
+      {
+        "name": "options",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{...options: Object, ...opts: Object}"
+      ]
+    }
   },
   {
     "__docId__": 53,
-    "kind": "external",
+    "kind": "function",
+    "name": "buildEvents",
+    "memberof": "js/utils.js",
+    "generator": false,
+    "async": false,
     "static": true,
-    "variation": null,
-    "name": "WeakMap",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "longname": "js/utils.js~buildEvents",
     "access": null,
+    "export": true,
+    "importPath": "cordova-plugin-admob-free/admob",
+    "importStyle": "{buildEvents}",
     "description": "",
-    "builtinExternal": true
-  },
-  {
-    "__docId__": 54,
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "WeakSet",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
-    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
-    "access": null,
-    "description": "",
-    "builtinExternal": true
+    "lineNumber": 77,
+    "ignore": true,
+    "params": [
+      {
+        "name": "adType",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "eventKeys",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 55,
     "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "ArrayBuffer",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
     "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1134,12 +1770,11 @@
   {
     "__docId__": 56,
     "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "DataView",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
     "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1147,12 +1782,11 @@
   {
     "__docId__": 57,
     "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "JSON",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
     "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1160,12 +1794,11 @@
   {
     "__docId__": 58,
     "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Promise",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
     "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1173,12 +1806,11 @@
   {
     "__docId__": 59,
     "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Generator",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
     "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1186,12 +1818,11 @@
   {
     "__docId__": 60,
     "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "GeneratorFunction",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
     "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1199,12 +1830,11 @@
   {
     "__docId__": 61,
     "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Reflect",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
     "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1212,12 +1842,23 @@
   {
     "__docId__": 62,
     "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Proxy",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
     "memberof": "BuiltinExternal/ECMAScriptExternal.js",
-    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 63,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1225,12 +1866,11 @@
   {
     "__docId__": 64,
     "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
     "static": true,
-    "variation": null,
-    "name": "CanvasRenderingContext2D",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
-    "memberof": "BuiltinExternal/WebAPIExternal.js",
-    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1238,12 +1878,11 @@
   {
     "__docId__": 65,
     "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
     "static": true,
-    "variation": null,
-    "name": "DocumentFragment",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
-    "memberof": "BuiltinExternal/WebAPIExternal.js",
-    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1251,12 +1890,11 @@
   {
     "__docId__": 66,
     "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
     "static": true,
-    "variation": null,
-    "name": "Element",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
-    "memberof": "BuiltinExternal/WebAPIExternal.js",
-    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1264,12 +1902,11 @@
   {
     "__docId__": 67,
     "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
     "static": true,
-    "variation": null,
-    "name": "Event",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
-    "memberof": "BuiltinExternal/WebAPIExternal.js",
-    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1277,12 +1914,11 @@
   {
     "__docId__": 68,
     "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
     "static": true,
-    "variation": null,
-    "name": "Node",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
-    "memberof": "BuiltinExternal/WebAPIExternal.js",
-    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1290,12 +1926,11 @@
   {
     "__docId__": 69,
     "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
     "static": true,
-    "variation": null,
-    "name": "NodeList",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
-    "memberof": "BuiltinExternal/WebAPIExternal.js",
-    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1303,12 +1938,11 @@
   {
     "__docId__": 70,
     "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
     "static": true,
-    "variation": null,
-    "name": "XMLHttpRequest",
-    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
-    "memberof": "BuiltinExternal/WebAPIExternal.js",
-    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
     "access": null,
     "description": "",
     "builtinExternal": true
@@ -1316,14 +1950,471 @@
   {
     "__docId__": 71,
     "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
     "static": true,
-    "variation": null,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 72,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 73,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 74,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 75,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 76,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 77,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 78,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 79,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 80,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 81,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 82,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 83,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 84,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 85,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 86,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 87,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 88,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 89,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 90,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 91,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 92,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 93,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 94,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 95,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 96,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 97,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 98,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 99,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 100,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 101,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "access": null,
+    "description": "",
+    "lineNumber": 193,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 103,
+    "kind": "external",
+    "name": "CanvasRenderingContext2D",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 104,
+    "kind": "external",
+    "name": "DocumentFragment",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 105,
+    "kind": "external",
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 106,
+    "kind": "external",
+    "name": "Event",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 107,
+    "kind": "external",
+    "name": "Node",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 108,
+    "kind": "external",
+    "name": "NodeList",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 109,
+    "kind": "external",
+    "name": "XMLHttpRequest",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 110,
+    "kind": "external",
     "name": "AudioContext",
     "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
     "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
     "longname": "BuiltinExternal/WebAPIExternal.js~AudioContext",
     "access": null,
     "description": "",
+    "lineNumber": 34,
     "builtinExternal": true
   }
 ]

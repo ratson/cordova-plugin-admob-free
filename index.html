@@ -32,7 +32,10 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createBannerView">createBannerView</a></span></span></li>
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/banner.js~Banner.html">Banner</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/interstitial.js~Interstitial.html">Interstitial</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/reward-video.js~RewardVideo.html">RewardVideo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createBannerView">createBannerView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createInterstitialView">createInterstitialView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-destroyBannerView">destroyBannerView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepareInterstitial">prepareInterstitial</a></span></span></li>
@@ -42,6 +45,13 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-showInterstitial">showInterstitial</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-showInterstitialAd">showInterstitialAd</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AD_SIZE">AD_SIZE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-banner">banner</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-interstitial">interstitial</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-rewardvideo">rewardvideo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BANNER_SIZE">BANNER_SIZE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BannerConfig">BannerConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-InterstitialConfig">InterstitialConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RewardVideoConfig">RewardVideoConfig</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -111,62 +121,16 @@
 </table>
 <p>Click &#x274C; to see the detail.</p>
 <h2 id="installation">Installation</h2>
-<pre><code class="lang-bash"><code class="source-code prettyprint">cordova plugin add cordova-plugin-admob-free --save</code>
+<pre><code class="lang-sh"><code class="source-code prettyprint">cordova plugin add cordova-plugin-admob-free --save</code>
 </code></pre>
 <h2 id="usage">Usage</h2>
 <h3 id="1-create-ad-unit-id-for-your-banner-and-interstitial-">1. Create Ad Unit ID for your banner and interstitial.</h3>
 <p>Go to <a href="https://www.google.com/admob/">AdMob portal</a>, click &quot;Monetize a new app&quot; button to create new ad unit.</p>
-<h3 id="2-define-configuration-for-different-platforms-">2. Define configuration for different platforms.</h3>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">var admobid = {};
-if ( /(android)/i.test(navigator.userAgent) ) {  // for android &amp; amazon-fireos
-  admobid = {
-    banner: &apos;ca-app-pub-xxx/xxx&apos;,
-    interstitial: &apos;ca-app-pub-xxx/xxx&apos;,
-  };
-} else {  // for ios
-  admobid = {
-    banner: &apos;ca-app-pub-xxx/xxx&apos;,
-    interstitial: &apos;ca-app-pub-xxx/xxx&apos;,
-  };
-}</code>
-</code></pre>
-<h3 id="3-set-options">3. Set options</h3>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">AdMob.setOptions({
-  publisherId: admobid.banner,
-  interstitialAdId: admobid.interstitial,
-  bannerAtTop: false,  // set to true, to put banner at top
-  overlap: true,  // set to true, to allow banner overlap webview
-  offsetTopBar: false,  // set to true to avoid ios7 status bar overlap
-  isTesting: false,  // receiving test ad
-  autoShow: false  // auto show interstitial ad when loaded
-});</code>
-</code></pre>
-<p>Note that <code>AdMob</code> is not defined until <code>deviceready</code> event is triggered.</p>
-<h3 id="4-display-advertisements">4. Display advertisements</h3>
-<h4 id="banner-ad">Banner Ad</h4>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">// Create banner
-AdMob.createBannerView();
-
-// Close the banner
-AdMob.destroyBannerView();
-
-// Hide the banner
-AdMob.showAd(false);
-
-// Show the banner
-AdMob.showAd(true);</code>
-</code></pre>
-<h4 id="interstitial-ad">Interstitial Ad</h4>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">// prepare and load ad resource in background, e.g. at the beginning of game level
-AdMob.prepareInterstitial({
-  interstitialId: admobid.interstitial,
-  autoShow: false
-});
-
-// show the interstitial later, e.g. at end of game level
-AdMob.showInterstitial();</code>
-</code></pre>
-<h3 id="5-profit">5. Profit</h3>
+<h3 id="2-display-advertisements">2. Display advertisements</h3>
+<h4 id="-banner-ad-https-ratson-github-io-cordova-plugin-admob-free-variable-index-html-static-variable-banner-"><a href="https://ratson.github.io/cordova-plugin-admob-free/variable/index.html#static-variable-banner">Banner Ad</a></h4>
+<h4 id="-interstitial-ad-https-ratson-github-io-cordova-plugin-admob-free-variable-index-html-static-variable-interstitial-"><a href="https://ratson.github.io/cordova-plugin-admob-free/variable/index.html#static-variable-interstitial">Interstitial Ad</a></h4>
+<h4 id="-reward-video-ad-https-ratson-github-io-cordova-plugin-admob-free-variable-index-html-static-variable-rewardvideo-"><a href="https://ratson.github.io/cordova-plugin-admob-free/variable/index.html#static-variable-rewardvideo">Reward Video Ad</a></h4>
+<h3 id="3-profit">3. Profit</h3>
 <p>If you find this plugin useful, please <a href="https://github.com/ratson/cordova-plugin-admob-free">star it on Github</a>.</p>
 <h2 id="screenshots">Screenshots</h2>
 <table>
@@ -198,38 +162,11 @@ AdMob.showInterstitial();</code>
 </tbody>
 </table>
 <h2 id="api">API</h2>
-<p>For more details, refer to <a href="https://ratson.github.io/cordova-plugin-admob-free/">documentation page</a>.</p>
-<p>Methods:</p>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">// set default value for other methods
-AdMob.setOptions(options, success, fail);
-
-// use banner
-AdMob.createBannerView();
-AdMob.destroyBannerView();
-AdMob.showAd();
-
-// use interstitial
-AdMob.prepareInterstitial(options, success, fail);
-AdMob.showInterstitial();
-// low-level methods
-AdMob.createInterstitialView();
-AdMob.requestInterstitialAd();
-AdMob.showInterstitialAd();</code>
-</code></pre>
-<p>Events:</p>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">document.addEventListener(&apos;onReceiveAd&apos;, function() {});
-document.addEventListener(&apos;onFailedToReceiveAd&apos;, function(data) {});
-document.addEventListener(&apos;onPresentAd&apos;, function() {});
-document.addEventListener(&apos;onDismissAd&apos;, function() {});
-document.addEventListener(&apos;onLeaveToAd&apos;, function() {});
-document.addEventListener(&apos;onReceiveInterstitialAd&apos;, function() {});
-document.addEventListener(&apos;onPresentInterstitialAd&apos;, function() {});
-document.addEventListener(&apos;onDismissInterstitialAd&apos;, function() {});</code>
-</code></pre>
+<p>See <a href="https://ratson.github.io/cordova-plugin-admob-free/identifiers.html">documentation page</a>.</p>
 <h2 id="status">Status</h2>
 <p>This plugin is forked from <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple">cordova-plugin-admob-simple</a> and removed the ad-sharing related code. All APIs are remaining the same as the original fork.</p>
 <p>The code for Android has almost all rewritten to be more maintainable, plus some extra features.</p>
-<p>For iOS, while it is working, I have less interest in writing Objective-C code these days. If someone is will to help, feel free to send a pull request, I will review it.</p>
+<p>For iOS, while it is working, I have less interest in writing Objective-C code these days. If someone is willing to help, feel free to send a pull request, I will review it.</p>
 <h2 id="contributing">Contributing</h2>
 <p>You can use this Cordova plugin for free. You can contribute to this project in many ways:</p>
 <ul>
@@ -250,7 +187,7 @@ document.addEventListener(&apos;onDismissInterstitialAd&apos;, function() {});</
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
 </footer>
 
 <script src="script/search_index.js"></script>

@@ -1,20 +1,32 @@
 {
-  "coverage": "20%",
-  "expectCount": 10,
-  "actualCount": 2,
+  "coverage": "91.17%",
+  "expectCount": 34,
+  "actualCount": 31,
   "files": {
-    "js/AdMob.js": {
-      "expectCount": 10,
-      "actualCount": 2,
+    "js/admob.js": {
+      "expectCount": 13,
+      "actualCount": 13,
+      "undocumentLines": []
+    },
+    "js/banner.js": {
+      "expectCount": 9,
+      "actualCount": 8,
       "undocumentLines": [
-        94,
-        98,
-        102,
-        120,
-        106,
-        110,
-        125,
-        114
+        59
+      ]
+    },
+    "js/interstitial.js": {
+      "expectCount": 6,
+      "actualCount": 5,
+      "undocumentLines": [
+        25
+      ]
+    },
+    "js/reward-video.js": {
+      "expectCount": 6,
+      "actualCount": 5,
+      "undocumentLines": [
+        27
       ]
     }
   }

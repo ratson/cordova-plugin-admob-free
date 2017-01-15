@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="">
-  <title data-ice="title">Source | Cordova AdMob Plugin API Document</title>
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">js/utils.js | Cordova AdMob Plugin API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -56,75 +56,91 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">31/34</span></h1>
+<div class="content" data-ice="content"><h1 data-ice="title">js/utils.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import corodvaExec from &apos;cordova/exec&apos;
+import isUndefined from &apos;lodash/isUndefined&apos;
 
-<table class="files-summary" data-ice="files" data-use-coverage="true">
-  <thead>
-    <tr>
-      <td>File</td>
-      <td>Identifier</td>
-      <td class="coverage">Document</td>
-      <td style="display: none;">Size</td>
-      <td style="display: none;">Lines</td>
-      <td style="display: none;">Updated</td>
-    </tr>
-  </thead>
-  <tbody>
-    
-  <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/js/admob.js.html">js/admob.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-AD_SIZE">AD_SIZE</a></span>
-<span><a href="variable/index.html#static-variable-banner">banner</a></span>
-<span><a href="function/index.html#static-function-createBannerView">createBannerView</a></span>
-<span><a href="function/index.html#static-function-createInterstitialView">createInterstitialView</a></span>
-<span><a href="function/index.html#static-function-destroyBannerView">destroyBannerView</a></span>
-<span><a href="variable/index.html#static-variable-interstitial">interstitial</a></span>
-<span><a href="function/index.html#static-function-prepareInterstitial">prepareInterstitial</a></span>
-<span><a href="function/index.html#static-function-requestInterstitialAd">requestInterstitialAd</a></span>
-<span><a href="variable/index.html#static-variable-rewardvideo">rewardvideo</a></span>
-<span><a href="function/index.html#static-function-setOptions">setOptions</a></span>
-<span><a href="function/index.html#static-function-showAd">showAd</a></span>
-<span><a href="function/index.html#static-function-showInterstitial">showInterstitial</a></span>
-<span><a href="function/index.html#static-function-showInterstitialAd">showInterstitialAd</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">13/13</span></td>
-      <td style="display: none;" data-ice="size">5678 byte</td>
-      <td style="display: none;" data-ice="lines">192</td>
-      <td style="display: none;" data-ice="updated">2017-01-01 16:31:00 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/js/banner.js.html#errorLines=59">js/banner.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/js/banner.js~Banner.html">Banner</a></span></td>
-      <td class="coverage"><span data-ice="coverage">88 %</span><span data-ice="coverageCount" class="coverage-count">8/9</span></td>
-      <td style="display: none;" data-ice="size">2714 byte</td>
-      <td style="display: none;" data-ice="lines">129</td>
-      <td style="display: none;" data-ice="updated">2017-01-01 16:31:00 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/js/interstitial.js.html#errorLines=25">js/interstitial.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/js/interstitial.js~Interstitial.html">Interstitial</a></span></td>
-      <td class="coverage"><span data-ice="coverage">83 %</span><span data-ice="coverageCount" class="coverage-count">5/6</span></td>
-      <td style="display: none;" data-ice="size">1301 byte</td>
-      <td style="display: none;" data-ice="lines">70</td>
-      <td style="display: none;" data-ice="updated">2017-01-01 16:31:00 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/js/reward-video.js.html#errorLines=27">js/reward-video.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/js/reward-video.js~RewardVideo.html">RewardVideo</a></span></td>
-      <td class="coverage"><span data-ice="coverage">83 %</span><span data-ice="coverageCount" class="coverage-count">5/6</span></td>
-      <td style="display: none;" data-ice="size">1308 byte</td>
-      <td style="display: none;" data-ice="lines">72</td>
-      <td style="display: none;" data-ice="updated">2017-01-01 16:31:00 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/js/utils.js.html">js/utils.js</a></span></td>
-      <td data-ice="identifier" class="identifiers">-</td>
-      <td class="coverage"><span data-ice="coverage">-</span></td>
-      <td style="display: none;" data-ice="size">1622 byte</td>
-      <td style="display: none;" data-ice="lines">82</td>
-      <td style="display: none;" data-ice="updated">2017-01-01 16:31:00 (UTC)</td>
-    </tr>
-</tbody>
-</table>
+/**
+ * @ignore
+ */
+export function exec(method, args) {
+  return new Promise((resolve, reject) =&gt; {
+    corodvaExec(resolve, reject, &apos;AdMob&apos;, method, args)
+  })
+}
+
+/**
+ * @ignore
+ */
+export function isFunction(x) {
+  return typeof x === &apos;function&apos;
+}
+
+function isString(x) {
+  return typeof x === &apos;string&apos;
+}
+
+/**
+ * @ignore
+ */
+export function wrapCallbacks(p, successCallback, failureCallback) {
+  if (isFunction(successCallback)) {
+    p = p.then(successCallback)
+  }
+  if (isFunction(failureCallback)) {
+    p = p.catch(failureCallback)
+  }
+  return p
+}
+
+function boolean2string(x) {
+  if (x === null) {
+    return &apos;&apos;
+  }
+  if (x === true) {
+    return &apos;yes&apos;
+  }
+  if (x === false) {
+    return &apos;no&apos;
+  }
+  return x
+}
+
+/**
+ * @ignore
+ */
+export function translateOptions(options) {
+  /* eslint-disable no-console */
+  const opts = {}
+  if (!isUndefined(options.forChild)) {
+    opts.forChild = boolean2string(options.forChild)
+    if (isString(options.forChild)) {
+      console.warn(&apos;`forChild` will not accept string in future, pass boolean instead&apos;)
+    }
+  }
+  if (!isUndefined(options.forFamily)) {
+    opts.forFamily = boolean2string(options.forFamily)
+    if (isString(options.forFamily)) {
+      console.warn(&apos;`forFamily` will not accept string in future, pass boolean instead&apos;)
+    }
+  }
+  return {
+    ...options,
+    ...opts,
+  }
+}
+
+/**
+ * @ignore
+ */
+export function buildEvents(adType, eventKeys) {
+  return eventKeys.reduce((r, eventKey) =&gt; {
+    r[eventKey] = `admob.${adType}.events.${eventKey}`
+    return r
+  }, {})
+}
+</code></pre>
+
 </div>
 
 <footer class="footer">

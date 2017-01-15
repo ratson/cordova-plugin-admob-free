@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../">
-  <title data-ice="title">js/AdMob.js | Cordova AdMob Plugin API Document</title>
+  <title data-ice="title">js/admob.js | Cordova AdMob Plugin API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -32,7 +32,10 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createBannerView">createBannerView</a></span></span></li>
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/banner.js~Banner.html">Banner</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/interstitial.js~Interstitial.html">Interstitial</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/reward-video.js~RewardVideo.html">RewardVideo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createBannerView">createBannerView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createInterstitialView">createInterstitialView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-destroyBannerView">destroyBannerView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepareInterstitial">prepareInterstitial</a></span></span></li>
@@ -42,72 +45,82 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-showInterstitial">showInterstitial</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-showInterstitialAd">showInterstitialAd</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AD_SIZE">AD_SIZE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-banner">banner</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-interstitial">interstitial</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-rewardvideo">rewardvideo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BANNER_SIZE">BANNER_SIZE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BannerConfig">BannerConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-InterstitialConfig">InterstitialConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RewardVideoConfig">RewardVideoConfig</a></span></span></li>
 </ul>
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">js/AdMob.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import exec from &apos;cordova/exec&apos;
+<div class="content" data-ice="content"><h1 data-ice="title">js/admob.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* eslint-disable no-console */
+import exec from &apos;cordova/exec&apos;
+
+import {wrapCallbacks, translateOptions} from &apos;./utils&apos;
+
+import {Banner} from &apos;./banner&apos;
+import {Interstitial} from &apos;./interstitial&apos;
+import {RewardVideo} from &apos;./reward-video&apos;
 
 /**
- * Ad sizes.
- * @constant
- * @type {Object}
+ * @type {Banner}
+ * @since 0.6
+ * @example
+ * admob.banner.config({
+ *  id: &apos;ca-app-pub-xxx/xxx&apos;,
+ * })
+ *
+ * // Create banner
+ * admob.banner.prepare()
+ *
+ * // Show the banner
+ * admob.banner.show()
+ *
+ * // Hide the banner
+ * admob.banner.hide()
+ *
+ * // Remove the banner
+ * admob.banner.remove()
  */
-export const AD_SIZE = {
-  BANNER: &apos;BANNER&apos;,
-  IAB_BANNER: &apos;IAB_BANNER&apos;,
-  IAB_LEADERBOARD: &apos;IAB_LEADERBOARD&apos;,
-  IAB_MRECT: &apos;IAB_MRECT&apos;,
-  LARGE_BANNER: &apos;LARGE_BANNER&apos;,
-  SMART_BANNER: &apos;SMART_BANNER&apos;,
-  FLUID: &apos;FLUID&apos;,
-  // android-only
-  FULL_BANNER: &apos;FULL_BANNER&apos;,
-  LEADERBOARD: &apos;LEADERBOARD&apos;,
-  MEDIUM_RECTANGLE: &apos;MEDIUM_RECTANGLE&apos;,
-  SEARCH: &apos;SEARCH&apos;,
-  WIDE_SKYSCRAPER: &apos;WIDE_SKYSCRAPER&apos;,
-}
+export const banner = new Banner()
 
-function boolean2string(x) {
-  if (x === null) {
-    return &apos;&apos;
-  }
-  if (x === true) {
-    return &apos;yes&apos;
-  }
-  if (x === false) {
-    return &apos;no&apos;
-  }
-  return x
-}
+/**
+ * @type {Interstitial}
+ * @since 0.6
+ * @example
+ * admob.interstitial.config({
+ *  id: &apos;ca-app-pub-xxx/xxx&apos;,
+ * })
+ *
+ * admob.interstitial.prepare()
+ *
+ * admob.interstitial.show()
+ */
+export const interstitial = new Interstitial()
 
-function isUndefined(x) {
-  return typeof x === &apos;undefined&apos;
-}
+/**
+ * @type {RewardVideo}
+ * @since 0.6
+ * @example
+ * admob.rewardvideo.config({
+ *  id: &apos;ca-app-pub-xxx/xxx&apos;,
+ * })
+ *
+ * admob.rewardvideo.prepare()
+ *
+ * admob.rewardvideo.show()
+ */
+export const rewardvideo = new RewardVideo()
 
-function translateOptions(options) {
-  const opts = {}
-  if (!isUndefined(options.forChild)) {
-    opts.forChild = boolean2string(options.forChild)
-    if (typeof options.forChild === &apos;string&apos;) {
-      console.warn(&apos;`forChild` will not accept string in future, pass boolean instead&apos;)
-    }
-  }
-  if (!isUndefined(options.forFamily)) {
-    opts.forFamily = boolean2string(options.forFamily)
-    if (typeof options.forFamily === &apos;string&apos;) {
-      console.warn(&apos;`forFamily` will not accept string in future, pass boolean instead&apos;)
-    }
-  }
-  return Object.assign({}, options, opts)
-}
-// export for testing
-export const _translateOptions = translateOptions
+// Old APIs
 
 /**
  *
+ * @deprecated since version 0.6
  * @param {Object} options
  * @param {string} options.publisherId
  * @param {string} options.interstitialAdId
@@ -134,52 +147,114 @@ export const _translateOptions = translateOptions
  */
 export function setOptions(options, successCallback, failureCallback) {
   if (typeof options === &apos;object&apos;) {
-    cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;setOptions&apos;, [translateOptions(options)])
+    Object.keys(options).forEach((k) =&gt; {
+      switch (k) {
+        case &apos;publisherId&apos;:
+          banner._config.id = options[k]
+          break
+        case &apos;bannerAtTop&apos;:
+        case &apos;overlap&apos;:
+        case &apos;offsetTopBar&apos;:
+          banner._config[k] = options[k]
+          break
+        case &apos;interstitialAdId&apos;:
+          interstitial._config.id = options[k]
+          break
+        case &apos;rewardVideoId&apos;:
+          rewardvideo._config.id = options[k]
+          break
+        case &apos;isTesting&apos;:
+        case &apos;autoShow&apos;:
+          banner._config[k] = options[k]
+          interstitial._config[k] = options[k]
+          rewardvideo._config[k] = options[k]
+          break
+        default:
+      }
+    })
+    exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;setOptions&apos;, [translateOptions(options)])
   } else if (typeof failureCallback === &apos;function&apos;) {
     failureCallback(&apos;options should be specified.&apos;)
   }
 }
 
+/**
+ * Ad sizes.
+ * @constant
+ * @type {BANNER_SIZE}
+ * @deprecated since version 0.6
+ */
+export const AD_SIZE = Banner.sizes
+
+/**
+ * @deprecated since version 0.6
+ */
 export function createBannerView(options = {}, successCallback, failureCallback) {
-  cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;createBannerView&apos;, [translateOptions(options)])
+  console.warn(&apos;Use admob.banner.prepare() instead.&apos;)
+  exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;createBannerView&apos;, [translateOptions(options)])
 }
 
-export function createInterstitialView(options, successCallback, failureCallback) {
-  cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;createInterstitialView&apos;, [translateOptions(options)])
-}
-
+/**
+ * @deprecated since version 0.6
+ */
 export function destroyBannerView(options = {}, successCallback, failureCallback) {
-  cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;destroyBannerView&apos;, [])
+  console.warn(&apos;Use admob.banner.remove() instead.&apos;)
+  exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;destroyBannerView&apos;, [])
 }
 
-export function requestInterstitialAd(options = {}, successCallback, failureCallback) {
-  cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;requestInterstitialAd&apos;, [translateOptions(options)])
-}
-
+/**
+ * @deprecated since version 0.6
+ */
 export function showAd(show = true, successCallback, failureCallback) {
-  cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;showAd&apos;, [show])
+  console.warn(&apos;Use admob.banner.show() and admob.banner.hide() instead.&apos;)
+  exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;showAd&apos;, [show])
 }
 
-export function showInterstitialAd(show = true, successCallback, failureCallback) {
-  cordova.exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;showInterstitialAd&apos;, [show])
+/**
+ * @deprecated since version 0.6
+ */
+export function createInterstitialView(options, successCallback, failureCallback) {
+  console.warn(&apos;Use admob.interstitial.prepare() instead, it will do both createInterstitialView() and requestInterstitialAd().&apos;)
+  exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;createInterstitialView&apos;, [translateOptions(options)])
 }
 
-// emulate cordova-admob-pro interface
-
-export function prepareInterstitial(args, successCallback, failureCallback) {
-  createInterstitialView(args, successCallback, failureCallback)
-  requestInterstitialAd(args, successCallback, failureCallback)
+/**
+ * @deprecated since version 0.6
+ */
+export function requestInterstitialAd(options = {}, successCallback, failureCallback) {
+  console.warn(&apos;Use admob.interstitial.prepare() instead, it will do both createInterstitialView() and requestInterstitialAd().&apos;)
+  exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;requestInterstitialAd&apos;, [translateOptions(options)])
 }
 
+/**
+ * @deprecated since version 0.6
+ */
+export function prepareInterstitial(options = {}, successCallback, failureCallback) {
+  console.warn(&apos;Use admob.interstitial.prepare() instead.&apos;)
+  exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;prepareInterstitial&apos;, [translateOptions(options)])
+}
+
+/**
+ * @deprecated since version 0.6
+ */
 export function showInterstitial(successCallback, failureCallback) {
-  showInterstitialAd(true, successCallback, failureCallback)
+  console.warn(&apos;Use admob.interstitial.show() instead.&apos;)
+  wrapCallbacks(interstitial.show(), successCallback, failureCallback)
+}
+
+/**
+ * @deprecated since version 0.6
+ */
+export function showInterstitialAd(show = true, successCallback, failureCallback) {
+  console.warn(&apos;Use admob.interstitial.show() instead.&apos;)
+  exec(successCallback, failureCallback, &apos;AdMob&apos;, &apos;showInterstitialAd&apos;, [show])
 }
 </code></pre>
 
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
 </footer>
 
 <script src="script/search_index.js"></script>
