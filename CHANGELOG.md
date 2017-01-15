@@ -1,4 +1,4 @@
-## Next
+## 0.6.0 (2017-01-16)
 
 Introduce whole new set of API, which focus on consistency and
 conciseness. All old API should just work as before, but emit warnings,
@@ -31,6 +31,7 @@ it is strongly recommended to migrate to new API and give feedback.
 * Support Rewarded Video. ([@warcry2000](https://github.com/warcry2000) in [#35](https://github.com/ratson/cordova-plugin-admob-free/pull/35))
 * Promise APIs.
 * Events now have namespace.
+* Add [mediation example](https://github.com/ratson/cordova-plugin-admob-free/tree/master/examples/mediation)
 
 ## 0.5.1 (2016-12-08)
 
