@@ -52,6 +52,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BannerConfig">BannerConfig</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-InterstitialConfig">InterstitialConfig</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RewardVideoConfig">RewardVideoConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/rehy/cordova-admob-mediation">cordova-admob-mediation</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -162,7 +163,9 @@
       <div>
         
         
-        
+        <div data-ice="description"><p>Reward video requires mediation SDK to be installed,
+see <span><a href="https://github.com/rehy/cordova-admob-mediation">cordova-admob-mediation</a></span> for list of supported networks.</p>
+</div>
       </div>
     </td>
     <td>
@@ -187,11 +190,11 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/admob.js.html#lineNumber128">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/admob.js.html#lineNumber150">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {AD_SIZE} from &apos;<span><a href="file/js/admob.js.html#lineNumber128">cordova-plugin-admob-free/admob</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {AD_SIZE} from &apos;<span><a href="file/js/admob.js.html#lineNumber150">cordova-plugin-admob-free/admob</a></span>&apos;</code></pre></div>
   <div class="deprecated" data-ice="deprecated">this variable was deprecated. since version 0.6</div>
   
   <div data-ice="description"><p>Ad sizes.</p>
@@ -231,11 +234,11 @@
     <span class="right-info">
       
       <span class="since" data-ice="since">since 0.6</span>
-      <span data-ice="source"><span><a href="file/js/admob.js.html#lineNumber30">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/admob.js.html#lineNumber35">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {banner} from &apos;<span><a href="file/js/admob.js.html#lineNumber30">cordova-plugin-admob-free/admob</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {banner} from &apos;<span><a href="file/js/admob.js.html#lineNumber35">cordova-plugin-admob-free/admob</a></span>&apos;</code></pre></div>
   
   
   
@@ -247,7 +250,34 @@
 
   
 
-  
+  <div data-ice="emitWrap">
+    <h4>Emit:</h4>
+    <table>
+      <tbody>
+      
+      <tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.banner.events.LOAD</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.banner.events.LOAD_FAIL</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.banner.events.OPEN</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.banner.events.CLOSE</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.banner.events.EXIT_APP</span></p></td>
+        
+      </tr>
+</tbody>
+    </table>
+  </div>
 
   
 
@@ -295,11 +325,11 @@ admob.banner.remove()</code></pre>
     <span class="right-info">
       
       <span class="since" data-ice="since">since 0.6</span>
-      <span data-ice="source"><span><a href="file/js/admob.js.html#lineNumber44">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/admob.js.html#lineNumber54">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {interstitial} from &apos;<span><a href="file/js/admob.js.html#lineNumber44">cordova-plugin-admob-free/admob</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {interstitial} from &apos;<span><a href="file/js/admob.js.html#lineNumber54">cordova-plugin-admob-free/admob</a></span>&apos;</code></pre></div>
   
   
   
@@ -311,7 +341,34 @@ admob.banner.remove()</code></pre>
 
   
 
-  
+  <div data-ice="emitWrap">
+    <h4>Emit:</h4>
+    <table>
+      <tbody>
+      
+      <tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.interstitial.events.LOAD</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.interstitial.events.LOAD_FAIL</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.interstitial.events.OPEN</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.interstitial.events.CLOSE</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.interstitial.events.EXIT_APP</span></p></td>
+        
+      </tr>
+</tbody>
+    </table>
+  </div>
 
   
 
@@ -351,14 +408,16 @@ admob.interstitial.show()</code></pre>
     <span class="right-info">
       
       <span class="since" data-ice="since">since 0.6</span>
-      <span data-ice="source"><span><a href="file/js/admob.js.html#lineNumber58">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/admob.js.html#lineNumber80">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {rewardvideo} from &apos;<span><a href="file/js/admob.js.html#lineNumber58">cordova-plugin-admob-free/admob</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {rewardvideo} from &apos;<span><a href="file/js/admob.js.html#lineNumber80">cordova-plugin-admob-free/admob</a></span>&apos;</code></pre></div>
   
   
-  
+  <div data-ice="description"><p>Reward video requires mediation SDK to be installed,
+see <span><a href="https://github.com/rehy/cordova-admob-mediation">cordova-admob-mediation</a></span> for list of supported networks.</p>
+</div>
 
   
 
@@ -367,7 +426,42 @@ admob.interstitial.show()</code></pre>
 
   
 
-  
+  <div data-ice="emitWrap">
+    <h4>Emit:</h4>
+    <table>
+      <tbody>
+      
+      <tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.rewardvideo.events.LOAD</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.rewardvideo.events.LOAD_FAIL</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.rewardvideo.events.OPEN</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.rewardvideo.events.CLOSE</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.rewardvideo.events.EXIT_APP</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.rewardvideo.events.START</span></p></td>
+        
+      </tr>
+<tr class="emit" data-ice="emit">
+        <td><p data-ice="emitName"><span>admob.rewardvideo.events.REWARD</span></p></td>
+        
+      </tr>
+</tbody>
+    </table>
+  </div>
 
   
 

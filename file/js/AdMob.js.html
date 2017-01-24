@@ -52,6 +52,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BannerConfig">BannerConfig</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-InterstitialConfig">InterstitialConfig</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RewardVideoConfig">RewardVideoConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/rehy/cordova-admob-mediation">cordova-admob-mediation</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -69,6 +70,11 @@ import {RewardVideo} from &apos;./reward-video&apos;
 /**
  * @type {Banner}
  * @since 0.6
+ * @emits {admob.banner.events.LOAD}
+ * @emits {admob.banner.events.LOAD_FAIL}
+ * @emits {admob.banner.events.OPEN}
+ * @emits {admob.banner.events.CLOSE}
+ * @emits {admob.banner.events.EXIT_APP}
  * @example
  * admob.banner.config({
  *  id: &apos;ca-app-pub-xxx/xxx&apos;,
@@ -91,6 +97,11 @@ export const banner = new Banner()
 /**
  * @type {Interstitial}
  * @since 0.6
+ * @emits {admob.interstitial.events.LOAD}
+ * @emits {admob.interstitial.events.LOAD_FAIL}
+ * @emits {admob.interstitial.events.OPEN}
+ * @emits {admob.interstitial.events.CLOSE}
+ * @emits {admob.interstitial.events.EXIT_APP}
  * @example
  * admob.interstitial.config({
  *  id: &apos;ca-app-pub-xxx/xxx&apos;,
@@ -103,8 +114,20 @@ export const banner = new Banner()
 export const interstitial = new Interstitial()
 
 /**
+ * @external {cordova-admob-mediation} https://github.com/rehy/cordova-admob-mediation
+ */
+/**
+ * Reward video requires mediation SDK to be installed,
+ * see {@link cordova-admob-mediation} for list of supported networks.
  * @type {RewardVideo}
  * @since 0.6
+ * @emits {admob.rewardvideo.events.LOAD}
+ * @emits {admob.rewardvideo.events.LOAD_FAIL}
+ * @emits {admob.rewardvideo.events.OPEN}
+ * @emits {admob.rewardvideo.events.CLOSE}
+ * @emits {admob.rewardvideo.events.EXIT_APP}
+ * @emits {admob.rewardvideo.events.START}
+ * @emits {admob.rewardvideo.events.REWARD}
  * @example
  * admob.rewardvideo.config({
  *  id: &apos;ca-app-pub-xxx/xxx&apos;,

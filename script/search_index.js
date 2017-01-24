@@ -432,6 +432,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "js/admob.js~cordova-admob-mediation",
+    "https://github.com/rehy/cordova-admob-mediation",
+    "js/admob.js~cordova-admob-mediation",
+    "external"
+  ],
+  [
     "js/banner.js",
     "file/js/banner.js.html",
     "js/banner.js",
