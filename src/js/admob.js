@@ -10,6 +10,11 @@ import {RewardVideo} from './reward-video'
 /**
  * @type {Banner}
  * @since 0.6
+ * @emits {admob.banner.events.LOAD}
+ * @emits {admob.banner.events.LOAD_FAIL}
+ * @emits {admob.banner.events.OPEN}
+ * @emits {admob.banner.events.CLOSE}
+ * @emits {admob.banner.events.EXIT_APP}
  * @example
  * admob.banner.config({
  *  id: 'ca-app-pub-xxx/xxx',
@@ -32,6 +37,11 @@ export const banner = new Banner()
 /**
  * @type {Interstitial}
  * @since 0.6
+ * @emits {admob.interstitial.events.LOAD}
+ * @emits {admob.interstitial.events.LOAD_FAIL}
+ * @emits {admob.interstitial.events.OPEN}
+ * @emits {admob.interstitial.events.CLOSE}
+ * @emits {admob.interstitial.events.EXIT_APP}
  * @example
  * admob.interstitial.config({
  *  id: 'ca-app-pub-xxx/xxx',
@@ -51,6 +61,13 @@ export const interstitial = new Interstitial()
  * see {@link cordova-admob-mediation} for list of supported networks.
  * @type {RewardVideo}
  * @since 0.6
+ * @emits {admob.rewardvideo.events.LOAD}
+ * @emits {admob.rewardvideo.events.LOAD_FAIL}
+ * @emits {admob.rewardvideo.events.OPEN}
+ * @emits {admob.rewardvideo.events.CLOSE}
+ * @emits {admob.rewardvideo.events.EXIT_APP}
+ * @emits {admob.rewardvideo.events.START}
+ * @emits {admob.rewardvideo.events.REWARD}
  * @example
  * admob.rewardvideo.config({
  *  id: 'ca-app-pub-xxx/xxx',

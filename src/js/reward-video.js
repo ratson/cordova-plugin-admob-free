@@ -19,9 +19,8 @@ const events = buildEvents('rewardvideo', [
 ])
 
 /**
- * @protected
- * @desc
  * See usage in {@link rewardvideo}.
+ * @protected
  */
 class RewardVideo {
   static events = events
