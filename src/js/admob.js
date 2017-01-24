@@ -44,6 +44,11 @@ export const banner = new Banner()
 export const interstitial = new Interstitial()
 
 /**
+ * @external {cordova-admob-mediation} https://github.com/rehy/cordova-admob-mediation
+ */
+/**
+ * Reward video requires mediation SDK to be installed,
+ * see {@link cordova-admob-mediation} for list of supported networks.
  * @type {RewardVideo}
  * @since 0.6
  * @example
