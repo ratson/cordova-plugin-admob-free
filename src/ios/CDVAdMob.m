@@ -14,7 +14,7 @@
 - (void) __setOptions:(NSDictionary*) options;
 - (void) __createBanner;
 - (void) __showAd:(BOOL)show;
-- (void) __showInterstitial:(BOOL)show;
+- (BOOL) __showInterstitial:(BOOL)show;
 - (void) __showRewardedVideo:(BOOL)show;
 - (GADRequest*) __buildAdRequest;
 - (NSString*) __md5: (NSString*) s;
@@ -258,9 +258,12 @@
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"interstitialAd is null, call createInterstitialView first."];
 
     } else {
-        [self __showInterstitial:YES];
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-
+        BOOL showed = [self __showInterstitial:YES];
+        if (showed) {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        } else {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"interstitial not ready yet."];
+        }
     }
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
@@ -596,7 +599,7 @@
     }
 }
 
-- (void) __showInterstitial:(BOOL)show {
+- (BOOL) __showInterstitial:(BOOL)show {
     NSLog(@"__showInterstitial");
 
     if (!self.interstitialView){
@@ -605,8 +608,10 @@
 
     if (self.interstitialView && self.interstitialView.isReady) {
         [self.interstitialView presentFromRootViewController:self.viewController];
+        return true;
     } else {
         NSLog(@"Ad wasn't ready");
+        return false;
     }
 }
 
