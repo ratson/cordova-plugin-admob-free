@@ -1,3 +1,15 @@
+## Next
+
+## 0.6.1 (2017-01-25)
+
+### Added
+
+* Document events.
+
+### Fixed
+
+* Fix iOS InterstitialAd does not call failure callback. ([@becvert](https://github.com/becvert) in [#47](https://github.com/ratson/cordova-plugin-admob-free/pull/47))
+
 ## 0.6.0 (2017-01-16)
 
 Introduce whole new set of API, which focus on consistency and
