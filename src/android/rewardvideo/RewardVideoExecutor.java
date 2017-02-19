@@ -104,6 +104,23 @@ public class RewardVideoExecutor extends AbstractExecutor {
         this.clearAd();
     }
 
+    public PluginResult isReady(final CallbackContext callbackContext) {
+        CordovaInterface cordova = plugin.cordova;
+
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (rewardedVideoAd != null && rewardedVideoAd.isLoaded()) {
+                    callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, true));
+                } else {
+                    callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, false));
+                }
+            }
+        });
+
+        return null;
+    }
+
     boolean shouldAutoShow() {
         return plugin.config.autoShowRewardVideo;
     }
