@@ -35,6 +35,8 @@ Click ❌ to see the detail.
 cordova plugin add cordova-plugin-admob-free --save
 ```
 
+Note that `cordova plugin add [GIT_URL]` is not supported.
+
 ## Usage
 
 ### 1. Create Ad Unit ID for your banner and interstitial.
