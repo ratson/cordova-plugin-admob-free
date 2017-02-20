@@ -147,20 +147,14 @@ public class InterstitialExecutor extends AbstractExecutor {
     }
 
     public PluginResult isReady(final CallbackContext callbackContext) {
-        CordovaInterface cordova = plugin.cordova;
+        PluginResult result;
+        if (interstitialAd != null && interstitialAd.isLoaded()) {
+            result = new PluginResult(PluginResult.Status.OK, true);
+        } else {
+            result = new PluginResult(PluginResult.Status.OK, false);
+        }
 
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (interstitialAd != null && interstitialAd.isLoaded()) {
-                    callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, true));
-                } else {
-                    callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, false));
-                }
-            }
-        });
-
-        return null;
+        return result;
     }
 
     boolean shouldAutoShow() {
