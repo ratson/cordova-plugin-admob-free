@@ -65,6 +65,13 @@ class Interstitial {
   show() {
     return exec('showInterstitialAd', [true])
   }
+
+  /**
+   * @return {Promise}
+   */
+  isReady() {
+    return exec('isInterstitialReady', []);
+  }
 }
 
 export {Interstitial}

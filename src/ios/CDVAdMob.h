@@ -68,8 +68,10 @@
 - (void)createInterstitialView:(CDVInvokedUrlCommand *)command;
 - (void)requestInterstitialAd:(CDVInvokedUrlCommand *)command;
 - (void)showInterstitialAd:(CDVInvokedUrlCommand *)command;
+- (void)isInterstitialReady:(CDVInvokedUrlCommand *)command;
 
 - (void)createRewardVideo:(CDVInvokedUrlCommand *)command;
 - (void)showRewardVideo:(CDVInvokedUrlCommand *)command;
+- (void)isRewardVideoReady:(CDVInvokedUrlCommand *)command;
 
 @end

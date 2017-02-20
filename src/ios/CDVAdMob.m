@@ -269,6 +269,21 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
+- (void)isInterstitialReady:(CDVInvokedUrlCommand *)command {
+    NSLog(@"isInterstitialReady");
+        
+    CDVPluginResult *pluginResult;
+    NSString *callbackId = command.callbackId;
+
+    if (self.interstitialView && self.interstitialView.isReady) {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:true];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:false];
+    }
+    
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+}
+
 - (void)requestAd:(CDVInvokedUrlCommand *)command {
     NSLog(@"requestAd");
 
@@ -357,6 +372,22 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 
 }
+
+- (void)isRewardVideoReady:(CDVInvokedUrlCommand *)command {
+    NSLog(@"isRewardVideoReady");
+        
+    CDVPluginResult *pluginResult;
+    NSString *callbackId = command.callbackId;
+
+    if (self.rewardVideoView && self.rewardVideoView.isReady) {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:true];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:false];
+    }
+    
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+}
+
 - (void) __cycleRewardVideo {
     NSLog(@"__cycleRewardVideo");
 

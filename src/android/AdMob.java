@@ -113,6 +113,9 @@ public class AdMob extends CordovaPlugin {
             boolean show = inputs.optBoolean(0);
             result = interstitialExecutor.showAd(show, callbackContext);
 
+        } else if(Actions.IS_INTERSTITIAL_READY.equals(action)) {
+            result = interstitialExecutor.isReady(callbackContext);
+
         } else if (Actions.CREATE_REWARD_VIDEO.equals(action)) {
             JSONObject options = inputs.optJSONObject(0);
             result = rewardVideoExecutor.prepareAd(options, callbackContext);
@@ -120,6 +123,9 @@ public class AdMob extends CordovaPlugin {
         } else if (Actions.SHOW_REWARD_VIDEO.equals(action)) {
             boolean show = inputs.optBoolean(0);
             result = rewardVideoExecutor.showAd(show, callbackContext);
+
+        } else if(Actions.IS_REWARD_VIDEO_READY.equals(action)) {
+            result = rewardVideoExecutor.isReady(callbackContext);
 
         } else {
             Log.d(TAG, String.format("Invalid action passed: %s", action));

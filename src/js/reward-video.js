@@ -66,6 +66,13 @@ class RewardVideo {
   show() {
     return exec('showRewardVideo', [true])
   }
+
+  /**
+   * @return {Promise}
+   */
+  isReady() {
+    return exec('isRewardVideoReady', []);
+  }
 }
 
 export {RewardVideo}
