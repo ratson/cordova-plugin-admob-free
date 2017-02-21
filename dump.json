@@ -1161,7 +1161,7 @@
     "__docId__": 29,
     "kind": "file",
     "name": "js/interstitial.js",
-    "content": "import {buildEvents, exec, translateOptions} from './utils'\n\n/**\n * Interstitial config object.\n * @typedef {Object} InterstitialConfig\n * @property {string} [id=TESTING_AD_ID] - Ad Unit ID\n * @property {boolean} [isTesting=false] - receiving test ad\n * @property {boolean} [autoShow=false] - auto show ad when loaded\n */\n\nconst events = buildEvents('interstitial', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n])\n\n/**\n * @protected\n * @desc\n * See usage in {@link interstitial}.\n */\nclass Interstitial {\n  static events = events\n\n  /**\n   * @protected\n   * @param {InterstitialConfig} opts - initial config.\n   */\n  constructor(opts) {\n    this.config({\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   * @param {InterstitialConfig} opts - new config.\n   * @return {InterstitialConfig} updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * @return {Promise}\n   */\n  prepare() {\n    const options = {\n      interstitialAdId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('prepareInterstitial', [translateOptions(options)])\n  }\n\n  /**\n   * @return {Promise}\n   */\n  show() {\n    return exec('showInterstitialAd', [true])\n  }\n}\n\nexport {Interstitial}\n",
+    "content": "import {buildEvents, exec, translateOptions} from './utils'\n\n/**\n * Interstitial config object.\n * @typedef {Object} InterstitialConfig\n * @property {string} [id=TESTING_AD_ID] - Ad Unit ID\n * @property {boolean} [isTesting=false] - receiving test ad\n * @property {boolean} [autoShow=false] - auto show ad when loaded\n */\n\nconst events = buildEvents('interstitial', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n])\n\n/**\n * @protected\n * @desc\n * See usage in {@link interstitial}.\n */\nclass Interstitial {\n  static events = events\n\n  /**\n   * @protected\n   * @param {InterstitialConfig} opts - initial config.\n   */\n  constructor(opts) {\n    this.config({\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   * @param {InterstitialConfig} opts - new config.\n   * @return {InterstitialConfig} updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * @return {Promise}\n   */\n  prepare() {\n    const options = {\n      interstitialAdId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('prepareInterstitial', [translateOptions(options)])\n  }\n\n  /**\n   * @return {Promise}\n   */\n  show() {\n    return exec('showInterstitialAd', [true])\n  }\n\n  /**\n   * @return {Promise}\n   */\n  isReady() {\n    return exec('isInterstitialReady', [])\n  }\n}\n\nexport {Interstitial}\n",
     "static": true,
     "longname": "js/interstitial.js",
     "access": null,
@@ -1389,9 +1389,31 @@
   },
   {
     "__docId__": 38,
+    "kind": "method",
+    "name": "isReady",
+    "memberof": "js/interstitial.js~Interstitial",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/interstitial.js~Interstitial#isReady",
+    "access": null,
+    "description": "",
+    "lineNumber": 72,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 39,
     "kind": "file",
     "name": "js/reward-video.js",
-    "content": "import {buildEvents, exec, translateOptions} from './utils'\n\n/**\n * Reward Video config object.\n * @typedef {Object} RewardVideoConfig\n * @property {string} [id=TESTING_AD_ID] - Ad Unit ID\n * @property {boolean} [isTesting=false] - receiving test ad\n * @property {boolean} [autoShow=false] - auto show ad when loaded\n */\n\nconst events = buildEvents('rewardvideo', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n  'START',\n  'REWARD',\n])\n\n/**\n * See usage in {@link rewardvideo}.\n * @protected\n */\nclass RewardVideo {\n  static events = events\n\n  /**\n   * @protected\n   * @param {RewardVideoConfig} opts - initial config.\n   */\n  constructor(opts) {\n    this.config({\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   * @param {RewardVideoConfig} opts - new config.\n   * @return {RewardVideoConfig} updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * @return {Promise}\n   */\n  prepare() {\n    const options = {\n      rewardVideoId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('createRewardVideo', [translateOptions(options)])\n  }\n\n  /**\n   * @return {Promise}\n   */\n  show() {\n    return exec('showRewardVideo', [true])\n  }\n}\n\nexport {RewardVideo}\n",
+    "content": "import {buildEvents, exec, translateOptions} from './utils'\n\n/**\n * Reward Video config object.\n * @typedef {Object} RewardVideoConfig\n * @property {string} [id=TESTING_AD_ID] - Ad Unit ID\n * @property {boolean} [isTesting=false] - receiving test ad\n * @property {boolean} [autoShow=false] - auto show ad when loaded\n */\n\nconst events = buildEvents('rewardvideo', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n  'START',\n  'REWARD',\n])\n\n/**\n * See usage in {@link rewardvideo}.\n * @protected\n */\nclass RewardVideo {\n  static events = events\n\n  /**\n   * @protected\n   * @param {RewardVideoConfig} opts - initial config.\n   */\n  constructor(opts) {\n    this.config({\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   * @param {RewardVideoConfig} opts - new config.\n   * @return {RewardVideoConfig} updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * @return {Promise}\n   */\n  prepare() {\n    const options = {\n      rewardVideoId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('createRewardVideo', [translateOptions(options)])\n  }\n\n  /**\n   * @return {Promise}\n   */\n  show() {\n    return exec('showRewardVideo', [true])\n  }\n\n  /**\n   * @return {Promise}\n   */\n  isReady() {\n    return exec('isRewardVideoReady', [])\n  }\n}\n\nexport {RewardVideo}\n",
     "static": true,
     "longname": "js/reward-video.js",
     "access": null,
@@ -1399,7 +1421,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 39,
+    "__docId__": 40,
     "kind": "typedef",
     "name": "RewardVideoConfig",
     "memberof": "js/reward-video.js",
@@ -1455,7 +1477,7 @@
     }
   },
   {
-    "__docId__": 40,
+    "__docId__": 41,
     "kind": "class",
     "name": "RewardVideo",
     "memberof": "js/reward-video.js",
@@ -1470,7 +1492,7 @@
     "interface": false
   },
   {
-    "__docId__": 41,
+    "__docId__": 42,
     "kind": "member",
     "name": "events",
     "memberof": "js/reward-video.js~RewardVideo",
@@ -1493,7 +1515,7 @@
     }
   },
   {
-    "__docId__": 42,
+    "__docId__": 43,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "js/reward-video.js~RewardVideo",
@@ -1518,7 +1540,7 @@
     ]
   },
   {
-    "__docId__": 43,
+    "__docId__": 44,
     "kind": "method",
     "name": "config",
     "memberof": "js/reward-video.js~RewardVideo",
@@ -1551,7 +1573,7 @@
     }
   },
   {
-    "__docId__": 44,
+    "__docId__": 45,
     "kind": "member",
     "name": "_config",
     "memberof": "js/reward-video.js~RewardVideo",
@@ -1574,7 +1596,7 @@
     }
   },
   {
-    "__docId__": 45,
+    "__docId__": 46,
     "kind": "method",
     "name": "prepare",
     "memberof": "js/reward-video.js~RewardVideo",
@@ -1596,7 +1618,7 @@
     }
   },
   {
-    "__docId__": 46,
+    "__docId__": 47,
     "kind": "method",
     "name": "show",
     "memberof": "js/reward-video.js~RewardVideo",
@@ -1618,7 +1640,29 @@
     }
   },
   {
-    "__docId__": 47,
+    "__docId__": 48,
+    "kind": "method",
+    "name": "isReady",
+    "memberof": "js/reward-video.js~RewardVideo",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/reward-video.js~RewardVideo#isReady",
+    "access": null,
+    "description": "",
+    "lineNumber": 73,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 49,
     "kind": "file",
     "name": "js/utils.js",
     "content": "import corodvaExec from 'cordova/exec'\nimport isUndefined from 'lodash/isUndefined'\n\n/**\n * @ignore\n */\nexport function exec(method, args) {\n  return new Promise((resolve, reject) => {\n    corodvaExec(resolve, reject, 'AdMob', method, args)\n  })\n}\n\n/**\n * @ignore\n */\nexport function isFunction(x) {\n  return typeof x === 'function'\n}\n\nfunction isString(x) {\n  return typeof x === 'string'\n}\n\n/**\n * @ignore\n */\nexport function wrapCallbacks(p, successCallback, failureCallback) {\n  if (isFunction(successCallback)) {\n    p = p.then(successCallback)\n  }\n  if (isFunction(failureCallback)) {\n    p = p.catch(failureCallback)\n  }\n  return p\n}\n\nfunction boolean2string(x) {\n  if (x === null) {\n    return ''\n  }\n  if (x === true) {\n    return 'yes'\n  }\n  if (x === false) {\n    return 'no'\n  }\n  return x\n}\n\n/**\n * @ignore\n */\nexport function translateOptions(options) {\n  /* eslint-disable no-console */\n  const opts = {}\n  if (!isUndefined(options.forChild)) {\n    opts.forChild = boolean2string(options.forChild)\n    if (isString(options.forChild)) {\n      console.warn('`forChild` will not accept string in future, pass boolean instead')\n    }\n  }\n  if (!isUndefined(options.forFamily)) {\n    opts.forFamily = boolean2string(options.forFamily)\n    if (isString(options.forFamily)) {\n      console.warn('`forFamily` will not accept string in future, pass boolean instead')\n    }\n  }\n  return {\n    ...options,\n    ...opts,\n  }\n}\n\n/**\n * @ignore\n */\nexport function buildEvents(adType, eventKeys) {\n  return eventKeys.reduce((r, eventKey) => {\n    r[eventKey] = `admob.${adType}.events.${eventKey}`\n    return r\n  }, {})\n}\n",
@@ -1629,7 +1673,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 48,
+    "__docId__": 50,
     "kind": "function",
     "name": "exec",
     "memberof": "js/utils.js",
@@ -1665,7 +1709,7 @@
     }
   },
   {
-    "__docId__": 49,
+    "__docId__": 51,
     "kind": "function",
     "name": "isFunction",
     "memberof": "js/utils.js",
@@ -1695,7 +1739,7 @@
     }
   },
   {
-    "__docId__": 50,
+    "__docId__": 52,
     "kind": "function",
     "name": "isString",
     "memberof": "js/utils.js",
@@ -1731,7 +1775,7 @@
     }
   },
   {
-    "__docId__": 51,
+    "__docId__": 53,
     "kind": "function",
     "name": "wrapCallbacks",
     "memberof": "js/utils.js",
@@ -1773,7 +1817,7 @@
     }
   },
   {
-    "__docId__": 52,
+    "__docId__": 54,
     "kind": "function",
     "name": "boolean2string",
     "memberof": "js/utils.js",
@@ -1809,7 +1853,7 @@
     }
   },
   {
-    "__docId__": 53,
+    "__docId__": 55,
     "kind": "function",
     "name": "translateOptions",
     "memberof": "js/utils.js",
@@ -1839,7 +1883,7 @@
     }
   },
   {
-    "__docId__": 54,
+    "__docId__": 56,
     "kind": "function",
     "name": "buildEvents",
     "memberof": "js/utils.js",
@@ -1875,7 +1919,7 @@
     }
   },
   {
-    "__docId__": 56,
+    "__docId__": 58,
     "kind": "external",
     "name": "Infinity",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
@@ -1887,7 +1931,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 57,
+    "__docId__": 59,
     "kind": "external",
     "name": "NaN",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
@@ -1899,7 +1943,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 58,
+    "__docId__": 60,
     "kind": "external",
     "name": "undefined",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
@@ -1911,7 +1955,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 59,
+    "__docId__": 61,
     "kind": "external",
     "name": "null",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
@@ -1923,7 +1967,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 60,
+    "__docId__": 62,
     "kind": "external",
     "name": "Object",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
@@ -1935,7 +1979,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 61,
+    "__docId__": 63,
     "kind": "external",
     "name": "object",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
@@ -1947,7 +1991,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 62,
+    "__docId__": 64,
     "kind": "external",
     "name": "Function",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
@@ -1959,7 +2003,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 63,
+    "__docId__": 65,
     "kind": "external",
     "name": "function",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
@@ -1971,7 +2015,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 64,
+    "__docId__": 66,
     "kind": "external",
     "name": "Boolean",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
@@ -1983,7 +2027,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 65,
+    "__docId__": 67,
     "kind": "external",
     "name": "boolean",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
@@ -1995,7 +2039,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 66,
+    "__docId__": 68,
     "kind": "external",
     "name": "Symbol",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
@@ -2007,7 +2051,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 67,
+    "__docId__": 69,
     "kind": "external",
     "name": "Error",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
@@ -2019,7 +2063,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 68,
+    "__docId__": 70,
     "kind": "external",
     "name": "EvalError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
@@ -2031,7 +2075,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 69,
+    "__docId__": 71,
     "kind": "external",
     "name": "InternalError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
@@ -2043,7 +2087,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 70,
+    "__docId__": 72,
     "kind": "external",
     "name": "RangeError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
@@ -2055,7 +2099,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 71,
+    "__docId__": 73,
     "kind": "external",
     "name": "ReferenceError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
@@ -2067,7 +2111,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 72,
+    "__docId__": 74,
     "kind": "external",
     "name": "SyntaxError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
@@ -2079,7 +2123,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 73,
+    "__docId__": 75,
     "kind": "external",
     "name": "TypeError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
@@ -2091,7 +2135,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 74,
+    "__docId__": 76,
     "kind": "external",
     "name": "URIError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
@@ -2103,7 +2147,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 75,
+    "__docId__": 77,
     "kind": "external",
     "name": "Number",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
@@ -2115,7 +2159,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 76,
+    "__docId__": 78,
     "kind": "external",
     "name": "number",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
@@ -2127,7 +2171,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 77,
+    "__docId__": 79,
     "kind": "external",
     "name": "Date",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
@@ -2139,7 +2183,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 78,
+    "__docId__": 80,
     "kind": "external",
     "name": "String",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
@@ -2151,7 +2195,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 79,
+    "__docId__": 81,
     "kind": "external",
     "name": "string",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
@@ -2163,7 +2207,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 80,
+    "__docId__": 82,
     "kind": "external",
     "name": "RegExp",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
@@ -2175,7 +2219,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 81,
+    "__docId__": 83,
     "kind": "external",
     "name": "Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
@@ -2187,7 +2231,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 82,
+    "__docId__": 84,
     "kind": "external",
     "name": "Int8Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
@@ -2199,7 +2243,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 83,
+    "__docId__": 85,
     "kind": "external",
     "name": "Uint8Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
@@ -2211,7 +2255,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 84,
+    "__docId__": 86,
     "kind": "external",
     "name": "Uint8ClampedArray",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
@@ -2223,7 +2267,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 85,
+    "__docId__": 87,
     "kind": "external",
     "name": "Int16Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
@@ -2235,7 +2279,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 86,
+    "__docId__": 88,
     "kind": "external",
     "name": "Uint16Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
@@ -2247,7 +2291,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 87,
+    "__docId__": 89,
     "kind": "external",
     "name": "Int32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
@@ -2259,7 +2303,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 88,
+    "__docId__": 90,
     "kind": "external",
     "name": "Uint32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
@@ -2271,7 +2315,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 89,
+    "__docId__": 91,
     "kind": "external",
     "name": "Float32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
@@ -2283,7 +2327,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 90,
+    "__docId__": 92,
     "kind": "external",
     "name": "Float64Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
@@ -2295,7 +2339,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 91,
+    "__docId__": 93,
     "kind": "external",
     "name": "Map",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
@@ -2307,7 +2351,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 92,
+    "__docId__": 94,
     "kind": "external",
     "name": "Set",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
@@ -2319,7 +2363,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 93,
+    "__docId__": 95,
     "kind": "external",
     "name": "WeakMap",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
@@ -2331,7 +2375,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 94,
+    "__docId__": 96,
     "kind": "external",
     "name": "WeakSet",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
@@ -2343,7 +2387,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 95,
+    "__docId__": 97,
     "kind": "external",
     "name": "ArrayBuffer",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
@@ -2355,7 +2399,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 96,
+    "__docId__": 98,
     "kind": "external",
     "name": "DataView",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
@@ -2367,7 +2411,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 97,
+    "__docId__": 99,
     "kind": "external",
     "name": "JSON",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
@@ -2379,7 +2423,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 98,
+    "__docId__": 100,
     "kind": "external",
     "name": "Promise",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
@@ -2391,7 +2435,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 99,
+    "__docId__": 101,
     "kind": "external",
     "name": "Generator",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
@@ -2403,7 +2447,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 100,
+    "__docId__": 102,
     "kind": "external",
     "name": "GeneratorFunction",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
@@ -2415,7 +2459,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 101,
+    "__docId__": 103,
     "kind": "external",
     "name": "Reflect",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
@@ -2427,7 +2471,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 102,
+    "__docId__": 104,
     "kind": "external",
     "name": "Proxy",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
@@ -2440,7 +2484,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 104,
+    "__docId__": 106,
     "kind": "external",
     "name": "CanvasRenderingContext2D",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
@@ -2452,7 +2496,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 105,
+    "__docId__": 107,
     "kind": "external",
     "name": "DocumentFragment",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
@@ -2464,7 +2508,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 106,
+    "__docId__": 108,
     "kind": "external",
     "name": "Element",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
@@ -2476,7 +2520,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 107,
+    "__docId__": 109,
     "kind": "external",
     "name": "Event",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
@@ -2488,7 +2532,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 108,
+    "__docId__": 110,
     "kind": "external",
     "name": "Node",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
@@ -2500,7 +2544,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 109,
+    "__docId__": 111,
     "kind": "external",
     "name": "NodeList",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
@@ -2512,7 +2556,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 110,
+    "__docId__": 112,
     "kind": "external",
     "name": "XMLHttpRequest",
     "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
@@ -2524,7 +2568,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 111,
+    "__docId__": 113,
     "kind": "external",
     "name": "AudioContext",
     "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",

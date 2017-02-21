@@ -522,6 +522,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "js/interstitial.js~interstitial#isready",
+    "class/js/interstitial.js~Interstitial.html#instance-method-isReady",
+    "js/interstitial.js~Interstitial#isReady",
+    "method"
+  ],
+  [
     "js/interstitial.js~interstitial#prepare",
     "class/js/interstitial.js~Interstitial.html#instance-method-prepare",
     "js/interstitial.js~Interstitial#prepare",
@@ -561,6 +567,12 @@ window.esdocSearchIndex = [
     "js/reward-video.js~rewardvideo#constructor",
     "class/js/reward-video.js~RewardVideo.html#instance-constructor-constructor",
     "js/reward-video.js~RewardVideo#constructor",
+    "method"
+  ],
+  [
+    "js/reward-video.js~rewardvideo#isready",
+    "class/js/reward-video.js~RewardVideo.html#instance-method-isReady",
+    "js/reward-video.js~RewardVideo#isReady",
     "method"
   ],
   [

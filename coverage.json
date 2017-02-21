@@ -1,7 +1,7 @@
 {
-  "coverage": "91.17%",
-  "expectCount": 34,
-  "actualCount": 31,
+  "coverage": "91.66%",
+  "expectCount": 36,
+  "actualCount": 33,
   "files": {
     "js/admob.js": {
       "expectCount": 13,
@@ -16,15 +16,15 @@
       ]
     },
     "js/interstitial.js": {
-      "expectCount": 6,
-      "actualCount": 5,
+      "expectCount": 7,
+      "actualCount": 6,
       "undocumentLines": [
         25
       ]
     },
     "js/reward-video.js": {
-      "expectCount": 6,
-      "actualCount": 5,
+      "expectCount": 7,
+      "actualCount": 6,
       "undocumentLines": [
         26
       ]
