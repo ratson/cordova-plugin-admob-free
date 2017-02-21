@@ -51,7 +51,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.23.0",
-    "babel-jest": "^18.0.0",
+    "babel-jest": "^19.0.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-lodash": "^3.2.11",
@@ -75,7 +75,7 @@
     "eslint": "^3.16.0",
     "eslint-config-concise": "^0.6.1",
     "eslint-config-concise-esnext": "^0.6.0",
-    "jest": "^18.1.0",
+    "jest": "^19.0.0",
     "lintspaces-cli": "^0.6.0",
     "lodash": "^4.17.4",
     "lodash-es": "^4.17.4",

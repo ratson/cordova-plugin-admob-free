@@ -271,7 +271,7 @@
 
 - (void)isInterstitialReady:(CDVInvokedUrlCommand *)command {
     NSLog(@"isInterstitialReady");
-        
+
     CDVPluginResult *pluginResult;
     NSString *callbackId = command.callbackId;
 
@@ -280,7 +280,7 @@
     } else {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:false];
     }
-    
+
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
@@ -375,7 +375,7 @@
 
 - (void)isRewardVideoReady:(CDVInvokedUrlCommand *)command {
     NSLog(@"isRewardVideoReady");
-        
+
     CDVPluginResult *pluginResult;
     NSString *callbackId = command.callbackId;
 
@@ -384,7 +384,7 @@
     } else {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:false];
     }
-    
+
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 

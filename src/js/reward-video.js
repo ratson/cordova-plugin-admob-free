@@ -71,7 +71,7 @@ class RewardVideo {
    * @return {Promise}
    */
   isReady() {
-    return exec('isRewardVideoReady', []);
+    return exec('isRewardVideoReady', [])
   }
 }
 

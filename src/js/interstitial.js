@@ -70,7 +70,7 @@ class Interstitial {
    * @return {Promise}
    */
   isReady() {
-    return exec('isInterstitialReady', []);
+    return exec('isInterstitialReady', [])
   }
 }
 
