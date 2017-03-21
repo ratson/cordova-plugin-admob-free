@@ -1,8 +1,10 @@
 ## Next
 
+## 0.8.0 (2017-03-22)
+
 ### Breaking
 
-* Update Google AdMob SDK for iOS to v7.18.0.
+* Update Google AdMob SDK for iOS to v7.19.0.
 
 ## 0.7.0 (2017-02-21)
 
