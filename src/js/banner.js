@@ -2,10 +2,7 @@ import {buildEvents, exec, translateOptions} from './utils'
 
 /**
  * Banner config object.
- * @typedef {Object} BannerConfig
- * @property {string} [id=TESTING_AD_ID] - Ad Unit ID
- * @property {boolean} [isTesting=false] - receiving test ad
- * @property {boolean} [autoShow=false] - auto show ad when loaded
+ * @typedef {BaseConfig} BannerConfig
  * @property {boolean} [bannerAtTop=false] - set to true, to put banner at top
  * @property {boolean} [overlap=true] - set to true, to allow banner overlap webview
  * @property {boolean} [offsetTopBar=false] - set to true to avoid ios7 status bar overlap

@@ -2,6 +2,14 @@ import corodvaExec from 'cordova/exec'
 import isUndefined from 'lodash/isUndefined'
 
 /**
+ * Base config object.
+ * @typedef {Object} BaseConfig
+ * @property {string} [id=TESTING_AD_ID] - Ad Unit ID
+ * @property {boolean} [isTesting=false] - receiving test ad
+ * @property {boolean} [autoShow=false] - auto show ad when loaded
+ */
+
+/**
  * @ignore
  */
 export function exec(method, args) {

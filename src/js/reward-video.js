@@ -2,10 +2,7 @@ import {buildEvents, exec, translateOptions} from './utils'
 
 /**
  * Reward Video config object.
- * @typedef {Object} RewardVideoConfig
- * @property {string} [id=TESTING_AD_ID] - Ad Unit ID
- * @property {boolean} [isTesting=false] - receiving test ad
- * @property {boolean} [autoShow=false] - auto show ad when loaded
+ * @typedef {BaseConfig} RewardVideoConfig
  */
 
 const events = buildEvents('rewardvideo', [

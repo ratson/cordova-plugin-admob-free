@@ -2,10 +2,7 @@ import {buildEvents, exec, translateOptions} from './utils'
 
 /**
  * Interstitial config object.
- * @typedef {Object} InterstitialConfig
- * @property {string} [id=TESTING_AD_ID] - Ad Unit ID
- * @property {boolean} [isTesting=false] - receiving test ad
- * @property {boolean} [autoShow=false] - auto show ad when loaded
+ * @typedef {BaseConfig} InterstitialConfig
  */
 
 const events = buildEvents('interstitial', [
