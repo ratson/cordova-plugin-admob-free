@@ -5,8 +5,23 @@ import isUndefined from 'lodash/isUndefined'
  * Base config object.
  * @typedef {Object} BaseConfig
  * @property {string} [id=TESTING_AD_ID] - Ad Unit ID
- * @property {boolean} [isTesting=false] - receiving test ad
- * @property {boolean} [autoShow=false] - auto show ad when loaded
+ * @property {boolean} [isTesting=false] - Receiving test ad
+ * @property {boolean} [autoShow=false] - Auto show ad when loaded
+ *
+ * @property {boolean|null} [forChild=null]
+ * Child-directed setting.
+ * Default is not calling `tagForChildDirectedTreatment`.
+ * Set to `true` for `tagForChildDirectedTreatment(true)`.
+ * Set to `false` for `tagForChildDirectedTreatment(false)`.
+ * @see https://firebase.google.com/docs/admob/android/targeting#child-directed_setting
+ *
+ * @property {boolean|null} [forFamily=null]
+ * Designed for Families setting.
+ * Android-only.
+ * Default is not calling `setIsDesignedForFamilies`.
+ * Set to `true` for `setIsDesignedForFamilies(true)`.
+ * Set to `false` for `setIsDesignedForFamilies(false)`.
+ * @see https://firebase.google.com/docs/admob/android/targeting#designed_for_families_setting
  */
 
 /**
