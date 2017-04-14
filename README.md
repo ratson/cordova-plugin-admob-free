@@ -79,7 +79,7 @@ See [documentation page](https://ratson.github.io/cordova-plugin-admob-free/iden
 
 ## Status
 
-This plugin is forked from [cordova-plugin-admob-simple](https://github.com/sunnycupertino/cordova-plugin-admob-simple) and removed the ad-sharing related code. All APIs are remaining the same as the original fork.
+This plugin is forked from [cordova-plugin-admob-simple](https://github.com/sunnycupertino/cordova-plugin-admob-simple) and removed the ad-sharing related code.
 
 The code for Android has almost all rewritten to be more maintainable, plus some extra features.
 
