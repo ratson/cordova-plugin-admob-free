@@ -22,6 +22,11 @@ import isUndefined from 'lodash/isUndefined'
  * Set to `true` for `setIsDesignedForFamilies(true)`.
  * Set to `false` for `setIsDesignedForFamilies(false)`.
  * @see https://firebase.google.com/docs/admob/android/targeting#designed_for_families_setting
+ *
+ * @property {Array<number>|null} [location=null]
+ * Location targeting. It accept an array in the form of `[latitude, longitude]`.
+ * Android-only.
+ * Default is not calling `setLatitude` and `setLongitude`.
  */
 
 /**
@@ -79,13 +84,17 @@ export function translateOptions(options) {
   if (!isUndefined(options.forChild)) {
     opts.forChild = boolean2string(options.forChild)
     if (isString(options.forChild)) {
-      console.warn('`forChild` will not accept string in future, pass boolean instead')
+      console.warn(
+        '`forChild` will not accept string in future, pass boolean instead',
+      )
     }
   }
   if (!isUndefined(options.forFamily)) {
     opts.forFamily = boolean2string(options.forFamily)
     if (isString(options.forFamily)) {
-      console.warn('`forFamily` will not accept string in future, pass boolean instead')
+      console.warn(
+        '`forFamily` will not accept string in future, pass boolean instead',
+      )
     }
   }
   return {
