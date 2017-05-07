@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-admob-free",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Cordova AdMob Plugin for Google AdMob",
   "scripts": {
     "clean": "rimraf coverage dist www",
