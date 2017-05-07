@@ -12,21 +12,21 @@
       "expectCount": 9,
       "actualCount": 8,
       "undocumentLines": [
-        59
+        56
       ]
     },
     "js/interstitial.js": {
       "expectCount": 7,
       "actualCount": 6,
       "undocumentLines": [
-        25
+        22
       ]
     },
     "js/reward-video.js": {
       "expectCount": 7,
       "actualCount": 6,
       "undocumentLines": [
-        26
+        23
       ]
     }
   }

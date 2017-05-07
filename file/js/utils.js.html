@@ -52,6 +52,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BannerConfig">BannerConfig</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-InterstitialConfig">InterstitialConfig</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RewardVideoConfig">RewardVideoConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BaseConfig">BaseConfig</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/rehy/cordova-admob-mediation">cordova-admob-mediation</a></span></span></li>
 </ul>
 </div>
@@ -60,6 +61,34 @@
 <div class="content" data-ice="content"><h1 data-ice="title">js/utils.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import corodvaExec from &apos;cordova/exec&apos;
 import isUndefined from &apos;lodash/isUndefined&apos;
+
+/**
+ * Base config object.
+ * @typedef {Object} BaseConfig
+ * @property {string} [id=TESTING_AD_ID] - Ad Unit ID
+ * @property {boolean} [isTesting=false] - Receiving test ad
+ * @property {boolean} [autoShow=false] - Auto show ad when loaded
+ *
+ * @property {boolean|null} [forChild=null]
+ * Child-directed setting.
+ * Default is not calling `tagForChildDirectedTreatment`.
+ * Set to `true` for `tagForChildDirectedTreatment(true)`.
+ * Set to `false` for `tagForChildDirectedTreatment(false)`.
+ * @see https://firebase.google.com/docs/admob/android/targeting#child-directed_setting
+ *
+ * @property {boolean|null} [forFamily=null]
+ * Designed for Families setting.
+ * Android-only.
+ * Default is not calling `setIsDesignedForFamilies`.
+ * Set to `true` for `setIsDesignedForFamilies(true)`.
+ * Set to `false` for `setIsDesignedForFamilies(false)`.
+ * @see https://firebase.google.com/docs/admob/android/targeting#designed_for_families_setting
+ *
+ * @property {Array&lt;number&gt;|null} [location=null]
+ * Location targeting. It accept an array in the form of `[latitude, longitude]`.
+ * Android-only.
+ * Default is not calling `setLatitude` and `setLongitude`.
+ */
 
 /**
  * @ignore
@@ -116,13 +145,17 @@ export function translateOptions(options) {
   if (!isUndefined(options.forChild)) {
     opts.forChild = boolean2string(options.forChild)
     if (isString(options.forChild)) {
-      console.warn(&apos;`forChild` will not accept string in future, pass boolean instead&apos;)
+      console.warn(
+        &apos;`forChild` will not accept string in future, pass boolean instead&apos;,
+      )
     }
   }
   if (!isUndefined(options.forFamily)) {
     opts.forFamily = boolean2string(options.forFamily)
     if (isString(options.forFamily)) {
-      console.warn(&apos;`forFamily` will not accept string in future, pass boolean instead&apos;)
+      console.warn(
+        &apos;`forFamily` will not accept string in future, pass boolean instead&apos;,
+      )
     }
   }
   return {

@@ -1,98 +1,98 @@
 window.esdocSearchIndex = [
   [
-    "cordova-plugin-admob-free/admob~ad_size",
+    "cordova-plugin-admob-free/js/admob.js~ad_size",
     "variable/index.html#static-variable-AD_SIZE",
-    "<span>AD_SIZE</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>AD_SIZE</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "variable"
   ],
   [
-    "cordova-plugin-admob-free/admob~banner",
+    "cordova-plugin-admob-free/js/banner.js~banner",
     "class/js/banner.js~Banner.html",
-    "<span>Banner</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>Banner</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/banner.js</span>",
     "class"
   ],
   [
-    "cordova-plugin-admob-free/admob~interstitial",
+    "cordova-plugin-admob-free/js/interstitial.js~interstitial",
     "class/js/interstitial.js~Interstitial.html",
-    "<span>Interstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>Interstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/interstitial.js</span>",
     "class"
   ],
   [
-    "cordova-plugin-admob-free/admob~rewardvideo",
+    "cordova-plugin-admob-free/js/reward-video.js~rewardvideo",
     "class/js/reward-video.js~RewardVideo.html",
-    "<span>RewardVideo</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>RewardVideo</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/reward-video.js</span>",
     "class"
   ],
   [
-    "cordova-plugin-admob-free/admob~banner",
+    "cordova-plugin-admob-free/js/admob.js~banner",
     "variable/index.html#static-variable-banner",
-    "<span>banner</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>banner</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "variable"
   ],
   [
-    "cordova-plugin-admob-free/admob~createbannerview",
+    "cordova-plugin-admob-free/js/admob.js~createbannerview",
     "function/index.html#static-function-createBannerView",
-    "<span>createBannerView</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>createBannerView</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/admob~createinterstitialview",
+    "cordova-plugin-admob-free/js/admob.js~createinterstitialview",
     "function/index.html#static-function-createInterstitialView",
-    "<span>createInterstitialView</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>createInterstitialView</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/admob~destroybannerview",
+    "cordova-plugin-admob-free/js/admob.js~destroybannerview",
     "function/index.html#static-function-destroyBannerView",
-    "<span>destroyBannerView</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>destroyBannerView</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/admob~interstitial",
+    "cordova-plugin-admob-free/js/admob.js~interstitial",
     "variable/index.html#static-variable-interstitial",
-    "<span>interstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>interstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "variable"
   ],
   [
-    "cordova-plugin-admob-free/admob~prepareinterstitial",
+    "cordova-plugin-admob-free/js/admob.js~prepareinterstitial",
     "function/index.html#static-function-prepareInterstitial",
-    "<span>prepareInterstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>prepareInterstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/admob~requestinterstitialad",
+    "cordova-plugin-admob-free/js/admob.js~requestinterstitialad",
     "function/index.html#static-function-requestInterstitialAd",
-    "<span>requestInterstitialAd</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>requestInterstitialAd</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/admob~rewardvideo",
+    "cordova-plugin-admob-free/js/admob.js~rewardvideo",
     "variable/index.html#static-variable-rewardvideo",
-    "<span>rewardvideo</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>rewardvideo</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "variable"
   ],
   [
-    "cordova-plugin-admob-free/admob~setoptions",
+    "cordova-plugin-admob-free/js/admob.js~setoptions",
     "function/index.html#static-function-setOptions",
-    "<span>setOptions</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>setOptions</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/admob~showad",
+    "cordova-plugin-admob-free/js/admob.js~showad",
     "function/index.html#static-function-showAd",
-    "<span>showAd</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>showAd</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/admob~showinterstitial",
+    "cordova-plugin-admob-free/js/admob.js~showinterstitial",
     "function/index.html#static-function-showInterstitial",
-    "<span>showInterstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>showInterstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/admob~showinterstitialad",
+    "cordova-plugin-admob-free/js/admob.js~showinterstitialad",
     "function/index.html#static-function-showInterstitialAd",
-    "<span>showInterstitialAd</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
+    "<span>showInterstitialAd</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
     "function"
   ],
   [
@@ -604,5 +604,11 @@ window.esdocSearchIndex = [
     "file/js/utils.js.html",
     "js/utils.js",
     "file"
+  ],
+  [
+    "js/utils.js~baseconfig",
+    "typedef/index.html#static-typedef-BaseConfig",
+    "js/utils.js~BaseConfig",
+    "typedef"
   ]
 ]

@@ -52,6 +52,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BannerConfig">BannerConfig</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-InterstitialConfig">InterstitialConfig</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-RewardVideoConfig">RewardVideoConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BaseConfig">BaseConfig</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/rehy/cordova-admob-mediation">cordova-admob-mediation</a></span></span></li>
 </ul>
 </div>
@@ -68,7 +69,7 @@
 <p>Except Google provided <a href="https://github.com/rehy/cordova-admob-sdk">AdMob SDKs</a>, every line of code are on Github. You don&apos;t <a href="https://github.com/admob-google/admob-cordova/blob/master/src/android/libs/admobadplugin.jar">execute</a> <a href="https://github.com/floatinghotpot/cordova-extension/blob/master/src/android/cordova-generic-ad.jar">compiled</a> <a href="https://github.com/floatinghotpot/cordova-extension/blob/master/src/ios/libCordovaGenericAd.a">binary</a> without seeing the source code.</p>
 </li>
 <li><p><strong>No Remote Control</strong></p>
-<p>Do not <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/326">send your application information to a remote server</a> to control whether ad could be displayed. Therefore, you don&apos;t lose revenue because <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/450#issuecomment-244837346">some server bugs</a>,</p>
+<p>Do not <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/326">send your application information to a remote server</a> to control whether ad could be displayed. Therefore, you don&apos;t <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/544">lose revenue</a> because <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/450#issuecomment-244837346">some server bugs</a>,</p>
 </li>
 </ul>
 <h3 id="compare-to-other-projects">Compare to other projects</h3>
@@ -110,7 +111,7 @@
 <td>  <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple">cordova-plugin-admob-simple</a></td>
 <td><a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple/blob/a58846c1ea14188a4aef44381ccd28ffdcae3bfa/src/android/AdMob.java#L207">&#x274C;</a></td>
 <td>&#x2705;</td>
-<td>&#x2705;</td>
+<td><a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple/blob/f7cc64e9e018f2146b2735b5ae8d3b780fa24f72/src/android/AdMob.java#L728">&#x274C;</a></td>
 </tr>
 <tr>
 <td>  <a href="https://github.com/floatinghotpot/cordova-admob-pro">cordova-plugin-admobpro</a></td>
@@ -166,7 +167,7 @@
 <h2 id="api">API</h2>
 <p>See <a href="https://ratson.github.io/cordova-plugin-admob-free/identifiers.html">documentation page</a>.</p>
 <h2 id="status">Status</h2>
-<p>This plugin is forked from <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple">cordova-plugin-admob-simple</a> and removed the ad-sharing related code. All APIs are remaining the same as the original fork.</p>
+<p>This plugin is forked from <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple">cordova-plugin-admob-simple</a> and removed the ad-sharing related code.</p>
 <p>The code for Android has almost all rewritten to be more maintainable, plus some extra features.</p>
 <p>For iOS, while it is working, I have less interest in writing Objective-C code these days. If someone is willing to help, feel free to send a pull request, I will review it.</p>
 <h2 id="contributing">Contributing</h2>
