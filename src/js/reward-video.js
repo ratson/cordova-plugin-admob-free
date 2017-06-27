@@ -1,4 +1,4 @@
-import {buildEvents, exec, translateOptions} from './utils'
+import { buildEvents, exec, translateOptions } from './utils'
 
 /**
  * Reward Video config object.
@@ -72,4 +72,4 @@ class RewardVideo {
   }
 }
 
-export {RewardVideo}
+export { RewardVideo }

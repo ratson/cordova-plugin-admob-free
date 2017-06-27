@@ -1,4 +1,4 @@
-import {buildEvents, exec, translateOptions} from './utils'
+import { buildEvents, exec, translateOptions } from './utils'
 
 /**
  * Banner config object.
@@ -123,4 +123,4 @@ class Banner {
   }
 }
 
-export {Banner}
+export { Banner }

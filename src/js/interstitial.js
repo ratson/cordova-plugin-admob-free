@@ -1,4 +1,4 @@
-import {buildEvents, exec, translateOptions} from './utils'
+import { buildEvents, exec, translateOptions } from './utils'
 
 /**
  * Interstitial config object.
@@ -71,4 +71,4 @@ class Interstitial {
   }
 }
 
-export {Interstitial}
+export { Interstitial }
