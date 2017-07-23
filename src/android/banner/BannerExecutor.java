@@ -205,12 +205,13 @@ public class BannerExecutor extends AbstractExecutor {
                             parentView = new LinearLayout(webView.getContext());
                         }
                         if (wvParentView != null && wvParentView != parentView) {
+                            ViewGroup rootView = (ViewGroup)(getWebView().getParent());
                             wvParentView.removeView(getWebView());
                             ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
                             parentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
                             getWebView().setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0F));
                             parentView.addView(getWebView());
-                            cordova.getActivity().setContentView(parentView);
+                            rootView.addView(parentView);
                         }
 
 
