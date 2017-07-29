@@ -31,7 +31,7 @@ describe('Banner', () => {
       expect.any(Function),
       'AdMob',
       'createBannerView',
-      [expect.objectContaining(options)]
+      [expect.objectContaining(options)],
     )
   })
 
@@ -42,7 +42,7 @@ describe('Banner', () => {
       expect.any(Function),
       'AdMob',
       'destroyBannerView',
-      []
+      [],
     )
   })
 
@@ -53,7 +53,7 @@ describe('Banner', () => {
       expect.any(Function),
       'AdMob',
       'showAd',
-      [true]
+      [true],
     )
   })
 
@@ -64,7 +64,7 @@ describe('Banner', () => {
       expect.any(Function),
       'AdMob',
       'showAd',
-      [false]
+      [false],
     )
   })
 })
@@ -77,7 +77,7 @@ describe('Interstitial', () => {
       expect.any(Function),
       'AdMob',
       'prepareInterstitial',
-      [options]
+      [options],
     )
   })
 
@@ -88,7 +88,7 @@ describe('Interstitial', () => {
       expect.any(Function),
       'AdMob',
       'showInterstitialAd',
-      [true]
+      [true],
     )
   })
 })
@@ -101,7 +101,7 @@ describe('Reward Video', () => {
       expect.any(Function),
       'AdMob',
       'createRewardVideo',
-      [options]
+      [options],
     )
   })
 
@@ -112,7 +112,7 @@ describe('Reward Video', () => {
       expect.any(Function),
       'AdMob',
       'showRewardVideo',
-      [true]
+      [true],
     )
   })
 })
@@ -125,7 +125,7 @@ describe('Old APIs', () => {
       expect.any(Function),
       'AdMob',
       'createBannerView',
-      [expect.objectContaining(options)]
+      [expect.objectContaining(options)],
     )
   })
 
@@ -136,7 +136,7 @@ describe('Old APIs', () => {
       expect.any(Function),
       'AdMob',
       'destroyBannerView',
-      []
+      [],
     )
   })
 
@@ -154,7 +154,7 @@ describe('Old APIs', () => {
       expect.any(Function),
       'AdMob',
       'prepareInterstitial',
-      [expect.objectContaining(options)]
+      [expect.objectContaining(options)],
     )
   })
 
@@ -165,18 +165,18 @@ describe('Old APIs', () => {
       expect.any(Function),
       'AdMob',
       'showInterstitialAd',
-      [true]
+      [true],
     )
   })
 
   it('showInterstitialAd() should work', () => {
     admob.showInterstitialAd(false, success, error)
     expect(
-      mockFn
+      mockFn,
     ).toBeCalledWith(success, error, 'AdMob', 'showInterstitialAd', [false])
     admob.showInterstitialAd(true, success, error)
     expect(
-      mockFn
+      mockFn,
     ).toBeCalledWith(success, error, 'AdMob', 'showInterstitialAd', [true])
   })
 })

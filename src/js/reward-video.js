@@ -24,7 +24,7 @@ class RewardVideo {
 
   /**
    * @protected
-   * @param {RewardVideoConfig} opts - initial config.
+   * @param {RewardVideoConfig} opts - Initial config.
    */
   constructor(opts) {
     this.config({
@@ -34,8 +34,9 @@ class RewardVideo {
 
   /**
    * Update config.
-   * @param {RewardVideoConfig} opts - new config.
-   * @return {RewardVideoConfig} updated config.
+   *
+   * @param {RewardVideoConfig} opts - New config.
+   * @returns {RewardVideoConfig} Updated config.
    */
   config(opts) {
     this._config = {
@@ -46,7 +47,7 @@ class RewardVideo {
   }
 
   /**
-   * @return {Promise}
+   * @returns {Promise}
    */
   prepare() {
     const options = {
@@ -58,14 +59,14 @@ class RewardVideo {
   }
 
   /**
-   * @return {Promise}
+   * @returns {Promise}
    */
   show() {
     return exec('showRewardVideo', [true])
   }
 
   /**
-   * @return {Promise}
+   * @returns {Promise}
    */
   isReady() {
     return exec('isRewardVideoReady', [])

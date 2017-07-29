@@ -4,8 +4,10 @@ import { buildEvents, exec, translateOptions } from './utils'
  * Banner config object.
  * @typedef {BaseConfig} BannerConfig
  * @property {boolean} [bannerAtTop=false] - set to true, to put banner at top
- * @property {boolean} [overlap=true] - set to true, to allow banner overlap webview
- * @property {boolean} [offsetTopBar=false] - set to true to avoid ios7 status bar overlap
+ * @property {boolean} [overlap=true] -
+ * set to true, to allow banner overlap webview
+ * @property {boolean} [offsetTopBar=false] -
+ * set to true to avoid ios7 status bar overlap
  * @property {string} [size=SMART_BANNER] - {@link BANNER_SIZE}
  */
 
@@ -63,7 +65,7 @@ class Banner {
 
   /**
    * @protected
-   * @param {BannerConfig} opts - initial config.
+   * @param {BannerConfig} opts - Initial config.
    */
   constructor(opts) {
     this.config({
@@ -74,8 +76,9 @@ class Banner {
 
   /**
    * Update config.
-   * @param {BannerConfig} opts - new config.
-   * @return {BannerConfig} updated config.
+   *
+   * @param {BannerConfig} opts - New config.
+   * @returns {BannerConfig} Updated config.
    */
   config(opts) {
     this._config = {
@@ -87,7 +90,8 @@ class Banner {
 
   /**
    * Create banner.
-   * @return {Promise}
+   *
+   * @returns {Promise}
    */
   prepare() {
     const options = {
@@ -100,7 +104,8 @@ class Banner {
 
   /**
    * Show the banner.
-   * @return {Promise}
+   *
+   * @returns {Promise}
    */
   show() {
     return exec('showAd', [true])
@@ -108,7 +113,8 @@ class Banner {
 
   /**
    * Hide the banner.
-   * @return {Promise}
+   *
+   * @returns {Promise}
    */
   hide() {
     return exec('showAd', [false])
@@ -116,7 +122,8 @@ class Banner {
 
   /**
    * Remove the banner.
-   * @return {Promise}
+   *
+   * @returns {Promise}
    */
   remove() {
     return exec('destroyBannerView', [])

@@ -23,7 +23,7 @@ class Interstitial {
 
   /**
    * @protected
-   * @param {InterstitialConfig} opts - initial config.
+   * @param {InterstitialConfig} opts - Initial config.
    */
   constructor(opts) {
     this.config({
@@ -33,8 +33,9 @@ class Interstitial {
 
   /**
    * Update config.
-   * @param {InterstitialConfig} opts - new config.
-   * @return {InterstitialConfig} updated config.
+   *
+   * @param {InterstitialConfig} opts - New config.
+   * @returns {InterstitialConfig} Updated config.
    */
   config(opts) {
     this._config = {
@@ -45,7 +46,7 @@ class Interstitial {
   }
 
   /**
-   * @return {Promise}
+   * @returns {Promise}
    */
   prepare() {
     const options = {
@@ -57,14 +58,14 @@ class Interstitial {
   }
 
   /**
-   * @return {Promise}
+   * @returns {Promise}
    */
   show() {
     return exec('showInterstitialAd', [true])
   }
 
   /**
-   * @return {Promise}
+   * @returns {Promise}
    */
   isReady() {
     return exec('isInterstitialReady', [])

@@ -1,3 +1,5 @@
 extends:
   - concise
   - concise-esnext
+rules:
+  class-methods-use-this: off

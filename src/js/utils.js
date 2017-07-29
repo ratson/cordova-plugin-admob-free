@@ -24,7 +24,8 @@ import isUndefined from 'lodash/isUndefined'
  * @see https://firebase.google.com/docs/admob/android/targeting#designed_for_families_setting
  *
  * @property {Array<number>|null} [location=null]
- * Location targeting. It accept an array in the form of `[latitude, longitude]`.
+ * Location targeting.
+ * It accept an array in the form of `[latitude, longitude]`.
  * Android-only.
  * Default is not calling `setLatitude` and `setLongitude`.
  */
@@ -54,10 +55,10 @@ function isString(x) {
  */
 export function wrapCallbacks(p, successCallback, failureCallback) {
   if (isFunction(successCallback)) {
-    p = p.then(successCallback)
+    p = p.then(successCallback) // eslint-disable-line no-param-reassign
   }
   if (isFunction(failureCallback)) {
-    p = p.catch(failureCallback)
+    p = p.catch(failureCallback) // eslint-disable-line no-param-reassign
   }
   return p
 }
@@ -97,6 +98,7 @@ export function translateOptions(options) {
       )
     }
   }
+  /* eslint-enable no-console */
   return {
     ...options,
     ...opts,
@@ -107,8 +109,8 @@ export function translateOptions(options) {
  * @ignore
  */
 export function buildEvents(adType, eventKeys) {
-  return eventKeys.reduce((r, eventKey) => {
-    r[eventKey] = `admob.${adType}.events.${eventKey}`
-    return r
+  return eventKeys.reduce((acc, eventKey) => {
+    acc[eventKey] = `admob.${adType}.events.${eventKey}`
+    return acc
   }, {})
 }

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import exec from 'cordova/exec'
 
 import { wrapCallbacks, translateOptions } from './utils'
@@ -82,17 +81,22 @@ export const rewardvideo = new RewardVideo()
 // Old APIs
 
 /**
+ * Set options.
  *
  * @deprecated since version 0.6
  * @param {Object} options
  * @param {string} options.publisherId
  * @param {string} options.interstitialAdId
  *
- * @param {boolean} [options.bannerAtTop=false]    Set to true, to put banner at top
- * @param {boolean} [options.overlap=true]   Set to true, to allow banner overlap webview
- * @param {boolean} [options.offsetTopBar=false]    Set to true to avoid ios7 status bar overlap
- * @param {boolean} [options.isTesting=false]    Receiving test ad
- * @param {boolean} [options.autoShow=false]    Auto show interstitial ad when loaded
+ * @param {boolean} [options.bannerAtTop=false]
+ * Set to true, to put banner at top.
+ * @param {boolean} [options.overlap=true]
+ * Set to true, to allow banner overlap webview.
+ * @param {boolean} [options.offsetTopBar=false]
+ * Set to true to avoid ios7 status bar overlap.
+ * @param {boolean} [options.isTesting=false]    Receiving test ad.
+ * @param {boolean} [options.autoShow=false]
+ * Auto show interstitial ad when loaded.
  *
  * @param {boolean|null} [options.forChild=null]
  * Default is not calling `tagForChildDirectedTreatment`.
@@ -151,13 +155,14 @@ export function setOptions(options, successCallback, failureCallback) {
  */
 export const AD_SIZE = Banner.sizes
 
+/* eslint-disable no-console */
 /**
  * @deprecated since version 0.6
  */
 export function createBannerView(
   options = {},
   successCallback,
-  failureCallback
+  failureCallback,
 ) {
   console.warn('Use admob.banner.prepare() instead.')
   exec(successCallback, failureCallback, 'AdMob', 'createBannerView', [
@@ -187,10 +192,10 @@ export function showAd(show = true, successCallback, failureCallback) {
 export function createInterstitialView(
   options,
   successCallback,
-  failureCallback
+  failureCallback,
 ) {
   console.warn(
-    'Use admob.interstitial.prepare() instead, it will do both createInterstitialView() and requestInterstitialAd().'
+    'Use admob.interstitial.prepare() instead, it will do both createInterstitialView() and requestInterstitialAd().',
   )
   exec(successCallback, failureCallback, 'AdMob', 'createInterstitialView', [
     translateOptions(options),
@@ -203,10 +208,10 @@ export function createInterstitialView(
 export function requestInterstitialAd(
   options = {},
   successCallback,
-  failureCallback
+  failureCallback,
 ) {
   console.warn(
-    'Use admob.interstitial.prepare() instead, it will do both createInterstitialView() and requestInterstitialAd().'
+    'Use admob.interstitial.prepare() instead, it will do both createInterstitialView() and requestInterstitialAd().',
   )
   exec(successCallback, failureCallback, 'AdMob', 'requestInterstitialAd', [
     translateOptions(options),
@@ -219,7 +224,7 @@ export function requestInterstitialAd(
 export function prepareInterstitial(
   options = {},
   successCallback,
-  failureCallback
+  failureCallback,
 ) {
   console.warn('Use admob.interstitial.prepare() instead.')
   exec(successCallback, failureCallback, 'AdMob', 'prepareInterstitial', [
@@ -241,8 +246,9 @@ export function showInterstitial(successCallback, failureCallback) {
 export function showInterstitialAd(
   show = true,
   successCallback,
-  failureCallback
+  failureCallback,
 ) {
   console.warn('Use admob.interstitial.show() instead.')
   exec(successCallback, failureCallback, 'AdMob', 'showInterstitialAd', [show])
 }
+/* eslint-enable no-console */
