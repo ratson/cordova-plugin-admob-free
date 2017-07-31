@@ -9,7 +9,7 @@
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
 <meta name="description" content="Cordova AdMob Plugin for Google AdMob"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Cordova AdMob Plugin"><meta property="twitter:description" content="Cordova AdMob Plugin for Google AdMob"></head>
-<body class="layout-container manual-root manual-index" data-ice="rootContainer">
+<body class="layout-container manual-root" data-ice="rootContainer">
 
 <header>
   <a href="./">Home</a>
@@ -84,23 +84,17 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="github-markdown">
-  
-
-  
-
-  <div class="manual-cards">
-    
-  <div class="manual-card-wrap" data-ice="cards">
-      <div class="manual-card">
-        <div data-ice="card"><h1>Contributing Guide</h1><p>I want to make contributing to this project as easy and transparent as
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="contributing-guide">Contributing Guide</h1><p>I want to make contributing to this project as easy and transparent as
 possible. Hopefully this document makes the process for contributing clear and
 answers any questions you may have. If not, feel free to open an
-<a href="https://github.com/ratson/cordova-plugin-admob-free/issues">Issue</a>.</p><h2>Issues</h2><p>Please ensure your bug description is clear and has sufficient instructions
+<a href="https://github.com/ratson/cordova-plugin-admob-free/issues">Issue</a>.</p>
+<h2 id="issues">Issues</h2><p>Please ensure your bug description is clear and has sufficient instructions
 to be able to reproduce the issue. The best way is to provide a reduced
-test case as a Github repository.</p><h2>Pull Requests</h2><p>Your <a href="https://help.github.com/articles/creating-a-pull-request">pull requests</a>
+test case as a Github repository.</p>
+<h2 id="pull-requests">Pull Requests</h2><p>Your <a href="https://help.github.com/articles/creating-a-pull-request">pull requests</a>
 are always welcome and are greatly appreciated! Every little bit helps, and
-credit will always be given.</p><h3>Getting Started</h3><ol>
+credit will always be given.</p>
+<h3 id="getting-started">Getting Started</h3><ol>
 <li><p>Fork this repo by using the &quot;Fork&quot; button in the upper-right</p>
 </li>
 <li><p>Check out your fork</p>
@@ -122,89 +116,26 @@ Ensure your work is committed within a feature branch.</p>
 <pre><code class="lang-sh"><code class="source-code prettyprint">npm test</code>
 </code></pre>
 </li>
-</ol><h3>Building Docs</h3><p>Building the docs locally is extremely simple. First execute the following commands:</p><pre><code class="lang-sh"><code class="source-code prettyprint">npm run docs</code>
-</code></pre><p>After this, you can open <code>gh-pages/index.html</code> in your browser.</p><h3>Keeping Fork Updated</h3><p>Add git remote, call it <code>upstream</code>:</p><pre><code class="lang-sh"><code class="source-code prettyprint">git remote add upstream https://github.com/ratson/cordova-plugin-admob-free.git</code>
-</code></pre><p>Each time you want to update, from your local <code>master</code> branch:</p><pre><code class="lang-sh"><code class="source-code prettyprint">git fetch upstream
+</ol>
+<h3 id="building-docs">Building Docs</h3><p>Building the docs locally is extremely simple. First execute the following commands:</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm run docs</code>
+</code></pre>
+<p>After this, you can open <code>gh-pages/index.html</code> in your browser.</p>
+<h3 id="keeping-fork-updated">Keeping Fork Updated</h3><p>Add git remote, call it <code>upstream</code>:</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">git remote add upstream https://github.com/ratson/cordova-plugin-admob-free.git</code>
+</code></pre>
+<p>Each time you want to update, from your local <code>master</code> branch:</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">git fetch upstream
 git rebase upstream/master</code>
-</code></pre><p>If you&apos;ve rebased your branch onto <code>upstream/master</code> you may need to
+</code></pre>
+<p>If you&apos;ve rebased your branch onto <code>upstream/master</code> you may need to
 force the push in order to push it to your own forked repository on GitHub.
-You&apos;d do that with:</p><pre><code class="lang-sh"><code class="source-code prettyprint">git push -f origin master</code>
-</code></pre><p>For more reference, read <a href="http://eslint.org/docs/developer-guide/contributing/pull-requests#working-with-code">ESLint&apos;s excellent one</a>.</p><h2>License</h2><p>By contributing to <code>cordova-plugin-admob-free</code>, you agree that
-your contributions will be licensed under its MIT license.</p></div>
-        <a data-ice="link" href="manual/CONTRIBUTING.html"></a>
-      </div>
-    </div>
-<div class="manual-card-wrap" data-ice="cards">
-      <div class="manual-card">
-        <div data-ice="card"><h1>Releases</h1><h2>Next</h2><h2>0.10.0 (2017-07-31)</h2><h3>Breaking</h3><ul>
-<li>Update Google AdMob SDK for iOS to v7.21.0.</li>
-</ul><h3>Fixed</h3><ul>
-<li>Avoid webview redraws the background. (<a href="https://github.com/wf9a5m75">@warcry2000</a> in <a href="https://github.com/ratson/cordova-plugin-admob-free/pull/95">#95</a>)</li>
-</ul><h2>0.9.0 (2017-05-07)</h2><h3>Breaking</h3><ul>
-<li>Update Google AdMob SDK for iOS to v7.20.0.</li>
-</ul><h2>0.8.0 (2017-03-22)</h2><h3>Breaking</h3><ul>
-<li>Update Google AdMob SDK for iOS to v7.19.0.</li>
-</ul><h2>0.7.0 (2017-02-21)</h2><h3>Added</h3><ul>
-<li>Add availability methods for interstitials and reward videos. (<a href="https://github.com/vintage">@vintage</a> in <a href="https://github.com/ratson/cordova-plugin-admob-free/pull/54">#54</a>)</li>
-</ul><h3>Breaking</h3><ul>
-<li>Update Google AdMob SDK for iOS to v7.17.0.</li>
-</ul><h2>0.6.1 (2017-01-25)</h2><h3>Added</h3><ul>
-<li>Document events.</li>
-</ul><h3>Fixed</h3><ul>
-<li>Fix iOS InterstitialAd does not call failure callback. (<a href="https://github.com/becvert">@becvert</a> in <a href="https://github.com/ratson/cordova-plugin-admob-free/pull/47">#47</a>)</li>
-</ul><h2>0.6.0 (2017-01-16)</h2><p>Introduce whole new set of API, which focus on consistency and
-conciseness. All old API should just work as before, but emit warnings,
-it is strongly recommended to migrate to new API and give feedback.</p><h3>New API</h3><ul>
-<li><p><code>window.admob</code> is introduced to replace <code>window.AdMob</code> and <code>window.plugins.AdMob</code>. Developer should no longer need to worry about missed upper-case causing <code>Admob is not defined</code> error.</p>
-</li>
-<li><p><code>admob.banner.prepare()</code> is replacing <code>createBannerView()</code>.</p>
-</li>
-<li><p><code>admob.banner.show()</code> and <code>admob.banner.hide()</code> are replacing <code>showAd()</code>.</p>
-</li>
-<li><p><code>admob.banner.remove()</code> is replacing <code>destroyBannerView()</code>.</p>
-</li>
-<li><p><code>admob.interstitial.prepare()</code> is replacing <code>prepareInterstitial()</code></p>
-</li>
-<li><p><code>admob.interstitial.show()</code> is replacing <code>showInterstitialAd()</code></p>
-</li>
-</ul><h3>Breaking</h3><ul>
-<li>Update Google AdMob SDK for iOS to v7.16.0.</li>
-</ul><h3>Internal</h3><ul>
-<li><code>prepareInterstitial</code> is now implemented natively, which should fix some race condition bugs.</li>
-</ul><h3>Added</h3><ul>
-<li>Support Rewarded Video. (<a href="https://github.com/warcry2000">@warcry2000</a> in <a href="https://github.com/ratson/cordova-plugin-admob-free/pull/35">#35</a>)</li>
-<li>Promise APIs.</li>
-<li>Events now have namespace.</li>
-<li>Add <a href="https://github.com/ratson/cordova-plugin-admob-free/tree/master/examples/mediation">mediation example</a></li>
-</ul><h2>0.5.1 (2016-12-08)</h2><h3>Fixed</h3><ul>
-<li>Add more Babel transforms for more compatible code.</li>
-</ul><h2>0.5.0 (2016-12-08)</h2><h3>Breaking</h3><ul>
-<li>Drop support for WP8.</li>
-<li>Update Google AdMob SDK for iOS to v7.15.0.</li>
-</ul><h3>Added</h3><ul>
-<li><a href="https://ratson.github.io/cordova-plugin-admob-free/">Documentation page</a> is available.</li>
-<li>Support Child-directed setting. (<a href="https://github.com/Venkat-TTapp">@Venkat-TTapp</a> in <a href="https://github.com/ratson/cordova-plugin-admob-free/issues/32">#32</a>)</li>
-</ul><h3>Fixed</h3><ul>
-<li>Babel generated more compatible code.</li>
-<li>Separate autoShow for banner and interstitial. (<a href="https://github.com/oangelo">@oangelo</a> in <a href="https://github.com/ratson/cordova-plugin-admob-free/issues/27">#27</a>)</li>
-</ul><h2>0.4.1 (2016-11-22)</h2><h3>Fixed</h3><ul>
-<li>Remove duplicated <code>LARGE_BANNER</code>. (<a href="https://github.com/warcry2000">@warcry2000</a> in <a href="https://github.com/ratson/cordova-plugin-admob-free/issues/28">#28</a>)</li>
-</ul><h2>0.4.0 (2016-11-07)</h2><h3>Breaking</h3><ul>
-<li>Drop support for Cordova &lt; 4.</li>
-<li>Update Google AdMob SDK for iOS to v7.14.0.</li>
-</ul><h3>Added</h3><ul>
-<li>Add <code>FLUID</code> ad size support.</li>
-</ul><h2>0.3.1 (2016-10-26)</h2><h3>Fixed</h3><ul>
-<li>Fix banner focus for Android. (<a href="https://github.com/raulpopi">@raulpopi</a> in <a href="https://github.com/ratson/cordova-plugin-admob-free/issues/19">#19</a>)</li>
-</ul><h2>0.3.0 (2016-10-23)</h2><h3>Added</h3><ul>
-<li>Add <code>LARGE_BANNER</code> support.</li>
-</ul><h3>Fixed</h3><ul>
-<li>Fix displaying test ads on iOS devices. (<a href="https://github.com/vintage">@vintage</a> in <a href="https://github.com/ratson/cordova-plugin-admob-free/pull/17">#17</a>)</li>
-</ul></div>
-        <a data-ice="link" href="manual/CHANGELOG.html"></a>
-      </div>
-    </div>
-</div>
+You&apos;d do that with:</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">git push -f origin master</code>
+</code></pre>
+<p>For more reference, read <a href="http://eslint.org/docs/developer-guide/contributing/pull-requests#working-with-code">ESLint&apos;s excellent one</a>.</p>
+<h2 id="license">License</h2><p>By contributing to <code>cordova-plugin-admob-free</code>, you agree that
+your contributions will be licensed under its MIT license.</p>
 </div>
 </div>
 

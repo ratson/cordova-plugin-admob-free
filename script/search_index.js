@@ -1,428 +1,380 @@
 window.esdocSearchIndex = [
   [
-    "cordova-plugin-admob-free/js/admob.js~ad_size",
+    "cordova-plugin-admob-free/admob~ad_size",
     "variable/index.html#static-variable-AD_SIZE",
-    "<span>AD_SIZE</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>AD_SIZE</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "variable"
   ],
   [
-    "cordova-plugin-admob-free/js/banner.js~banner",
+    "cordova-plugin-admob-free/admob~banner",
     "class/js/banner.js~Banner.html",
-    "<span>Banner</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/banner.js</span>",
+    "<span>Banner</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "class"
   ],
   [
-    "cordova-plugin-admob-free/js/interstitial.js~interstitial",
+    "cordova-plugin-admob-free/admob~interstitial",
     "class/js/interstitial.js~Interstitial.html",
-    "<span>Interstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/interstitial.js</span>",
+    "<span>Interstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "class"
   ],
   [
-    "cordova-plugin-admob-free/js/reward-video.js~rewardvideo",
+    "cordova-plugin-admob-free/admob~rewardvideo",
     "class/js/reward-video.js~RewardVideo.html",
-    "<span>RewardVideo</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/reward-video.js</span>",
+    "<span>RewardVideo</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "class"
   ],
   [
-    "cordova-plugin-admob-free/js/admob.js~banner",
+    "cordova-plugin-admob-free/admob~banner",
     "variable/index.html#static-variable-banner",
-    "<span>banner</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>banner</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "variable"
   ],
   [
-    "cordova-plugin-admob-free/js/admob.js~createbannerview",
+    "cordova-plugin-admob-free/admob~createbannerview",
     "function/index.html#static-function-createBannerView",
-    "<span>createBannerView</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>createBannerView</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/js/admob.js~createinterstitialview",
+    "cordova-plugin-admob-free/admob~createinterstitialview",
     "function/index.html#static-function-createInterstitialView",
-    "<span>createInterstitialView</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>createInterstitialView</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/js/admob.js~destroybannerview",
+    "cordova-plugin-admob-free/admob~destroybannerview",
     "function/index.html#static-function-destroyBannerView",
-    "<span>destroyBannerView</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>destroyBannerView</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/js/admob.js~interstitial",
+    "cordova-plugin-admob-free/admob~interstitial",
     "variable/index.html#static-variable-interstitial",
-    "<span>interstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>interstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "variable"
   ],
   [
-    "cordova-plugin-admob-free/js/admob.js~prepareinterstitial",
+    "cordova-plugin-admob-free/admob~prepareinterstitial",
     "function/index.html#static-function-prepareInterstitial",
-    "<span>prepareInterstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>prepareInterstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/js/admob.js~requestinterstitialad",
+    "cordova-plugin-admob-free/admob~requestinterstitialad",
     "function/index.html#static-function-requestInterstitialAd",
-    "<span>requestInterstitialAd</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>requestInterstitialAd</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/js/admob.js~rewardvideo",
+    "cordova-plugin-admob-free/admob~rewardvideo",
     "variable/index.html#static-variable-rewardvideo",
-    "<span>rewardvideo</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>rewardvideo</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "variable"
   ],
   [
-    "cordova-plugin-admob-free/js/admob.js~setoptions",
+    "cordova-plugin-admob-free/admob~setoptions",
     "function/index.html#static-function-setOptions",
-    "<span>setOptions</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>setOptions</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/js/admob.js~showad",
+    "cordova-plugin-admob-free/admob~showad",
     "function/index.html#static-function-showAd",
-    "<span>showAd</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>showAd</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/js/admob.js~showinterstitial",
+    "cordova-plugin-admob-free/admob~showinterstitial",
     "function/index.html#static-function-showInterstitial",
-    "<span>showInterstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>showInterstitial</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "function"
   ],
   [
-    "cordova-plugin-admob-free/js/admob.js~showinterstitialad",
+    "cordova-plugin-admob-free/admob~showinterstitialad",
     "function/index.html#static-function-showInterstitialAd",
-    "<span>showInterstitialAd</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/js/admob.js</span>",
+    "<span>showInterstitialAd</span> <span class=\"search-result-import-path\">cordova-plugin-admob-free/admob</span>",
     "function"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~array",
+    "js/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "js/.external-ecmascript.js~Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~arraybuffer",
+    "js/.external-ecmascript.js~arraybuffer",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
-    "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "js/.external-ecmascript.js~ArrayBuffer",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~boolean",
+    "js/.external-ecmascript.js~boolean",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
-    "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "js/.external-ecmascript.js~Boolean",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~dataview",
+    "js/.external-ecmascript.js~dataview",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
-    "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "js/.external-ecmascript.js~DataView",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~date",
+    "js/.external-ecmascript.js~date",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
-    "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "js/.external-ecmascript.js~Date",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~error",
+    "js/.external-ecmascript.js~error",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
-    "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "js/.external-ecmascript.js~Error",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~evalerror",
+    "js/.external-ecmascript.js~evalerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
-    "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "js/.external-ecmascript.js~EvalError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~float32array",
+    "js/.external-ecmascript.js~float32array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "js/.external-ecmascript.js~Float32Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~float64array",
+    "js/.external-ecmascript.js~float64array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "js/.external-ecmascript.js~Float64Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~function",
+    "js/.external-ecmascript.js~function",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
-    "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "js/.external-ecmascript.js~Function",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~generator",
+    "js/.external-ecmascript.js~generator",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
-    "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "js/.external-ecmascript.js~Generator",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~generatorfunction",
+    "js/.external-ecmascript.js~generatorfunction",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
-    "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "js/.external-ecmascript.js~GeneratorFunction",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~infinity",
+    "js/.external-ecmascript.js~infinity",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
-    "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "js/.external-ecmascript.js~Infinity",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~int16array",
+    "js/.external-ecmascript.js~int16array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "js/.external-ecmascript.js~Int16Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~int32array",
+    "js/.external-ecmascript.js~int32array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "js/.external-ecmascript.js~Int32Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~int8array",
+    "js/.external-ecmascript.js~int8array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "js/.external-ecmascript.js~Int8Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~internalerror",
+    "js/.external-ecmascript.js~internalerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
-    "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "js/.external-ecmascript.js~InternalError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~json",
+    "js/.external-ecmascript.js~json",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
-    "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "js/.external-ecmascript.js~JSON",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~map",
+    "js/.external-ecmascript.js~map",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
-    "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "js/.external-ecmascript.js~Map",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~nan",
+    "js/.external-ecmascript.js~nan",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
-    "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "js/.external-ecmascript.js~NaN",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~number",
+    "js/.external-ecmascript.js~number",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
-    "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "js/.external-ecmascript.js~Number",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~object",
+    "js/.external-ecmascript.js~object",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
-    "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "js/.external-ecmascript.js~Object",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~promise",
+    "js/.external-ecmascript.js~promise",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
-    "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "js/.external-ecmascript.js~Promise",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~proxy",
+    "js/.external-ecmascript.js~proxy",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
-    "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "js/.external-ecmascript.js~Proxy",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~rangeerror",
+    "js/.external-ecmascript.js~rangeerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
-    "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "js/.external-ecmascript.js~RangeError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~referenceerror",
+    "js/.external-ecmascript.js~referenceerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
-    "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "js/.external-ecmascript.js~ReferenceError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~reflect",
+    "js/.external-ecmascript.js~reflect",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
-    "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "js/.external-ecmascript.js~Reflect",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~regexp",
+    "js/.external-ecmascript.js~regexp",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
-    "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "js/.external-ecmascript.js~RegExp",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~set",
+    "js/.external-ecmascript.js~set",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
-    "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "js/.external-ecmascript.js~Set",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~string",
+    "js/.external-ecmascript.js~string",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
-    "BuiltinExternal/ECMAScriptExternal.js~String",
+    "js/.external-ecmascript.js~String",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~symbol",
+    "js/.external-ecmascript.js~symbol",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
-    "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "js/.external-ecmascript.js~Symbol",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~syntaxerror",
+    "js/.external-ecmascript.js~syntaxerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
-    "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "js/.external-ecmascript.js~SyntaxError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~typeerror",
+    "js/.external-ecmascript.js~typeerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
-    "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "js/.external-ecmascript.js~TypeError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~urierror",
+    "js/.external-ecmascript.js~urierror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
-    "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "js/.external-ecmascript.js~URIError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~uint16array",
+    "js/.external-ecmascript.js~uint16array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "js/.external-ecmascript.js~Uint16Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~uint32array",
+    "js/.external-ecmascript.js~uint32array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "js/.external-ecmascript.js~Uint32Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~uint8array",
+    "js/.external-ecmascript.js~uint8array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "js/.external-ecmascript.js~Uint8Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~uint8clampedarray",
+    "js/.external-ecmascript.js~uint8clampedarray",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
-    "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "js/.external-ecmascript.js~Uint8ClampedArray",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~weakmap",
+    "js/.external-ecmascript.js~weakmap",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
-    "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "js/.external-ecmascript.js~WeakMap",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~weakset",
+    "js/.external-ecmascript.js~weakset",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
-    "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "js/.external-ecmascript.js~WeakSet",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~boolean",
+    "js/.external-ecmascript.js~boolean",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
-    "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "js/.external-ecmascript.js~boolean",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~function",
+    "js/.external-ecmascript.js~function",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
-    "BuiltinExternal/ECMAScriptExternal.js~function",
+    "js/.external-ecmascript.js~function",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~null",
+    "js/.external-ecmascript.js~null",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
-    "BuiltinExternal/ECMAScriptExternal.js~null",
+    "js/.external-ecmascript.js~null",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~number",
+    "js/.external-ecmascript.js~number",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
-    "BuiltinExternal/ECMAScriptExternal.js~number",
+    "js/.external-ecmascript.js~number",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~object",
+    "js/.external-ecmascript.js~object",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
-    "BuiltinExternal/ECMAScriptExternal.js~object",
+    "js/.external-ecmascript.js~object",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~string",
+    "js/.external-ecmascript.js~string",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
-    "BuiltinExternal/ECMAScriptExternal.js~string",
+    "js/.external-ecmascript.js~string",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~undefined",
+    "js/.external-ecmascript.js~undefined",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
-    "BuiltinExternal/ECMAScriptExternal.js~undefined",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~audiocontext",
-    "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
-    "BuiltinExternal/WebAPIExternal.js~AudioContext",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~canvasrenderingcontext2d",
-    "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
-    "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~documentfragment",
-    "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
-    "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~element",
-    "https://developer.mozilla.org/en-US/docs/Web/API/Element",
-    "BuiltinExternal/WebAPIExternal.js~Element",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~event",
-    "https://developer.mozilla.org/en-US/docs/Web/API/Event",
-    "BuiltinExternal/WebAPIExternal.js~Event",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~node",
-    "https://developer.mozilla.org/en-US/docs/Web/API/Node",
-    "BuiltinExternal/WebAPIExternal.js~Node",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~nodelist",
-    "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
-    "BuiltinExternal/WebAPIExternal.js~NodeList",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~xmlhttprequest",
-    "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
-    "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "js/.external-ecmascript.js~undefined",
     "external"
   ],
   [
@@ -448,6 +400,12 @@ window.esdocSearchIndex = [
     "typedef/index.html#static-typedef-BANNER_SIZE",
     "js/banner.js~BANNER_SIZE",
     "typedef"
+  ],
+  [
+    "js/banner.js~banner#_config",
+    "class/js/banner.js~Banner.html#instance-member-_config",
+    "js/banner.js~Banner#_config",
+    "member"
   ],
   [
     "js/banner.js~banner#config",
@@ -510,6 +468,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "js/interstitial.js~interstitial#_config",
+    "class/js/interstitial.js~Interstitial.html#instance-member-_config",
+    "js/interstitial.js~Interstitial#_config",
+    "member"
+  ],
+  [
     "js/interstitial.js~interstitial#config",
     "class/js/interstitial.js~Interstitial.html#instance-method-config",
     "js/interstitial.js~Interstitial#config",
@@ -556,6 +520,12 @@ window.esdocSearchIndex = [
     "file/js/reward-video.js.html",
     "js/reward-video.js",
     "file"
+  ],
+  [
+    "js/reward-video.js~rewardvideo#_config",
+    "class/js/reward-video.js~RewardVideo.html#instance-member-_config",
+    "js/reward-video.js~RewardVideo#_config",
+    "member"
   ],
   [
     "js/reward-video.js~rewardvideo#config",
