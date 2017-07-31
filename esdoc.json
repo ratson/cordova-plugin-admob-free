@@ -1,12 +1,28 @@
 {
   "source": "./src/js",
   "destination": "./gh-pages",
-  "title": "Cordova AdMob Plugin",
-  "experimentalProposal": {
-    "classProperties": true,
-    "objectRestSpread": true
-  },
   "plugins": [
+    {
+      "name": "esdoc-standard-plugin",
+      "option": {
+        "brand": {
+          "title": "Cordova AdMob Plugin"
+        },
+        "manual": {
+          "files": [
+            "./CONTRIBUTING.md",
+            "./CHANGELOG.md"
+          ]
+        }
+      }
+    },
+    {
+      "name": "esdoc-ecmascript-proposal-plugin",
+      "option": {
+        "classProperties": true,
+        "objectRestSpread": true
+      }
+    },
     {
       "name": "esdoc-importpath-plugin",
       "option": {
@@ -15,9 +31,5 @@
         ]
       }
     }
-  ],
-  "manual": {
-    "tutorial": ["./CONTRIBUTING.md"],
-    "changelog": ["./CHANGELOG.md"]
-  }
+  ]
 }
