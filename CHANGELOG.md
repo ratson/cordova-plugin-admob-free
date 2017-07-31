@@ -2,6 +2,17 @@
 
 ## Next
 
+## 0.10.0 (2017-07-31)
+
+### Breaking
+
+* Update Google AdMob SDK for iOS to v7.21.0.
+
+### Fixed
+
+* Avoid webview redraws the background. ([@warcry2000](https://github.com/wf9a5m75) in [#95](https://github.com/ratson/cordova-plugin-admob-free/pull/95))
+
+
 ## 0.9.0 (2017-05-07)
 
 ### Breaking
