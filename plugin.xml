@@ -25,8 +25,8 @@
         <clobbers target="plugins.AdMob" />
     </js-module>
 
-    <dependency id="cordova-promise-polyfill" version="~0.0.1" />
-    <dependency id="cordova-admob-sdk" version="~0.8.0" />
+    <dependency id="cordova-promise-polyfill" version="~0.0.2" />
+    <dependency id="cordova-admob-sdk" version="~0.9.0" />
 
     <platform name="android">
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
