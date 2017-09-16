@@ -16,7 +16,7 @@ public class AdMobConfig {
     private static final String OPT_PUBLISHER_ID = "publisherId";
     private static final String OPT_INTERSTITIAL_AD_ID = "interstitialAdId";
     private static final String OPT_REWARD_VIDEO_ID = "rewardVideoId";
-    private static final String OPT_AD_SIZE = "adSize";
+    private static final String OPT_AD_SIZE = "size";
     private static final String OPT_BANNER_AT_TOP = "bannerAtTop";
     private static final String OPT_OVERLAP = "overlap";
     private static final String OPT_OFFSET_TOPBAR = "offsetTopBar";
