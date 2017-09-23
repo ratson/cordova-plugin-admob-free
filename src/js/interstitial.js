@@ -46,7 +46,7 @@ class Interstitial {
   }
 
   /**
-   * @returns {Promise}
+   * @returns {Promise} Excutaion result promise.
    */
   prepare() {
     const options = {
@@ -58,14 +58,14 @@ class Interstitial {
   }
 
   /**
-   * @returns {Promise}
+   * @returns {Promise} Excutaion result promise.
    */
   show() {
     return exec('showInterstitialAd', [true])
   }
 
   /**
-   * @returns {Promise}
+   * @returns {Promise} Excutaion result promise.
    */
   isReady() {
     return exec('isInterstitialReady', [])

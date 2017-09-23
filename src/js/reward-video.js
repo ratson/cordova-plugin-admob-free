@@ -47,7 +47,7 @@ class RewardVideo {
   }
 
   /**
-   * @returns {Promise}
+   * @returns {Promise} Excutaion result promise.
    */
   prepare() {
     const options = {
@@ -59,14 +59,14 @@ class RewardVideo {
   }
 
   /**
-   * @returns {Promise}
+   * @returns {Promise} Excutaion result promise.
    */
   show() {
     return exec('showRewardVideo', [true])
   }
 
   /**
-   * @returns {Promise}
+   * @returns {Promise} Excutaion result promise.
    */
   isReady() {
     return exec('isRewardVideoReady', [])

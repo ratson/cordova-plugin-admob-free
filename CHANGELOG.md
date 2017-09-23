@@ -2,9 +2,12 @@
 
 ## Next
 
+
+## 0.11.0 (2017-09-23)
+
 ### Breaking
 
-* Update Google AdMob SDK for iOS to v7.22.0.
+* Update Google AdMob SDK for iOS to v7.24.0.
 * Update cordova-promise-polyfill to v0.0.2.
 
 

@@ -2,10 +2,11 @@ import babel from 'rollup-plugin-babel'
 import nodeResolve from 'rollup-plugin-node-resolve'
 
 export default {
-  entry: 'src/js/admob.js',
-  external: [
-    'cordova/exec',
-  ],
+  input: 'src/js/admob.js',
+  output: {
+    format: 'cjs',
+  },
+  external: ['cordova/exec'],
   plugins: [
     babel({
       exclude: 'node_modules/**',
@@ -19,17 +20,20 @@ export default {
       ],
       babelrc: false,
       presets: [
-        ['env', {
-          targets: {
-            browsers: [
-              '> 1%',
-              'last 4 versions',
-              'Android > 2',
-              'last 2 ChromeAndroid versions',
-            ],
+        [
+          'env',
+          {
+            targets: {
+              browsers: [
+                '> 1%',
+                'last 4 versions',
+                'Android > 2',
+                'last 2 ChromeAndroid versions',
+              ],
+            },
+            modules: false,
           },
-          modules: false,
-        }],
+        ],
         'stage-2',
       ],
       plugins: [
@@ -38,11 +42,14 @@ export default {
         'transform-es3-member-expression-literals',
         'transform-es3-property-literals',
         'transform-object-assign',
-        ['module-resolver', {
-          alias: {
-            lodash: 'lodash-es',
+        [
+          'module-resolver',
+          {
+            alias: {
+              lodash: 'lodash-es',
+            },
           },
-        }],
+        ],
       ],
     }),
     nodeResolve({
@@ -50,6 +57,5 @@ export default {
       browser: true,
     }),
   ],
-  format: 'cjs',
-  sourceMap: true,
+  sourcemap: true,
 }

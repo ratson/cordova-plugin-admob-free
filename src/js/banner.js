@@ -91,7 +91,7 @@ class Banner {
   /**
    * Create banner.
    *
-   * @returns {Promise}
+   * @returns {Promise} Excutaion result promise.
    */
   prepare() {
     const options = {
@@ -105,7 +105,7 @@ class Banner {
   /**
    * Show the banner.
    *
-   * @returns {Promise}
+   * @returns {Promise} Excutaion result promise.
    */
   show() {
     return exec('showAd', [true])
@@ -114,7 +114,7 @@ class Banner {
   /**
    * Hide the banner.
    *
-   * @returns {Promise}
+   * @returns {Promise} Excutaion result promise.
    */
   hide() {
     return exec('showAd', [false])
@@ -123,7 +123,7 @@ class Banner {
   /**
    * Remove the banner.
    *
-   * @returns {Promise}
+   * @returns {Promise} Excutaion result promise.
    */
   remove() {
     return exec('destroyBannerView', [])
