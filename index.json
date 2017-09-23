@@ -1273,7 +1273,7 @@
     "__docId__": 63,
     "kind": "file",
     "name": "js/banner.js",
-    "content": "import { buildEvents, exec, translateOptions } from './utils'\n\n/**\n * Banner config object.\n * @typedef {BaseConfig} BannerConfig\n * @property {boolean} [bannerAtTop=false] - set to true, to put banner at top\n * @property {boolean} [overlap=true] -\n * set to true, to allow banner overlap webview\n * @property {boolean} [offsetTopBar=false] -\n * set to true to avoid ios7 status bar overlap\n * @property {string} [size=SMART_BANNER] - {@link BANNER_SIZE}\n */\n\nconst events = buildEvents('banner', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n])\n\n/**\n * @typedef {Object} BANNER_SIZE\n * @property {string} BANNER - BANNER\n * @property {string} IAB_BANNER - IAB_BANNER\n * @property {string} IAB_LEADERBOARD - IAB_LEADERBOARD\n * @property {string} IAB_MRECT - IAB_MRECT\n * @property {string} LARGE_BANNER - LARGE_BANNER\n * @property {string} SMART_BANNER - SMART_BANNER\n * @property {string} FLUID - FLUID\n */\n/**\n * @constant\n * @type {Object}\n */\nconst sizes = {\n  BANNER: 'BANNER',\n  IAB_BANNER: 'IAB_BANNER',\n  IAB_LEADERBOARD: 'IAB_LEADERBOARD',\n  IAB_MRECT: 'IAB_MRECT',\n  LARGE_BANNER: 'LARGE_BANNER',\n  SMART_BANNER: 'SMART_BANNER',\n  FLUID: 'FLUID',\n  // android-only\n  FULL_BANNER: 'FULL_BANNER',\n  LEADERBOARD: 'LEADERBOARD',\n  MEDIUM_RECTANGLE: 'MEDIUM_RECTANGLE',\n  SEARCH: 'SEARCH',\n  WIDE_SKYSCRAPER: 'WIDE_SKYSCRAPER',\n}\n\n/**\n * @protected\n * @desc\n * See usage in {@link banner}.\n */\nclass Banner {\n  static events = events\n\n  /**\n   * Banner sizes\n   * @type {BANNER_SIZE}\n   */\n  static sizes = sizes\n\n  /**\n   * @protected\n   * @param {BannerConfig} opts - Initial config.\n   */\n  constructor(opts) {\n    this.config({\n      size: sizes.SMART_BANNER,\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   *\n   * @param {BannerConfig} opts - New config.\n   * @returns {BannerConfig} Updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * Create banner.\n   *\n   * @returns {Promise}\n   */\n  prepare() {\n    const options = {\n      publisherId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('createBannerView', [translateOptions(options)])\n  }\n\n  /**\n   * Show the banner.\n   *\n   * @returns {Promise}\n   */\n  show() {\n    return exec('showAd', [true])\n  }\n\n  /**\n   * Hide the banner.\n   *\n   * @returns {Promise}\n   */\n  hide() {\n    return exec('showAd', [false])\n  }\n\n  /**\n   * Remove the banner.\n   *\n   * @returns {Promise}\n   */\n  remove() {\n    return exec('destroyBannerView', [])\n  }\n}\n\nexport { Banner }\n",
+    "content": "import { buildEvents, exec, translateOptions } from './utils'\n\n/**\n * Banner config object.\n * @typedef {BaseConfig} BannerConfig\n * @property {boolean} [bannerAtTop=false] - set to true, to put banner at top\n * @property {boolean} [overlap=true] -\n * set to true, to allow banner overlap webview\n * @property {boolean} [offsetTopBar=false] -\n * set to true to avoid ios7 status bar overlap\n * @property {string} [size=SMART_BANNER] - {@link BANNER_SIZE}\n */\n\nconst events = buildEvents('banner', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n])\n\n/**\n * @typedef {Object} BANNER_SIZE\n * @property {string} BANNER - BANNER\n * @property {string} IAB_BANNER - IAB_BANNER\n * @property {string} IAB_LEADERBOARD - IAB_LEADERBOARD\n * @property {string} IAB_MRECT - IAB_MRECT\n * @property {string} LARGE_BANNER - LARGE_BANNER\n * @property {string} SMART_BANNER - SMART_BANNER\n * @property {string} FLUID - FLUID\n */\n/**\n * @constant\n * @type {Object}\n */\nconst sizes = {\n  BANNER: 'BANNER',\n  IAB_BANNER: 'IAB_BANNER',\n  IAB_LEADERBOARD: 'IAB_LEADERBOARD',\n  IAB_MRECT: 'IAB_MRECT',\n  LARGE_BANNER: 'LARGE_BANNER',\n  SMART_BANNER: 'SMART_BANNER',\n  FLUID: 'FLUID',\n  // android-only\n  FULL_BANNER: 'FULL_BANNER',\n  LEADERBOARD: 'LEADERBOARD',\n  MEDIUM_RECTANGLE: 'MEDIUM_RECTANGLE',\n  SEARCH: 'SEARCH',\n  WIDE_SKYSCRAPER: 'WIDE_SKYSCRAPER',\n}\n\n/**\n * @protected\n * @desc\n * See usage in {@link banner}.\n */\nclass Banner {\n  static events = events\n\n  /**\n   * Banner sizes\n   * @type {BANNER_SIZE}\n   */\n  static sizes = sizes\n\n  /**\n   * @protected\n   * @param {BannerConfig} opts - Initial config.\n   */\n  constructor(opts) {\n    this.config({\n      size: sizes.SMART_BANNER,\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   *\n   * @param {BannerConfig} opts - New config.\n   * @returns {BannerConfig} Updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * Create banner.\n   *\n   * @returns {Promise} Excutaion result promise.\n   */\n  prepare() {\n    const options = {\n      publisherId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('createBannerView', [translateOptions(options)])\n  }\n\n  /**\n   * Show the banner.\n   *\n   * @returns {Promise} Excutaion result promise.\n   */\n  show() {\n    return exec('showAd', [true])\n  }\n\n  /**\n   * Hide the banner.\n   *\n   * @returns {Promise} Excutaion result promise.\n   */\n  hide() {\n    return exec('showAd', [false])\n  }\n\n  /**\n   * Remove the banner.\n   *\n   * @returns {Promise} Excutaion result promise.\n   */\n  remove() {\n    return exec('destroyBannerView', [])\n  }\n}\n\nexport { Banner }\n",
     "static": true,
     "longname": "/Users/deva/github/cordova-plugin-admob-free/src/js/banner.js",
     "access": "public",
@@ -1613,7 +1613,7 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Promise}"
+        "tagValue": "{Promise} Excutaion result promise."
       }
     ],
     "return": {
@@ -1622,7 +1622,7 @@
         "Promise"
       ],
       "spread": false,
-      "description": ""
+      "description": "Excutaion result promise."
     },
     "params": []
   },
@@ -1641,7 +1641,7 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Promise}"
+        "tagValue": "{Promise} Excutaion result promise."
       }
     ],
     "return": {
@@ -1650,7 +1650,7 @@
         "Promise"
       ],
       "spread": false,
-      "description": ""
+      "description": "Excutaion result promise."
     },
     "params": []
   },
@@ -1669,7 +1669,7 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Promise}"
+        "tagValue": "{Promise} Excutaion result promise."
       }
     ],
     "return": {
@@ -1678,7 +1678,7 @@
         "Promise"
       ],
       "spread": false,
-      "description": ""
+      "description": "Excutaion result promise."
     },
     "params": []
   },
@@ -1697,7 +1697,7 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Promise}"
+        "tagValue": "{Promise} Excutaion result promise."
       }
     ],
     "return": {
@@ -1706,7 +1706,7 @@
         "Promise"
       ],
       "spread": false,
-      "description": ""
+      "description": "Excutaion result promise."
     },
     "params": []
   },
@@ -1714,7 +1714,7 @@
     "__docId__": 77,
     "kind": "file",
     "name": "js/interstitial.js",
-    "content": "import { buildEvents, exec, translateOptions } from './utils'\n\n/**\n * Interstitial config object.\n * @typedef {BaseConfig} InterstitialConfig\n */\n\nconst events = buildEvents('interstitial', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n])\n\n/**\n * @protected\n * @desc\n * See usage in {@link interstitial}.\n */\nclass Interstitial {\n  static events = events\n\n  /**\n   * @protected\n   * @param {InterstitialConfig} opts - Initial config.\n   */\n  constructor(opts) {\n    this.config({\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   *\n   * @param {InterstitialConfig} opts - New config.\n   * @returns {InterstitialConfig} Updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * @returns {Promise}\n   */\n  prepare() {\n    const options = {\n      interstitialAdId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('prepareInterstitial', [translateOptions(options)])\n  }\n\n  /**\n   * @returns {Promise}\n   */\n  show() {\n    return exec('showInterstitialAd', [true])\n  }\n\n  /**\n   * @returns {Promise}\n   */\n  isReady() {\n    return exec('isInterstitialReady', [])\n  }\n}\n\nexport { Interstitial }\n",
+    "content": "import { buildEvents, exec, translateOptions } from './utils'\n\n/**\n * Interstitial config object.\n * @typedef {BaseConfig} InterstitialConfig\n */\n\nconst events = buildEvents('interstitial', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n])\n\n/**\n * @protected\n * @desc\n * See usage in {@link interstitial}.\n */\nclass Interstitial {\n  static events = events\n\n  /**\n   * @protected\n   * @param {InterstitialConfig} opts - Initial config.\n   */\n  constructor(opts) {\n    this.config({\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   *\n   * @param {InterstitialConfig} opts - New config.\n   * @returns {InterstitialConfig} Updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * @returns {Promise} Excutaion result promise.\n   */\n  prepare() {\n    const options = {\n      interstitialAdId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('prepareInterstitial', [translateOptions(options)])\n  }\n\n  /**\n   * @returns {Promise} Excutaion result promise.\n   */\n  show() {\n    return exec('showInterstitialAd', [true])\n  }\n\n  /**\n   * @returns {Promise} Excutaion result promise.\n   */\n  isReady() {\n    return exec('isInterstitialReady', [])\n  }\n}\n\nexport { Interstitial }\n",
     "static": true,
     "longname": "/Users/deva/github/cordova-plugin-admob-free/src/js/interstitial.js",
     "access": "public",
@@ -1867,7 +1867,7 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Promise}"
+        "tagValue": "{Promise} Excutaion result promise."
       }
     ],
     "return": {
@@ -1876,7 +1876,7 @@
         "Promise"
       ],
       "spread": false,
-      "description": ""
+      "description": "Excutaion result promise."
     },
     "params": []
   },
@@ -1895,7 +1895,7 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Promise}"
+        "tagValue": "{Promise} Excutaion result promise."
       }
     ],
     "return": {
@@ -1904,7 +1904,7 @@
         "Promise"
       ],
       "spread": false,
-      "description": ""
+      "description": "Excutaion result promise."
     },
     "params": []
   },
@@ -1923,7 +1923,7 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Promise}"
+        "tagValue": "{Promise} Excutaion result promise."
       }
     ],
     "return": {
@@ -1932,7 +1932,7 @@
         "Promise"
       ],
       "spread": false,
-      "description": ""
+      "description": "Excutaion result promise."
     },
     "params": []
   },
@@ -1940,7 +1940,7 @@
     "__docId__": 87,
     "kind": "file",
     "name": "js/reward-video.js",
-    "content": "import { buildEvents, exec, translateOptions } from './utils'\n\n/**\n * Reward Video config object.\n * @typedef {BaseConfig} RewardVideoConfig\n */\n\nconst events = buildEvents('rewardvideo', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n  'START',\n  'REWARD',\n])\n\n/**\n * See usage in {@link rewardvideo}.\n * @protected\n */\nclass RewardVideo {\n  static events = events\n\n  /**\n   * @protected\n   * @param {RewardVideoConfig} opts - Initial config.\n   */\n  constructor(opts) {\n    this.config({\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   *\n   * @param {RewardVideoConfig} opts - New config.\n   * @returns {RewardVideoConfig} Updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * @returns {Promise}\n   */\n  prepare() {\n    const options = {\n      rewardVideoId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('createRewardVideo', [translateOptions(options)])\n  }\n\n  /**\n   * @returns {Promise}\n   */\n  show() {\n    return exec('showRewardVideo', [true])\n  }\n\n  /**\n   * @returns {Promise}\n   */\n  isReady() {\n    return exec('isRewardVideoReady', [])\n  }\n}\n\nexport { RewardVideo }\n",
+    "content": "import { buildEvents, exec, translateOptions } from './utils'\n\n/**\n * Reward Video config object.\n * @typedef {BaseConfig} RewardVideoConfig\n */\n\nconst events = buildEvents('rewardvideo', [\n  'LOAD',\n  'LOAD_FAIL',\n  'OPEN',\n  'CLOSE',\n  'EXIT_APP',\n  'START',\n  'REWARD',\n])\n\n/**\n * See usage in {@link rewardvideo}.\n * @protected\n */\nclass RewardVideo {\n  static events = events\n\n  /**\n   * @protected\n   * @param {RewardVideoConfig} opts - Initial config.\n   */\n  constructor(opts) {\n    this.config({\n      ...opts,\n    })\n  }\n\n  /**\n   * Update config.\n   *\n   * @param {RewardVideoConfig} opts - New config.\n   * @returns {RewardVideoConfig} Updated config.\n   */\n  config(opts) {\n    this._config = {\n      ...this._config,\n      ...opts,\n    }\n    return this._config\n  }\n\n  /**\n   * @returns {Promise} Excutaion result promise.\n   */\n  prepare() {\n    const options = {\n      rewardVideoId: this._config.id,\n      ...this._config,\n    }\n    delete options.id\n    return exec('createRewardVideo', [translateOptions(options)])\n  }\n\n  /**\n   * @returns {Promise} Excutaion result promise.\n   */\n  show() {\n    return exec('showRewardVideo', [true])\n  }\n\n  /**\n   * @returns {Promise} Excutaion result promise.\n   */\n  isReady() {\n    return exec('isRewardVideoReady', [])\n  }\n}\n\nexport { RewardVideo }\n",
     "static": true,
     "longname": "/Users/deva/github/cordova-plugin-admob-free/src/js/reward-video.js",
     "access": "public",
@@ -2093,7 +2093,7 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Promise}"
+        "tagValue": "{Promise} Excutaion result promise."
       }
     ],
     "return": {
@@ -2102,7 +2102,7 @@
         "Promise"
       ],
       "spread": false,
-      "description": ""
+      "description": "Excutaion result promise."
     },
     "params": []
   },
@@ -2121,7 +2121,7 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Promise}"
+        "tagValue": "{Promise} Excutaion result promise."
       }
     ],
     "return": {
@@ -2130,7 +2130,7 @@
         "Promise"
       ],
       "spread": false,
-      "description": ""
+      "description": "Excutaion result promise."
     },
     "params": []
   },
@@ -2149,7 +2149,7 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Promise}"
+        "tagValue": "{Promise} Excutaion result promise."
       }
     ],
     "return": {
@@ -2158,7 +2158,7 @@
         "Promise"
       ],
       "spread": false,
-      "description": ""
+      "description": "Excutaion result promise."
     },
     "params": []
   },
@@ -2517,7 +2517,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"cordova-plugin-admob-free\",\n  \"version\": \"0.10.0\",\n  \"description\": \"Cordova AdMob Plugin for Google AdMob\",\n  \"scripts\": {\n    \"clean\": \"rimraf coverage dist www\",\n    \"build\": \"cross-env NODE_ENV=production rollup -c -o www/admob.js\",\n    \"docs\": \"esdoc -c esdoc.json\",\n    \"docs:commit\": \"cd gh-pages && git add -A . && git commit -a -m 'Update page'\",\n    \"docs:watch\": \"nodemon -w src --exec 'npm run docs'\",\n    \"example:clean\": \"rimraf examples/basic/plugins examples/basic/platforms\",\n    \"example:prepare\": \"cd examples/basic && cordova prepare $PLATFORM\",\n    \"example:link\": \"cd examples/basic && cordova plugin add ../.. --link\",\n    \"example:build\": \"cd examples/basic && cordova build $PLATFORM\",\n    \"example:run\": \"cd examples/basic && cordova run $PLATFORM\",\n    \"example\": \"PLATFORM=${PLATFORM:-android} run-s build example:*\",\n    \"example-ios\": \"PLATFORM=ios npm run example\",\n    \"prepublish\": \"run-s clean build\",\n    \"postpublish\": \"run-s docs docs:commit\",\n    \"version\": \"sync-package-version --cordova-plugin\",\n    \"lint:js\": \"eslint --ext js,md .\",\n    \"lint:spaces\": \"lintspaces -n -t -d spaces *.* src/**/*.* tests/**/*.* examples/*/*.* examples/*/www/*.*\",\n    \"lint\": \"run-s lint:*\",\n    \"test:js\": \"jest\",\n    \"test:cordova\": \"cordova-test\",\n    \"test\": \"cross-env BABEL_ENV=test run-s build test:js lint\"\n  },\n  \"cordova\": {\n    \"id\": \"cordova-plugin-admob-free\",\n    \"platforms\": [\n      \"android\",\n      \"ios\"\n    ]\n  },\n  \"homepage\": \"https://ratson.github.io/cordova-plugin-admob-free/\",\n  \"repository\": \"ratson/cordova-plugin-admob-free\",\n  \"keywords\": [\n    \"cordova\",\n    \"admob\",\n    \"ecosystem:cordova\",\n    \"cordova-plugin-admob\",\n    \"cordova-admob\",\n    \"cordova-android\",\n    \"cordova-ios\",\n    \"plugin\",\n    \"google\",\n    \"admobpro\"\n  ],\n  \"tonicExampleFilename\": \"test.js\",\n  \"author\": \"Ratson\",\n  \"license\": \"MIT\",\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.24.1\",\n    \"babel-jest\": \"^20.0.3\",\n    \"babel-plugin-add-module-exports\": \"^0.2.1\",\n    \"babel-plugin-external-helpers\": \"^6.22.0\",\n    \"babel-plugin-lodash\": \"^3.2.11\",\n    \"babel-plugin-module-resolver\": \"^2.7.1\",\n    \"babel-plugin-transform-es3-member-expression-literals\": \"^6.22.0\",\n    \"babel-plugin-transform-es3-property-literals\": \"^6.22.0\",\n    \"babel-plugin-transform-object-assign\": \"^6.22.0\",\n    \"babel-preset-env\": \"^1.6.0\",\n    \"babel-preset-stage-0\": \"^6.24.1\",\n    \"babel-preset-stage-1\": \"^6.24.1\",\n    \"babel-preset-stage-2\": \"^6.24.1\",\n    \"babel-preset-stage-3\": \"^6.24.1\",\n    \"cordova\": \"^7.0.1\",\n    \"cordova-android\": \"^6.2.3\",\n    \"cordova-test-cli\": \"^0.0.1\",\n    \"cross-env\": \"^5.0.1\",\n    \"delay\": \"^2.0.0\",\n    \"es6-promise\": \"^4.1.1\",\n    \"esdoc\": \"^1.0.1\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-importpath-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^4.3.0\",\n    \"eslint-config-concise\": \"^0.10.0\",\n    \"eslint-config-concise-esnext\": \"^0.10.0\",\n    \"jest\": \"^20.0.4\",\n    \"lintspaces-cli\": \"^0.6.0\",\n    \"lodash\": \"^4.17.4\",\n    \"lodash-es\": \"^4.17.4\",\n    \"nodemon\": \"^1.11.0\",\n    \"npm-run-all\": \"^4.0.2\",\n    \"rimraf\": \"^2.6.1\",\n    \"rollup\": \"^0.45.2\",\n    \"rollup-plugin-babel\": \"^2.7.1\",\n    \"rollup-plugin-commonjs\": \"^8.0.2\",\n    \"rollup-plugin-node-resolve\": \"^3.0.0\",\n    \"rollup-plugin-uglify\": \"^2.0.1\",\n    \"sync-package-version\": \"^0.0.5\"\n  },\n  \"files\": [\n    \"*.js\",\n    \"*.md\",\n    \"*.xml\",\n    \"LICENSE\",\n    \"src\",\n    \"www\"\n  ],\n  \"jest\": {\n    \"collectCoverage\": true,\n    \"roots\": [\n      \"<rootDir>/tests/js\"\n    ]\n  }\n}\n",
+    "content": "{\n  \"name\": \"cordova-plugin-admob-free\",\n  \"version\": \"0.11.0\",\n  \"description\": \"Cordova AdMob Plugin for Google AdMob\",\n  \"scripts\": {\n    \"prepublish\": \"run-s clean build\",\n    \"postpublish\": \"run-s docs\",\n    \"pretest\": \"cross-env BABEL_ENV=test run-s build\",\n    \"test\": \"run-p test:* lint:*\",\n    \"test:cordova\": \"cordova-test\",\n    \"test:js\": \"jest\",\n    \"version\": \"sync-package-version --cordova-plugin\",\n    \"build\": \"cross-env NODE_ENV=production rollup -c -o www/admob.js\",\n    \"clean\": \"rimraf coverage dist www\",\n    \"docs\": \"run-s docs:*\",\n    \"docs:esdoc\": \"esdoc -c esdoc.json\",\n    \"docs:commit\": \"cd gh-pages && git add -A . && git commit -a -m 'Update page'\",\n    \"docs-watch\": \"nodemon -w src --exec 'npm run docs'\",\n    \"example\": \"PLATFORM=${PLATFORM:-android} run-s build example:*\",\n    \"example:clean\": \"rimraf examples/basic/plugins examples/basic/platforms\",\n    \"example:prepare\": \"cd examples/basic && cordova prepare $PLATFORM\",\n    \"example:link\": \"cd examples/basic && cordova plugin add ../.. --link\",\n    \"example:build\": \"cd examples/basic && cordova build $PLATFORM\",\n    \"example:run\": \"cd examples/basic && cordova run $PLATFORM\",\n    \"example-ios\": \"PLATFORM=ios npm run example\",\n    \"lint\": \"run-p lint:*\",\n    \"lint:js\": \"eslint --ext js,md .\",\n    \"lint:spaces\": \"lintspaces -n -t -d spaces *.* src/**/*.* tests/**/*.* examples/*/*.* examples/*/www/*.*\"\n  },\n  \"cordova\": {\n    \"id\": \"cordova-plugin-admob-free\",\n    \"platforms\": [\n      \"android\",\n      \"ios\"\n    ]\n  },\n  \"homepage\": \"https://ratson.github.io/cordova-plugin-admob-free/\",\n  \"repository\": \"ratson/cordova-plugin-admob-free\",\n  \"keywords\": [\n    \"cordova\",\n    \"admob\",\n    \"ecosystem:cordova\",\n    \"cordova-plugin-admob\",\n    \"cordova-admob\",\n    \"cordova-android\",\n    \"cordova-ios\",\n    \"plugin\",\n    \"google\",\n    \"admobpro\"\n  ],\n  \"tonicExampleFilename\": \"test.js\",\n  \"author\": \"Ratson\",\n  \"license\": \"MIT\",\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-jest\": \"^21.0.2\",\n    \"babel-plugin-add-module-exports\": \"^0.2.1\",\n    \"babel-plugin-external-helpers\": \"^6.22.0\",\n    \"babel-plugin-lodash\": \"^3.2.11\",\n    \"babel-plugin-module-resolver\": \"^2.7.1\",\n    \"babel-plugin-transform-es3-member-expression-literals\": \"^6.22.0\",\n    \"babel-plugin-transform-es3-property-literals\": \"^6.22.0\",\n    \"babel-plugin-transform-object-assign\": \"^6.22.0\",\n    \"babel-preset-env\": \"^1.6.0\",\n    \"babel-preset-stage-0\": \"^6.24.1\",\n    \"babel-preset-stage-1\": \"^6.24.1\",\n    \"babel-preset-stage-2\": \"^6.24.1\",\n    \"babel-preset-stage-3\": \"^6.24.1\",\n    \"cordova\": \"^7.0.1\",\n    \"cordova-android\": \"^6.2.3\",\n    \"cordova-test-cli\": \"^0.0.1\",\n    \"cross-env\": \"^5.0.5\",\n    \"delay\": \"^2.0.0\",\n    \"es6-promise\": \"^4.1.1\",\n    \"esdoc\": \"^1.0.3\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-importpath-plugin\": \"^1.0.1\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^4.7.2\",\n    \"eslint-config-concise\": \"^0.12.0\",\n    \"eslint-config-concise-esnext\": \"^0.12.0\",\n    \"jest\": \"^21.1.0\",\n    \"lintspaces-cli\": \"^0.6.0\",\n    \"lodash\": \"^4.17.4\",\n    \"lodash-es\": \"^4.17.4\",\n    \"nodemon\": \"^1.12.1\",\n    \"npm-run-all\": \"^4.1.1\",\n    \"rimraf\": \"^2.6.2\",\n    \"rollup\": \"^0.50.0\",\n    \"rollup-plugin-babel\": \"^3.0.2\",\n    \"rollup-plugin-commonjs\": \"^8.2.1\",\n    \"rollup-plugin-node-resolve\": \"^3.0.0\",\n    \"rollup-plugin-uglify\": \"^2.0.1\",\n    \"sync-package-version\": \"^0.0.5\"\n  },\n  \"files\": [\n    \"*.js\",\n    \"*.md\",\n    \"*.xml\",\n    \"LICENSE\",\n    \"src\",\n    \"www\"\n  ],\n  \"jest\": {\n    \"collectCoverage\": true,\n    \"roots\": [\n      \"<rootDir>/tests/js\"\n    ]\n  }\n}\n",
     "longname": "/Users/deva/github/cordova-plugin-admob-free/package.json",
     "name": "package.json",
     "static": true,
@@ -2543,7 +2543,7 @@
     "kind": "manual",
     "longname": "/Users/deva/github/cordova-plugin-admob-free/CHANGELOG.md",
     "name": "./CHANGELOG.md",
-    "content": "# Releases\n\n## Next\n\n## 0.10.0 (2017-07-31)\n\n### Breaking\n\n* Update Google AdMob SDK for iOS to v7.21.0.\n\n### Fixed\n\n* Avoid webview redraws the background. ([@warcry2000](https://github.com/wf9a5m75) in [#95](https://github.com/ratson/cordova-plugin-admob-free/pull/95))\n\n\n## 0.9.0 (2017-05-07)\n\n### Breaking\n\n* Update Google AdMob SDK for iOS to v7.20.0.\n\n## 0.8.0 (2017-03-22)\n\n### Breaking\n\n* Update Google AdMob SDK for iOS to v7.19.0.\n\n## 0.7.0 (2017-02-21)\n\n### Added\n\n* Add availability methods for interstitials and reward videos. ([@vintage](https://github.com/vintage) in [#54](https://github.com/ratson/cordova-plugin-admob-free/pull/54))\n\n### Breaking\n\n* Update Google AdMob SDK for iOS to v7.17.0.\n\n\n## 0.6.1 (2017-01-25)\n\n### Added\n\n* Document events.\n\n### Fixed\n\n* Fix iOS InterstitialAd does not call failure callback. ([@becvert](https://github.com/becvert) in [#47](https://github.com/ratson/cordova-plugin-admob-free/pull/47))\n\n\n## 0.6.0 (2017-01-16)\n\nIntroduce whole new set of API, which focus on consistency and\nconciseness. All old API should just work as before, but emit warnings,\nit is strongly recommended to migrate to new API and give feedback.\n\n### New API\n\n* `window.admob` is introduced to replace `window.AdMob` and `window.plugins.AdMob`. Developer should no longer need to worry about missed upper-case causing `Admob is not defined` error.\n\n* `admob.banner.prepare()` is replacing `createBannerView()`.\n\n* `admob.banner.show()` and `admob.banner.hide()` are replacing `showAd()`.\n\n* `admob.banner.remove()` is replacing `destroyBannerView()`.\n\n* `admob.interstitial.prepare()` is replacing `prepareInterstitial()`\n\n* `admob.interstitial.show()` is replacing `showInterstitialAd()`\n\n### Breaking\n\n* Update Google AdMob SDK for iOS to v7.16.0.\n\n### Internal\n\n* `prepareInterstitial` is now implemented natively, which should fix some race condition bugs.\n\n### Added\n\n* Support Rewarded Video. ([@warcry2000](https://github.com/warcry2000) in [#35](https://github.com/ratson/cordova-plugin-admob-free/pull/35))\n* Promise APIs.\n* Events now have namespace.\n* Add [mediation example](https://github.com/ratson/cordova-plugin-admob-free/tree/master/examples/mediation)\n\n\n## 0.5.1 (2016-12-08)\n\n### Fixed\n\n* Add more Babel transforms for more compatible code.\n\n\n## 0.5.0 (2016-12-08)\n\n### Breaking\n\n* Drop support for WP8.\n* Update Google AdMob SDK for iOS to v7.15.0.\n\n### Added\n\n* [Documentation page](https://ratson.github.io/cordova-plugin-admob-free/) is available.\n* Support Child-directed setting. ([@Venkat-TTapp](https://github.com/Venkat-TTapp) in [#32](https://github.com/ratson/cordova-plugin-admob-free/issues/32))\n\n### Fixed\n\n* Babel generated more compatible code.\n* Separate autoShow for banner and interstitial. ([@oangelo](https://github.com/oangelo) in [#27](https://github.com/ratson/cordova-plugin-admob-free/issues/27))\n\n\n## 0.4.1 (2016-11-22)\n\n### Fixed\n\n* Remove duplicated `LARGE_BANNER`. ([@warcry2000](https://github.com/warcry2000) in [#28](https://github.com/ratson/cordova-plugin-admob-free/issues/28))\n\n\n## 0.4.0 (2016-11-07)\n\n### Breaking\n\n* Drop support for Cordova < 4.\n* Update Google AdMob SDK for iOS to v7.14.0.\n\n### Added\n\n* Add `FLUID` ad size support.\n\n\n## 0.3.1 (2016-10-26)\n\n### Fixed\n\n* Fix banner focus for Android. ([@raulpopi](https://github.com/raulpopi) in [#19](https://github.com/ratson/cordova-plugin-admob-free/issues/19))\n\n\n## 0.3.0 (2016-10-23)\n\n### Added\n\n* Add `LARGE_BANNER` support.\n\n### Fixed\n\n* Fix displaying test ads on iOS devices. ([@vintage](https://github.com/vintage) in [#17](https://github.com/ratson/cordova-plugin-admob-free/pull/17))\n",
+    "content": "# Releases\n\n## Next\n\n\n## 0.11.0 (2017-09-23)\n\n### Breaking\n\n* Update Google AdMob SDK for iOS to v7.24.0.\n* Update cordova-promise-polyfill to v0.0.2.\n\n\n## 0.10.0 (2017-07-31)\n\n### Breaking\n\n* Update Google AdMob SDK for iOS to v7.21.0.\n\n### Fixed\n\n* Avoid webview redraws the background. ([@warcry2000](https://github.com/wf9a5m75) in [#95](https://github.com/ratson/cordova-plugin-admob-free/pull/95))\n\n\n## 0.9.0 (2017-05-07)\n\n### Breaking\n\n* Update Google AdMob SDK for iOS to v7.20.0.\n\n## 0.8.0 (2017-03-22)\n\n### Breaking\n\n* Update Google AdMob SDK for iOS to v7.19.0.\n\n## 0.7.0 (2017-02-21)\n\n### Added\n\n* Add availability methods for interstitials and reward videos. ([@vintage](https://github.com/vintage) in [#54](https://github.com/ratson/cordova-plugin-admob-free/pull/54))\n\n### Breaking\n\n* Update Google AdMob SDK for iOS to v7.17.0.\n\n\n## 0.6.1 (2017-01-25)\n\n### Added\n\n* Document events.\n\n### Fixed\n\n* Fix iOS InterstitialAd does not call failure callback. ([@becvert](https://github.com/becvert) in [#47](https://github.com/ratson/cordova-plugin-admob-free/pull/47))\n\n\n## 0.6.0 (2017-01-16)\n\nIntroduce whole new set of API, which focus on consistency and\nconciseness. All old API should just work as before, but emit warnings,\nit is strongly recommended to migrate to new API and give feedback.\n\n### New API\n\n* `window.admob` is introduced to replace `window.AdMob` and `window.plugins.AdMob`. Developer should no longer need to worry about missed upper-case causing `Admob is not defined` error.\n\n* `admob.banner.prepare()` is replacing `createBannerView()`.\n\n* `admob.banner.show()` and `admob.banner.hide()` are replacing `showAd()`.\n\n* `admob.banner.remove()` is replacing `destroyBannerView()`.\n\n* `admob.interstitial.prepare()` is replacing `prepareInterstitial()`\n\n* `admob.interstitial.show()` is replacing `showInterstitialAd()`\n\n### Breaking\n\n* Update Google AdMob SDK for iOS to v7.16.0.\n\n### Internal\n\n* `prepareInterstitial` is now implemented natively, which should fix some race condition bugs.\n\n### Added\n\n* Support Rewarded Video. ([@warcry2000](https://github.com/warcry2000) in [#35](https://github.com/ratson/cordova-plugin-admob-free/pull/35))\n* Promise APIs.\n* Events now have namespace.\n* Add [mediation example](https://github.com/ratson/cordova-plugin-admob-free/tree/master/examples/mediation)\n\n\n## 0.5.1 (2016-12-08)\n\n### Fixed\n\n* Add more Babel transforms for more compatible code.\n\n\n## 0.5.0 (2016-12-08)\n\n### Breaking\n\n* Drop support for WP8.\n* Update Google AdMob SDK for iOS to v7.15.0.\n\n### Added\n\n* [Documentation page](https://ratson.github.io/cordova-plugin-admob-free/) is available.\n* Support Child-directed setting. ([@Venkat-TTapp](https://github.com/Venkat-TTapp) in [#32](https://github.com/ratson/cordova-plugin-admob-free/issues/32))\n\n### Fixed\n\n* Babel generated more compatible code.\n* Separate autoShow for banner and interstitial. ([@oangelo](https://github.com/oangelo) in [#27](https://github.com/ratson/cordova-plugin-admob-free/issues/27))\n\n\n## 0.4.1 (2016-11-22)\n\n### Fixed\n\n* Remove duplicated `LARGE_BANNER`. ([@warcry2000](https://github.com/warcry2000) in [#28](https://github.com/ratson/cordova-plugin-admob-free/issues/28))\n\n\n## 0.4.0 (2016-11-07)\n\n### Breaking\n\n* Drop support for Cordova < 4.\n* Update Google AdMob SDK for iOS to v7.14.0.\n\n### Added\n\n* Add `FLUID` ad size support.\n\n\n## 0.3.1 (2016-10-26)\n\n### Fixed\n\n* Fix banner focus for Android. ([@raulpopi](https://github.com/raulpopi) in [#19](https://github.com/ratson/cordova-plugin-admob-free/issues/19))\n\n\n## 0.3.0 (2016-10-23)\n\n### Added\n\n* Add `LARGE_BANNER` support.\n\n### Fixed\n\n* Fix displaying test ads on iOS devices. ([@vintage](https://github.com/vintage) in [#17](https://github.com/ratson/cordova-plugin-admob-free/pull/17))\n",
     "static": true,
     "access": "public"
   }
