@@ -1,6 +1,8 @@
 import babel from 'rollup-plugin-babel'
 import nodeResolve from 'rollup-plugin-node-resolve'
 
+import { browserslist } from './package.json'
+
 export default {
   input: 'src/js/admob.js',
   output: {
@@ -24,12 +26,7 @@ export default {
           'env',
           {
             targets: {
-              browsers: [
-                '> 1%',
-                'last 4 versions',
-                'Android > 2',
-                'last 2 ChromeAndroid versions',
-              ],
+              browsers: browserslist,
             },
             modules: false,
           },

@@ -101,6 +101,12 @@
     "src",
     "www"
   ],
+  "browserslist": [
+    "> 1%",
+    "last 4 versions",
+    "Android > 2",
+    "last 2 ChromeAndroid versions"
+  ],
   "jest": {
     "collectCoverage": true,
     "roots": [
