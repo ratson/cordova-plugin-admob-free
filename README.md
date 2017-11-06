@@ -85,6 +85,7 @@ The code for Android has almost all rewritten to be more maintainable, plus some
 
 For iOS, while it is working, I have less interest in writing Objective-C code these days. If someone is willing to help, feel free to send a pull request, I will review it.
 
+
 ## Contributing
 
 You can use this Cordova plugin for free. You can contribute to this project in many ways:
@@ -96,6 +97,13 @@ You can use this Cordova plugin for free. You can contribute to this project in 
 Help with documentation is always appreciated and can be done via pull requests.
 
 Read [Contributing Guide](https://ratson.github.io/cordova-plugin-admob-free/manual/tutorial.html#contributing-guide) to learn how to contribute.
+
+### Ionic Support
+
+While the Ionic community have provided [an Ionic Native Plugin](https://ionicframework.com/docs/native/admob-free/), plugin users need more examples and tutorials.
+
+As I ([@ratson](https://github.com/ratson)) don't use Ionic myself, it would be great if some experienced Ionic developers could help answering questions or come up with more examples. HELP WANTED HERE.
+
 
 ## Credits
 
