@@ -2,6 +2,10 @@
 
 ## Next
 
+### Fixed
+
+* Fix banner size bug
+
 
 ## 0.11.0 (2017-09-23)
 
