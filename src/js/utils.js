@@ -102,6 +102,8 @@ export function translateOptions(options) {
   return {
     ...options,
     ...opts,
+    // TODO update native implementation using `size`
+    adSize: options.size,
   }
 }
 
