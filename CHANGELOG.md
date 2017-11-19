@@ -2,9 +2,17 @@
 
 ## Next
 
+
+## 0.12.0 (2017-11-19)
+
+### Breaking
+
+* Update Google AdMob SDK for iOS to v7.26.0.
+
+
 ### Fixed
 
-* Fix banner size bug
+* Fix banner size bug.
 
 
 ## 0.11.0 (2017-09-23)
