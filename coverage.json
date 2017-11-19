@@ -1,7 +1,7 @@
 {
-  "coverage": "82.97%",
+  "coverage": "80.85%",
   "expectCount": 47,
-  "actualCount": 39,
+  "actualCount": 38,
   "files": {
     "js/admob.js": {
       "expectCount": 13,
@@ -10,8 +10,9 @@
     },
     "js/banner.js": {
       "expectCount": 11,
-      "actualCount": 9,
+      "actualCount": 8,
       "undocumentLines": [
+        57,
         58,
         84
       ]

@@ -1248,7 +1248,25 @@
                       "raw": "'WIDE_SKYSCRAPER'"
                     },
                     "value": "WIDE_SKYSCRAPER"
-                  }
+                  },
+                  "trailingComments": [
+                    {
+                      "type": "CommentBlock",
+                      "value": "*\n * @protected\n * @desc\n * See usage in {@link banner}.\n ",
+                      "start": 1352,
+                      "end": 1414,
+                      "loc": {
+                        "start": {
+                          "line": 52,
+                          "column": 0
+                        },
+                        "end": {
+                          "line": 56,
+                          "column": 3
+                        }
+                      }
+                    }
+                  ]
                 }
               ],
               "trailingComments": null
@@ -1340,8 +1358,7 @@
             },
             "identifierName": "Banner"
           },
-          "name": "Banner",
-          "leadingComments": null
+          "name": "Banner"
         },
         "superClass": null,
         "body": {
@@ -1373,6 +1390,7 @@
                   "column": 24
                 }
               },
+              "static": true,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -1391,7 +1409,6 @@
                 },
                 "name": "events"
               },
-              "static": true,
               "value": {
                 "type": "Identifier",
                 "start": 1448,
@@ -1444,6 +1461,7 @@
                   "column": 22
                 }
               },
+              "static": true,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -1462,7 +1480,6 @@
                 },
                 "name": "sizes"
               },
-              "static": true,
               "value": {
                 "type": "Identifier",
                 "start": 1528,
@@ -1533,6 +1550,7 @@
                   "column": 3
                 }
               },
+              "static": false,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -1552,7 +1570,6 @@
                 "name": "constructor",
                 "leadingComments": null
               },
-              "static": false,
               "kind": "constructor",
               "id": null,
               "generator": false,
@@ -1861,6 +1878,7 @@
                   "column": 3
                 }
               },
+              "static": false,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -1880,7 +1898,6 @@
                 "name": "config",
                 "leadingComments": null
               },
-              "static": false,
               "kind": "method",
               "id": null,
               "generator": false,
@@ -2229,6 +2246,7 @@
                   "column": 3
                 }
               },
+              "static": false,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -2248,7 +2266,6 @@
                 "name": "prepare",
                 "leadingComments": null
               },
-              "static": false,
               "kind": "method",
               "id": null,
               "generator": false,
@@ -2793,6 +2810,7 @@
                   "column": 3
                 }
               },
+              "static": false,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -2812,7 +2830,6 @@
                 "name": "show",
                 "leadingComments": null
               },
-              "static": false,
               "kind": "method",
               "id": null,
               "generator": false,
@@ -2991,6 +3008,7 @@
                   "column": 3
                 }
               },
+              "static": false,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -3010,7 +3028,6 @@
                 "name": "hide",
                 "leadingComments": null
               },
-              "static": false,
               "kind": "method",
               "id": null,
               "generator": false,
@@ -3189,6 +3206,7 @@
                   "column": 3
                 }
               },
+              "static": false,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -3208,7 +3226,6 @@
                 "name": "remove",
                 "leadingComments": null
               },
-              "static": false,
               "kind": "method",
               "id": null,
               "generator": false,
@@ -3339,8 +3356,8 @@
             }
           ]
         },
-        "leadingComments": [],
         "name": "_",
+        "leadingComments": [],
         "trailingComments": []
       },
       {
@@ -3454,8 +3471,7 @@
               },
               "identifierName": "Banner"
             },
-            "name": "Banner",
-            "leadingComments": null
+            "name": "Banner"
           },
           "superClass": null,
           "body": {
@@ -3487,6 +3503,7 @@
                     "column": 24
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -3505,7 +3522,6 @@
                   },
                   "name": "events"
                 },
-                "static": true,
                 "value": {
                   "type": "Identifier",
                   "start": 1448,
@@ -3558,6 +3574,7 @@
                     "column": 22
                   }
                 },
+                "static": true,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -3576,7 +3593,6 @@
                   },
                   "name": "sizes"
                 },
-                "static": true,
                 "value": {
                   "type": "Identifier",
                   "start": 1528,
@@ -3647,6 +3663,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -3666,7 +3683,6 @@
                   "name": "constructor",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "constructor",
                 "id": null,
                 "generator": false,
@@ -3975,6 +3991,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -3994,7 +4011,6 @@
                   "name": "config",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -4343,6 +4359,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -4362,7 +4379,6 @@
                   "name": "prepare",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -4907,6 +4923,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -4926,7 +4943,6 @@
                   "name": "show",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5105,6 +5121,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5124,7 +5141,6 @@
                   "name": "hide",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5303,6 +5319,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5322,7 +5339,6 @@
                   "name": "remove",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5453,25 +5469,8 @@
               }
             ]
           },
-          "leadingComments": [
-            {
-              "type": "CommentBlock",
-              "value": "*\n * @protected\n * @desc\n * See usage in {@link banner}.\n ",
-              "start": 1352,
-              "end": 1414,
-              "loc": {
-                "start": {
-                  "line": 52,
-                  "column": 0
-                },
-                "end": {
-                  "line": 56,
-                  "column": 3
-                }
-              }
-            }
-          ],
           "__PseudoExport__": false,
+          "leadingComments": [],
           "trailingComments": []
         },
         "specifiers": null,
@@ -5681,7 +5680,7 @@
         "label": "import",
         "keyword": "import",
         "beforeExpr": false,
-        "startsExpr": false,
+        "startsExpr": true,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
