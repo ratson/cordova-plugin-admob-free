@@ -41,7 +41,7 @@ Note that `cordova plugin add [GIT_URL]` is not supported.
 
 ### 1. Create Ad Unit ID for your banner and interstitial.
 
-Go to [AdMob portal](https://www.google.com/admob/), click "Monetize a new app" button to create new ad unit.
+Go to the [AdMob portal](https://www.google.com/admob/) and add your app (if you haven't done so already), once your app is added to your AdMob account, create a new ad unit for it.
 
 ### 2. Display advertisements
 
