@@ -16,13 +16,6 @@
     "docs:esdoc": "esdoc -c esdoc.json",
     "docs:commit": "cd gh-pages && git add -A . && git commit -a -m 'Update page'",
     "docs-watch": "nodemon -w src --exec 'npm run docs'",
-    "example": "PLATFORM=${PLATFORM:-android} run-s build example:*",
-    "example:clean": "rimraf examples/basic/plugins examples/basic/platforms",
-    "example:prepare": "cd examples/basic && cordova prepare $PLATFORM",
-    "example:link": "cd examples/basic && cordova plugin add ../.. --link",
-    "example:build": "cd examples/basic && cordova build $PLATFORM",
-    "example:run": "cd examples/basic && cordova run $PLATFORM",
-    "example-ios": "PLATFORM=ios npm run example",
     "lint": "run-p lint:*",
     "lint:js": "eslint --ext js,md .",
     "lint:spaces": "lintspaces -n -t -d spaces *.* src/**/*.* tests/**/*.* examples/*/*.* examples/*/www/*.*"
