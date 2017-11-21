@@ -1,0 +1,24 @@
+{
+  "name": "hello.admob",
+  "version": "1.0.0",
+  "displayName": "Hello AdMob",
+  "cordova": {
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-admob-free": {}
+    }
+  },
+  "dependencies": {
+    "cordova-android": "6.4.0",
+    "cordova-ios": "~4.5.3",
+    "cordova-plugin-whitelist": "^1.3.3",
+    "cordova-plugin-admob-free": "~0.12.0"
+  },
+  "devDependencies": {
+    "cordova": "^7.1.0"
+  }
+}
