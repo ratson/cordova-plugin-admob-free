@@ -3,12 +3,18 @@
 ## Next
 
 
+## 0.12.1 (2017-11-25)
+
+### Fixed
+
+* Update Rewarded Video Test Ad ID.  ([@nicolasmoreira](https://github.com/nicolasmoreira) in [#125](https://github.com/ratson/cordova-plugin-admob-free/pull/125))
+
+
 ## 0.12.0 (2017-11-19)
 
 ### Breaking
 
 * Update Google AdMob SDK for iOS to v7.26.0.
-
 
 ### Fixed
 
