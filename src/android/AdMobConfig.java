@@ -74,7 +74,7 @@ public class AdMobConfig {
     private String interstitialAdUnitId = "";
 
     // Reward Video
-    private static final String TEST_REWARDED_VIDEO_ID = "ca-app-pub-3940256099942544/1033173712";
+    private static final String TEST_REWARDED_VIDEO_ID = "ca-app-pub-3940256099942544/5224354917";
     private String rewardVideoId = "";
 
 
