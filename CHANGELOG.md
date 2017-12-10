@@ -2,13 +2,18 @@
 
 ## Next
 
+## 0.13.0 (2017-12-10)
+
+### Breaking
+
+* Update `cordova-admob-sdk` to v0.13.1.
+  Now `cordova-android >=6.3.0` is required.
 
 ## 0.12.1 (2017-11-25)
 
 ### Fixed
 
-* Update Rewarded Video Test Ad ID.  ([@nicolasmoreira](https://github.com/nicolasmoreira) in [#125](https://github.com/ratson/cordova-plugin-admob-free/pull/125))
-
+* Update Rewarded Video Test Ad ID. ([@nicolasmoreira](https://github.com/nicolasmoreira) in [#125](https://github.com/ratson/cordova-plugin-admob-free/pull/125))
 
 ## 0.12.0 (2017-11-19)
 
@@ -20,14 +25,12 @@
 
 * Fix banner size bug.
 
-
 ## 0.11.0 (2017-09-23)
 
 ### Breaking
 
 * Update Google AdMob SDK for iOS to v7.24.0.
 * Update cordova-promise-polyfill to v0.0.2.
-
 
 ## 0.10.0 (2017-07-31)
 
@@ -38,7 +41,6 @@
 ### Fixed
 
 * Avoid webview redraws the background. ([@warcry2000](https://github.com/wf9a5m75) in [#95](https://github.com/ratson/cordova-plugin-admob-free/pull/95))
-
 
 ## 0.9.0 (2017-05-07)
 
@@ -62,7 +64,6 @@
 
 * Update Google AdMob SDK for iOS to v7.17.0.
 
-
 ## 0.6.1 (2017-01-25)
 
 ### Added
@@ -72,7 +73,6 @@
 ### Fixed
 
 * Fix iOS InterstitialAd does not call failure callback. ([@becvert](https://github.com/becvert) in [#47](https://github.com/ratson/cordova-plugin-admob-free/pull/47))
-
 
 ## 0.6.0 (2017-01-16)
 
@@ -109,13 +109,11 @@ it is strongly recommended to migrate to new API and give feedback.
 * Events now have namespace.
 * Add [mediation example](https://github.com/ratson/cordova-plugin-admob-free/tree/master/examples/mediation)
 
-
 ## 0.5.1 (2016-12-08)
 
 ### Fixed
 
 * Add more Babel transforms for more compatible code.
-
 
 ## 0.5.0 (2016-12-08)
 
@@ -134,13 +132,11 @@ it is strongly recommended to migrate to new API and give feedback.
 * Babel generated more compatible code.
 * Separate autoShow for banner and interstitial. ([@oangelo](https://github.com/oangelo) in [#27](https://github.com/ratson/cordova-plugin-admob-free/issues/27))
 
-
 ## 0.4.1 (2016-11-22)
 
 ### Fixed
 
 * Remove duplicated `LARGE_BANNER`. ([@warcry2000](https://github.com/warcry2000) in [#28](https://github.com/ratson/cordova-plugin-admob-free/issues/28))
-
 
 ## 0.4.0 (2016-11-07)
 
@@ -153,13 +149,11 @@ it is strongly recommended to migrate to new API and give feedback.
 
 * Add `FLUID` ad size support.
 
-
 ## 0.3.1 (2016-10-26)
 
 ### Fixed
 
 * Fix banner focus for Android. ([@raulpopi](https://github.com/raulpopi) in [#19](https://github.com/ratson/cordova-plugin-admob-free/issues/19))
-
 
 ## 0.3.0 (2016-10-23)
 
