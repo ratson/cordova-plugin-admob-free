@@ -78,37 +78,37 @@
 </thead>
 <tbody>
 <tr>
-<td>  <a href="https://github.com/admob-google/admob-cordova">admob</a></td>
+<td><a href="https://github.com/admob-google/admob-cordova">admob</a></td>
 <td>Not Sure</td>
 <td><a href="https://github.com/admob-google/admob-cordova/blob/master/src/android/libs/admobadplugin.jar">&#x274C;</a> <a href="https://github.com/admob-google/admob-cordova/blob/master/src/ios/AdmobAPI.framework/AdmobAPI">&#x274C;</a></td>
 <td>Not Sure</td>
 </tr>
 <tr>
-<td>  <a href="https://github.com/appfeel/admob-google-cordova">cordova-admob</a></td>
+<td><a href="https://github.com/appfeel/admob-google-cordova">cordova-admob</a></td>
 <td><a href="https://github.com/appfeel/admob-google-cordova/blob/3f122f278a323a4bc9e580f400182a7bd690a346/src/android/AdMobAds.java#L569">&#x274C;</a></td>
 <td>&#x2705;</td>
 <td>&#x2705;</td>
 </tr>
 <tr>
-<td>  <a href="https://github.com/cranberrygame/cordova-plugin-ad-admob">cordova-plugin-ad-admob</a></td>
+<td><a href="https://github.com/cranberrygame/cordova-plugin-ad-admob">cordova-plugin-ad-admob</a></td>
 <td><a href="https://github.com/cranberrygame/cordova-plugin-ad-admob/blob/7aaa397b19ab63579d6aa68fbf20ffdf795a15fc/src/android/AdMobPlugin.java#L330">&#x274C;</a></td>
 <td>&#x2705;</td>
 <td>&#x2705;</td>
 </tr>
 <tr>
-<td>  <a href="https://github.com/ratson/cordova-plugin-admob-free">cordova-plugin-admob-free</a></td>
+<td><a href="https://github.com/ratson/cordova-plugin-admob-free">cordova-plugin-admob-free</a></td>
 <td>&#x2705;</td>
 <td>&#x2705;</td>
 <td>&#x2705;</td>
 </tr>
 <tr>
-<td>  <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple">cordova-plugin-admob-simple</a></td>
+<td><a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple">cordova-plugin-admob-simple</a></td>
 <td><a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple/blob/a58846c1ea14188a4aef44381ccd28ffdcae3bfa/src/android/AdMob.java#L207">&#x274C;</a></td>
 <td>&#x2705;</td>
 <td><a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple/blob/f7cc64e9e018f2146b2735b5ae8d3b780fa24f72/src/android/AdMob.java#L728">&#x274C;</a></td>
 </tr>
 <tr>
-<td>  <a href="https://github.com/floatinghotpot/cordova-admob-pro">cordova-plugin-admobpro</a></td>
+<td><a href="https://github.com/floatinghotpot/cordova-admob-pro">cordova-plugin-admobpro</a></td>
 <td><a href="https://github.com/floatinghotpot/cordova-admob-pro/wiki/License-Agreement#2-win-win-partnership">&#x274C;</a></td>
 <td><a href="https://github.com/floatinghotpot/cordova-extension/blob/master/src/android/cordova-generic-ad.jar">&#x274C;</a> <a href="https://github.com/floatinghotpot/cordova-extension/blob/master/src/ios/libCordovaGenericAd.a">&#x274C;</a></td>
 <td><a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/326">&#x274C;</a> <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/450">&#x274C;</a></td>
@@ -150,6 +150,12 @@
 </tbody>
 </table>
 <h2 id="api">API</h2><p>See <a href="https://ratson.github.io/cordova-plugin-admob-free/identifiers.html">documentation page</a>.</p>
+<h2 id="customize-google-play-services-versions--android-only-">Customize Google Play Services versions (Android only)</h2><p>The default <code>PLAY_SERVICES_VERSION</code> is set to <code>11.0.4</code>.
+If you need a different version, edit <code>config.xml</code> with following,</p>
+<pre><code class="lang-xml"><code class="source-code prettyprint">&lt;plugin name=&quot;cordova-admob-sdk&quot; spec=&quot;~0.13.1&quot;&gt;
+    &lt;variable name=&quot;PLAY_SERVICES_VERSION&quot; value=&quot;11.6.0&quot; /&gt;
+&lt;/plugin&gt;</code>
+</code></pre>
 <h2 id="status">Status</h2><p>This plugin is forked from <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple">cordova-plugin-admob-simple</a> and removed the ad-sharing related code.</p>
 <p>The code for Android has almost all rewritten to be more maintainable, plus some extra features.</p>
 <p>For iOS, while it is working, I have less interest in writing Objective-C code these days. If someone is willing to help, feel free to send a pull request, I will review it.</p>
