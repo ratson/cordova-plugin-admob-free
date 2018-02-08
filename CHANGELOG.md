@@ -2,6 +2,13 @@
 
 ## Next
 
+## 0.14.0 (2018-02-09)
+
+### Breaking
+
+* Update `cordova-admob-sdk` to v0.15.0.
+
+
 ## 0.13.0 (2017-12-10)
 
 ### Breaking
