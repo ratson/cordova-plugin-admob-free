@@ -7,6 +7,7 @@ export default {
   input: 'src/js/admob.js',
   output: {
     format: 'cjs',
+    sourcemap: true,
   },
   external: ['cordova/exec'],
   plugins: [
@@ -54,5 +55,4 @@ export default {
       browser: true,
     }),
   ],
-  sourcemap: true,
 }
