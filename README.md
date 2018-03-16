@@ -16,6 +16,8 @@ A free, no ad-sharing version of Google AdMob plugin for Cordova.
 
   Do not [send your application information to a remote server](https://github.com/floatinghotpot/cordova-admob-pro/issues/326) to control whether ad could be displayed. Therefore, you don't [lose revenue](https://github.com/floatinghotpot/cordova-admob-pro/issues/544) because [some server bugs](https://github.com/floatinghotpot/cordova-admob-pro/issues/450#issuecomment-244837346),
 
+  NOTE(2018-03-17): The above issue links are broken due to the author removed the discussions, the fact is the `cordova-plugin-admobpro` is sending requests to http://adlic.rjfun.com/adlic with application information for controling ad display, and some users reported losting more revenue than advertised, so use it at your own risk.
+
 ### Compare to other projects
 
 | Project                                                                                      | No Ad-Sharing                                                                                                                                  | Fully Open Sourced                                                                                                                                                                                           | No Remote Control                                                                                                                             |
@@ -28,6 +30,9 @@ A free, no ad-sharing version of Google AdMob plugin for Cordova.
 | [cordova-plugin-admobpro](https://github.com/floatinghotpot/cordova-admob-pro)               | [❌](https://github.com/floatinghotpot/cordova-admob-pro/wiki/License-Agreement#2-win-win-partnership)                                         | [❌](https://github.com/floatinghotpot/cordova-extension/blob/master/src/android/cordova-generic-ad.jar) [❌](https://github.com/floatinghotpot/cordova-extension/blob/master/src/ios/libCordovaGenericAd.a) | [❌](https://github.com/floatinghotpot/cordova-admob-pro/issues/326) [❌](https://github.com/floatinghotpot/cordova-admob-pro/issues/450)     |
 
 Click ❌ to see the detail.
+
+NOTE(2018-03-17): `cordova-plugin-admobpro` is using [`cordova-plugin-extension`](https://www.npmjs.com/package/cordova-plugin-extension) for its compiled code, the author removed the repository casusing the above broken links.
+For those interested could download the npm tarball for investigation.
 
 ## Installation
 
