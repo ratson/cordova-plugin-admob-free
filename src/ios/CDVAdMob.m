@@ -531,7 +531,7 @@
     NSLog(@"__createBanner");
 
     // set background color to black
-    //self.webView.superview.backgroundColor = [UIColor blackColor];
+    self.webView.superview.backgroundColor = [UIColor blackColor];
     //self.webView.superview.tintColor = [UIColor whiteColor];
 
     if (!self.bannerView){
@@ -711,6 +711,12 @@
                     bf.origin.y = wf.size.height - bf.size.height; // banner is subview of webview
                 } else {
                     bf.origin.y = pr.size.height - bf.size.height;
+
+                    if (@available(iOS 11.0, *)) {
+                        bf.origin.y -= parentView.safeAreaInsets.bottom;
+                        bf.size.width = wf.size.width - parentView.safeAreaInsets.left - parentView.safeAreaInsets.right;
+                        wf.size.height -= parentView.safeAreaInsets.bottom;
+                    }
                 }
             }
 
