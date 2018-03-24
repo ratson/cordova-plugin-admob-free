@@ -65,6 +65,7 @@
 </li>
 <li><p><strong>No Remote Control</strong></p>
 <p>Do not <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/326">send your application information to a remote server</a> to control whether ad could be displayed. Therefore, you don&apos;t <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/544">lose revenue</a> because <a href="https://github.com/floatinghotpot/cordova-admob-pro/issues/450#issuecomment-244837346">some server bugs</a>,</p>
+<p>NOTE(2018-03-17): The above issue links are broken due to the author removed the discussions, the fact is the <code>cordova-plugin-admobpro</code> is sending requests to <a href="http://adlic.rjfun.com/adlic">http://adlic.rjfun.com/adlic</a> with application information for controling ad display, and some users reported losting more revenue than advertised, so use it at your own risk.</p>
 </li>
 </ul>
 <h3 id="compare-to-other-projects">Compare to other projects</h3><table>
@@ -116,6 +117,8 @@
 </tbody>
 </table>
 <p>Click &#x274C; to see the detail.</p>
+<p>NOTE(2018-03-17): <code>cordova-plugin-admobpro</code> is using <a href="https://www.npmjs.com/package/cordova-plugin-extension"><code>cordova-plugin-extension</code></a> for its compiled code, the author removed the repository casusing the above broken links.
+For those interested could download the npm tarball for investigation.</p>
 <h2 id="installation">Installation</h2><pre><code class="lang-sh"><code class="source-code prettyprint">cordova plugin add cordova-plugin-admob-free --save</code>
 </code></pre>
 <p>Note that <code>cordova plugin add [GIT_URL]</code> is not supported.</p>
