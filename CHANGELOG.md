@@ -2,6 +2,13 @@
 
 ## Next
 
+## 0.15.0 (2018-03-25)
+
+* Update `cordova-admob-sdk` to v0.15.1.
+* Implement `onRewardedVideoCompleted()` callback for Android.
+* Add space for non-overlapping bottom banners on iPhone X ([@MBuchalik](https://github.com/MBuchalik) in [#186](https://github.com/ratson/cordova-plugin-admob-free/pull/186))
+* Add filenames to src attr to copy source-files. ([@srikanth-wgl](https://github.com/srikanth-wgl) in [#189](https://github.com/ratson/cordova-plugin-admob-free/pull/189))
+
 ## 0.14.0 (2018-02-09)
 
 ### Breaking
