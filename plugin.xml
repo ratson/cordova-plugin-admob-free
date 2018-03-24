@@ -45,9 +45,12 @@
             </feature>
         </config-file>
 
-        <source-file src="src/android/banner" target-dir="src/name/ratson/cordova/admob" />
-        <source-file src="src/android/interstitial" target-dir="src/name/ratson/cordova/admob" />
-        <source-file src="src/android/rewardvideo" target-dir="src/name/ratson/cordova/admob" />
+        <source-file src="src/android/banner/BannerExecutor.java" target-dir="src/name/ratson/cordova/admob/banner" />
+        <source-file src="src/android/banner/BannerListener.java" target-dir="src/name/ratson/cordova/admob/banner" />
+        <source-file src="src/android/interstitial/InterstitialExecutor.java" target-dir="src/name/ratson/cordova/admob/interstitial" />
+        <source-file src="src/android/interstitial/InterstitialListener.java" target-dir="src/name/ratson/cordova/admob/interstitial" />
+        <source-file src="src/android/rewardvideo/RewardVideoExecutor.java" target-dir="src/name/ratson/cordova/admob/rewardvideo" />
+        <source-file src="src/android/rewardvideo/RewardVideoListener.java" target-dir="src/name/ratson/cordova/admob/rewardvideo" />
 
         <source-file src="src/android/AbstractExecutor.java" target-dir="src/name/ratson/cordova/admob" />
         <source-file src="src/android/Actions.java" target-dir="src/name/ratson/cordova/admob" />
