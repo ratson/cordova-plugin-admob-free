@@ -18,7 +18,8 @@
     "docs-watch": "nodemon -w src --exec 'npm run docs'",
     "lint": "run-p lint:*",
     "lint:js": "eslint --ext js,md .",
-    "lint:spaces": "lintspaces -n -t -d spaces *.* src/**/*.* tests/**/*.* examples/*/*.* examples/*/www/*.*"
+    "lint:spaces": "lintspaces -n -t -d spaces *.* src/**/*.* tests/**/*.* examples/*/*.* examples/*/www/*.*",
+    "precommit": "lint-staged"
   },
   "cordova": {
     "id": "cordova-plugin-admob-free",
@@ -50,7 +51,7 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-lodash": "^3.3.2",
-    "babel-plugin-module-resolver": "^3.1.0",
+    "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
     "babel-plugin-transform-es3-property-literals": "^6.22.0",
     "babel-plugin-transform-object-assign": "^6.22.0",
@@ -70,14 +71,16 @@
     "esdoc-importpath-plugin": "^1.0.1",
     "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^4.19.1",
-    "eslint-config-concise": "^0.20.0",
-    "eslint-config-concise-esnext": "^0.20.0",
+    "eslint-config-concise": "^0.22.0",
+    "eslint-config-concise-esnext": "^0.22.0",
     "eslint-config-concise-jest": "^0.20.0",
+    "husky": "^0.14.3",
     "jest": "^22.4.3",
+    "lint-staged": "^7.0.4",
     "lintspaces-cli": "^0.6.0",
     "lodash": "^4.17.5",
-    "lodash-es": "^4.17.7",
-    "nodemon": "^1.17.2",
+    "lodash-es": "^4.17.8",
+    "nodemon": "^1.17.3",
     "npm-run-all": "^4.1.2",
     "rimraf": "^2.6.2",
     "rollup": "^0.57.1",
@@ -105,6 +108,15 @@
     "collectCoverage": true,
     "roots": [
       "<rootDir>/tests/js"
+    ]
+  },
+  "lint-staged": {
+    "*.{java,js,html,h,m,md,xml}": [
+      "lintspaces -n -t -d spaces"
+    ],
+    "*.js": [
+      "eslint --fix",
+      "git add"
     ]
   }
 }
