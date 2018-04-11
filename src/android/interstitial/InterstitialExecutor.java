@@ -110,12 +110,12 @@ public class InterstitialExecutor extends AbstractExecutor {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (interstitialAd != null)
-                {
-                    interstitialAd.loadAd(plugin.buildAdRequest());
-
-                    delayCallback.success();
+                if (interstitialAd == null) {
+                    return;
                 }
+                interstitialAd.loadAd(plugin.buildAdRequest());
+
+                delayCallback.success();
             }
         });
 
@@ -131,19 +131,19 @@ public class InterstitialExecutor extends AbstractExecutor {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (interstitialAd != null)
-                {
-                    AdMobConfig config = plugin.config;
+                if (interstitialAd == null) {
+                    return;
+                }
+                AdMobConfig config = plugin.config;
 
-                    if (interstitialAd.isLoaded()) {
-                        interstitialAd.show();
-                        if (callbackContext != null) {
-                            callbackContext.success();
-                        }
-                    } else if (!config.autoShowInterstitial) {
-                        if (callbackContext != null) {
-                            callbackContext.error("Interstital not ready yet");
-                        }
+                if (interstitialAd.isLoaded()) {
+                    interstitialAd.show();
+                    if (callbackContext != null) {
+                        callbackContext.success();
+                    }
+                } else if (!config.autoShowInterstitial) {
+                    if (callbackContext != null) {
+                        callbackContext.error("Interstital not ready yet");
                     }
                 }
             }
