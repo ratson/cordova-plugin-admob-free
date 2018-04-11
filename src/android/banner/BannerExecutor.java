@@ -116,6 +116,9 @@ public class BannerExecutor extends AbstractExecutor {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (adView == null) {
+                    return;
+                }
                 adView.loadAd(plugin.buildAdRequest());
 
                 delayCallback.success();
@@ -173,6 +176,9 @@ public class BannerExecutor extends AbstractExecutor {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (adView == null) {
+                    return;
+                }
                 CordovaInterface cordova = plugin.cordova;
                 if (bannerVisible == bannerShow) {
                     // no change
