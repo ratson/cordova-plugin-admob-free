@@ -110,6 +110,9 @@ public class InterstitialExecutor extends AbstractExecutor {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (interstitialAd == null) {
+                    return;
+                }
                 interstitialAd.loadAd(plugin.buildAdRequest());
 
                 delayCallback.success();
@@ -128,6 +131,9 @@ public class InterstitialExecutor extends AbstractExecutor {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (interstitialAd == null) {
+                    return;
+                }
                 AdMobConfig config = plugin.config;
 
                 if (interstitialAd.isLoaded()) {
