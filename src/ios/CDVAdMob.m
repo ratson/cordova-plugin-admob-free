@@ -576,11 +576,14 @@
             request.gender = kGADGenderUnknown;
         }
     }
-    if ([self.forChild caseInsensitiveCompare:@"yes"] == NSOrderedSame) {
-        [request tagForChildDirectedTreatment:YES];
-    } else if ([self.forChild caseInsensitiveCompare:@"no"] == NSOrderedSame) {
-        [request tagForChildDirectedTreatment:NO];
-    }
+
+    if (self.forChild != nil) {
+        if ([self.forChild caseInsensitiveCompare:@"yes"] == NSOrderedSame) {
+            [request tagForChildDirectedTreatment:YES];
+        } else if ([self.forChild caseInsensitiveCompare:@"no"] == NSOrderedSame) {
+            [request tagForChildDirectedTreatment:NO];
+        }
+    }    
 
     return request;
 }
