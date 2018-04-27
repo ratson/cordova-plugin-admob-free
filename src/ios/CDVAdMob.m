@@ -583,7 +583,7 @@
         } else if ([self.forChild caseInsensitiveCompare:@"no"] == NSOrderedSame) {
             [request tagForChildDirectedTreatment:NO];
         }
-    }    
+    }
 
     return request;
 }
