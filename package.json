@@ -11,7 +11,7 @@
     "test:js": "jest",
     "version": "sync-package-version --cordova-plugin",
     "build": "cross-env NODE_ENV=production rollup -c -o www/admob.js",
-    "clean": "rimraf coverage dist www",
+    "clean": "rimraf *.log coverage dist www",
     "docs": "run-s docs:*",
     "docs:esdoc": "esdoc -c esdoc.json",
     "docs:commit": "cd gh-pages && git add -A . && git commit -a -m 'Update page'",

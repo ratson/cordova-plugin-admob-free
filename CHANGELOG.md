@@ -2,6 +2,12 @@
 
 ## Next
 
+## 0.16.0 (2018-04-27)
+
+* Update `cordova-admob-sdk` to v0.16.0.
+* Fix not showing production ads on iOS ([@MBuchalik](https://github.com/MBuchalik) in [#208](https://github.com/ratson/cordova-plugin-admob-free/pull/208))
+* Fix crashes on Android ([@tominou](https://github.com/tominou) in [#201](https://github.com/ratson/cordova-plugin-admob-free/pull/201))
+
 ## 0.15.0 (2018-03-25)
 
 * Update `cordova-admob-sdk` to v0.15.1.
