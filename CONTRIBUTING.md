@@ -87,6 +87,12 @@ git push -f origin master
 For more reference, read [ESLint's excellent one](http://eslint.org/docs/developer-guide/contributing/pull-requests#working-with-code).
 
 
+## For Collaborators
+
+While collaborator is giving push access, it is better to send Pull Request, so otheres could review and comment.
+
+Please note that generated code is not committed as it increases the repository size and need to rebuild frequently to be useful.
+
 ## License
 
 By contributing to `cordova-plugin-admob-free`, you agree that
