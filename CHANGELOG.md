@@ -2,6 +2,10 @@
 
 ## Next
 
+## 0.16.1 (2018-05-13)
+
+* Fix for iPhone X status bar improperly refreshed ([@rafaellop](https://github.com/rafaellop) in [#218](https://github.com/ratson/cordova-plugin-admob-free/pull/218))
+
 ## 0.16.0 (2018-04-27)
 
 * Update `cordova-admob-sdk` to v0.16.0.
