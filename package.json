@@ -71,7 +71,7 @@
     "esdoc-importpath-plugin": "^1.0.2",
     "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^4.19.1",
-    "eslint-config-concise": "^0.24.0",
+    "eslint-config-concise": "^0.25.0",
     "eslint-config-concise-esnext": "^0.24.1",
     "eslint-config-concise-jest": "^0.24.0",
     "husky": "^0.14.3",
@@ -83,7 +83,7 @@
     "nodemon": "^1.17.4",
     "npm-run-all": "^4.1.3",
     "rimraf": "^2.6.2",
-    "rollup": "^0.58.2",
+    "rollup": "^0.59.1",
     "rollup-plugin-babel": "^3.0.4",
     "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-node-resolve": "^3.3.0",
@@ -104,6 +104,16 @@
     "Android > 2",
     "last 2 ChromeAndroid versions"
   ],
+  "eslintConfig": {
+    "extends": [
+      "concise",
+      "concise-esnext",
+      "concise-jest"
+    ],
+    "rules": {
+      "class-methods-use-this": "off"
+    }
+  },
   "jest": {
     "collectCoverage": true,
     "roots": [
