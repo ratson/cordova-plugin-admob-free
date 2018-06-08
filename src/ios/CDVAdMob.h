@@ -1,6 +1,7 @@
 #import <Cordova/CDV.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <Cordova/CDVPlugin.h>
 
 #import <GoogleMobileAds/GADAdSize.h>
 #import <GoogleMobileAds/GADBannerView.h>
@@ -23,8 +24,9 @@
 
 // This version of the AdMob plugin has been tested with Cordova version 2.5.0.
 
-
 @interface CDVAdMob : CDVPlugin <GADBannerViewDelegate, GADInterstitialDelegate, GADRewardBasedVideoAdDelegate> {
+	@protected    
+    UIView* _safeAreaBackgroundView; 
 }
 
 @property(nonatomic, retain) GADBannerView *bannerView;
