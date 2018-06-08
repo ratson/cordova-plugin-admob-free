@@ -8,7 +8,6 @@
 #import "MainViewController.h"
 
 
-
 @interface CDVAdMob()
 
 - (void) __setOptions:(NSDictionary*) options;
@@ -107,6 +106,8 @@
     rewardedVideoLock = nil;
 
     srand((unsigned int)time(NULL));
+
+    [self initializeSafeAreaBackgroundView];
 }
 
 - (void) setOptions:(CDVInvokedUrlCommand *)command {
@@ -663,6 +664,31 @@
     }
 }
 
+- (void) initializeSafeAreaBackgroundView
+{
+    if (! bannerOverlap && ! bannerAtTop){    	
+    	if (@available(iOS 11.0, *)) {
+    		
+    		UIView* parentView = self.bannerOverlap ? self.webView : [self.webView superview];
+    		CGRect pr = self.webView.superview.bounds;
+
+			CGRect safeAreaFrame = CGRectMake(0, 0, 0, 0);
+
+    		safeAreaFrame.origin.y = pr.size.height - parentView.safeAreaInsets.bottom;
+    		safeAreaFrame.size.width = pr.size.width;
+    		safeAreaFrame.size.height = parentView.safeAreaInsets.bottom;
+
+    		
+    		_safeAreaBackgroundView = [[UIView alloc] initWithFrame:safeAreaFrame];
+    		_safeAreaBackgroundView.backgroundColor = [UIColor blackColor];
+    		_safeAreaBackgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth  | UIViewAutoresizingFlexibleBottomMargin);
+    		_safeAreaBackgroundView.autoresizesSubviews = YES;
+
+    		[self.webView.superview addSubview:_safeAreaBackgroundView];
+    	}    	
+	}
+}
+
 - (void)resizeViews {
     // Frame of the main container view that holds the Cordova webview.
     CGRect pr = self.webView.superview.bounds, wf = pr;
@@ -674,7 +700,7 @@
     //CGFloat top = isIOS7 ? MIN(sf.size.height, sf.size.width) : 0.0;
     float top = 0.0;
 
-    if(! self.offsetTopBar) top = 0.0;
+    //if(! self.offsetTopBar) top = 0.0;
 
     wf.origin.y = top;
     wf.size.height = pr.size.height - top;
@@ -720,6 +746,14 @@
                         bf.origin.y -= parentView.safeAreaInsets.bottom;
                         bf.size.width = wf.size.width - parentView.safeAreaInsets.left - parentView.safeAreaInsets.right;
                         wf.size.height -= parentView.safeAreaInsets.bottom;
+
+                        CGRect saf = _safeAreaBackgroundView.frame;
+                        saf.origin.y = pr.size.height - parentView.safeAreaInsets.bottom;
+    					saf.size.width = pr.size.width;
+    					saf.size.height = parentView.safeAreaInsets.bottom;
+
+    					_safeAreaBackgroundView.frame = saf;
+    					_safeAreaBackgroundView.bounds = saf;
                     }
                 }
             }
@@ -740,7 +774,8 @@
     //NSLog(@"superview: %d x %d, webview: %d x %d", (int) pr.size.width, (int) pr.size.height, (int) wf.size.width, (int) wf.size.height );
 }
 
-- (void)deviceOrientationChange:(NSNotification *)notification {
+- (void)deviceOrientationChange:(NSNotification *)notification {    
+    
     [self resizeViews];
 }
 
