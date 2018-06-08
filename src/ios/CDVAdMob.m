@@ -8,6 +8,7 @@
 #import "MainViewController.h"
 
 
+
 @interface CDVAdMob()
 
 - (void) __setOptions:(NSDictionary*) options;
@@ -105,7 +106,7 @@
     isRewardedVideoLoading = false;
     rewardedVideoLock = nil;
 
-    srand((unsigned int)time(NULL));  
+    srand((unsigned int)time(NULL));
 }
 
 - (void) setOptions:(CDVInvokedUrlCommand *)command {
@@ -740,7 +741,6 @@
 }
 
 - (void)deviceOrientationChange:(NSNotification *)notification {    
-    
     [self resizeViews];
 }
 
