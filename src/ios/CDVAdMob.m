@@ -740,7 +740,7 @@
     //NSLog(@"superview: %d x %d, webview: %d x %d", (int) pr.size.width, (int) pr.size.height, (int) wf.size.width, (int) wf.size.height );
 }
 
-- (void)deviceOrientationChange:(NSNotification *)notification {    
+- (void)deviceOrientationChange:(NSNotification *)notification {
     [self resizeViews];
 }
 
