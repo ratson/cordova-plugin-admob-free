@@ -66,7 +66,6 @@
     "cordova-test-cli": "^0.0.1",
     "cordova-testbed": "^0.0.1",
     "cross-env": "^5.1.5",
-    "delay": "^2.0.0",
     "es6-promise": "^4.2.4",
     "esdoc": "^1.1.0",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
