@@ -753,9 +753,8 @@
                         wf.size.height -= parentView.safeAreaInsets.bottom;
 
                         //If safeAreBackground was turned turned off, turn it back on
-                        if( _safeAreaBackgroundView.hidden ){
-        					_safeAreaBackgroundView.hidden = false;
-        				}
+                        _safeAreaBackgroundView.hidden = false;
+        		
 
                         CGRect saf = _safeAreaBackgroundView.frame;
                         saf.origin.y = pr.size.height - parentView.safeAreaInsets.bottom;
