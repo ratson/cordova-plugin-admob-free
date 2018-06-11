@@ -666,27 +666,26 @@
 
 - (void) initializeSafeAreaBackgroundView
 {
-    if (! bannerOverlap && ! bannerAtTop){    	
-    	if (@available(iOS 11.0, *)) {
-    		
-    		UIView* parentView = self.bannerOverlap ? self.webView : [self.webView superview];
-    		CGRect pr = self.webView.superview.bounds;
+   	if (@available(iOS 11.0, *)) {
+		
+		UIView* parentView = self.bannerOverlap ? self.webView : [self.webView superview];
+		CGRect pr = self.webView.superview.bounds;
 
-			CGRect safeAreaFrame = CGRectMake(0, 0, 0, 0);
+		CGRect safeAreaFrame = CGRectMake(0, 0, 0, 0);
 
-    		safeAreaFrame.origin.y = pr.size.height - parentView.safeAreaInsets.bottom;
-    		safeAreaFrame.size.width = pr.size.width;
-    		safeAreaFrame.size.height = parentView.safeAreaInsets.bottom;
+		safeAreaFrame.origin.y = pr.size.height - parentView.safeAreaInsets.bottom;
+		safeAreaFrame.size.width = pr.size.width;
+		safeAreaFrame.size.height = parentView.safeAreaInsets.bottom;
 
-    		
-    		_safeAreaBackgroundView = [[UIView alloc] initWithFrame:safeAreaFrame];
-    		_safeAreaBackgroundView.backgroundColor = [UIColor blackColor];
-    		_safeAreaBackgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth  | UIViewAutoresizingFlexibleBottomMargin);
-    		_safeAreaBackgroundView.autoresizesSubviews = YES;
+		
+		_safeAreaBackgroundView = [[UIView alloc] initWithFrame:safeAreaFrame];
+		_safeAreaBackgroundView.backgroundColor = [UIColor blackColor];
+		_safeAreaBackgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth  | UIViewAutoresizingFlexibleBottomMargin);
+		_safeAreaBackgroundView.autoresizesSubviews = YES;
+		_safeAreaBackgroundView.hidden = true;
 
-    		[self.webView.superview addSubview:_safeAreaBackgroundView];
-    	}    	
-	}
+		[self.webView.superview addSubview:_safeAreaBackgroundView];
+	} 	
 }
 
 - (void)resizeViews {
@@ -718,6 +717,12 @@
 
         CGRect bf = self.bannerView.frame;
 
+        
+    	//If the ad is not showing turn the safeArea Background off
+        if(self.bannerView.hidden && ! _safeAreaBackgroundView.hidden){
+        	_safeAreaBackgroundView.hidden = true;
+        }
+
         // If the ad is not showing or the ad is hidden, we don't want to resize anything.
         UIView* parentView = self.bannerOverlap ? self.webView : [self.webView superview];
         BOOL adIsShowing = ([self.bannerView isDescendantOfView:parentView]) && (! self.bannerView.hidden);
@@ -746,6 +751,11 @@
                         bf.origin.y -= parentView.safeAreaInsets.bottom;
                         bf.size.width = wf.size.width - parentView.safeAreaInsets.left - parentView.safeAreaInsets.right;
                         wf.size.height -= parentView.safeAreaInsets.bottom;
+
+                        //If safeAreBackground was turned turned off, turn it back on
+                        if( _safeAreaBackgroundView.hidden ){
+        					_safeAreaBackgroundView.hidden = false;
+        				}
 
                         CGRect saf = _safeAreaBackgroundView.frame;
                         saf.origin.y = pr.size.height - parentView.safeAreaInsets.bottom;
