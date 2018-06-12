@@ -717,12 +717,6 @@
 
         CGRect bf = self.bannerView.frame;
 
-        
-    	//If the ad is not showing turn the safeArea Background off
-        if(self.bannerView.hidden && ! _safeAreaBackgroundView.hidden){
-        	_safeAreaBackgroundView.hidden = true;
-        }
-
         // If the ad is not showing or the ad is hidden, we don't want to resize anything.
         UIView* parentView = self.bannerOverlap ? self.webView : [self.webView superview];
         BOOL adIsShowing = ([self.bannerView isDescendantOfView:parentView]) && (! self.bannerView.hidden);
@@ -775,7 +769,13 @@
             self.bannerView.bounds = bf;
 
             //NSLog(@"x,y,w,h = %d,%d,%d,%d", (int) bf.origin.x, (int) bf.origin.y, (int) bf.size.width, (int) bf.size.height );
-        }
+        } else {
+	   //Hide safe area background if visibile and banner ad does not exist    
+    	   _safeAreaBackgroundView.hidden = true;
+	}	
+    } else {
+	//Hide safe area background if visibile and banner ad does not exist    
+    	_safeAreaBackgroundView.hidden = true;
     }
 
     self.webView.frame = wf;
