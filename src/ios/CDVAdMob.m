@@ -8,7 +8,6 @@
 #import "MainViewController.h"
 
 
-
 @interface CDVAdMob()
 
 - (void) __setOptions:(NSDictionary*) options;
@@ -107,6 +106,8 @@
     rewardedVideoLock = nil;
 
     srand((unsigned int)time(NULL));
+
+    [self initializeSafeAreaBackgroundView];
 }
 
 - (void) setOptions:(CDVInvokedUrlCommand *)command {
@@ -531,7 +532,7 @@
     NSLog(@"__createBanner");
 
     // set background color to black
-    self.webView.superview.backgroundColor = [UIColor blackColor];
+    //self.webView.superview.backgroundColor = [UIColor blackColor];
     //self.webView.superview.tintColor = [UIColor whiteColor];
 
     if (!self.bannerView){
@@ -663,17 +664,42 @@
     }
 }
 
+- (void) initializeSafeAreaBackgroundView
+{
+   	if (@available(iOS 11.0, *)) {
+		
+		UIView* parentView = self.bannerOverlap ? self.webView : [self.webView superview];
+		CGRect pr = self.webView.superview.bounds;
+
+		CGRect safeAreaFrame = CGRectMake(0, 0, 0, 0);
+
+		safeAreaFrame.origin.y = pr.size.height - parentView.safeAreaInsets.bottom;
+		safeAreaFrame.size.width = pr.size.width;
+		safeAreaFrame.size.height = parentView.safeAreaInsets.bottom;
+
+		
+		_safeAreaBackgroundView = [[UIView alloc] initWithFrame:safeAreaFrame];
+		_safeAreaBackgroundView.backgroundColor = [UIColor blackColor];
+		_safeAreaBackgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth  | UIViewAutoresizingFlexibleBottomMargin);
+		_safeAreaBackgroundView.autoresizesSubviews = YES;
+		_safeAreaBackgroundView.hidden = true;
+
+		[self.webView.superview addSubview:_safeAreaBackgroundView];
+	} 	
+}
+
 - (void)resizeViews {
     // Frame of the main container view that holds the Cordova webview.
     CGRect pr = self.webView.superview.bounds, wf = pr;
     //NSLog(@"super view: %d x %d", (int)pr.size.width, (int)pr.size.height);
 
     // iOS7 Hack, handle the Statusbar
-    BOOL isIOS7 = ([[UIDevice currentDevice].systemVersion floatValue] >= 7) && ([[UIDevice currentDevice].systemVersion floatValue] < 11);
-    CGRect sf = [[UIApplication sharedApplication] statusBarFrame];
-    CGFloat top = isIOS7 ? MIN(sf.size.height, sf.size.width) : 0.0;
+    //BOOL isIOS7 = ([[UIDevice currentDevice].systemVersion floatValue] >= 7);
+    //CGRect sf = [[UIApplication sharedApplication] statusBarFrame];
+    //CGFloat top = isIOS7 ? MIN(sf.size.height, sf.size.width) : 0.0;
+    float top = 0.0;
 
-    if(! self.offsetTopBar) top = 0.0;
+    //if(! self.offsetTopBar) top = 0.0;
 
     wf.origin.y = top;
     wf.size.height = pr.size.height - top;
@@ -719,6 +745,18 @@
                         bf.origin.y -= parentView.safeAreaInsets.bottom;
                         bf.size.width = wf.size.width - parentView.safeAreaInsets.left - parentView.safeAreaInsets.right;
                         wf.size.height -= parentView.safeAreaInsets.bottom;
+
+                        //If safeAreBackground was turned turned off, turn it back on
+                        _safeAreaBackgroundView.hidden = false;
+        		
+
+                        CGRect saf = _safeAreaBackgroundView.frame;
+                        saf.origin.y = pr.size.height - parentView.safeAreaInsets.bottom;
+    					saf.size.width = pr.size.width;
+    					saf.size.height = parentView.safeAreaInsets.bottom;
+
+    					_safeAreaBackgroundView.frame = saf;
+    					_safeAreaBackgroundView.bounds = saf;
                     }
                 }
             }
@@ -731,7 +769,13 @@
             self.bannerView.bounds = bf;
 
             //NSLog(@"x,y,w,h = %d,%d,%d,%d", (int) bf.origin.x, (int) bf.origin.y, (int) bf.size.width, (int) bf.size.height );
-        }
+        } else {
+	   //Hide safe area background if visibile and banner ad does not exist    
+    	   _safeAreaBackgroundView.hidden = true;
+	}	
+    } else {
+	//Hide safe area background if visibile and banner ad does not exist    
+    	_safeAreaBackgroundView.hidden = true;
     }
 
     self.webView.frame = wf;
@@ -739,7 +783,8 @@
     //NSLog(@"superview: %d x %d, webview: %d x %d", (int) pr.size.width, (int) pr.size.height, (int) wf.size.width, (int) wf.size.height );
 }
 
-- (void)deviceOrientationChange:(NSNotification *)notification {
+- (void)deviceOrientationChange:(NSNotification *)notification {    
+    
     [self resizeViews];
 }
 
