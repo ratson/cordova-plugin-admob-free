@@ -25,8 +25,8 @@
 // This version of the AdMob plugin has been tested with Cordova version 2.5.0.
 
 @interface CDVAdMob : CDVPlugin <GADBannerViewDelegate, GADInterstitialDelegate, GADRewardBasedVideoAdDelegate> {
-	@protected    
-    UIView* _safeAreaBackgroundView; 
+    @protected
+    UIView* _safeAreaBackgroundView;
 }
 
 @property(nonatomic, retain) GADBannerView *bannerView;

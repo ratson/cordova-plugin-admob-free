@@ -666,26 +666,25 @@
 
 - (void) initializeSafeAreaBackgroundView
 {
-   	if (@available(iOS 11.0, *)) {
-		
-		UIView* parentView = self.bannerOverlap ? self.webView : [self.webView superview];
-		CGRect pr = self.webView.superview.bounds;
+    if (@available(iOS 11.0, *)) {
 
-		CGRect safeAreaFrame = CGRectMake(0, 0, 0, 0);
+        UIView* parentView = self.bannerOverlap ? self.webView : [self.webView superview];
+        CGRect pr = self.webView.superview.bounds;
 
-		safeAreaFrame.origin.y = pr.size.height - parentView.safeAreaInsets.bottom;
-		safeAreaFrame.size.width = pr.size.width;
-		safeAreaFrame.size.height = parentView.safeAreaInsets.bottom;
+        CGRect safeAreaFrame = CGRectMake(0, 0, 0, 0);
 
-		
-		_safeAreaBackgroundView = [[UIView alloc] initWithFrame:safeAreaFrame];
-		_safeAreaBackgroundView.backgroundColor = [UIColor blackColor];
-		_safeAreaBackgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth  | UIViewAutoresizingFlexibleBottomMargin);
-		_safeAreaBackgroundView.autoresizesSubviews = YES;
-		_safeAreaBackgroundView.hidden = true;
+        safeAreaFrame.origin.y = pr.size.height - parentView.safeAreaInsets.bottom;
+        safeAreaFrame.size.width = pr.size.width;
+        safeAreaFrame.size.height = parentView.safeAreaInsets.bottom;
 
-		[self.webView.superview addSubview:_safeAreaBackgroundView];
-	} 	
+        _safeAreaBackgroundView = [[UIView alloc] initWithFrame:safeAreaFrame];
+        _safeAreaBackgroundView.backgroundColor = [UIColor blackColor];
+        _safeAreaBackgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth  | UIViewAutoresizingFlexibleBottomMargin);
+        _safeAreaBackgroundView.autoresizesSubviews = YES;
+        _safeAreaBackgroundView.hidden = true;
+
+        [self.webView.superview addSubview:_safeAreaBackgroundView];
+    }
 }
 
 - (void)resizeViews {
@@ -748,15 +747,14 @@
 
                         //If safeAreBackground was turned turned off, turn it back on
                         _safeAreaBackgroundView.hidden = false;
-        		
 
                         CGRect saf = _safeAreaBackgroundView.frame;
                         saf.origin.y = pr.size.height - parentView.safeAreaInsets.bottom;
-    					saf.size.width = pr.size.width;
-    					saf.size.height = parentView.safeAreaInsets.bottom;
+                        saf.size.width = pr.size.width;
+                        saf.size.height = parentView.safeAreaInsets.bottom;
 
-    					_safeAreaBackgroundView.frame = saf;
-    					_safeAreaBackgroundView.bounds = saf;
+                        _safeAreaBackgroundView.frame = saf;
+                        _safeAreaBackgroundView.bounds = saf;
                     }
                 }
             }
@@ -770,12 +768,12 @@
 
             //NSLog(@"x,y,w,h = %d,%d,%d,%d", (int) bf.origin.x, (int) bf.origin.y, (int) bf.size.width, (int) bf.size.height );
         } else {
-	   //Hide safe area background if visibile and banner ad does not exist    
-    	   _safeAreaBackgroundView.hidden = true;
-	}	
+            //Hide safe area background if visibile and banner ad does not exist
+            _safeAreaBackgroundView.hidden = true;
+        }
     } else {
-	//Hide safe area background if visibile and banner ad does not exist    
-    	_safeAreaBackgroundView.hidden = true;
+        //Hide safe area background if visibile and banner ad does not exist
+        _safeAreaBackgroundView.hidden = true;
     }
 
     self.webView.frame = wf;
@@ -783,8 +781,7 @@
     //NSLog(@"superview: %d x %d, webview: %d x %d", (int) pr.size.width, (int) pr.size.height, (int) wf.size.width, (int) wf.size.height );
 }
 
-- (void)deviceOrientationChange:(NSNotification *)notification {    
-    
+- (void)deviceOrientationChange:(NSNotification *)notification {
     [self resizeViews];
 }
 
