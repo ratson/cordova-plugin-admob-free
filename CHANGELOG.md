@@ -2,6 +2,11 @@
 
 ## Next
 
+## 0.17.1 (2018-06-16)
+
+* Fix iPhone X & iOs11 issues. ([@tennist](https://github.com/tennist) in [#232](https://github.com/ratson/cordova-plugin-admob-free/pull/232))
+* Fix onRewardedVideoCompleted error. ([@Penny13692018](https://github.com/Penny13692018) in [#234](https://github.com/ratson/cordova-plugin-admob-free/pull/234))
+
 ## 0.17.0 (2018-05-22)
 
 * Update `cordova-admob-sdk` to v0.17.0. ([@rafaellop](https://github.com/rafaellop) in [#219](https://github.com/ratson/cordova-plugin-admob-free/pull/219))
