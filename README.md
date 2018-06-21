@@ -90,6 +90,8 @@ If you need a different version, edit `config.xml` with following,
 </plugin>
 ```
 
+Note that if you are adding these lines to an existing project, you need to remove both `admob-free` plugin and `android` platform and add them back again to affect the version number.
+
 ## Status
 
 This plugin is forked from [cordova-plugin-admob-simple](https://github.com/sunnycupertino/cordova-plugin-admob-simple) and removed the ad-sharing related code.
