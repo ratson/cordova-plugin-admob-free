@@ -5,9 +5,6 @@
 
 #import <GoogleMobileAds/GADExtras.h>
 
-#import "MainViewController.h"
-
-
 @interface CDVAdMob()
 
 - (void) __setOptions:(NSDictionary*) options;
