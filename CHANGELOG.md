@@ -2,6 +2,11 @@
 
 ## Next
 
+## 0.17.2 (2018-06-25)
+
+* Remove unused import. ([@jcesarmobile](https://github.com/jcesarmobile) in [#254](https://github.com/ratson/cordova-plugin-admob-free/pull/254))
+* Revert [#234](https://github.com/ratson/cordova-plugin-admob-free/pull/234))
+
 ## 0.17.1 (2018-06-16)
 
 * Fix iPhone X & iOs11 issues. ([@tennist](https://github.com/tennist) in [#232](https://github.com/ratson/cordova-plugin-admob-free/pull/232))
