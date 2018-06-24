@@ -159,6 +159,7 @@ If you need a different version, edit <code>config.xml</code> with following,</p
     &lt;variable name=&quot;PLAY_SERVICES_VERSION&quot; value=&quot;11.6.0&quot; /&gt;
 &lt;/plugin&gt;</code>
 </code></pre>
+<p>Note that if you are adding these lines to an existing project, you need to remove both <code>admob-free</code> plugin and <code>android</code> platform and add them back again to affect the version number.</p>
 <h2 id="status">Status</h2><p>This plugin is forked from <a href="https://github.com/sunnycupertino/cordova-plugin-admob-simple">cordova-plugin-admob-simple</a> and removed the ad-sharing related code.</p>
 <p>The code for Android has almost all rewritten to be more maintainable, plus some extra features.</p>
 <p>For iOS, while it is working, I have less interest in writing Objective-C code these days. If someone is willing to help, feel free to send a pull request, I will review it.</p>
