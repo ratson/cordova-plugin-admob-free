@@ -733,6 +733,7 @@
                     wf.origin.y = bf.origin.y + bf.size.height;
                     
                     if (@available(iOS 11.0, *)) {
+                        bf.origin.y += parentView.safeAreaInsets.top;
                         wf.origin.y += parentView.safeAreaInsets.top;
                         bf.size.width = wf.size.width - parentView.safeAreaInsets.left - parentView.safeAreaInsets.right;
                         wf.size.height -= parentView.safeAreaInsets.top;
