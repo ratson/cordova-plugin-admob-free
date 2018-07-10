@@ -863,6 +863,7 @@
     if (self.interstitialView) {
         self.interstitialView.delegate = nil;
         self.interstitialView = nil;
+        [self resizeViews];
     }
 }
 
