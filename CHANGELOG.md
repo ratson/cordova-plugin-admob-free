@@ -2,6 +2,10 @@
 
 ## Next
 
+## 0.17.3 (2018-07-14)
+
+* Fix banner locations on the iPhone X for top banners. ([@tennist](https://github.com/tennist) in [#262](https://github.com/ratson/cordova-plugin-admob-free/pull/262))
+
 ## 0.17.2 (2018-06-25)
 
 * Remove unused import. ([@jcesarmobile](https://github.com/jcesarmobile) in [#254](https://github.com/ratson/cordova-plugin-admob-free/pull/254))
