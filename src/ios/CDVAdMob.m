@@ -723,7 +723,7 @@
                 if(bannerOverlap) {
                     wf.origin.y = top;
                     bf.origin.y = 0; // banner is subview of webview
-                    
+
                     if (@available(iOS 11.0, *)) {
                         bf.origin.y = parentView.safeAreaInsets.top;
                         bf.size.width = wf.size.width - parentView.safeAreaInsets.left - parentView.safeAreaInsets.right;
@@ -731,7 +731,7 @@
                 } else {
                     bf.origin.y = top;
                     wf.origin.y = bf.origin.y + bf.size.height;
-                    
+
                     if (@available(iOS 11.0, *)) {
                         bf.origin.y += parentView.safeAreaInsets.top;
                         wf.origin.y += parentView.safeAreaInsets.top;
@@ -757,7 +757,7 @@
 
                 if( bannerOverlap ) {
                     bf.origin.y = wf.size.height - bf.size.height; // banner is subview of webview
-                    
+
                     if (@available(iOS 11.0, *)) {
                         bf.origin.y -= parentView.safeAreaInsets.bottom;
                         bf.size.width = wf.size.width - parentView.safeAreaInsets.left - parentView.safeAreaInsets.right;
