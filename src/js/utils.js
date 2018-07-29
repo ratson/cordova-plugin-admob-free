@@ -6,7 +6,7 @@ import isUndefined from 'lodash/isUndefined'
  * @typedef {Object} BaseConfig
  * @property {string} [id=TESTING_AD_ID] - Ad Unit ID
  * @property {boolean} [isTesting=false] - Receiving test ad
- * @property {boolean} [autoShow=false] - Auto show ad when loaded
+ * @property {boolean} [autoShow=true] - Auto show ad when loaded
  *
  * @property {boolean|null} [forChild=null]
  * Child-directed setting.
