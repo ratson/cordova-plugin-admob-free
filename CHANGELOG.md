@@ -2,6 +2,11 @@
 
 ## Next
 
+## 0.17.4 (2018-07-30)
+
+* Fix mismatch doc. ([@charlesverge](https://github.com/charlesverge) in [#267](https://github.com/ratson/cordova-plugin-admob-free/pull/267))
+
+
 ## 0.17.3 (2018-07-14)
 
 * Fix banner locations on the iPhone X for top banners. ([@tennist](https://github.com/tennist) in [#262](https://github.com/ratson/cordova-plugin-admob-free/pull/262))
