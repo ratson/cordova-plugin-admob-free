@@ -2,6 +2,10 @@
 
 ## Next
 
+## 0.18.0 (2018-08-20)
+
+* Update `cordova-admob-sdk` to v0.18.0.
+
 ## 0.17.4 (2018-07-30)
 
 * Fix mismatch doc. ([@charlesverge](https://github.com/charlesverge) in [#267](https://github.com/ratson/cordova-plugin-admob-free/pull/267))
