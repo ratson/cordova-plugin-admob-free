@@ -88,6 +88,6 @@ class RewardVideoListener implements RewardedVideoAdListener {
     }
 
     public void onRewardedVideoCompleted() {
-        executor.fireAdEvent("admob.rewardvideo.events.CLOSE");
+        executor.fireAdEvent("admob.rewardvideo.events.COMPLETE");
     }
 }
