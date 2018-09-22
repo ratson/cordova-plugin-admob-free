@@ -2,6 +2,8 @@
 
 ## Next
 
+* Update `cordova-admob-sdk` to v0.19.0.
+
 ## 0.18.0 (2018-08-20)
 
 * Update `cordova-admob-sdk` to v0.18.0.
