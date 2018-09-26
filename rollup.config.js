@@ -14,18 +14,10 @@ export default {
   plugins: [
     babel({
       exclude: 'node_modules/**',
-      externalHelpers: false,
-      externalHelpersWhitelist: [
-        'classCallCheck',
-        'createClass',
-        'extends',
-        'instanceof',
-        'typeof',
-      ],
       babelrc: false,
       presets: [
         [
-          'env',
+          '@babel/preset-env',
           {
             targets: {
               browsers: browserslist,
@@ -33,14 +25,16 @@ export default {
             modules: false,
           },
         ],
-        'stage-2',
       ],
       plugins: [
         'add-module-exports',
-        'external-helpers',
-        'transform-es3-member-expression-literals',
-        'transform-es3-property-literals',
-        'transform-object-assign',
+        '@babel/plugin-syntax-object-rest-spread',
+        '@babel/plugin-transform-member-expression-literals',
+        '@babel/plugin-transform-object-assign',
+        '@babel/plugin-transform-property-literals',
+        '@babel/plugin-transform-spread',
+        '@babel/plugin-proposal-class-properties',
+        '@babel/plugin-proposal-object-rest-spread',
         [
           'module-resolver',
           {
