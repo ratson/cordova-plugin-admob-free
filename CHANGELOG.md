@@ -2,11 +2,17 @@
 
 ## Next
 
+## 0.19.0 (2018-09-27)
+
+* Emit COMPLETE event for Rewarded Video ad. ([@Montoya](https://github.com/Montoya) in [#281](https://github.com/ratson/cordova-plugin-admob-free/pull/281))
 * Update `cordova-admob-sdk` to v0.19.0.
+* Build with `babel` v7.
+
 
 ## 0.18.0 (2018-08-20)
 
 * Update `cordova-admob-sdk` to v0.18.0.
+
 
 ## 0.17.4 (2018-07-30)
 
