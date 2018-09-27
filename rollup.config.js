@@ -28,6 +28,7 @@ export default {
       ],
       plugins: [
         'add-module-exports',
+        '@babel/plugin-syntax-class-properties',
         '@babel/plugin-syntax-object-rest-spread',
         '@babel/plugin-transform-member-expression-literals',
         '@babel/plugin-transform-object-assign',
