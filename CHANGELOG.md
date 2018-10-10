@@ -2,6 +2,10 @@
 
 ## Next
 
+## 0.21.0 (2018-10-10)
+
+* Make plugin available for Ads SDK v17.0.0. ([@paulstelzer](https://github.com/paulstelzer) in [#287](https://github.com/ratson/cordova-plugin-admob-free/pull/287))
+
 ## 0.20.0 (2018-10-06)
 
 * Update `cordova-admob-sdk` to v0.20.0.
