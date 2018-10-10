@@ -50,6 +50,13 @@ For those interested could download the npm tarball for investigation.
 cordova plugin add cordova-plugin-admob-free --save
 ```
 
+Since the version 17 of play-services-ads and the 0.21.0 version of the plugin the ADMOB_APP_ID must be added to the AndroidManifest.xml. To install the plugin without errors and to insert the ADMOB_APP_ID to the manifest file automatically use the following code:
+
+```sh
+cordova plugin add cordova-plugin-admob-free --save --variable ADMOB_APP_ID="<YOUR_ADMOB_APP_ID_AS_FOUND_IN_ADMOB>"
+```
+
+
 Note that `cordova plugin add [GIT_URL]` is not supported.
 
 ## Usage
