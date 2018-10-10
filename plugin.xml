@@ -29,10 +29,15 @@
     <dependency id="cordova-admob-sdk" version="~0.20.0" />
 
     <platform name="android">
+        <preference name="ADMOB_APP_ID" default=""/>
+
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
             <activity android:name="com.google.android.gms.ads.AdActivity"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
                 android:theme="@android:style/Theme.Translucent" />
+            <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="$ADMOB_APP_ID"/>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.INTERNET" />
