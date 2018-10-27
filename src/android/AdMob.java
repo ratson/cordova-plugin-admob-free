@@ -150,7 +150,7 @@ public class AdMob extends CordovaPlugin {
 
     public AdRequest buildAdRequest() {
         AdRequest.Builder builder = new AdRequest.Builder();
-        if (config.isTesting) {
+        if (config.isTesting || isRunningInTestLab()) {
             builder = builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(getDeviceId());
         }
 
@@ -245,6 +245,11 @@ public class AdMob extends CordovaPlugin {
         // This will request test ads on the emulator and deviceby passing this hashed device ID.
         String ANDROID_ID = Settings.Secure.getString(cordova.getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
         return md5(ANDROID_ID).toUpperCase();
+    }
+
+    private boolean isRunningInTestLab() {
+        String testLabSetting = Settings.System.getString(cordova.getActivity().getContentResolver(), "firebase.test.lab");
+        return "true".equals(testLabSetting);
     }
 
     private static String md5(final String s) {
