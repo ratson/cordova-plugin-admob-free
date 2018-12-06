@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "hello.admob",
   "version": "1.0.0",
   "displayName": "Hello AdMob",
