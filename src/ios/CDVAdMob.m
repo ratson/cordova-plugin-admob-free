@@ -789,7 +789,6 @@
             bf.origin.x = (pr.size.width - bf.size.width) * 0.5f;
 
             self.bannerView.frame = bf;
-            self.bannerView.bounds = bf;
 
             //NSLog(@"x,y,w,h = %d,%d,%d,%d", (int) bf.origin.x, (int) bf.origin.y, (int) bf.size.width, (int) bf.size.height );
         } else {

@@ -2,6 +2,10 @@
 
 ## Next
 
+## 0.24.0 (2018-12-07)
+
+* Fix iOS banner position.
+
 ## 0.23.0 (2018-11-20)
 
 * Update `cordova-admob-sdk` to v0.21.0.
