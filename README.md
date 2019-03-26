@@ -6,7 +6,7 @@ A free, no ad-sharing version of Google AdMob plugin for Cordova.
 
 I have been asking the interest about [funding this project](https://github.com/ratson/cordova-plugin-admob-free/issues/161) a while, got some encouraging feedback, finally have setup [a funding page](https://ratson.name/fund-admob-plus/).
 
-I am actively developing [admob-plus](https://github.com/admob-plus/admob-plus) for the last few weeks, it is usable for most cases, please try it out and give feedback.
+Please use [admob-plus](https://github.com/admob-plus/admob-plus) if possible.
 
 While my focus is `admob-plus`, I will keep maintaining `cordova-plugin-admob-free` until all exisiting features are available with the new plugin.
 
