@@ -827,7 +827,8 @@
     if(self.bannerShow) {
         [self __showAd:YES];
     }
-    [self fireEvent:@"" event:@"admob.banner.events.LOAD" withData:nil];
+    NSString* jsonData = [NSString stringWithFormat:@"{ 'bannerHeight': '%d' }", (int)self.bannerView.frame.size.height];
+    [self fireEvent:@"" event:@"admob.banner.events.LOAD" withData:jsonData];
     [self fireEvent:@"" event:@"onReceiveAd" withData:nil];
 }
 
