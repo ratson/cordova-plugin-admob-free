@@ -64,6 +64,14 @@ Since version 7.42 of the Google AdMob Mobile Ads SDK for iOS, you must add the 
 </config-file>
 ```
 
+Also according to the new guidelines the GADIsAdManagerApp key must be set to True if you serve ads. You can modify the `Info.plist` file directly or use the `config.xml` to do it for you during build by adding the XML below to the `<platform name="ios">` section:
+
+```xml
+<config-file parent="GADIsAdManagerApp" platform="ios" target="*-Info.plist">
+<true />
+</config-file>
+```
+
 Note that `cordova plugin add [GIT_URL]` is not supported.
 
 ## Usage
