@@ -65,6 +65,8 @@
     </platform>
 
     <platform name="ios">
+        <preference name="ADMOB_APP_ID" />
+
         <config-file target="*-Info.plist" parent="GADApplicationIdentifier">
             <string>$ADMOB_APP_ID</string>
         </config-file>
