@@ -24,6 +24,10 @@ public class BannerExecutor extends AbstractExecutor {
      * The adView to display to the user.
      */
     private AdView adView;
+
+    public AdView getAdView() {
+        return adView;
+    }
     /**
      * if want banner view overlap webview, we will need this layout
      */
@@ -35,8 +39,11 @@ public class BannerExecutor extends AbstractExecutor {
 
     boolean bannerVisible = false;
 
+    public AdMob plugin;
+
     public BannerExecutor(AdMob plugin) {
         super(plugin);
+        this.plugin = plugin;
     }
 
     @Override

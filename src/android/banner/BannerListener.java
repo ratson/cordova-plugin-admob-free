@@ -1,5 +1,6 @@
 package name.ratson.cordova.admob.banner;
 
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.google.android.gms.ads.AdListener;
@@ -43,13 +44,30 @@ class BannerListener extends AdListener {
         executor.fireAdEvent("onLeaveToAd", data);
     }
 
+    private int pxToDp(int px) {
+        DisplayMetrics displayMetrics = executor.plugin.cordova.getActivity().getApplicationContext().getResources().getDisplayMetrics();
+        int dp = Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return dp;
+    }
+
     @Override
     public void onAdLoaded() {
         Log.w("AdMob", "BannerAdLoaded");
         if (executor.shouldAutoShow() && !executor.bannerVisible) {
             executor.showAd(true, null);
         }
-        executor.fireAdEvent("admob.banner.events.LOAD");
+
+        JSONObject data = new JSONObject();
+        try {
+            int heightPx = executor.getAdView().getHeight();
+            int heightDp = pxToDp(heightPx);
+
+            data.put("bannerHeight", heightDp);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        executor.fireAdEvent("admob.banner.events.LOAD", data);
         executor.fireAdEvent("onReceiveAd");
     }
 
