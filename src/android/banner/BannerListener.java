@@ -2,8 +2,10 @@ package name.ratson.cordova.admob.banner;
 
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.ViewTreeObserver;
 
 import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,18 +59,26 @@ class BannerListener extends AdListener {
             executor.showAd(true, null);
         }
 
-        JSONObject data = new JSONObject();
-        try {
-            int heightPx = executor.getAdView().getHeight();
-            int heightDp = pxToDp(heightPx);
+        AdView view = executor.getAdView();
+        view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                JSONObject data = new JSONObject();
+                try {
+                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    int heightPx = view.getHeight(); //height is ready
+                    int heightDp = pxToDp(heightPx);
 
-            data.put("bannerHeight", heightDp);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+                    data.put("bannerHeight", heightDp);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-        executor.fireAdEvent("admob.banner.events.LOAD", data);
-        executor.fireAdEvent("onReceiveAd");
+                executor.fireAdEvent("admob.banner.events.LOAD", data);
+                executor.fireAdEvent("onReceiveAd");
+            }
+        });
+
     }
 
     @Override
