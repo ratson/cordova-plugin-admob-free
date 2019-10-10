@@ -33,7 +33,7 @@
 
 @synthesize publisherId, interstitialAdId, rewardVideoId, adSize;
 @synthesize bannerAtTop, bannerOverlap, offsetTopBar;
-@synthesize isTesting, adExtras;
+@synthesize isTesting, adExtras,userId;
 
 @synthesize bannerIsVisible, bannerIsInitialized;
 @synthesize bannerShow, autoShow, autoShowBanner, autoShowInterstitial, autoShowRewardVideo;
@@ -98,6 +98,7 @@
 
     gender = nil;
     forChild = nil;
+    userId = @"";
 
     isRewardedVideoLoading = false;
     rewardedVideoLock = nil;
@@ -404,6 +405,8 @@
                 self.rewardVideoView = [GADRewardBasedVideoAd sharedInstance];
                 self.rewardVideoView.delegate = self;
 
+                NSString* myNewString = [NSString stringWithFormat:@"%@", self.userId];
+                [GADRewardBasedVideoAd sharedInstance].userIdentifier = myNewString;
                 [self.rewardVideoView loadRequest:[GADRequest request] withAdUnitID:self.rewardVideoId];
             }
         }
@@ -506,6 +509,11 @@
     NSDictionary* dict = [options objectForKey:OPT_AD_EXTRAS];
     if (dict) {
         adExtras = dict;
+        NSString* str2 = nil;
+        str2 = [adExtras objectForKey:@"userId"];
+        if (str2) {
+            self.userId = str2;
+        }
     }
 
     str = [options objectForKey:OPT_AUTO_SHOW];
