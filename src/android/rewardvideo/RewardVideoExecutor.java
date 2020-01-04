@@ -13,6 +13,8 @@ import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.PluginResult;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import name.ratson.cordova.admob.AbstractExecutor;
 import name.ratson.cordova.admob.AdMob;
 
@@ -49,16 +51,28 @@ public class RewardVideoExecutor extends AbstractExecutor {
                 Log.w("rewardedvideo", plugin.config.getRewardedVideoAdUnitId());
 
                 synchronized (rewardedVideoLock) {
-                    if (!isRewardedVideoLoading) {
-                        isRewardedVideoLoading = true;
-                        Bundle extras = new Bundle();
-                        extras.putBoolean("_noRefresh", true);
-                        AdRequest adRequest = new AdRequest.Builder()
-                                .addNetworkExtrasBundle(AdMobAdapter.class, extras)
-                                .build();
-                        rewardedVideoAd.loadAd(plugin.config.getRewardedVideoAdUnitId(), adRequest);
-                        delayCallback.success();
+                    if (isRewardedVideoLoading) {
+                        return;
                     }
+
+                    isRewardedVideoLoading = true;
+                    Bundle extras = new Bundle();
+                    extras.putBoolean("_noRefresh", true);
+
+                    final AdRequest.Builder adBuilder = new AdRequest.Builder()
+                    .addNetworkExtrasBundle(AdMobAdapter.class, extras);
+
+                    final List<String> testDevices = plugin.config.testDeviceList;
+                    if (testDevices != null && !testDevices.isEmpty()) {
+                        for (String deviceId : testDevices) {
+                            adBuilder.addTestDevice(deviceId);
+                        }
+                    }
+
+                    final AdRequest adRequest = adBuilder.build();
+
+                    rewardedVideoAd.loadAd(plugin.config.getRewardedVideoAdUnitId(), adRequest);
+                    delayCallback.success();
                 }
             }
         });
