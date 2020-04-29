@@ -33,7 +33,7 @@
 
 @synthesize publisherId, interstitialAdId, rewardVideoId, adSize;
 @synthesize bannerAtTop, bannerOverlap, offsetTopBar;
-@synthesize isTesting, adExtras;
+@synthesize isTesting, adExtras, userId;
 
 @synthesize bannerIsVisible, bannerIsInitialized;
 @synthesize bannerShow, autoShow, autoShowBanner, autoShowInterstitial, autoShowRewardVideo;
@@ -47,7 +47,8 @@
 #define DEFAULT_INTERSTITIAL_ID @"ca-app-pub-3940256099942544/4411468910"
 #define DEFAULT_REWARD_VIDEO_ID @"ca-app-pub-3940256099942544/1712485313"
 
-#define OPT_PUBLISHER_ID    @"publisherId"
+#define OPT_USER_ID       @"userId"
+#define OPT_BANNER_AD_ID    @"bannerAdId"
 #define OPT_INTERSTITIAL_ADID   @"interstitialAdId"
 #define OPT_REWARD_VIDEO_ID   @"rewardVideoId"
 #define OPT_AD_SIZE         @"adSize"
@@ -98,6 +99,7 @@
 
     gender = nil;
     forChild = nil;
+    userId = @"";
 
     isRewardedVideoLoading = false;
     rewardedVideoLock = nil;
@@ -404,6 +406,8 @@
                 self.rewardVideoView = [GADRewardBasedVideoAd sharedInstance];
                 self.rewardVideoView.delegate = self;
 
+                NSLog(@"userId for rewardedVideo is %@", self.userId);
+                [GADRewardBasedVideoAd sharedInstance].userIdentifier = self.userId;
                 [self.rewardVideoView loadRequest:[GADRequest request] withAdUnitID:self.rewardVideoId];
             }
         }
@@ -463,7 +467,7 @@
 
     NSString* str = nil;
 
-    str = [options objectForKey:OPT_PUBLISHER_ID];
+    str = [options objectForKey:OPT_BANNER_AD_ID];
     if (str && [str length] > 0) {
         publisherId = str;
     }
@@ -507,7 +511,12 @@
     if (dict) {
         adExtras = dict;
     }
-
+    
+    str = [options objectForKey:OPT_USER_ID];
+    if (str) {
+        userId = str;
+    }
+    
     str = [options objectForKey:OPT_AUTO_SHOW];
     if (str) {
         autoShow = [str boolValue];
