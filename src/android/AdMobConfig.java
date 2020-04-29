@@ -13,6 +13,7 @@ import java.util.List;
 
 public class AdMobConfig {
     /* options */
+    private static final String OPT_USER_ID = "userId";
     private static final String OPT_PUBLISHER_ID = "publisherId";
     private static final String OPT_INTERSTITIAL_AD_ID = "interstitialAdId";
     private static final String OPT_REWARD_VIDEO_ID = "rewardVideoId";
@@ -76,6 +77,7 @@ public class AdMobConfig {
     // Reward Video
     private static final String TEST_REWARDED_VIDEO_ID = "ca-app-pub-3940256099942544/5224354917";
     private String rewardVideoId = "";
+    private String userId = "";
 
 
     public void setOptions(JSONObject options) {
@@ -119,7 +121,10 @@ public class AdMobConfig {
         if (options.has(OPT_AUTO_SHOW_INTERSTITIAL)) {
             this.autoShowInterstitial = options.optBoolean(OPT_AUTO_SHOW_INTERSTITIAL);
         }
-
+        if (options.has(OPT_USER_ID)) {
+            this.userId = options.optString(OPT_USER_ID);
+        }
+        
         if (options.has(OPT_LOCATION)) {
             JSONArray location = options.optJSONArray(OPT_LOCATION);
             if (location != null) {
@@ -175,6 +180,7 @@ public class AdMobConfig {
     public void setRewardVideoOptions(JSONObject options) {
         try {
             this.autoShowRewardVideo = (Boolean) options.remove(OPT_AUTO_SHOW);
+            this.userId = (String) options.remove(OPT_USER_ID);
         } catch (NullPointerException ignored) {
         }
         this.setOptions(options);
@@ -241,6 +247,10 @@ public class AdMobConfig {
             return TEST_REWARDED_VIDEO_ID;
         }
         return rewardVideoId;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     private static boolean isEmptyAdUnitId(String adId) {
