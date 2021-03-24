@@ -46,7 +46,9 @@ public class RewardVideoExecutor extends AbstractExecutor {
 
                 rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(cordova.getActivity());
                 rewardedVideoAd.setRewardedVideoAdListener(new RewardVideoListener(RewardVideoExecutor.this));
+                rewardedVideoAd.setUserId(plugin.config.getUserId());
                 Log.w("rewardedvideo", plugin.config.getRewardedVideoAdUnitId());
+                Log.w("rewardedvideo:userId", plugin.config.getUserId());
 
                 synchronized (rewardedVideoLock) {
                     if (!isRewardedVideoLoading) {

@@ -59,6 +59,7 @@
 
 @property (nonatomic, retain) NSString* gender;
 @property (nonatomic, retain) NSString* forChild;
+@property(nonatomic, copy, nullable) NSString *userId;
 
 - (void) setOptions:(CDVInvokedUrlCommand *)command;
 
