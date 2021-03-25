@@ -65,6 +65,16 @@
     </platform>
 
     <platform name="ios">
+        <preference name="ADMOB_APP_ID" />
+
+        <config-file target="*-Info.plist" parent="GADApplicationIdentifier">
+            <string>$ADMOB_APP_ID</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="GADIsAdManagerApp">
+            <true />
+        </config-file>
+
         <config-file parent="/*" target="config.xml">
             <feature name="AdMob">
                 <param name="ios-package" value="CDVAdMob" />
