@@ -140,6 +140,24 @@ While the Ionic community have provided [an Ionic Native Plugin](https://ionicfr
 
 As I ([@ratson](https://github.com/ratson)) don't use Ionic myself, it would be great if some experienced Ionic developers could help answering questions or come up with more examples. HELP WANTED HERE.
 
+## FAQ
+
+### My video rewards are not working on test mode (Android).
+
+You need to set your tests devices array. [AdMob official](https://developers.google.com/admob/android/test-ads#enable_test_devices) says:
+
+In LogCat search for:
+```
+I/Ads: Use AdRequest.Builder.addTestDevice("33BE2250B43518CCDA7DE426D04EE231")
+to get test ads on this device."
+```
+`33BE2250B43518CCDA7DE426D04EE231` is your device id send it with your video reward config in this way:
+```
+config = {
+  testDevices: ['33BE2250B43518CCDA7DE426D04EE231']
+}
+```
+
 ## Credits
 
 Thanks for the [cordova-plugin-admob-simple](https://github.com/sunnycupertino/cordova-plugin-admob-simple) author for forking the original project [cordova-plugin-admob](https://github.com/floatinghotpot/cordova-plugin-admob) to [make it functional](https://github.com/sunnycupertino/cordova-plugin-admob-simple/issues/1) and open source it.
