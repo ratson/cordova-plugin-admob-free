@@ -65,4 +65,10 @@ class InterstitialListener extends AdListener {
         executor.fireAdEvent("onDismissInterstitialAd");
         executor.destroy();
     }
+
+    @Override
+    public void onAdClicked() {
+        executor.fireAdEvent("admob.interstitial.events.CLICK");
+        executor.fireAdEvent("onCLickedInterstitialAd");
+    }
 }
