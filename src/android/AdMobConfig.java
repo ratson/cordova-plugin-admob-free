@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AdMobConfig {
     /* options */
-    private static final String OPT_PUBLISHER_ID = "publisherId";
+    private static final String OPT_PUBLISHER_ID = "publisherId";	
     private static final String OPT_INTERSTITIAL_AD_ID = "interstitialAdId";
     private static final String OPT_REWARD_VIDEO_ID = "rewardVideoId";
     private static final String OPT_AD_SIZE = "adSize";
@@ -83,8 +83,8 @@ public class AdMobConfig {
             return;
         }
 
-        if (options.has(OPT_PUBLISHER_ID)) {
-            this.bannerAdUnitId = options.optString(OPT_PUBLISHER_ID);
+        if (options.has(OPT_BANNER_AD_ID)) {
+            this.bannerAdUnitId = options.optString(OPT_BANNER_AD_ID);
         }
         if (options.has(OPT_INTERSTITIAL_AD_ID)) {
             this.interstitialAdUnitId = options.optString(OPT_INTERSTITIAL_AD_ID);
